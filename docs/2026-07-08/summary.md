@@ -1,427 +1,498 @@
 # CVE Digest Summary (2026-07-08)
 
-- 取得日時: 2026-07-08 13:10:55 JST
+- 取得日時: 2026-07-08 13:21:18 JST
+- 対象: 今日JSTに公開されたCVE、または今日CISA KEVに追加されたCVEのみ
 - 新規掲載件数: 30
 - 出力対象: 新規CVEのみ
 
-## 緊急対応候補
+## Critical
 
-### CVE-2026-31431: Linux Kernel Incorrect Resource Transfer Between Spheres Vulnerability
+### CVE-2026-56843
 
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2026-05-01
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux Kernel contains an incorrect resource transfer between spheres vulnerability that could allow for privilege escalation.
-- 参照:
-  - https://lore.kernel.org/linux-cve-announce/2026042214-CVE-2026-31431-3d65@gregkh/; https://xint.io/blog/copy-fail-linux-distributions#the-fix-6 ; https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/about/ ; https://nvd.nist.gov/vuln/detail/CVE-2026-31431
-
-### CVE-2020-15415: DrayTek Multiple Vigor Routers OS Command Injection Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: python
-- 影響製品: DrayTek Multiple Vigor Routers
-- 公開日: 2024-09-30
-- 更新日: -
-- 出典: CISA KEV
-- 概要: DrayTek Vigor3900, Vigor2960, and Vigor300B devices contain an OS command injection vulnerability in cgi-bin/mainfunction.cgi/cvmcfgupload that allows for remote code execution via shell metacharacters in a filename when the text/x-python-script content type is used.
-- 参照:
-  - https://www.draytek.com/about/security-advisory/vigor3900-/-vigor2960-/-vigor300b-remote-code-injection/execution-vulnerability-(cve-2020-14472) ; https://nvd.nist.gov/vuln/detail/CVE-2020-15415
-
-### CVE-2025-30066: tj-actions/changed-files GitHub Action Embedded Malicious Code Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: npm, github actions, aws
-- 影響製品: tj-actions changed-files GitHub Action
-- 公開日: 2025-03-18
-- 更新日: -
-- 出典: CISA KEV
-- 概要: tj-actions/changed-files GitHub Action contains an embedded malicious code vulnerability that allows a remote attacker to discover secrets by reading Github Actions Workflow Logs. These secrets may include, but are not limited to, valid AWS access keys, GitHub personal access tokens (PATs), npm tokens, and private RSA...
-- 参照:
-  - This vulnerability affects a common open-source project, third-party library, or a protocol used by different products. For more information, please see: CISA Mitigation Instructions: https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-tj-actionschanged-files-cve-2025-30066-and-reviewdogaction ; Additional References: https://github.com/tj-actions/changed-files/blob/45fb12d7a8bedb4da42342e52fe054c6c2c3fd73/README.md?plain=1#L20-L28 ; https://nvd.nist.gov/vuln/detail/CVE-2025-30066
-
-### CVE-2022-0492: Linux Kernel Improper Authentication Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2026-06-02
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux Kernel contains an improper authentication vulnerability which could allow for privilege escalation via the cgroups v1 release_agent feature.
-- 参照:
-  - This vulnerability affects a common open-source component, third-party library, or a protocol used by different products. Please check with specific vendors for information on patching status. For more information, please see: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=24f6008564183aa120d07c03d9289519c2fe02af ; https://www.kernel.org/ ; https://nvd.nist.gov/vuln/detail/CVE-2022-0492
-
-### CVE-2025-11953: React Native Community CLI OS Command Injection Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: react
-- 影響製品: React Native Community CLI
-- 公開日: 2026-02-05
-- 更新日: -
-- 出典: CISA KEV
-- 概要: React Native Community CLI contains an OS command injection vulnerability which could allow unauthenticated network attackers to send POST requests to the Metro Development Server and run arbitrary executables via a vulnerable endpoint exposed by the server. On Windows, attackers can also execute arbitrary shell comman...
-- 参照:
-  - This vulnerability could affect an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: https://github.com/react-native-community/cli/commit/15089907d1f1301b22c72d7f68846a2ef20df547 ; https://github.com/react-native-community/cli/pull/2735 ; https://nvd.nist.gov/vuln/detail/CVE-2025-11953
-
-### CVE-2025-55182: Meta React Server Components Remote Code Execution Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: react
-- 影響製品: Meta React Server Components
-- 公開日: 2025-12-05
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Meta React Server Components contains a remote code execution vulnerability that could allow unauthenticated remote code execution by exploiting a flaw in how React decodes payloads sent to React Server Function endpoints. Please note CVE-2025-66478 has been rejected, but it is associated with CVE-2025- 55182.
-- 参照:
-  - Check for signs of potential compromise on all internet accessible REACT instances after applying mitigations. For more information, please see: https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components ; https://github.com/vercel-labs/fix-react2shell-next?tab=readme-ov-file ; https://nvd.nist.gov/vuln/detail/CVE-2025-55182
-
-### CVE-2024-50302: Linux Kernel Use of Uninitialized Resource Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2025-03-04
-- 更新日: -
-- 出典: CISA KEV
-- 概要: The Linux kernel contains a use of uninitialized resource vulnerability that allows an attacker to leak kernel memory via a specially crafted HID report.
-- 参照:
-  - This vulnerability affects a common open-source component, third-party library, or a protocol used by different products. For more information, please see: https://lore.kernel.org/linux-cve-announce/2024111908-CVE-2024-50302-f677@gregkh/ ; https://source.android.com/docs/security/bulletin/2025-03-01 ; https://nvd.nist.gov/vuln/detail/CVE-2024-50302
-
-### CVE-2024-55591: Fortinet FortiOS and FortiProxy Authentication Bypass Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: node.js
-- 影響製品: Fortinet FortiOS and FortiProxy
-- 公開日: 2025-01-14
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Fortinet FortiOS and FortiProxy contain an authentication bypass vulnerability that may allow an unauthenticated, remote attacker to gain super-admin privileges via crafted requests to Node.js websocket module.
-- 参照:
-  - https://fortiguard.fortinet.com/psirt/FG-IR-24-535 ; https://nvd.nist.gov/vuln/detail/CVE-2024-55591
-
-### CVE-2024-36971: Android Kernel Remote Code Execution Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Android Kernel
-- 公開日: 2024-08-07
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Android contains an unspecified vulnerability in the kernel that allows for remote code execution. This vulnerability resides in Linux Kernel and could impact other products, including but not limited to Android OS.
-- 参照:
-  - This vulnerability affects a common open-source component, third-party library, or a protocol used by different products. Please check with specific vendors for information on patching status. For more information, please see:   https://source.android.com/docs/security/bulletin/2024-08-01,  https://lore.kernel.org/linux-cve-announce/20240610090330.1347021-2-lee@kernel.org/T/#u ; https://nvd.nist.gov/vuln/detail/CVE-2024-36971
-
-### CVE-2024-1086: Linux Kernel Use-After-Free Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2024-05-30
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux kernel contains a use-after-free vulnerability in the netfilter: nf_tables component that allows an attacker to achieve local privilege escalation.
-- 参照:
-  - This vulnerability affects a common open-source component, third-party library, or a protocol used by different products. Please check with specific vendors for information on patching status. For more information, please see: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=f342de4e2f33e0e39165d8639387aa6c19dff660;   https://nvd.nist.gov/vuln/detail/CVE-2024-1086
-
-### CVE-2023-28434: MinIO Security Feature Bypass Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: aws
-- 影響製品: MinIO MinIO
-- 公開日: 2023-09-19
-- 更新日: -
-- 出典: CISA KEV
-- 概要: MinIO contains a security feature bypass vulnerability that allows an attacker to use crafted requests to bypass metadata bucket name checking and put an object into any bucket while processing `PostPolicyBucket` to conduct privilege escalation. To carry out this attack, the attacker requires credentials with `arn:aws:...
-- 参照:
-  - https://github.com/minio/minio/security/advisories/GHSA-2pxw-r47w-4p8c;  https://nvd.nist.gov/vuln/detail/CVE-2023-28434
-
-### CVE-2023-34362: Progress MOVEit Transfer SQL Injection Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: mysql
-- 影響製品: Progress MOVEit Transfer
-- 公開日: 2023-06-02
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Progress MOVEit Transfer contains a SQL injection vulnerability that could allow an unauthenticated attacker to gain unauthorized access to MOVEit Transfer's database. Depending on the database engine being used (MySQL, Microsoft SQL Server, or Azure SQL), an attacker may be able to infer information about the structur...
-- 参照:
-  - This CVE has a CISA AA located here: https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-158a. Please see the AA for associated IOCs. Additional information is available at: https://community.progress.com/s/article/MOVEit-Transfer-Critical-Vulnerability-31May2023.;  https://nvd.nist.gov/vuln/detail/CVE-2023-34362
-
-### CVE-2023-0266: Linux Kernel Use-After-Free Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2023-03-30
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux kernel contains a use-after-free vulnerability that allows for privilege escalation to gain ring0 access from the system user.
-- 参照:
-  - https://git.kernel.org/pub/scm/linux/kernel/git/stable/stable-queue.git/tree/queue-5.10/alsa-pcm-move-rwsem-lock-inside-snd_ctl_elem_read-to-prevent-uaf.patch?id=72783cf35e6c55bca84c4bb7b776c58152856fd4;  https://nvd.nist.gov/vuln/detail/CVE-2023-0266
-
-### CVE-2021-3493: Linux Kernel Privilege Escalation Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2022-10-20
-- 更新日: -
-- 出典: CISA KEV
-- 概要: The overlayfs stacking file system in Linux kernel does not properly validate the application of file capabilities against user namespaces, which could lead to privilege escalation.
-- 参照:
-  - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=7c03e2cda4a584cadc398e8f6641ca9988a39d52; https://nvd.nist.gov/vuln/detail/CVE-2021-3493
-
-### CVE-2013-6282: Linux Kernel Improper Input Validation Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2022-09-15
-- 更新日: -
-- 出典: CISA KEV
-- 概要: The get_user and put_user API functions of the Linux kernel fail to validate the target address when being used on ARM v6k/v7 platforms. This allows an application to read and write kernel memory which could lead to privilege escalation.
-- 参照:
-  - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8404663f81d212918ff85f493649a7991209fa04; https://nvd.nist.gov/vuln/detail/CVE-2013-6282
-
-### CVE-2013-2596: Linux Kernel Integer Overflow Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2022-09-15
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux kernel fb_mmap function in drivers/video/fbmem.c contains an integer overflow vulnerability that allows for privilege escalation.
-- 参照:
-  - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=fc9bbca8f650e5f738af8806317c0a041a48ae4a; https://nvd.nist.gov/vuln/detail/CVE-2013-2596
-
-### CVE-2013-2094: Linux Kernel Privilege Escalation Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2022-09-15
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux kernel fails to check all 64 bits of attr.config passed by user space, resulting to out-of-bounds access of the perf_swevent_enabled array in sw_perf_event_destroy(). Explotation allows for privilege escalation.
-- 参照:
-  - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8176cced706b5e5d15887584150764894e94e02f; https://nvd.nist.gov/vuln/detail/CVE-2013-2094
-
-### CVE-2020-36193: PEAR Archive_Tar Improper Link Resolution Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: PEAR Archive_Tar
-- 公開日: 2022-08-25
-- 更新日: -
-- 出典: CISA KEV
-- 概要: PEAR Archive_Tar Tar.php allows write operations with directory traversal due to inadequate checking of symbolic links. PEAR stands for PHP Extension and Application Repository and it is an open-source framework and distribution system for reusable PHP components with known usage in third-party products such as Drupal...
-- 参照:
-  - https://github.com/pear/Archive_Tar/commit/cde460582ff389404b5b3ccb59374e9b389de916, https://www.drupal.org/sa-core-2021-001, https://access.redhat.com/security/cve/cve-2020-36193; https://nvd.nist.gov/vuln/detail/CVE-2020-36193
-
-### CVE-2020-28949: PEAR Archive_Tar Deserialization of Untrusted Data Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: PEAR Archive_Tar
-- 公開日: 2022-08-25
-- 更新日: -
-- 出典: CISA KEV
-- 概要: PEAR Archive_Tar allows an unserialization attack because phar: is blocked but PHAR: is not blocked. PEAR stands for PHP Extension and Application Repository and it is an open-source framework and distribution system for reusable PHP components with known usage in third-party products such as Drupal Core and Red Hat Li...
-- 参照:
-  - https://pear.php.net/bugs/bug.php?id=27002, https://www.drupal.org/sa-core-2020-013, https://access.redhat.com/security/cve/cve-2020-28949; https://nvd.nist.gov/vuln/detail/CVE-2020-28949
-
-### CVE-2021-22600: Linux Kernel Privilege Escalation Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2022-04-11
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux Kernel contains a flaw in the packet socket (AF_PACKET) implementation which could lead to incorrectly freeing memory. A local user could exploit this for denial-of-service (DoS) or possibly for privilege escalation.
-- 参照:
-  - https://nvd.nist.gov/vuln/detail/CVE-2021-22600
-
-### CVE-2010-1871: Red Hat Linux JBoss Seam 2 Remote Code Execution Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Red Hat JBoss Seam 2
-- 公開日: 2021-12-10
-- 更新日: -
-- 出典: CISA KEV
-- 概要: JBoss Seam 2 (jboss-seam2), as used in JBoss Enterprise Application Platform 4.3.0 for Red Hat Linux, allows attackers to perform remote code execution. This vulnerability can only be exploited when the Java Security Manager is not properly configured.
-- 参照:
-  - https://nvd.nist.gov/vuln/detail/CVE-2010-1871
-
-### CVE-2019-2215: Android Kernel Use-After-Free Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Android Android Kernel
-- 公開日: 2021-11-03
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Android Kernel contains a use-after-free vulnerability in binder.c that allows for privilege escalation from an application to the Linux Kernel. This vulnerability was observed chained with CVE-2020-0041 and CVE-2020-0069 under exploit chain "AbstractEmu."
-- 参照:
-  - https://nvd.nist.gov/vuln/detail/CVE-2019-2215
-
-### CVE-2020-0069: Mediatek Multiple Chipsets Insufficient Input Validation Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: MediaTek Multiple Chipsets
-- 公開日: 2021-11-03
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Multiple MediaTek chipsets contain an insufficient input validation vulnerability and have missing SELinux restrictions in the Command Queue drivers ioctl handlers. This causes an out-of-bounds write leading to privilege escalation. This vulnerability was observed chained with CVE-2019-2215 and CVE-2020-0041 under expl...
-- 参照:
-  - https://nvd.nist.gov/vuln/detail/CVE-2020-0069
-
-### CVE-2021-21315: System Information Library for Node.JS Command Injection
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: node.js, npm
-- 影響製品: Npm package System Information Library for Node.JS
-- 公開日: 2022-01-18
-- 更新日: -
-- 出典: CISA KEV
-- 概要: In this vulnerability, an attacker can send a malicious payload that will exploit the name parameter. After successful exploitation, attackers can execute remote.
-- 参照:
-  - https://nvd.nist.gov/vuln/detail/CVE-2021-21315
-
-### CVE-2026-56290: Joomlack Page Builder Improper Access Control Vulnerability
-
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
+- 重要度: CRITICAL
+- CVSS: 9.9
+- KEV掲載: no
 - 関連キーワード: -
-- 影響製品: Joomlack Page Builder
-- 公開日: 2026-07-07
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Joomlack Page Builder contains an improper access control vulnerability that could allow for remote code execution via unauthenticated arbitrary file upload.
+- 影響製品: -
+- 公開日: 2026-07-08 10:16:28 JST
+- 更新日: 2026-07-08 10:16:28 JST
+- 出典: NVD
+- 概要: Incorrect authorization in the XML-RPC API of WebPros Plesk before 18.0.78.4 allows a low-privileged authenticated customer to look up domains they do not own, because ownership is enforced only for certain lookup filters and schema validation is bypassed for legacy protocol versions. This results in cross-tenant discl...
 - 参照:
-  - https://www.joomlack.fr/en/joomla-extensions/page-builder-ck ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-56290
+  - https://support.plesk.com/hc/en-us/articles/41178305151255-Vulnerability-in-Plesk-XML-API-Cleartext-FTP-Password-Exposure
 
-### CVE-2026-20253: Splunk Enterprise Missing Authentication for Critical Function Vulnerability
+### CVE-2026-59800
 
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: postgresql
-- 影響製品: Splunk Enterprise
-- 公開日: 2026-06-18
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Splunk Enterprise contains a missing authentication for critical function vulnerability which could allow an unauthenticated user to create or truncate arbitrary files through a PostgreSQL sidecar service endpoint.
+- 重要度: CRITICAL
+- CVSS: 9.8
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 04:16:55 JST
+- 更新日: 2026-07-08 05:16:29 JST
+- 出典: NVD
+- 概要: 9Router before 0.4.44 contains an OS command injection vulnerability in the unauthenticated POST /api/tunnel/tailscale-install endpoint (this route is not covered by the dashboard middleware matcher, so no authorization check is applied). The sudoPassword field from the request body is written to the stdin of a 'sudo -...
 - 参照:
-  - https://advisory.splunk.com/advisories/SVD-2026-0603 ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-20253
+  - https://github.com/decolua/9router/security/advisories/GHSA-g6g7-pvmx-m74p
+  - https://www.vulncheck.com/advisories/9router-os-command-injection-via-sudopassword-parameter-in-tailscale-install-endpoint
+  - https://github.com/decolua/9router/security/advisories/GHSA-g6g7-pvmx-m74p
 
-### CVE-2026-54420: LiteSpeed cPanel Plugin UNIX Symbolic Link (Symlink) Following Vulnerability
+### CVE-2026-59707
 
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
+- 重要度: CRITICAL
+- CVSS: 9.2
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:29 JST
+- 更新日: 2026-07-08 06:17:29 JST
+- 出典: NVD
+- 概要: LocalAI contains an unauthenticated server-side request forgery vulnerability in the POST /models/apply endpoint that allows attackers to fetch arbitrary internal URLs. The endpoint passes unsanitized gallery URL fields directly to gallery.GetGalleryConfigFromURLWithContext without proper validation, enabling attackers...
+- 参照:
+  - https://github.com/mudler/LocalAI
+  - https://github.com/mudler/LocalAI/commit/f9b968e19d7cbc556d59dceb2e0e450b828a3fda
+  - https://github.com/mudler/LocalAI/issues/10665
+  - https://www.vulncheck.com/advisories/localai-server-side-request-forgery-via-post-models-apply
+
+### CVE-2026-13019
+
+- 重要度: CRITICAL
+- CVSS: 9.8
+- KEV掲載: no
 - 関連キーワード: linux
-- 影響製品: LiteSpeed cPanel Plugin
-- 公開日: 2026-06-15
-- 更新日: -
-- 出典: CISA KEV
-- 概要: LiteSpeed cPanel plugin contains a UNIX symbolic link (Symlink) following vulnerability that could allow a user with FTP or web shell access on a shared hosting server running CloudLinux/CageFS.
+- 影響製品: -
+- 公開日: 2026-07-08 02:16:35 JST
+- 更新日: 2026-07-08 03:16:34 JST
+- 出典: NVD
+- 概要: Esri Portal for ArcGIS versions 12.1 and earlier on Windows, Linux and Kubernetes have a missing authentication for critical function vulnerability allows a remote, unauthenticated attacker to access an unprotected API.
 - 参照:
-  - https://blog.litespeedtech.com/2026/06/01/security-update-for-litespeed-cpanel-plugin-2/ ; BOD 26-04: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk ; Forensics Triage Requirements: https://www.cisa.gov/news-events/directives/bod-26-04-implementation-guidance-prioritizing-security-updates-based-risk ; https://nvd.nist.gov/vuln/detail/CVE-2026-54420
+  - https://www.esri.com/arcgis-blog/products/trust-arcgis/administration/june-2026-arcgis-security-bulletin
 
-### CVE-2026-45321: TanStack Unspecified Vulnerability
+### CVE-2026-59705
 
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: npm
-- 影響製品: TanStack TanStack
-- 公開日: 2026-05-27
-- 更新日: -
-- 出典: CISA KEV
-- 概要: TanStack contains an unspecified vulnerability that allowed malicious versions of the product to be published to the npm registry to publish credential-stealing malware under a trusted identity.
+- 重要度: CRITICAL
+- CVSS: 9.8
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 08:16:55 JST
+- 更新日: 2026-07-08 08:16:55 JST
+- 出典: NVD
+- 概要: mem0's openmemory/api component contains an unauthenticated access vulnerability that allows unauthenticated attackers to read, write, and delete arbitrary user memories by accessing API routers registered without authentication middleware. Attackers can supply arbitrary user_id parameters or directly access memory ret...
 - 参照:
-  - This vulnerability could affect an open-source component, third-party library, protocol, or proprietary implementation that could be used by different products. For more information, please see: https://github.com/TanStack/router/security/advisories/GHSA-g7cv-rxg3-hmpx ; https://nvd.nist.gov/vuln/detail/CVE-2026-45321
+  - https://github.com/mem0ai/mem0
+  - https://github.com/mem0ai/mem0/commit/a3154d59e52386d4e1189c1f5f44819868f76514
+  - https://github.com/mem0ai/mem0/issues/6080
+  - https://www.vulncheck.com/advisories/mem0-openmemory-api-unauthenticated-access-via-memory-endpoints
 
-### CVE-2018-14634: Linux Kernel Integer Overflow Vulnerability
+### CVE-2026-58473
 
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2026-01-26
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux Kernel contains an integer overflow vulnerability in the create_elf_tables() function which could allow an unprivileged local user with access to SUID (or otherwise privileged) binary to escalate their privileges on the system.
+- 重要度: CRITICAL
+- CVSS: 9.3
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:29 JST
+- 更新日: 2026-07-08 06:17:29 JST
+- 出典: NVD
+- 概要: Cognee before 1.2.0 contains an improper access control vulnerability that allows unauthenticated attackers to overwrite the global LLM provider configuration by self-registering an account and calling the settings endpoint, which performs no admin or superuser check. Attackers can redirect all LLM operations instance-...
 - 参照:
-  - This vulnerability affects a common open-source component, third-party library, or a protocol used by different products. Please check with specific vendors for information on patching status. For more information, please see: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/about/ ; https://www.kernel.org/ ; https://www.cve.org/CVERecord?id=CVE-2018-14634 ; https://access.redhat.com/errata/RHSA-2018:3540 ; https://nvd.nist.gov/vuln/detail/CVE-2018-14634
+  - https://github.com/topoteretes/cognee/commit/d10b1b77e2157c6238fd4d1acb1923a048991699
+  - https://github.com/topoteretes/cognee/issues/3084
+  - https://github.com/topoteretes/cognee/releases/tag/v1.2.0
+  - https://www.vulncheck.com/advisories/cognee-unauthorized-llm-configuration-overwrite-via-api-v1-settings
 
-### CVE-2021-22555: Linux Kernel Heap Out-of-Bounds Write Vulnerability
+### CVE-2026-59706
 
-- 重要度: KEV
-- CVSS: -
-- KEV掲載: yes
-- 関連キーワード: linux
-- 影響製品: Linux Kernel
-- 公開日: 2025-10-06
-- 更新日: -
-- 出典: CISA KEV
-- 概要: Linux Kernel contains a heap out-of-bounds write vulnerability that could allow an attacker to gain privileges or cause a DoS (via heap memory corruption) through user name space.
+- 重要度: CRITICAL
+- CVSS: 9.3
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 07:16:54 JST
+- 更新日: 2026-07-08 07:16:54 JST
+- 出典: NVD
+- 概要: mem0 contains unauthenticated config API endpoints that expose LLM API keys in plaintext and allow server-side request forgery via attacker-controlled ollama_base_url parameter. Unauthenticated attackers can retrieve stored secrets like OpenAI API keys via GET /api/v1/config/ or trigger SSRF attacks by setting ollama_b...
 - 参照:
-  - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/net/netfilter/x_tables.c?id=9fa492cdc160cd27ce1046cb36f47d3b2b1efa21 ; https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/net/netfilter/x_tables.c?id=b29c457a6511435960115c0f548c4360d5f4801d ; https://security.netapp.com/advisory/ntap-20210805-0010/ ; https://github.com/google/security-research/security/advisories/GHSA-xxx5-8mvq-3528 ; https://nvd.nist.gov/vuln/detail/CVE-2021-22555
+  - https://github.com/mem0ai/mem0
+  - https://github.com/mem0ai/mem0/commit/a3154d59e52386d4e1189c1f5f44819868f76514
+  - https://github.com/mem0ai/mem0/issues/6081
+  - https://www.vulncheck.com/advisories/mem0-server-side-request-forgery-and-plaintext-api-key-exposure-via-unauthenticated-config-endpoints
+
+### CVE-2026-46354
+
+- 重要度: CRITICAL
+- CVSS: 9.1
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 07:16:52 JST
+- 更新日: 2026-07-08 07:16:52 JST
+- 出典: NVD
+- 概要: Coder allows organizations to provision remote development environments via Terraform. In versions prior tp 2.24.5, 2.29.13, 2.30.8, 2.31.12, 2.32.2, and 2.33.3, `azureidentity.Validate()` verifies that the PKCS#7 signer certificate chains to a trusted Azure CA but never verifies the PKCS#7 signature itself. An attacke...
+- 参照:
+  - https://github.com/coder/coder/pull/25286
+  - https://github.com/coder/coder/releases/tag/v2.24.5
+  - https://github.com/coder/coder/releases/tag/v2.29.13
+  - https://github.com/coder/coder/releases/tag/v2.30.8
+  - https://github.com/coder/coder/releases/tag/v2.31.12
+
+## High
+
+### CVE-2026-55633
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:27 JST
+- 更新日: 2026-07-08 06:17:27 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, a bypass of the H2 zip protocol and file dropper fix allows an authenticated attacker to upload a zip archive disguised with a .ttf extension through FontManage.saveFile and then exploit it through the zip protocol to achieve remote code...
+- 参照:
+  - https://github.com/dataease/dataease/commit/265b31179f1427c059f739841f2e39aaa6d1b937
+  - https://github.com/dataease/dataease/commit/8892a6945b0b7a329a156155270fae58afa895bc
+  - https://github.com/dataease/dataease/releases/tag/v2.10.24
+  - https://github.com/dataease/dataease/security/advisories/GHSA-8x36-774q-pwqg
+
+### CVE-2026-44454
+
+- 重要度: HIGH
+- CVSS: 8.1
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:25 JST
+- 更新日: 2026-07-08 07:16:52 JST
+- 出典: NVD
+- 概要: Coder allows organizations to provision remote development environments via Terraform. Prior to versions 2.29.7 and 2.30.2, the `dotfiles` registry module passed unsanitized user input to shell commands, allowing arbitrary code execution inside a provisioned workspace. Any user who supplied a crafted `dotfiles_uri` val...
+- 参照:
+  - https://github.com/coder/coder/commit/60e3ab7632f42415d283b9fd5622ee53a4639ceb
+  - https://github.com/coder/coder/pull/22011
+  - https://github.com/coder/coder/releases/tag/v2.29.7
+  - https://github.com/coder/coder/releases/tag/v2.30.2
+  - https://github.com/coder/coder/security/advisories/GHSA-m3cr-vc2j-pm27
+
+### CVE-2026-55408
+
+- 重要度: HIGH
+- CVSS: 8.4
+- KEV掲載: no
+- 関連キーワード: node.js
+- 影響製品: -
+- 公開日: 2026-07-08 07:16:53 JST
+- 更新日: 2026-07-08 07:16:53 JST
+- 出典: NVD
+- 概要: Koodo Reader is an ebook reader. In version 2.3.0 and earlier, Koodo Reader is vulnerable to remote code execution through malicious EPUB files because the open-book IPC handler enables nodeIntegrationInSubFrames and EPUB chapter content is rendered with unsanitized innerHTML. An attacker can craft an EPUB book that, w...
+- 参照:
+  - https://github.com/koodo-reader/koodo-reader/security/advisories/GHSA-mjr7-w4jq-2rq9
+
+### CVE-2026-55075
+
+- 重要度: HIGH
+- CVSS: 7.4
+- KEV掲載: no
+- 関連キーワード: aws
+- 影響製品: -
+- 公開日: 2026-07-08 07:16:53 JST
+- 更新日: 2026-07-08 07:16:53 JST
+- 出典: NVD
+- 概要: Coder allows organizations to provision remote development environments via Terraform. Prior to versions 2.29.7, 2.32.7, 2.33.8, and 2.34.2, two flaws in Coder's OIDC login chained into account takeover. Email-based user matching fell back to linking by email without checking for an existing link to a different IdP sub...
+- 参照:
+  - https://github.com/coder/coder/pull/25712
+  - https://github.com/coder/coder/pull/25713
+  - https://github.com/coder/coder/releases/tag/v2.29.17
+  - https://github.com/coder/coder/releases/tag/v2.32.7
+  - https://github.com/coder/coder/releases/tag/v2.33.8
+
+### CVE-2026-14904
+
+- 重要度: HIGH
+- CVSS: 7.1
+- KEV掲載: no
+- 関連キーワード: aws
+- 影響製品: -
+- 公開日: 2026-07-08 02:16:35 JST
+- 更新日: 2026-07-08 03:16:35 JST
+- 出典: NVD
+- 概要: AWS Research and Engineering Studio (RES) is an open-source solution that enables researchers and engineers to create and manage secure virtual desktops and computing resources on AWS. Improper link resolution before file access issue (CWE-59) in the Auth.GetUserPrivateKey API. An authenticated remote user could read a...
+- 参照:
+  - https://aws.amazon.com/security/security-bulletins/2026-053-aws/
+  - https://github.com/aws/res/releases/tag/2026.06
+
+### CVE-2026-23697
+
+- 重要度: HIGH
+- CVSS: 8.8
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 02:16:35 JST
+- 更新日: 2026-07-08 04:16:51 JST
+- 出典: NVD
+- 概要: Vtiger CRM before 8.4.0 contains an authenticated file upload vulnerability that allows low-privileged users to achieve remote code execution by uploading a .phar file containing arbitrary PHP code through the Documents module, bypassing the extension denylist in config.inc.php which omits the .phar extension. The uplo...
+- 参照:
+  - https://jivasecurity.com/writeups/vtiger-rce-phar-upload-cve-2026-23697
+  - https://www.vtiger.com/
+  - https://www.vulncheck.com/advisories/vtiger-crm-authenticated-file-upload-rce-via-documents-module
+
+### CVE-2026-56811
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 01:16:40 JST
+- 更新日: 2026-07-08 02:16:36 JST
+- 出典: NVD
+- 概要: Allocation of Resources Without Limits or Throttling vulnerability in phoenixframework phoenix (Phoenix.Socket module) allows an unauthenticated attacker to cause a denial of service against any endpoint that mounts a Phoenix socket with a reachable channel transport (WebSocket or LongPoll). This vulnerability is assoc...
+- 参照:
+  - https://cna.erlef.org/cves/CVE-2026-56811.html
+  - https://github.com/phoenixframework/phoenix/commit/16e295d2fccab185d1292322e2bee5d46c725c8a
+  - https://github.com/phoenixframework/phoenix/commit/a612100cd8a4279091abc1a2ef8fb98a6d01c0a1
+  - https://github.com/phoenixframework/phoenix/commit/c498ba8cf49f6accbbd0c643a5340b58db891218
+  - https://github.com/phoenixframework/phoenix/commit/d19ca0a8d9f82c130b7ed339b9f033433e2dea5e
+
+### CVE-2026-50529
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:26 JST
+- 更新日: 2026-07-08 06:17:26 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the /de2api/share/proxyInfo share interface generates and returns X-DE-LINK-TOKEN before validating the share password or ticket, allowing unauthenticated attackers who know a protected share UUID to obtain a valid link token for subsequ...
+- 参照:
+  - https://github.com/dataease/dataease/commit/c4e85a981e53c95b1ea73757db31e3025efdc410
+  - https://github.com/dataease/dataease/releases/tag/v2.10.24
+  - https://github.com/dataease/dataease/security/advisories/GHSA-7287-qqj9-phr6
+
+### CVE-2026-53729
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:26 JST
+- 更新日: 2026-07-08 06:17:26 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, any authenticated user can download (/exportCenter/download/{id}), delete (/exportCenter/delete), retry (/exportCenter/retry/{id}), or generate download links (/exportCenter/generateDownloadUri/{id}) for export tasks belonging to other u...
+- 参照:
+  - https://github.com/dataease/dataease/commit/57e90bdcc21c3fa2ec57184671603ad88a5b941b
+  - https://github.com/dataease/dataease/releases/tag/v2.10.24
+  - https://github.com/dataease/dataease/security/advisories/GHSA-9423-78gr-xjj5
+
+### CVE-2026-53730
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:26 JST
+- 更新日: 2026-07-08 06:17:26 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the /de2api/datasetData/previewSql endpoint lacks the mandatory @DePermit permission validation annotation, allowing any authenticated user to specify datasourceId=-1, access the built-in engine database, execute arbitrary SQL statements...
+- 参照:
+  - https://github.com/dataease/dataease/commit/7b47af38b8fa017c9eecb00a4a49264663189e7b
+  - https://github.com/dataease/dataease/security/advisories/GHSA-2jmq-vffm-4qmj
+
+### CVE-2026-53751
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:26 JST
+- 更新日: 2026-07-08 06:17:26 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the H2 database JDBC URL validation logic can be bypassed with special Unicode characters whose case-conversion behavior differs between DataEase validation and H2 parsing, allowing attackers to smuggle dangerous parameters such as init...
+- 参照:
+  - https://github.com/dataease/dataease/commit/2204258118eac6160a6636ca20dbedb0d3f95747
+  - https://github.com/dataease/dataease/releases/tag/v2.10.24
+  - https://github.com/dataease/dataease/security/advisories/GHSA-xjhm-r8p8-c2cg
+
+### CVE-2026-55635
+
+- 重要度: HIGH
+- CVSS: 8.7
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:27 JST
+- 更新日: 2026-07-08 06:17:27 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, chart quota and Y-axis filters embed attacker-controlled filter values directly into generated SQL in Quota2SQLObj.getYWheres() without applying the SQL literal validation and escaping used by other filter paths, allowing an authenticate...
+- 参照:
+  - https://github.com/dataease/dataease/commit/4463e21cb73d3d4bb8af89a0cb71ee403e4b808a
+  - https://github.com/dataease/dataease/security/advisories/GHSA-p758-rx6v-hc8g
+
+### CVE-2026-23698
+
+- 重要度: HIGH
+- CVSS: 8.6
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 02:16:36 JST
+- 更新日: 2026-07-08 03:16:35 JST
+- 出典: NVD
+- 概要: Vtiger CRM through 8.4.0 contains an authenticated remote code execution vulnerability in the admin module import feature that allows administrator-level attackers to upload arbitrary PHP files by submitting a crafted zip archive through the ModuleManager import function, which extracts contents directly into the modul...
+- 参照:
+  - https://jivasecurity.com/writeups/vtiger-rce-module-import-cve-2026-23698
+  - https://www.vtiger.com/
+  - https://www.vulncheck.com/advisories/vtiger-crm-authenticated-rce-via-module-import-file-upload
+
+### CVE-2026-55418
+
+- 重要度: HIGH
+- CVSS: 8.6
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 07:16:53 JST
+- 更新日: 2026-07-08 07:16:53 JST
+- 出典: NVD
+- 概要: FastGPT is an open source AI knowledge base platform. Prior to v4.15.0-beta5, two FastGPT file handlers authorize an unrelated resource and then sign or read an S3 object using a key taken directly from the request, without checking that the key belongs to the caller's team. Because S3 object keys are global within the...
+- 参照:
+  - https://github.com/labring/FastGPT/commit/decb6d2fb1417fb9e2bca145d2dcc9cbcf06396c
+  - https://github.com/labring/FastGPT/pull/7104
+  - https://github.com/labring/FastGPT/releases/tag/v4.15.0-beta5
+  - https://github.com/labring/FastGPT/security/advisories/GHSA-6rxv-p43w-mmx5
+
+### CVE-2026-57851
+
+- 重要度: HIGH
+- CVSS: 8.5
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 02:16:36 JST
+- 更新日: 2026-07-08 03:16:39 JST
+- 出典: NVD
+- 概要: MSI Feature Manager contains a local privilege escalation vulnerability in the KernCoreLib64.sys kernel driver that allows any locally logged-on user to perform arbitrary physical memory read/write and unrestricted I/O port operations by accessing exposed IOCTL handlers without administrator privileges. Attackers can e...
+- 参照:
+  - https://github.com/readmsr/MSI_FeatureManager_CVE
+  - https://www.vulncheck.com/advisories/msi-gamegaraj-kerncorelib64-sys-privilege-escalation-via-ioctl-handlers
+
+### CVE-2026-58583
+
+- 重要度: HIGH
+- CVSS: 8.4
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:29 JST
+- 更新日: 2026-07-08 06:17:29 JST
+- 出典: NVD
+- 概要: FluxInk (formerly Sunia SPB Peripheral) Color Management Driver (TcnPeripheral64.sys) 1.0.7.2 allows local privilege escalation for a standard user account via arbitrary physical memory mapping at \Device\PhysicalMemory. Fixed in version 1.0.7.6. The fixed driver is currently available in the Windows 11 25H2 HLK (Hardw...
+- 参照:
+  - https://github.com/b3s3da/TcnPeripheral64_PoC
+  - https://github.com/b3s3da/TcnPeripheral64_PoC/security/advisories/GHSA-x4rw-h4v2-v83h
+  - https://raw.githubusercontent.com/cisagov/CSAF/develop/csaf_files/IT/white/2026/va-26-188-01.json
+  - https://www.cve.org/CVERecord?id=CVE-2026-58583
+
+### CVE-2026-49471
+
+- 重要度: HIGH
+- CVSS: 8.3
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:25 JST
+- 更新日: 2026-07-08 06:17:25 JST
+- 出典: NVD
+- 概要: Serena is a powerful MCP toolkit for coding that provides semantic retrieval and editing capabilities. Prior to v1.5.2, Serena's built-in web dashboard exposes an unauthenticated Flask API on a fixed, predictable port, with no authentication, no CSRF protection, and no Host header validation. A DNS rebinding attack all...
+- 参照:
+  - https://github.com/oraios/serena/commit/016ccbe1c095a3eed7967737ac1d4df2754f5d96
+  - https://github.com/oraios/serena/releases/tag/v1.5.2
+  - https://github.com/oraios/serena/security/advisories/GHSA-37h2-6p4f-mp3q
+
+### CVE-2026-57172
+
+- 重要度: HIGH
+- CVSS: 8.3
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:28 JST
+- 更新日: 2026-07-08 06:17:28 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, ShareSecretManage uses a hardcoded default share link signature key, allowing an attacker who can obtain a passwordless share for a resource and user to use the known key link-pwd-fit2cloud to forge linkToken JWTs, bypass TokenFilter ver...
+- 参照:
+  - https://github.com/dataease/dataease/commit/356e83b518603f5612104760ced80aae8fc5d675
+  - https://github.com/dataease/dataease/security/advisories/GHSA-7cpg-f4cj-7pgm
+
+### CVE-2026-55076
+
+- 重要度: HIGH
+- CVSS: 7.4
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 08:16:55 JST
+- 更新日: 2026-07-08 08:16:55 JST
+- 出典: NVD
+- 概要: Coder allows organizations to provision remote development environments via Terraform. Prior to versions 2.29.7, 2.32.7, 2.33.8, and 2.34.2, Coder's OIDC callback checked `email_verified` with a direct Go `bool` type assertion. When an IdP returned the claim as a non-boolean (for example the string `"false"`) or omitte...
+- 参照:
+  - https://github.com/coder/coder/pull/25712
+  - https://github.com/coder/coder/pull/25713
+  - https://github.com/coder/coder/releases/tag/v2.29.17
+  - https://github.com/coder/coder/releases/tag/v2.32.7
+  - https://github.com/coder/coder/releases/tag/v2.33.8
+
+### CVE-2026-50007
+
+- 重要度: HIGH
+- CVSS: 7.2
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:25 JST
+- 更新日: 2026-07-08 06:17:25 JST
+- 出典: NVD
+- 概要: Actual is an open-source personal finance application. Prior to 26.7.0, a missing authorization issue allows a shared user with user_access on a budget file to perform owner-only file management actions. A non-owner shared user can call file-management endpoints intended for higher-privilege users, including /delete-us...
+- 参照:
+  - https://github.com/actualbudget/actual/commit/18a8dc03c48eeb2e8252669a80673e6a9933b5fd
+  - https://github.com/actualbudget/actual/commit/3b9e79ed5ee795a80bbae214d6ebb2755289d7f2
+  - https://github.com/actualbudget/actual/pull/7977
+  - https://github.com/actualbudget/actual/pull/8333
+  - https://github.com/actualbudget/actual/security/advisories/GHSA-23vm-ffgg-qvjr
+
+### CVE-2026-55631
+
+- 重要度: HIGH
+- CVSS: 7.2
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:27 JST
+- 更新日: 2026-07-08 06:17:27 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the font management module allows authenticated users to submit an arbitrary fileTransName when creating a font record; when the record is later deleted, the backend concatenates that stored value with the font storage directory and pass...
+- 参照:
+  - https://github.com/dataease/dataease/commit/8892a6945b0b7a329a156155270fae58afa895bc
+  - https://github.com/dataease/dataease/releases/tag/v2.10.24
+  - https://github.com/dataease/dataease/security/advisories/GHSA-r99p-w8fc-93g6
+
+### CVE-2026-50530
+
+- 重要度: HIGH
+- CVSS: 7.1
+- KEV掲載: no
+- 関連キーワード: -
+- 影響製品: -
+- 公開日: 2026-07-08 06:17:26 JST
+- 更新日: 2026-07-08 06:17:26 JST
+- 出典: NVD
+- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, a share mode chart data interface only validates that sceneId matches the resourceId in the link token and fails to validate whether tableId and field IDs in the request body belong to the shared resource, allowing an attacker with a val...
+- 参照:
+  - https://github.com/dataease/dataease/commit/c4e85a981e53c95b1ea73757db31e3025efdc410
+  - https://github.com/dataease/dataease/releases/tag/v2.10.24
+  - https://github.com/dataease/dataease/security/advisories/GHSA-qcf4-345v-6vg9

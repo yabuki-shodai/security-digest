@@ -175,12 +175,40 @@
       "severity": "KEV",
       "title": "CVE-2025-55182: Meta React Server Components Remote Code Execution Vulnerability"
     },
+    "CVE-2026-13019": {
+      "cvss": 9.8,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-13019"
+    },
+    "CVE-2026-14904": {
+      "cvss": 7.1,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-14904"
+    },
     "CVE-2026-20253": {
       "cvss": null,
       "first_seen": "2026-07-08",
       "kev": true,
       "severity": "KEV",
       "title": "CVE-2026-20253: Splunk Enterprise Missing Authentication for Critical Function Vulnerability"
+    },
+    "CVE-2026-23697": {
+      "cvss": 8.8,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-23697"
+    },
+    "CVE-2026-23698": {
+      "cvss": 8.6,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-23698"
     },
     "CVE-2026-31431": {
       "cvss": null,
@@ -189,12 +217,75 @@
       "severity": "KEV",
       "title": "CVE-2026-31431: Linux Kernel Incorrect Resource Transfer Between Spheres Vulnerability"
     },
+    "CVE-2026-44454": {
+      "cvss": 8.1,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-44454"
+    },
     "CVE-2026-45321": {
       "cvss": null,
       "first_seen": "2026-07-08",
       "kev": true,
       "severity": "KEV",
       "title": "CVE-2026-45321: TanStack Unspecified Vulnerability"
+    },
+    "CVE-2026-46354": {
+      "cvss": 9.1,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-46354"
+    },
+    "CVE-2026-49471": {
+      "cvss": 8.3,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-49471"
+    },
+    "CVE-2026-50007": {
+      "cvss": 7.2,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-50007"
+    },
+    "CVE-2026-50529": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-50529"
+    },
+    "CVE-2026-50530": {
+      "cvss": 7.1,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-50530"
+    },
+    "CVE-2026-53729": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-53729"
+    },
+    "CVE-2026-53730": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-53730"
+    },
+    "CVE-2026-53751": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-53751"
     },
     "CVE-2026-54420": {
       "cvss": null,
@@ -203,12 +294,131 @@
       "severity": "KEV",
       "title": "CVE-2026-54420: LiteSpeed cPanel Plugin UNIX Symbolic Link (Symlink) Following Vulnerability"
     },
+    "CVE-2026-55075": {
+      "cvss": 7.4,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55075"
+    },
+    "CVE-2026-55076": {
+      "cvss": 7.4,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55076"
+    },
+    "CVE-2026-55408": {
+      "cvss": 8.4,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55408"
+    },
+    "CVE-2026-55418": {
+      "cvss": 8.6,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55418"
+    },
+    "CVE-2026-55631": {
+      "cvss": 7.2,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55631"
+    },
+    "CVE-2026-55633": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55633"
+    },
+    "CVE-2026-55635": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55635"
+    },
     "CVE-2026-56290": {
       "cvss": null,
       "first_seen": "2026-07-08",
       "kev": true,
       "severity": "KEV",
       "title": "CVE-2026-56290: Joomlack Page Builder Improper Access Control Vulnerability"
+    },
+    "CVE-2026-56811": {
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-56811"
+    },
+    "CVE-2026-56843": {
+      "cvss": 9.9,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-56843"
+    },
+    "CVE-2026-57172": {
+      "cvss": 8.3,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-57172"
+    },
+    "CVE-2026-57851": {
+      "cvss": 8.5,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-57851"
+    },
+    "CVE-2026-58473": {
+      "cvss": 9.3,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-58473"
+    },
+    "CVE-2026-58583": {
+      "cvss": 8.4,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-58583"
+    },
+    "CVE-2026-59705": {
+      "cvss": 9.8,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-59705"
+    },
+    "CVE-2026-59706": {
+      "cvss": 9.3,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-59706"
+    },
+    "CVE-2026-59707": {
+      "cvss": 9.2,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-59707"
+    },
+    "CVE-2026-59800": {
+      "cvss": 9.8,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "CRITICAL",
+      "title": "CVE-2026-59800"
     }
   }
 }
