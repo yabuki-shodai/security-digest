@@ -196,6 +196,14 @@
       "severity": "CRITICAL",
       "title": "CVE-2026-13019"
     },
+    "CVE-2026-13020": {
+      "category": "backend",
+      "cvss": 8.1,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-13020"
+    },
     "CVE-2026-14904": {
       "cvss": 7.1,
       "first_seen": "2026-07-08",
@@ -259,6 +267,14 @@
       "severity": "KEV",
       "title": "CVE-2026-45321: TanStack Unspecified Vulnerability"
     },
+    "CVE-2026-45796": {
+      "category": "backend",
+      "cvss": 6.5,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "MEDIUM",
+      "title": "CVE-2026-45796"
+    },
     "CVE-2026-46354": {
       "cvss": 9.1,
       "first_seen": "2026-07-08",
@@ -308,6 +324,14 @@
       "severity": "MEDIUM",
       "title": "CVE-2026-48954"
     },
+    "CVE-2026-49229": {
+      "category": "backend",
+      "cvss": 8.3,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-49229"
+    },
     "CVE-2026-49471": {
       "cvss": 8.3,
       "first_seen": "2026-07-08",
@@ -335,6 +359,14 @@
       "kev": false,
       "severity": "HIGH",
       "title": "CVE-2026-50530"
+    },
+    "CVE-2026-53511": {
+      "category": "backend",
+      "cvss": 8.5,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-53511"
     },
     "CVE-2026-53729": {
       "cvss": 8.7,
@@ -364,6 +396,14 @@
       "severity": "KEV",
       "title": "CVE-2026-54420: LiteSpeed cPanel Plugin UNIX Symbolic Link (Symlink) Following Vulnerability"
     },
+    "CVE-2026-54698": {
+      "category": "frontend",
+      "cvss": 6.0,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "MEDIUM",
+      "title": "CVE-2026-54698"
+    },
     "CVE-2026-55075": {
       "cvss": 7.4,
       "first_seen": "2026-07-08",
@@ -377,6 +417,14 @@
       "kev": false,
       "severity": "HIGH",
       "title": "CVE-2026-55076"
+    },
+    "CVE-2026-55077": {
+      "category": "backend",
+      "cvss": 7.2,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55077"
     },
     "CVE-2026-55408": {
       "cvss": 8.4,
@@ -392,12 +440,52 @@
       "severity": "HIGH",
       "title": "CVE-2026-55418"
     },
+    "CVE-2026-55427": {
+      "category": "backend",
+      "cvss": 8.3,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55427"
+    },
+    "CVE-2026-55428": {
+      "category": "backend",
+      "cvss": 8.2,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55428"
+    },
+    "CVE-2026-55429": {
+      "category": "backend",
+      "cvss": 8.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55429"
+    },
     "CVE-2026-55430": {
       "cvss": 5.8,
       "first_seen": "2026-07-08",
       "kev": false,
       "severity": "MEDIUM",
       "title": "CVE-2026-55430"
+    },
+    "CVE-2026-55431": {
+      "category": "backend",
+      "cvss": 7.7,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55431"
+    },
+    "CVE-2026-55436": {
+      "category": "backend",
+      "cvss": 7.4,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55436"
     },
     "CVE-2026-55592": {
       "cvss": 3.9,
@@ -517,6 +605,14 @@
       "kev": false,
       "severity": "CRITICAL",
       "title": "CVE-2026-59800"
+    },
+    "CVE-2026-7017": {
+      "category": "backend",
+      "cvss": 7.1,
+      "first_seen": "2026-07-08",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-7017"
     }
   }
 }
