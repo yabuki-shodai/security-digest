@@ -6,7 +6,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -74,6 +74,31 @@ def format_date(value: str | None) -> str | None:
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=UTC)
     return parsed.astimezone(JST).strftime("%Y-%m-%d %H:%M:%S JST")
+
+
+def today_range_utc(now: datetime) -> tuple[datetime, datetime]:
+    today = now.astimezone(JST).date()
+    start_jst = datetime.combine(today, time.min, tzinfo=JST)
+    end_jst = datetime.combine(today + timedelta(days=1), time.min, tzinfo=JST)
+    return start_jst.astimezone(UTC), end_jst.astimezone(UTC)
+
+
+def is_today_jst(value: str | None, now: datetime) -> bool:
+    parsed = parse_datetime(value)
+    if parsed is None:
+        return False
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(JST).date() == now.astimezone(JST).date()
+
+
+def is_today_date(value: str | None, now: datetime) -> bool:
+    if not value:
+        return False
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").date() == now.astimezone(JST).date()
+    except ValueError:
+        return False
 
 
 def compact_text(value: str | None, max_length: int = 320) -> str:
@@ -155,8 +180,6 @@ def extract_affected_products(cve: dict[str, Any]) -> list[str]:
 
 def extract_references(cve: dict[str, Any]) -> list[str]:
     raw_references = cve.get("references", [])
-    refs: list[Any]
-
     if isinstance(raw_references, dict):
         reference_data = raw_references.get("referenceData", [])
         refs = reference_data if isinstance(reference_data, list) else []
@@ -209,12 +232,14 @@ def fetch_nvd(config: dict[str, Any], now: datetime) -> list[dict[str, Any]]:
     source = config.get("sources", {}).get("nvd", {})
     if not source.get("enabled", True):
         return []
-    lookback_days = int(config.get("lookback_days", 2))
-    start = (now.astimezone(UTC) - timedelta(days=lookback_days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    end = now.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    start, end = today_range_utc(now)
     data = fetch_json(
         str(source.get("url")),
-        {"pubStartDate": start, "pubEndDate": end, "resultsPerPage": "200"},
+        {
+            "pubStartDate": start.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+            "pubEndDate": end.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+            "resultsPerPage": "200",
+        },
     )
     vulnerabilities = data.get("vulnerabilities", [])
     return vulnerabilities if isinstance(vulnerabilities, list) else []
@@ -235,13 +260,17 @@ def fetch_cisa_kev(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return result
 
 
-def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]], config: dict[str, Any]) -> Vulnerability | None:
+def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]], config: dict[str, Any], now: datetime) -> Vulnerability | None:
     cve = item.get("cve", {})
     if not isinstance(cve, dict):
         return None
 
     cve_id = str(cve.get("id") or "")
     if not cve_id:
+        return None
+
+    published = cve.get("published")
+    if not is_today_jst(str(published) if published else None, now):
         return None
 
     descriptions = cve.get("descriptions", [])
@@ -290,7 +319,7 @@ def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]],
         title=title,
         description=description,
         source="NVD" + (" / CISA KEV" if is_kev else ""),
-        published_at=format_date(cve.get("published")),
+        published_at=format_date(str(published) if published else None),
         updated_at=format_date(cve.get("lastModified")),
         cvss=cvss,
         severity=severity,
@@ -302,17 +331,10 @@ def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]],
     )
 
 
-def is_recent_kev(item: dict[str, Any], now: datetime, lookback_days: int) -> bool:
-    date_added = str(item.get("dateAdded") or "")
-    try:
-        added_date = datetime.strptime(date_added, "%Y-%m-%d").date()
-    except ValueError:
-        return False
-    threshold = (now - timedelta(days=lookback_days)).date()
-    return added_date >= threshold
-
-
 def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str, Any], now: datetime) -> Vulnerability | None:
+    if not is_today_date(str(item.get("dateAdded") or ""), now):
+        return None
+
     vendor = str(item.get("vendorProject") or "")
     product = str(item.get("product") or "")
     vulnerability_name = str(item.get("vulnerabilityName") or cve_id)
@@ -327,8 +349,7 @@ def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str,
     )
     if excluded:
         return None
-    if not (matched or is_recent_kev(item, now, int(config.get("lookback_days", 2)))):
-        return None
+
     return Vulnerability(
         cve_id=cve_id,
         title=title,
@@ -389,6 +410,7 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         f"# CVE Digest Summary ({date_text})",
         "",
         f"- 取得日時: {fetched_text}",
+        "- 対象: 今日JSTに公開されたCVE、または今日CISA KEVに追加されたCVEのみ",
         f"- 新規掲載件数: {len(vulnerabilities)}",
         "- 出力対象: 新規CVEのみ",
         "",
@@ -398,7 +420,7 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         lines.extend(f"- {error}" for error in errors)
         lines.append("")
     if not vulnerabilities:
-        lines.extend(["## 結果", "", "条件に一致する新規脆弱性はありませんでした。", ""])
+        lines.extend(["## 結果", "", "条件に一致する今日公開の新規脆弱性はありませんでした。", ""])
         return "\n".join(lines)
 
     groups = [
@@ -454,7 +476,7 @@ def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list
     vulnerabilities_by_id: dict[str, Vulnerability] = {}
     for item in nvd_items:
         if isinstance(item, dict):
-            vuln = normalize_nvd_item(item, kev_map, config)
+            vuln = normalize_nvd_item(item, kev_map, config, now)
             if vuln:
                 vulnerabilities_by_id[vuln.cve_id] = vuln
 
