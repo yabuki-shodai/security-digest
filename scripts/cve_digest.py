@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 import re
 import sys
 import urllib.error
@@ -37,6 +36,7 @@ class Vulnerability:
     references: list[str]
     score: int
     priority_group: str
+    category: str
     ai_summary: str | None = None
 
 
@@ -104,7 +104,7 @@ def format_date(value: str | None) -> str | None:
     return parsed.astimezone(JST).strftime("%Y-%m-%d %H:%M:%S JST")
 
 
-def compact_text(value: str | None, max_length: int = 320) -> str:
+def compact_text(value: str | None, max_length: int = 700) -> str:
     if not value:
         return "-"
     text = " ".join(str(value).split())
@@ -202,17 +202,27 @@ def match_keywords(text: str, keywords: list[str], exclude_keywords: list[str]) 
     if excluded:
         return False, [], True
     matched = [keyword for keyword in keywords if keyword.lower() in lower_text]
-    return bool(matched), matched, False
+    return bool(matched), list(dict.fromkeys(matched)), False
 
 
-def is_frontend_vulnerability(vuln_text: str, config: dict[str, Any]) -> tuple[bool, list[str]]:
-    keywords = [str(item) for item in config.get("frontend_keywords", [])]
-    _, matched, _ = match_keywords(vuln_text, keywords, [])
-    return bool(matched), matched
+def category_matches(search_text: str, config: dict[str, Any], category: str) -> list[str]:
+    keywords = [str(item) for item in config.get(f"{category}_keywords", [])]
+    _, matched, _ = match_keywords(search_text, keywords, [])
+    return matched
 
 
-def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], description: str, is_frontend: bool) -> int:
-    score = 1000 if is_frontend else 0
+def classify_category(search_text: str, config: dict[str, Any]) -> tuple[str, list[str]]:
+    frontend_matches = category_matches(search_text, config, "frontend")
+    backend_matches = category_matches(search_text, config, "backend")
+    if frontend_matches:
+        return "frontend", frontend_matches
+    if backend_matches:
+        return "backend", backend_matches
+    return "security", []
+
+
+def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], description: str, category: str) -> int:
+    score = 1000 if category == "frontend" else 900 if category == "backend" else 0
     score += 100 if kev else 0
     if cvss is not None:
         if cvss >= 9.0:
@@ -223,7 +233,8 @@ def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], 
             score += 10
     score += len(matched_keywords) * 10
     lower_description = description.lower()
-    for word in ["remote code execution", "rce", "authentication bypass", "privilege escalation", "xss", "prototype pollution", "csrf", "ssrf"]:
+    risky_words = ["remote code execution", "rce", "authentication bypass", "privilege escalation", "xss", "prototype pollution", "csrf", "ssrf"]
+    for word in risky_words:
         if word in lower_description:
             score += 15
     return score
@@ -283,12 +294,11 @@ def make_vulnerability(
     )
     if excluded:
         return None
-    is_frontend, frontend_matches = is_frontend_vulnerability(search_text, config)
+    category, category_keywords = classify_category(search_text, config)
     min_cvss = float(config.get("min_cvss", 7.0))
-    if not (kev or matched or is_frontend or (cvss is not None and cvss >= min_cvss)):
+    if not (kev or matched or category != "security" or (cvss is not None and cvss >= min_cvss)):
         return None
-    priority_group = "frontend" if is_frontend else "security"
-    merged_keywords = list(dict.fromkeys(frontend_matches + matched_keywords))
+    merged_keywords = list(dict.fromkeys(category_keywords + matched_keywords))
     return Vulnerability(
         cve_id=cve_id,
         title=title,
@@ -302,8 +312,9 @@ def make_vulnerability(
         affected_products=[item for item in affected_products if item],
         matched_keywords=merged_keywords,
         references=references,
-        score=calculate_score(cvss, kev, merged_keywords, description, is_frontend),
-        priority_group=priority_group,
+        score=calculate_score(cvss, kev, merged_keywords, description, category),
+        priority_group=category if category in {"frontend", "backend"} else "security",
+        category=category,
     )
 
 
@@ -375,74 +386,6 @@ def normalize_kev_today_item(cve_id: str, item: dict[str, Any], config: dict[str
     )
 
 
-def compact_for_model(vuln: Vulnerability) -> dict[str, Any]:
-    return {
-        "cve_id": vuln.cve_id,
-        "title": vuln.title,
-        "severity": vuln.severity,
-        "cvss": vuln.cvss,
-        "kev": vuln.kev,
-        "priority_group": vuln.priority_group,
-        "matched_keywords": vuln.matched_keywords,
-        "affected_products": vuln.affected_products,
-        "description": compact_text(vuln.description, 700),
-    }
-
-
-def call_github_models(vulnerabilities: list[Vulnerability], config: dict[str, Any]) -> dict[str, str]:
-    model_config = config.get("github_models", {})
-    if not model_config.get("enabled", True) or not vulnerabilities:
-        return {}
-    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
-    if not token:
-        return {}
-    max_items = int(model_config.get("max_items", 30))
-    payload = [compact_for_model(vuln) for vuln in vulnerabilities[:max_items]]
-    request_body = {
-        "model": str(model_config.get("model", "openai/gpt-4.1-mini")),
-        "messages": [
-            {
-                "role": "system",
-                "content": "あなたは脆弱性情報を日本語で簡潔に整理するセキュリティ担当です。誇張せず、開発者が読む要約だけをJSONで返してください。",
-            },
-            {
-                "role": "user",
-                "content": "次のCVEごとに日本語で2文以内の要約と対応目安を作ってください。返却は {\"items\":[{\"cve_id\":\"...\",\"summary\":\"...\"}]} のJSONのみ。\n" + json.dumps({"items": payload}, ensure_ascii=False),
-            },
-        ],
-        "temperature": 0.2,
-        "max_tokens": int(model_config.get("max_tokens", 2500)),
-    }
-    request = urllib.request.Request(
-        str(model_config.get("endpoint", "https://models.github.ai/inference/chat/completions")),
-        data=json.dumps(request_body).encode("utf-8"),
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "Accept": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=60) as response:
-            response_data = json.loads(response.read().decode("utf-8"))
-        content = response_data["choices"][0]["message"]["content"]
-        content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip())
-        parsed = json.loads(content)
-        items = parsed.get("items", [])
-        if not isinstance(items, list):
-            return {}
-        return {str(item.get("cve_id")): str(item.get("summary")) for item in items if isinstance(item, dict) and item.get("cve_id") and item.get("summary")}
-    except Exception as error:  # noqa: BLE001
-        print(f"github models summary failed: {error}", file=sys.stderr)
-        return {}
-
-
-def apply_ai_summaries(vulnerabilities: list[Vulnerability], summaries: dict[str, str]) -> list[Vulnerability]:
-    return [
-        Vulnerability(
-            **{**vuln.__dict__, "ai_summary": summaries.get(vuln.cve_id)}
-        )
-        for vuln in vulnerabilities
-    ]
-
-
 def prune_history(history: dict[str, Any], now: datetime, retention_days: int) -> dict[str, Any]:
     seen = history.get("seen", {})
     if not isinstance(seen, dict):
@@ -469,7 +412,14 @@ def update_history(history: dict[str, Any], vulnerabilities: list[Vulnerability]
     seen = history.setdefault("seen", {})
     today = now.strftime("%Y-%m-%d")
     for vuln in vulnerabilities:
-        seen[vuln.cve_id] = {"title": vuln.title, "severity": vuln.severity, "cvss": vuln.cvss, "kev": vuln.kev, "first_seen": today}
+        seen[vuln.cve_id] = {
+            "title": vuln.title,
+            "severity": vuln.severity,
+            "cvss": vuln.cvss,
+            "kev": vuln.kev,
+            "category": vuln.category,
+            "first_seen": today,
+        }
     return history
 
 
@@ -478,14 +428,17 @@ def render_card(vuln: Vulnerability) -> list[str]:
     keywords = ", ".join(vuln.matched_keywords) if vuln.matched_keywords else "-"
     products = ", ".join(vuln.affected_products) if vuln.affected_products else "-"
     refs = vuln.references or [f"https://nvd.nist.gov/vuln/detail/{vuln.cve_id}"]
-    priority_label = "フロントエンド最優先" if vuln.priority_group == "frontend" else "通常優先"
+    priority_label = {
+        "frontend": "Frontend",
+        "backend": "Backend",
+    }.get(vuln.category, "Security")
     lines = [
         f"### [{vuln.cve_id}]({refs[0]})",
         "",
         f"> **{priority_label}** / **{vuln.severity}** / CVSS: **{cvss_text}** / KEV: **{'yes' if vuln.kev else 'no'}**",
         "",
         f"- タイトル: {vuln.title}",
-        f"- AI要約: {vuln.ai_summary or 'GitHub Modelsの要約は取得できませんでした。'}",
+        f"- 概要: {compact_text(vuln.description)}",
         f"- 関連キーワード: {keywords}",
         f"- 影響製品: {products}",
         f"- 公開日: {vuln.published_at or '-'}",
@@ -501,7 +454,8 @@ def render_card(vuln: Vulnerability) -> list[str]:
 def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: list[str], used_model: bool) -> str:
     fetched_text = now.strftime("%Y-%m-%d %H:%M:%S JST")
     date_text = now.strftime("%Y-%m-%d")
-    frontend_count = sum(1 for vuln in vulnerabilities if vuln.priority_group == "frontend")
+    frontend_count = sum(1 for vuln in vulnerabilities if vuln.category == "frontend")
+    backend_count = sum(1 for vuln in vulnerabilities if vuln.category == "backend")
     kev_count = sum(1 for vuln in vulnerabilities if vuln.kev)
     critical_count = sum(1 for vuln in vulnerabilities if vuln.severity == "CRITICAL")
     lines = [
@@ -512,10 +466,11 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         f"- 取得日時: {fetched_text}",
         "- 対象: 今日公開されたCVE / 今日CISA KEVに追加されたCVEのみ",
         f"- 新規掲載件数: {len(vulnerabilities)}",
-        f"- フロントエンド関連: {frontend_count}",
+        f"- Frontend関連: {frontend_count}",
+        f"- Backend関連: {backend_count}",
         f"- KEV掲載: {kev_count}",
         f"- Critical: {critical_count}",
-        f"- 日本語要約: {'GitHub Models' if used_model else '未使用または失敗'}",
+        f"- 日本語AI要約: {'GitHub Models' if used_model else '未使用'}",
         "",
     ]
     if errors:
@@ -526,11 +481,12 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         lines.extend(["## 結果", "", "条件に一致する今日公開の新規脆弱性はありませんでした。", ""])
         return "\n".join(lines)
     groups = [
-        ("Frontend Priority", lambda vuln: vuln.priority_group == "frontend"),
-        ("Exploited / KEV", lambda vuln: vuln.priority_group != "frontend" and vuln.kev),
-        ("Critical", lambda vuln: vuln.priority_group != "frontend" and not vuln.kev and vuln.severity == "CRITICAL"),
-        ("High", lambda vuln: vuln.priority_group != "frontend" and not vuln.kev and vuln.severity == "HIGH"),
-        ("Other", lambda vuln: vuln.priority_group != "frontend" and not vuln.kev and vuln.severity not in {"CRITICAL", "HIGH"}),
+        ("Frontend", lambda vuln: vuln.category == "frontend"),
+        ("Backend", lambda vuln: vuln.category == "backend"),
+        ("Exploited / KEV", lambda vuln: vuln.category == "security" and vuln.kev),
+        ("Critical", lambda vuln: vuln.category == "security" and not vuln.kev and vuln.severity == "CRITICAL"),
+        ("High", lambda vuln: vuln.category == "security" and not vuln.kev and vuln.severity == "HIGH"),
+        ("Other", lambda vuln: vuln.category == "security" and not vuln.kev and vuln.severity not in {"CRITICAL", "HIGH"}),
     ]
     for heading, predicate in groups:
         items = [vuln for vuln in vulnerabilities if predicate(vuln)]
@@ -539,6 +495,38 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         lines.extend([f"## {heading}", ""])
         for vuln in items:
             lines.extend(render_card(vuln))
+    return "\n".join(lines)
+
+
+def render_category_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: list[str], category: str) -> str:
+    date_text = now.strftime("%Y-%m-%d")
+    fetched_text = now.strftime("%Y-%m-%d %H:%M:%S JST")
+    label = "Frontend" if category == "frontend" else "Backend"
+    items = [vuln for vuln in vulnerabilities if vuln.category == category]
+    lines = [
+        f"# {label} CVE Summary ({date_text})",
+        "",
+        "## Overview",
+        "",
+        f"- 取得日時: {fetched_text}",
+        "- 対象: 今日公開されたCVE / 今日CISA KEVに追加されたCVEのみ",
+        f"- 掲載件数: {len(items)}",
+        f"- Critical: {sum(1 for vuln in items if vuln.severity == 'CRITICAL')}",
+        f"- High: {sum(1 for vuln in items if vuln.severity == 'HIGH')}",
+        f"- KEV掲載: {sum(1 for vuln in items if vuln.kev)}",
+        "- 日本語AI要約: 未使用",
+        "",
+    ]
+    if errors:
+        lines.extend(["## 取得エラー", ""])
+        lines.extend(f"- {error}" for error in errors)
+        lines.append("")
+    if not items:
+        lines.extend(["## 結果", "", f"条件に一致する{label}関連の新規脆弱性はありませんでした。", ""])
+        return "\n".join(lines)
+    lines.extend(["## CVEs", ""])
+    for vuln in items:
+        lines.extend(render_card(vuln))
     return "\n".join(lines)
 
 
@@ -567,7 +555,8 @@ def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list
         if vuln:
             vulnerabilities_by_id[cve_id] = vuln
     vulnerabilities = list(vulnerabilities_by_id.values())
-    vulnerabilities.sort(key=lambda vuln: (0 if vuln.priority_group == "frontend" else 1, -vuln.score, -(vuln.cvss or 0), vuln.cve_id))
+    order = {"frontend": 0, "backend": 1, "security": 2}
+    vulnerabilities.sort(key=lambda vuln: (order.get(vuln.category, 9), -vuln.score, -(vuln.cvss or 0), vuln.cve_id))
     return vulnerabilities[: int(config.get("max_items", 30))], errors
 
 
@@ -578,18 +567,23 @@ def main() -> int:
     history = prune_history(history, now, int(config.get("history_retention_days", 120)))
     vulnerabilities, errors = collect_vulnerabilities(config, now)
     new_vulnerabilities = filter_new(vulnerabilities, history)
-    summaries = call_github_models(new_vulnerabilities, config)
-    used_model = bool(summaries)
-    new_vulnerabilities = apply_ai_summaries(new_vulnerabilities, summaries)
+    used_model = False
 
     output_dir = OUTPUT_ROOT / now.strftime("%Y-%m-%d")
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / "summary.md"
-    output_path.write_text(render_summary(new_vulnerabilities, now, errors, used_model), encoding="utf-8")
-    print(f"created: {output_path.relative_to(ROOT_DIR)}")
+    outputs = {
+        "summary.md": render_summary(new_vulnerabilities, now, errors, used_model),
+        "frontend-summary.md": render_category_summary(new_vulnerabilities, now, errors, "frontend"),
+        "backend-summary.md": render_category_summary(new_vulnerabilities, now, errors, "backend"),
+    }
+    for filename, content in outputs.items():
+        output_path = output_dir / filename
+        output_path.write_text(content, encoding="utf-8")
+        print(f"created: {output_path.relative_to(ROOT_DIR)}")
+
     write_json(HISTORY_PATH, update_history(history, new_vulnerabilities, now))
     if errors:
-        print("warning: one or more sources failed, but summary.md was generated", file=sys.stderr)
+        print("warning: one or more sources failed, but markdown files were generated", file=sys.stderr)
     return 0
 
 
