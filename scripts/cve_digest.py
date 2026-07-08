@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -34,6 +36,8 @@ class Vulnerability:
     matched_keywords: list[str]
     references: list[str]
     score: int
+    priority_group: str
+    ai_summary: str | None = None
 
 
 def load_json(path: Path, default: dict[str, Any]) -> dict[str, Any]:
@@ -58,37 +62,29 @@ def fetch_json(url: str, params: dict[str, str] | None = None, timeout: int = 45
         return json.loads(response.read().decode("utf-8"))
 
 
+def today_range_utc(now: datetime) -> tuple[datetime, datetime]:
+    today = now.astimezone(JST).date()
+    start_jst = datetime.combine(today, time.min, tzinfo=JST)
+    end_jst = start_jst + timedelta(days=1)
+    return start_jst.astimezone(UTC), end_jst.astimezone(UTC)
+
+
 def parse_datetime(value: str | None) -> datetime | None:
     if not value:
         return None
     try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         return None
-
-
-def format_date(value: str | None) -> str | None:
-    parsed = parse_datetime(value)
-    if parsed is None:
-        return value
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=UTC)
-    return parsed.astimezone(JST).strftime("%Y-%m-%d %H:%M:%S JST")
-
-
-def today_range_utc(now: datetime) -> tuple[datetime, datetime]:
-    today = now.astimezone(JST).date()
-    start_jst = datetime.combine(today, time.min, tzinfo=JST)
-    end_jst = datetime.combine(today + timedelta(days=1), time.min, tzinfo=JST)
-    return start_jst.astimezone(UTC), end_jst.astimezone(UTC)
+    return parsed
 
 
 def is_today_jst(value: str | None, now: datetime) -> bool:
     parsed = parse_datetime(value)
     if parsed is None:
         return False
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=UTC)
     return parsed.astimezone(JST).date() == now.astimezone(JST).date()
 
 
@@ -99,6 +95,13 @@ def is_today_date(value: str | None, now: datetime) -> bool:
         return datetime.strptime(value, "%Y-%m-%d").date() == now.astimezone(JST).date()
     except ValueError:
         return False
+
+
+def format_date(value: str | None) -> str | None:
+    parsed = parse_datetime(value)
+    if parsed is None:
+        return value
+    return parsed.astimezone(JST).strftime("%Y-%m-%d %H:%M:%S JST")
 
 
 def compact_text(value: str | None, max_length: int = 320) -> str:
@@ -124,7 +127,6 @@ def extract_cvss_and_severity(cve: dict[str, Any]) -> tuple[float | None, str]:
     metrics = cve.get("metrics", {})
     if not isinstance(metrics, dict):
         return None, "UNKNOWN"
-
     best_score: float | None = None
     best_severity = "UNKNOWN"
     for key in ["cvssMetricV40", "cvssMetricV31", "cvssMetricV30", "cvssMetricV2"]:
@@ -158,8 +160,7 @@ def extract_affected_products(cve: dict[str, Any]) -> list[str]:
         for match in node.get("cpeMatch", []) or []:
             if not isinstance(match, dict):
                 continue
-            criteria = str(match.get("criteria", ""))
-            parts = criteria.split(":")
+            parts = str(match.get("criteria", "")).split(":")
             if len(parts) >= 5:
                 vendor = parts[3].replace("_", " ")
                 product = parts[4].replace("_", " ")
@@ -181,13 +182,13 @@ def extract_affected_products(cve: dict[str, Any]) -> list[str]:
 def extract_references(cve: dict[str, Any]) -> list[str]:
     raw_references = cve.get("references", [])
     if isinstance(raw_references, dict):
-        reference_data = raw_references.get("referenceData", [])
-        refs = reference_data if isinstance(reference_data, list) else []
+        refs = raw_references.get("referenceData", [])
     elif isinstance(raw_references, list):
         refs = raw_references
     else:
         refs = []
-
+    if not isinstance(refs, list):
+        return []
     urls: list[str] = []
     for ref in refs:
         if isinstance(ref, dict) and ref.get("url"):
@@ -204,8 +205,15 @@ def match_keywords(text: str, keywords: list[str], exclude_keywords: list[str]) 
     return bool(matched), matched, False
 
 
-def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], description: str) -> int:
-    score = 100 if kev else 0
+def is_frontend_vulnerability(vuln_text: str, config: dict[str, Any]) -> tuple[bool, list[str]]:
+    keywords = [str(item) for item in config.get("frontend_keywords", [])]
+    _, matched, _ = match_keywords(vuln_text, keywords, [])
+    return bool(matched), matched
+
+
+def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], description: str, is_frontend: bool) -> int:
+    score = 1000 if is_frontend else 0
+    score += 100 if kev else 0
     if cvss is not None:
         if cvss >= 9.0:
             score += 50
@@ -215,20 +223,13 @@ def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], 
             score += 10
     score += len(matched_keywords) * 10
     lower_description = description.lower()
-    for word in [
-        "remote code execution",
-        "rce",
-        "authentication bypass",
-        "privilege escalation",
-        "sql injection",
-        "command injection",
-    ]:
+    for word in ["remote code execution", "rce", "authentication bypass", "privilege escalation", "xss", "prototype pollution", "csrf", "ssrf"]:
         if word in lower_description:
             score += 15
     return score
 
 
-def fetch_nvd(config: dict[str, Any], now: datetime) -> list[dict[str, Any]]:
+def fetch_nvd_today(config: dict[str, Any], now: datetime) -> list[dict[str, Any]]:
     source = config.get("sources", {}).get("nvd", {})
     if not source.get("enabled", True):
         return []
@@ -260,88 +261,21 @@ def fetch_cisa_kev(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return result
 
 
-def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]], config: dict[str, Any], now: datetime) -> Vulnerability | None:
-    cve = item.get("cve", {})
-    if not isinstance(cve, dict):
-        return None
-
-    cve_id = str(cve.get("id") or "")
-    if not cve_id:
-        return None
-
-    published = cve.get("published")
-    if not is_today_jst(str(published) if published else None, now):
-        return None
-
-    descriptions = cve.get("descriptions", [])
-    description = ""
-    if isinstance(descriptions, list):
-        english = [desc for desc in descriptions if isinstance(desc, dict) and desc.get("lang") == "en"]
-        selected = english[0] if english else descriptions[0] if descriptions else {}
-        description = str(selected.get("value") or "") if isinstance(selected, dict) else ""
-
-    cvss, severity = extract_cvss_and_severity(cve)
-    severity = severity if severity != "UNKNOWN" else severity_from_cvss(cvss)
-    affected_products = extract_affected_products(cve)
-    references = extract_references(cve)
-    kev_item = kev_map.get(cve_id)
-    is_kev = kev_item is not None
-
-    if is_kev and kev_item:
-        affected_products = affected_products or [
-            " ".join(
-                part for part in [str(kev_item.get("vendorProject") or ""), str(kev_item.get("product") or "")] if part
-            ).strip()
-        ]
-        if kev_item.get("notes"):
-            references.append(str(kev_item.get("notes")))
-
-    title = cve_id
-    if is_kev and kev_item and kev_item.get("vulnerabilityName"):
-        title = f"{cve_id}: {kev_item.get('vulnerabilityName')}"
-    elif affected_products:
-        title = f"{cve_id}: {affected_products[0]}"
-
-    keywords = [str(item) for item in config.get("watch_keywords", [])]
-    excludes = [str(item) for item in config.get("exclude_keywords", [])]
-    matched, matched_keywords, excluded = match_keywords(
-        " ".join([title, description, " ".join(affected_products), severity]), keywords, excludes
-    )
-    if excluded:
-        return None
-
-    min_cvss = float(config.get("min_cvss", 7.0))
-    if not (is_kev or matched or (cvss is not None and cvss >= min_cvss)):
-        return None
-
-    return Vulnerability(
-        cve_id=cve_id,
-        title=title,
-        description=description,
-        source="NVD" + (" / CISA KEV" if is_kev else ""),
-        published_at=format_date(str(published) if published else None),
-        updated_at=format_date(cve.get("lastModified")),
-        cvss=cvss,
-        severity=severity,
-        kev=is_kev,
-        affected_products=[item for item in affected_products if item],
-        matched_keywords=matched_keywords,
-        references=references,
-        score=calculate_score(cvss, is_kev, matched_keywords, description),
-    )
-
-
-def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str, Any], now: datetime) -> Vulnerability | None:
-    if not is_today_date(str(item.get("dateAdded") or ""), now):
-        return None
-
-    vendor = str(item.get("vendorProject") or "")
-    product = str(item.get("product") or "")
-    vulnerability_name = str(item.get("vulnerabilityName") or cve_id)
-    description = str(item.get("shortDescription") or "")
-    title = f"{cve_id}: {vulnerability_name}"
-    affected = " ".join(part for part in [vendor, product] if part).strip()
-    search_text = " ".join([title, description, affected])
+def make_vulnerability(
+    cve_id: str,
+    title: str,
+    description: str,
+    source: str,
+    published_at: str | None,
+    updated_at: str | None,
+    cvss: float | None,
+    severity: str,
+    kev: bool,
+    affected_products: list[str],
+    references: list[str],
+    config: dict[str, Any],
+) -> Vulnerability | None:
+    search_text = " ".join([title, description, " ".join(affected_products), severity])
     matched, matched_keywords, excluded = match_keywords(
         search_text,
         [str(item) for item in config.get("watch_keywords", [])],
@@ -349,22 +283,164 @@ def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str,
     )
     if excluded:
         return None
-
+    is_frontend, frontend_matches = is_frontend_vulnerability(search_text, config)
+    min_cvss = float(config.get("min_cvss", 7.0))
+    if not (kev or matched or is_frontend or (cvss is not None and cvss >= min_cvss)):
+        return None
+    priority_group = "frontend" if is_frontend else "security"
+    merged_keywords = list(dict.fromkeys(frontend_matches + matched_keywords))
     return Vulnerability(
         cve_id=cve_id,
         title=title,
         description=description,
-        source="CISA KEV",
-        published_at=str(item.get("dateAdded") or "-"),
-        updated_at=None,
-        cvss=None,
-        severity="KEV",
-        kev=True,
-        affected_products=[affected] if affected else [],
-        matched_keywords=matched_keywords,
-        references=[str(item.get("notes"))] if item.get("notes") else [],
-        score=calculate_score(None, True, matched_keywords, description),
+        source=source,
+        published_at=published_at,
+        updated_at=updated_at,
+        cvss=cvss,
+        severity=severity,
+        kev=kev,
+        affected_products=[item for item in affected_products if item],
+        matched_keywords=merged_keywords,
+        references=references,
+        score=calculate_score(cvss, kev, merged_keywords, description, is_frontend),
+        priority_group=priority_group,
     )
+
+
+def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]], config: dict[str, Any], now: datetime) -> Vulnerability | None:
+    cve = item.get("cve", {})
+    if not isinstance(cve, dict) or not is_today_jst(cve.get("published"), now):
+        return None
+    cve_id = str(cve.get("id") or "")
+    if not cve_id:
+        return None
+    descriptions = cve.get("descriptions", [])
+    description = ""
+    if isinstance(descriptions, list):
+        english = [desc for desc in descriptions if isinstance(desc, dict) and desc.get("lang") == "en"]
+        selected = english[0] if english else descriptions[0] if descriptions else {}
+        description = str(selected.get("value") or "") if isinstance(selected, dict) else ""
+    cvss, severity = extract_cvss_and_severity(cve)
+    severity = severity if severity != "UNKNOWN" else severity_from_cvss(cvss)
+    affected_products = extract_affected_products(cve)
+    references = extract_references(cve)
+    kev_item = kev_map.get(cve_id)
+    is_kev = kev_item is not None
+    if is_kev and kev_item:
+        affected_products = affected_products or [
+            " ".join(part for part in [str(kev_item.get("vendorProject") or ""), str(kev_item.get("product") or "")] if part).strip()
+        ]
+        if kev_item.get("notes"):
+            references.append(str(kev_item.get("notes")))
+    title = f"{cve_id}: {kev_item.get('vulnerabilityName')}" if is_kev and kev_item and kev_item.get("vulnerabilityName") else cve_id
+    if title == cve_id and affected_products:
+        title = f"{cve_id}: {affected_products[0]}"
+    return make_vulnerability(
+        cve_id,
+        title,
+        description,
+        "NVD" + (" / CISA KEV" if is_kev else ""),
+        format_date(cve.get("published")),
+        format_date(cve.get("lastModified")),
+        cvss,
+        severity,
+        is_kev,
+        affected_products,
+        references,
+        config,
+    )
+
+
+def normalize_kev_today_item(cve_id: str, item: dict[str, Any], config: dict[str, Any], now: datetime) -> Vulnerability | None:
+    if not is_today_date(str(item.get("dateAdded") or ""), now):
+        return None
+    vendor = str(item.get("vendorProject") or "")
+    product = str(item.get("product") or "")
+    vulnerability_name = str(item.get("vulnerabilityName") or cve_id)
+    description = str(item.get("shortDescription") or "")
+    affected = " ".join(part for part in [vendor, product] if part).strip()
+    return make_vulnerability(
+        cve_id,
+        f"{cve_id}: {vulnerability_name}",
+        description,
+        "CISA KEV",
+        str(item.get("dateAdded") or "-"),
+        None,
+        None,
+        "KEV",
+        True,
+        [affected] if affected else [],
+        [str(item.get("notes"))] if item.get("notes") else [],
+        config,
+    )
+
+
+def compact_for_model(vuln: Vulnerability) -> dict[str, Any]:
+    return {
+        "cve_id": vuln.cve_id,
+        "title": vuln.title,
+        "severity": vuln.severity,
+        "cvss": vuln.cvss,
+        "kev": vuln.kev,
+        "priority_group": vuln.priority_group,
+        "matched_keywords": vuln.matched_keywords,
+        "affected_products": vuln.affected_products,
+        "description": compact_text(vuln.description, 700),
+    }
+
+
+def call_github_models(vulnerabilities: list[Vulnerability], config: dict[str, Any]) -> dict[str, str]:
+    model_config = config.get("github_models", {})
+    if not model_config.get("enabled", True) or not vulnerabilities:
+        return {}
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if not token:
+        return {}
+    max_items = int(model_config.get("max_items", 30))
+    payload = [compact_for_model(vuln) for vuln in vulnerabilities[:max_items]]
+    request_body = {
+        "model": str(model_config.get("model", "openai/gpt-4.1-mini")),
+        "messages": [
+            {
+                "role": "system",
+                "content": "あなたは脆弱性情報を日本語で簡潔に整理するセキュリティ担当です。誇張せず、開発者が読む要約だけをJSONで返してください。",
+            },
+            {
+                "role": "user",
+                "content": "次のCVEごとに日本語で2文以内の要約と対応目安を作ってください。返却は {\"items\":[{\"cve_id\":\"...\",\"summary\":\"...\"}]} のJSONのみ。\n" + json.dumps({"items": payload}, ensure_ascii=False),
+            },
+        ],
+        "temperature": 0.2,
+        "max_tokens": int(model_config.get("max_tokens", 2500)),
+    }
+    request = urllib.request.Request(
+        str(model_config.get("endpoint", "https://models.github.ai/inference/chat/completions")),
+        data=json.dumps(request_body).encode("utf-8"),
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "Accept": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=60) as response:
+            response_data = json.loads(response.read().decode("utf-8"))
+        content = response_data["choices"][0]["message"]["content"]
+        content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip())
+        parsed = json.loads(content)
+        items = parsed.get("items", [])
+        if not isinstance(items, list):
+            return {}
+        return {str(item.get("cve_id")): str(item.get("summary")) for item in items if isinstance(item, dict) and item.get("cve_id") and item.get("summary")}
+    except Exception as error:  # noqa: BLE001
+        print(f"github models summary failed: {error}", file=sys.stderr)
+        return {}
+
+
+def apply_ai_summaries(vulnerabilities: list[Vulnerability], summaries: dict[str, str]) -> list[Vulnerability]:
+    return [
+        Vulnerability(
+            **{**vuln.__dict__, "ai_summary": summaries.get(vuln.cve_id)}
+        )
+        for vuln in vulnerabilities
+    ]
 
 
 def prune_history(history: dict[str, Any], now: datetime, retention_days: int) -> dict[str, Any]:
@@ -393,26 +469,53 @@ def update_history(history: dict[str, Any], vulnerabilities: list[Vulnerability]
     seen = history.setdefault("seen", {})
     today = now.strftime("%Y-%m-%d")
     for vuln in vulnerabilities:
-        seen[vuln.cve_id] = {
-            "title": vuln.title,
-            "severity": vuln.severity,
-            "cvss": vuln.cvss,
-            "kev": vuln.kev,
-            "first_seen": today,
-        }
+        seen[vuln.cve_id] = {"title": vuln.title, "severity": vuln.severity, "cvss": vuln.cvss, "kev": vuln.kev, "first_seen": today}
     return history
 
 
-def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: list[str]) -> str:
+def render_card(vuln: Vulnerability) -> list[str]:
+    cvss_text = "-" if vuln.cvss is None else f"{vuln.cvss:.1f}"
+    keywords = ", ".join(vuln.matched_keywords) if vuln.matched_keywords else "-"
+    products = ", ".join(vuln.affected_products) if vuln.affected_products else "-"
+    refs = vuln.references or [f"https://nvd.nist.gov/vuln/detail/{vuln.cve_id}"]
+    priority_label = "フロントエンド最優先" if vuln.priority_group == "frontend" else "通常優先"
+    lines = [
+        f"### [{vuln.cve_id}]({refs[0]})",
+        "",
+        f"> **{priority_label}** / **{vuln.severity}** / CVSS: **{cvss_text}** / KEV: **{'yes' if vuln.kev else 'no'}**",
+        "",
+        f"- タイトル: {vuln.title}",
+        f"- AI要約: {vuln.ai_summary or 'GitHub Modelsの要約は取得できませんでした。'}",
+        f"- 関連キーワード: {keywords}",
+        f"- 影響製品: {products}",
+        f"- 公開日: {vuln.published_at or '-'}",
+        f"- 更新日: {vuln.updated_at or '-'}",
+        f"- 出典: {vuln.source}",
+        "- 参照:",
+    ]
+    lines.extend(f"  - {ref}" for ref in refs[:5])
+    lines.append("")
+    return lines
+
+
+def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: list[str], used_model: bool) -> str:
     fetched_text = now.strftime("%Y-%m-%d %H:%M:%S JST")
     date_text = now.strftime("%Y-%m-%d")
+    frontend_count = sum(1 for vuln in vulnerabilities if vuln.priority_group == "frontend")
+    kev_count = sum(1 for vuln in vulnerabilities if vuln.kev)
+    critical_count = sum(1 for vuln in vulnerabilities if vuln.severity == "CRITICAL")
     lines = [
         f"# CVE Digest Summary ({date_text})",
         "",
+        "## Overview",
+        "",
         f"- 取得日時: {fetched_text}",
-        "- 対象: 今日JSTに公開されたCVE、または今日CISA KEVに追加されたCVEのみ",
+        "- 対象: 今日公開されたCVE / 今日CISA KEVに追加されたCVEのみ",
         f"- 新規掲載件数: {len(vulnerabilities)}",
-        "- 出力対象: 新規CVEのみ",
+        f"- フロントエンド関連: {frontend_count}",
+        f"- KEV掲載: {kev_count}",
+        f"- Critical: {critical_count}",
+        f"- 日本語要約: {'GitHub Models' if used_model else '未使用または失敗'}",
         "",
     ]
     if errors:
@@ -422,12 +525,12 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
     if not vulnerabilities:
         lines.extend(["## 結果", "", "条件に一致する今日公開の新規脆弱性はありませんでした。", ""])
         return "\n".join(lines)
-
     groups = [
-        ("緊急対応候補", lambda vuln: vuln.kev),
-        ("Critical", lambda vuln: not vuln.kev and vuln.severity == "CRITICAL"),
-        ("High", lambda vuln: not vuln.kev and vuln.severity == "HIGH"),
-        ("Other", lambda vuln: not vuln.kev and vuln.severity not in {"CRITICAL", "HIGH"}),
+        ("Frontend Priority", lambda vuln: vuln.priority_group == "frontend"),
+        ("Exploited / KEV", lambda vuln: vuln.priority_group != "frontend" and vuln.kev),
+        ("Critical", lambda vuln: vuln.priority_group != "frontend" and not vuln.kev and vuln.severity == "CRITICAL"),
+        ("High", lambda vuln: vuln.priority_group != "frontend" and not vuln.kev and vuln.severity == "HIGH"),
+        ("Other", lambda vuln: vuln.priority_group != "frontend" and not vuln.kev and vuln.severity not in {"CRITICAL", "HIGH"}),
     ]
     for heading, predicate in groups:
         items = [vuln for vuln in vulnerabilities if predicate(vuln)]
@@ -435,28 +538,7 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
             continue
         lines.extend([f"## {heading}", ""])
         for vuln in items:
-            cvss_text = "-" if vuln.cvss is None else f"{vuln.cvss:.1f}"
-            keywords = ", ".join(vuln.matched_keywords) if vuln.matched_keywords else "-"
-            products = ", ".join(vuln.affected_products) if vuln.affected_products else "-"
-            references = vuln.references or [f"https://nvd.nist.gov/vuln/detail/{vuln.cve_id}"]
-            lines.extend(
-                [
-                    f"### {vuln.title}",
-                    "",
-                    f"- 重要度: {vuln.severity}",
-                    f"- CVSS: {cvss_text}",
-                    f"- KEV掲載: {'yes' if vuln.kev else 'no'}",
-                    f"- 関連キーワード: {keywords}",
-                    f"- 影響製品: {products}",
-                    f"- 公開日: {vuln.published_at or '-'}",
-                    f"- 更新日: {vuln.updated_at or '-'}",
-                    f"- 出典: {vuln.source}",
-                    f"- 概要: {compact_text(vuln.description)}",
-                    "- 参照:",
-                ]
-            )
-            lines.extend(f"  - {ref}" for ref in references[:5])
-            lines.append("")
+            lines.extend(render_card(vuln))
     return "\n".join(lines)
 
 
@@ -469,26 +551,23 @@ def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list
     except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError) as error:
         errors.append(f"CISA KEV: {error}")
     try:
-        nvd_items = fetch_nvd(config, now)
+        nvd_items = fetch_nvd_today(config, now)
     except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError) as error:
         errors.append(f"NVD: {error}")
-
     vulnerabilities_by_id: dict[str, Vulnerability] = {}
     for item in nvd_items:
         if isinstance(item, dict):
             vuln = normalize_nvd_item(item, kev_map, config, now)
             if vuln:
                 vulnerabilities_by_id[vuln.cve_id] = vuln
-
     for cve_id, kev_item in kev_map.items():
         if cve_id in vulnerabilities_by_id:
             continue
-        vuln = normalize_kev_only_item(cve_id, kev_item, config, now)
+        vuln = normalize_kev_today_item(cve_id, kev_item, config, now)
         if vuln:
             vulnerabilities_by_id[cve_id] = vuln
-
     vulnerabilities = list(vulnerabilities_by_id.values())
-    vulnerabilities.sort(key=lambda vuln: (vuln.score, vuln.cvss or 0), reverse=True)
+    vulnerabilities.sort(key=lambda vuln: (0 if vuln.priority_group == "frontend" else 1, -vuln.score, -(vuln.cvss or 0), vuln.cve_id))
     return vulnerabilities[: int(config.get("max_items", 30))], errors
 
 
@@ -499,13 +578,15 @@ def main() -> int:
     history = prune_history(history, now, int(config.get("history_retention_days", 120)))
     vulnerabilities, errors = collect_vulnerabilities(config, now)
     new_vulnerabilities = filter_new(vulnerabilities, history)
+    summaries = call_github_models(new_vulnerabilities, config)
+    used_model = bool(summaries)
+    new_vulnerabilities = apply_ai_summaries(new_vulnerabilities, summaries)
 
     output_dir = OUTPUT_ROOT / now.strftime("%Y-%m-%d")
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / "summary.md"
-    output_path.write_text(render_summary(new_vulnerabilities, now, errors), encoding="utf-8")
+    output_path.write_text(render_summary(new_vulnerabilities, now, errors, used_model), encoding="utf-8")
     print(f"created: {output_path.relative_to(ROOT_DIR)}")
-
     write_json(HISTORY_PATH, update_history(history, new_vulnerabilities, now))
     if errors:
         print("warning: one or more sources failed, but summary.md was generated", file=sys.stderr)
