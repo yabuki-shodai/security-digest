@@ -1,498 +1,227 @@
 # CVE Digest Summary (2026-07-08)
 
-- 取得日時: 2026-07-08 13:21:18 JST
-- 対象: 今日JSTに公開されたCVE、または今日CISA KEVに追加されたCVEのみ
-- 新規掲載件数: 30
-- 出力対象: 新規CVEのみ
+## Overview
 
-## Critical
+- 取得日時: 2026-07-08 13:28:29 JST
+- 対象: 今日公開されたCVE / 今日CISA KEVに追加されたCVEのみ
+- 新規掲載件数: 14
+- フロントエンド関連: 14
+- KEV掲載: 0
+- Critical: 0
+- 日本語要約: GitHub Models
 
-### CVE-2026-56843
+## Frontend Priority
 
-- 重要度: CRITICAL
-- CVSS: 9.9
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 10:16:28 JST
-- 更新日: 2026-07-08 10:16:28 JST
-- 出典: NVD
-- 概要: Incorrect authorization in the XML-RPC API of WebPros Plesk before 18.0.78.4 allows a low-privileged authenticated customer to look up domains they do not own, because ownership is enforced only for certain lookup filters and schema validation is bypassed for legacy protocol versions. This results in cross-tenant discl...
-- 参照:
-  - https://support.plesk.com/hc/en-us/articles/41178305151255-Vulnerability-in-Plesk-XML-API-Cleartext-FTP-Password-Exposure
+### [CVE-2026-56812](https://cna.erlef.org/cves/CVE-2026-56812.html)
 
-### CVE-2026-59800
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **6.3** / KEV: **no**
 
-- 重要度: CRITICAL
-- CVSS: 9.8
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 04:16:55 JST
-- 更新日: 2026-07-08 05:16:29 JST
-- 出典: NVD
-- 概要: 9Router before 0.4.44 contains an OS command injection vulnerability in the unauthenticated POST /api/tunnel/tailscale-install endpoint (this route is not covered by the dashboard middleware matcher, so no authorization check is applied). The sudoPassword field from the request body is written to the stdin of a 'sudo -...
-- 参照:
-  - https://github.com/decolua/9router/security/advisories/GHSA-g6g7-pvmx-m74p
-  - https://www.vulncheck.com/advisories/9router-os-command-injection-via-sudopassword-parameter-in-tailscale-install-endpoint
-  - https://github.com/decolua/9router/security/advisories/GHSA-g6g7-pvmx-m74p
-
-### CVE-2026-59707
-
-- 重要度: CRITICAL
-- CVSS: 9.2
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 06:17:29 JST
-- 更新日: 2026-07-08 06:17:29 JST
-- 出典: NVD
-- 概要: LocalAI contains an unauthenticated server-side request forgery vulnerability in the POST /models/apply endpoint that allows attackers to fetch arbitrary internal URLs. The endpoint passes unsanitized gallery URL fields directly to gallery.GetGalleryConfigFromURLWithContext without proper validation, enabling attackers...
-- 参照:
-  - https://github.com/mudler/LocalAI
-  - https://github.com/mudler/LocalAI/commit/f9b968e19d7cbc556d59dceb2e0e450b828a3fda
-  - https://github.com/mudler/LocalAI/issues/10665
-  - https://www.vulncheck.com/advisories/localai-server-side-request-forgery-via-post-models-apply
-
-### CVE-2026-13019
-
-- 重要度: CRITICAL
-- CVSS: 9.8
-- KEV掲載: no
-- 関連キーワード: linux
-- 影響製品: -
-- 公開日: 2026-07-08 02:16:35 JST
-- 更新日: 2026-07-08 03:16:34 JST
-- 出典: NVD
-- 概要: Esri Portal for ArcGIS versions 12.1 and earlier on Windows, Linux and Kubernetes have a missing authentication for critical function vulnerability allows a remote, unauthenticated attacker to access an unprotected API.
-- 参照:
-  - https://www.esri.com/arcgis-blog/products/trust-arcgis/administration/june-2026-arcgis-security-bulletin
-
-### CVE-2026-59705
-
-- 重要度: CRITICAL
-- CVSS: 9.8
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 08:16:55 JST
-- 更新日: 2026-07-08 08:16:55 JST
-- 出典: NVD
-- 概要: mem0's openmemory/api component contains an unauthenticated access vulnerability that allows unauthenticated attackers to read, write, and delete arbitrary user memories by accessing API routers registered without authentication middleware. Attackers can supply arbitrary user_id parameters or directly access memory ret...
-- 参照:
-  - https://github.com/mem0ai/mem0
-  - https://github.com/mem0ai/mem0/commit/a3154d59e52386d4e1189c1f5f44819868f76514
-  - https://github.com/mem0ai/mem0/issues/6080
-  - https://www.vulncheck.com/advisories/mem0-openmemory-api-unauthenticated-access-via-memory-endpoints
-
-### CVE-2026-58473
-
-- 重要度: CRITICAL
-- CVSS: 9.3
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 06:17:29 JST
-- 更新日: 2026-07-08 06:17:29 JST
-- 出典: NVD
-- 概要: Cognee before 1.2.0 contains an improper access control vulnerability that allows unauthenticated attackers to overwrite the global LLM provider configuration by self-registering an account and calling the settings endpoint, which performs no admin or superuser check. Attackers can redirect all LLM operations instance-...
-- 参照:
-  - https://github.com/topoteretes/cognee/commit/d10b1b77e2157c6238fd4d1acb1923a048991699
-  - https://github.com/topoteretes/cognee/issues/3084
-  - https://github.com/topoteretes/cognee/releases/tag/v1.2.0
-  - https://www.vulncheck.com/advisories/cognee-unauthorized-llm-configuration-overwrite-via-api-v1-settings
-
-### CVE-2026-59706
-
-- 重要度: CRITICAL
-- CVSS: 9.3
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 07:16:54 JST
-- 更新日: 2026-07-08 07:16:54 JST
-- 出典: NVD
-- 概要: mem0 contains unauthenticated config API endpoints that expose LLM API keys in plaintext and allow server-side request forgery via attacker-controlled ollama_base_url parameter. Unauthenticated attackers can retrieve stored secrets like OpenAI API keys via GET /api/v1/config/ or trigger SSRF attacks by setting ollama_b...
-- 参照:
-  - https://github.com/mem0ai/mem0
-  - https://github.com/mem0ai/mem0/commit/a3154d59e52386d4e1189c1f5f44819868f76514
-  - https://github.com/mem0ai/mem0/issues/6081
-  - https://www.vulncheck.com/advisories/mem0-server-side-request-forgery-and-plaintext-api-key-exposure-via-unauthenticated-config-endpoints
-
-### CVE-2026-46354
-
-- 重要度: CRITICAL
-- CVSS: 9.1
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 07:16:52 JST
-- 更新日: 2026-07-08 07:16:52 JST
-- 出典: NVD
-- 概要: Coder allows organizations to provision remote development environments via Terraform. In versions prior tp 2.24.5, 2.29.13, 2.30.8, 2.31.12, 2.32.2, and 2.33.3, `azureidentity.Validate()` verifies that the PKCS#7 signer certificate chains to a trusted Azure CA but never verifies the PKCS#7 signature itself. An attacke...
-- 参照:
-  - https://github.com/coder/coder/pull/25286
-  - https://github.com/coder/coder/releases/tag/v2.24.5
-  - https://github.com/coder/coder/releases/tag/v2.29.13
-  - https://github.com/coder/coder/releases/tag/v2.30.8
-  - https://github.com/coder/coder/releases/tag/v2.31.12
-
-## High
-
-### CVE-2026-55633
-
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 06:17:27 JST
-- 更新日: 2026-07-08 06:17:27 JST
-- 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, a bypass of the H2 zip protocol and file dropper fix allows an authenticated attacker to upload a zip archive disguised with a .ttf extension through FontManage.saveFile and then exploit it through the zip protocol to achieve remote code...
-- 参照:
-  - https://github.com/dataease/dataease/commit/265b31179f1427c059f739841f2e39aaa6d1b937
-  - https://github.com/dataease/dataease/commit/8892a6945b0b7a329a156155270fae58afa895bc
-  - https://github.com/dataease/dataease/releases/tag/v2.10.24
-  - https://github.com/dataease/dataease/security/advisories/GHSA-8x36-774q-pwqg
-
-### CVE-2026-44454
-
-- 重要度: HIGH
-- CVSS: 8.1
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 06:17:25 JST
-- 更新日: 2026-07-08 07:16:52 JST
-- 出典: NVD
-- 概要: Coder allows organizations to provision remote development environments via Terraform. Prior to versions 2.29.7 and 2.30.2, the `dotfiles` registry module passed unsanitized user input to shell commands, allowing arbitrary code execution inside a provisioned workspace. Any user who supplied a crafted `dotfiles_uri` val...
-- 参照:
-  - https://github.com/coder/coder/commit/60e3ab7632f42415d283b9fd5622ee53a4639ceb
-  - https://github.com/coder/coder/pull/22011
-  - https://github.com/coder/coder/releases/tag/v2.29.7
-  - https://github.com/coder/coder/releases/tag/v2.30.2
-  - https://github.com/coder/coder/security/advisories/GHSA-m3cr-vc2j-pm27
-
-### CVE-2026-55408
-
-- 重要度: HIGH
-- CVSS: 8.4
-- KEV掲載: no
-- 関連キーワード: node.js
-- 影響製品: -
-- 公開日: 2026-07-08 07:16:53 JST
-- 更新日: 2026-07-08 07:16:53 JST
-- 出典: NVD
-- 概要: Koodo Reader is an ebook reader. In version 2.3.0 and earlier, Koodo Reader is vulnerable to remote code execution through malicious EPUB files because the open-book IPC handler enables nodeIntegrationInSubFrames and EPUB chapter content is rendered with unsanitized innerHTML. An attacker can craft an EPUB book that, w...
-- 参照:
-  - https://github.com/koodo-reader/koodo-reader/security/advisories/GHSA-mjr7-w4jq-2rq9
-
-### CVE-2026-55075
-
-- 重要度: HIGH
-- CVSS: 7.4
-- KEV掲載: no
-- 関連キーワード: aws
-- 影響製品: -
-- 公開日: 2026-07-08 07:16:53 JST
-- 更新日: 2026-07-08 07:16:53 JST
-- 出典: NVD
-- 概要: Coder allows organizations to provision remote development environments via Terraform. Prior to versions 2.29.7, 2.32.7, 2.33.8, and 2.34.2, two flaws in Coder's OIDC login chained into account takeover. Email-based user matching fell back to linking by email without checking for an existing link to a different IdP sub...
-- 参照:
-  - https://github.com/coder/coder/pull/25712
-  - https://github.com/coder/coder/pull/25713
-  - https://github.com/coder/coder/releases/tag/v2.29.17
-  - https://github.com/coder/coder/releases/tag/v2.32.7
-  - https://github.com/coder/coder/releases/tag/v2.33.8
-
-### CVE-2026-14904
-
-- 重要度: HIGH
-- CVSS: 7.1
-- KEV掲載: no
-- 関連キーワード: aws
-- 影響製品: -
-- 公開日: 2026-07-08 02:16:35 JST
-- 更新日: 2026-07-08 03:16:35 JST
-- 出典: NVD
-- 概要: AWS Research and Engineering Studio (RES) is an open-source solution that enables researchers and engineers to create and manage secure virtual desktops and computing resources on AWS. Improper link resolution before file access issue (CWE-59) in the Auth.GetUserPrivateKey API. An authenticated remote user could read a...
-- 参照:
-  - https://aws.amazon.com/security/security-bulletins/2026-053-aws/
-  - https://github.com/aws/res/releases/tag/2026.06
-
-### CVE-2026-23697
-
-- 重要度: HIGH
-- CVSS: 8.8
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 02:16:35 JST
-- 更新日: 2026-07-08 04:16:51 JST
-- 出典: NVD
-- 概要: Vtiger CRM before 8.4.0 contains an authenticated file upload vulnerability that allows low-privileged users to achieve remote code execution by uploading a .phar file containing arbitrary PHP code through the Documents module, bypassing the extension denylist in config.inc.php which omits the .phar extension. The uplo...
-- 参照:
-  - https://jivasecurity.com/writeups/vtiger-rce-phar-upload-cve-2026-23697
-  - https://www.vtiger.com/
-  - https://www.vulncheck.com/advisories/vtiger-crm-authenticated-file-upload-rce-via-documents-module
-
-### CVE-2026-56811
-
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
+- タイトル: CVE-2026-56812
+- AI要約: PhoenixframeworkのPresence JavaScriptクライアントにおいて、攻撃者が存在キーを操作し永続的なクライアント側DoSを引き起こせる脆弱性です。クライアント側の状態同期処理の検証不足が原因です。
+- 関連キーワード: javascript, prototype pollution
 - 影響製品: -
 - 公開日: 2026-07-08 01:16:40 JST
 - 更新日: 2026-07-08 02:16:36 JST
 - 出典: NVD
-- 概要: Allocation of Resources Without Limits or Throttling vulnerability in phoenixframework phoenix (Phoenix.Socket module) allows an unauthenticated attacker to cause a denial of service against any endpoint that mounts a Phoenix socket with a reachable channel transport (WebSocket or LongPoll). This vulnerability is assoc...
 - 参照:
-  - https://cna.erlef.org/cves/CVE-2026-56811.html
-  - https://github.com/phoenixframework/phoenix/commit/16e295d2fccab185d1292322e2bee5d46c725c8a
-  - https://github.com/phoenixframework/phoenix/commit/a612100cd8a4279091abc1a2ef8fb98a6d01c0a1
-  - https://github.com/phoenixframework/phoenix/commit/c498ba8cf49f6accbbd0c643a5340b58db891218
-  - https://github.com/phoenixframework/phoenix/commit/d19ca0a8d9f82c130b7ed339b9f033433e2dea5e
+  - https://cna.erlef.org/cves/CVE-2026-56812.html
+  - https://github.com/phoenixframework/phoenix/commit/7f7b971c1ea0994e3fbd1c11ddb05e780bd38ad8
+  - https://github.com/phoenixframework/phoenix/commit/89a1c4be161e436241e12b2378a719904b9bd96f
+  - https://github.com/phoenixframework/phoenix/commit/b90b22521465ece00eb5a19d5aa2b9465b209c85
+  - https://github.com/phoenixframework/phoenix/commit/beffc4da1e787e572121f68902c63daf4fe7d9c2
 
-### CVE-2026-50529
+### [CVE-2025-12799](https://access.redhat.com/errata/RHSA-2026:36342)
 
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **6.5** / KEV: **no**
+
+- タイトル: CVE-2025-12799
+- AI要約: Jastowにおいて、特定の設定でURL内の未エスケープ文字を適切に処理できずXSS攻撃を受ける可能性があります。入力の適切な検証とエスケープが必要です。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:26 JST
-- 更新日: 2026-07-08 06:17:26 JST
+- 公開日: 2026-07-08 02:16:34 JST
+- 更新日: 2026-07-08 09:16:31 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the /de2api/share/proxyInfo share interface generates and returns X-DE-LINK-TOKEN before validating the share password or ticket, allowing unauthenticated attackers who know a protected share UUID to obtain a valid link token for subsequ...
 - 参照:
-  - https://github.com/dataease/dataease/commit/c4e85a981e53c95b1ea73757db31e3025efdc410
-  - https://github.com/dataease/dataease/releases/tag/v2.10.24
-  - https://github.com/dataease/dataease/security/advisories/GHSA-7287-qqj9-phr6
+  - https://access.redhat.com/errata/RHSA-2026:36342
+  - https://access.redhat.com/errata/RHSA-2026:36343
+  - https://access.redhat.com/errata/RHSA-2026:36344
+  - https://access.redhat.com/errata/RHSA-2026:36345
+  - https://access.redhat.com/security/cve/CVE-2025-12799
 
-### CVE-2026-53729
+### [CVE-2026-48949](https://developer.joomla.org/security-centre/1057-20260703-core-xss-in-mfa-method-management.html)
 
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.9** / KEV: **no**
+
+- タイトル: CVE-2026-48949
+- AI要約: MFA管理画面における入力検証不足によりXSS脆弱性が存在します。ユーザー入力の適切な検証とエスケープが推奨されます。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:26 JST
-- 更新日: 2026-07-08 06:17:26 JST
+- 公開日: 2026-07-08 04:16:53 JST
+- 更新日: 2026-07-08 04:16:53 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, any authenticated user can download (/exportCenter/download/{id}), delete (/exportCenter/delete), retry (/exportCenter/retry/{id}), or generate download links (/exportCenter/generateDownloadUri/{id}) for export tasks belonging to other u...
 - 参照:
-  - https://github.com/dataease/dataease/commit/57e90bdcc21c3fa2ec57184671603ad88a5b941b
-  - https://github.com/dataease/dataease/releases/tag/v2.10.24
-  - https://github.com/dataease/dataease/security/advisories/GHSA-9423-78gr-xjj5
+  - https://developer.joomla.org/security-centre/1057-20260703-core-xss-in-mfa-method-management.html
 
-### CVE-2026-53730
+### [CVE-2026-48950](https://developer.joomla.org/security-centre/1058-20260704-core-xss-in-com-templates.html)
 
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.9** / KEV: **no**
+
+- タイトル: CVE-2026-48950
+- AI要約: com_templatesのファイル管理画面でエスケープ処理が不足しておりXSS攻撃のリスクがあります。表示時の適切なエスケープ対応が必要です。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:26 JST
-- 更新日: 2026-07-08 06:17:26 JST
+- 公開日: 2026-07-08 04:16:53 JST
+- 更新日: 2026-07-08 04:16:53 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the /de2api/datasetData/previewSql endpoint lacks the mandatory @DePermit permission validation annotation, allowing any authenticated user to specify datasourceId=-1, access the built-in engine database, execute arbitrary SQL statements...
 - 参照:
-  - https://github.com/dataease/dataease/commit/7b47af38b8fa017c9eecb00a4a49264663189e7b
-  - https://github.com/dataease/dataease/security/advisories/GHSA-2jmq-vffm-4qmj
+  - https://developer.joomla.org/security-centre/1058-20260704-core-xss-in-com-templates.html
 
-### CVE-2026-53751
+### [CVE-2026-48951](https://developer.joomla.org/security-centre/1059-20260705-core-xss-in-various-modalreturn-layouts.html)
 
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.9** / KEV: **no**
+
+- タイトル: CVE-2026-48951
+- AI要約: 複数コンポーネントのmodalreturnレイアウトにおいてエスケープ不足によるXSS脆弱性が報告されています。ユーザー入力の適切なエスケープを実施してください。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:26 JST
-- 更新日: 2026-07-08 06:17:26 JST
+- 公開日: 2026-07-08 04:16:53 JST
+- 更新日: 2026-07-08 04:16:53 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the H2 database JDBC URL validation logic can be bypassed with special Unicode characters whose case-conversion behavior differs between DataEase validation and H2 parsing, allowing attackers to smuggle dangerous parameters such as init...
 - 参照:
-  - https://github.com/dataease/dataease/commit/2204258118eac6160a6636ca20dbedb0d3f95747
-  - https://github.com/dataease/dataease/releases/tag/v2.10.24
-  - https://github.com/dataease/dataease/security/advisories/GHSA-xjhm-r8p8-c2cg
+  - https://developer.joomla.org/security-centre/1059-20260705-core-xss-in-various-modalreturn-layouts.html
 
-### CVE-2026-55635
+### [CVE-2026-48952](https://developer.joomla.org/security-centre/1060-20260706-core-xss-in-com-installer.html)
 
-- 重要度: HIGH
-- CVSS: 8.7
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.9** / KEV: **no**
+
+- タイトル: CVE-2026-48952
+- AI要約: com_installerの更新リスト画面でエスケープ処理が不十分なためXSS攻撃が可能です。入力値の適切なエスケープが必要です。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:27 JST
-- 更新日: 2026-07-08 06:17:27 JST
+- 公開日: 2026-07-08 04:16:53 JST
+- 更新日: 2026-07-08 04:16:53 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, chart quota and Y-axis filters embed attacker-controlled filter values directly into generated SQL in Quota2SQLObj.getYWheres() without applying the SQL literal validation and escaping used by other filter paths, allowing an authenticate...
 - 参照:
-  - https://github.com/dataease/dataease/commit/4463e21cb73d3d4bb8af89a0cb71ee403e4b808a
-  - https://github.com/dataease/dataease/security/advisories/GHSA-p758-rx6v-hc8g
+  - https://developer.joomla.org/security-centre/1060-20260706-core-xss-in-com-installer.html
 
-### CVE-2026-23698
+### [CVE-2026-48953](https://developer.joomla.org/security-centre/1061-20260707-core-xss-in-the-generic-image-output-layout.html)
 
-- 重要度: HIGH
-- CVSS: 8.6
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.9** / KEV: **no**
+
+- タイトル: CVE-2026-48953
+- AI要約: 汎用画像出力レイアウトにおけるエスケープ不足によりXSS脆弱性が存在します。表示内容の適切なサニタイズを推奨します。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 02:16:36 JST
-- 更新日: 2026-07-08 03:16:35 JST
+- 公開日: 2026-07-08 04:16:53 JST
+- 更新日: 2026-07-08 04:16:53 JST
 - 出典: NVD
-- 概要: Vtiger CRM through 8.4.0 contains an authenticated remote code execution vulnerability in the admin module import feature that allows administrator-level attackers to upload arbitrary PHP files by submitting a crafted zip archive through the ModuleManager import function, which extracts contents directly into the modul...
 - 参照:
-  - https://jivasecurity.com/writeups/vtiger-rce-module-import-cve-2026-23698
-  - https://www.vtiger.com/
-  - https://www.vulncheck.com/advisories/vtiger-crm-authenticated-rce-via-module-import-file-upload
+  - https://developer.joomla.org/security-centre/1061-20260707-core-xss-in-the-generic-image-output-layout.html
 
-### CVE-2026-55418
+### [CVE-2026-48954](https://developer.joomla.org/security-centre/1062-20260708-core-xss-through-language-overrides.html)
 
-- 重要度: HIGH
-- CVSS: 8.6
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.9** / KEV: **no**
+
+- タイトル: CVE-2026-48954
+- AI要約: 言語オーバーライド機能で検証不足によりXSS攻撃が可能な脆弱性があります。入力値の検証とエスケープ強化が必要です。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 07:16:53 JST
-- 更新日: 2026-07-08 07:16:53 JST
+- 公開日: 2026-07-08 04:16:54 JST
+- 更新日: 2026-07-08 04:16:54 JST
 - 出典: NVD
-- 概要: FastGPT is an open source AI knowledge base platform. Prior to v4.15.0-beta5, two FastGPT file handlers authorize an unrelated resource and then sign or read an S3 object using a key taken directly from the request, without checking that the key belongs to the caller's team. Because S3 object keys are global within the...
 - 参照:
-  - https://github.com/labring/FastGPT/commit/decb6d2fb1417fb9e2bca145d2dcc9cbcf06396c
-  - https://github.com/labring/FastGPT/pull/7104
-  - https://github.com/labring/FastGPT/releases/tag/v4.15.0-beta5
-  - https://github.com/labring/FastGPT/security/advisories/GHSA-6rxv-p43w-mmx5
+  - https://developer.joomla.org/security-centre/1062-20260708-core-xss-through-language-overrides.html
 
-### CVE-2026-57851
+### [CVE-2026-55647](https://github.com/dataease/dataease/commit/9565812980da781eda04c0a3632bf5dc8b0469f6)
 
-- 重要度: HIGH
-- CVSS: 8.5
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 02:16:36 JST
-- 更新日: 2026-07-08 03:16:39 JST
-- 出典: NVD
-- 概要: MSI Feature Manager contains a local privilege escalation vulnerability in the KernCoreLib64.sys kernel driver that allows any locally logged-on user to perform arbitrary physical memory read/write and unrestricted I/O port operations by accessing exposed IOCTL handlers without administrator privileges. Attackers can e...
-- 参照:
-  - https://github.com/readmsr/MSI_FeatureManager_CVE
-  - https://www.vulncheck.com/advisories/msi-gamegaraj-kerncorelib64-sys-privilege-escalation-via-ioctl-handlers
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.1** / KEV: **no**
 
-### CVE-2026-58583
-
-- 重要度: HIGH
-- CVSS: 8.4
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 06:17:29 JST
-- 更新日: 2026-07-08 06:17:29 JST
-- 出典: NVD
-- 概要: FluxInk (formerly Sunia SPB Peripheral) Color Management Driver (TcnPeripheral64.sys) 1.0.7.2 allows local privilege escalation for a standard user account via arbitrary physical memory mapping at \Device\PhysicalMemory. Fixed in version 1.0.7.6. The fixed driver is currently available in the Windows 11 25H2 HLK (Hardw...
-- 参照:
-  - https://github.com/b3s3da/TcnPeripheral64_PoC
-  - https://github.com/b3s3da/TcnPeripheral64_PoC/security/advisories/GHSA-x4rw-h4v2-v83h
-  - https://raw.githubusercontent.com/cisagov/CSAF/develop/csaf_files/IT/white/2026/va-26-188-01.json
-  - https://www.cve.org/CVERecord?id=CVE-2026-58583
-
-### CVE-2026-49471
-
-- 重要度: HIGH
-- CVSS: 8.3
-- KEV掲載: no
-- 関連キーワード: -
-- 影響製品: -
-- 公開日: 2026-07-08 06:17:25 JST
-- 更新日: 2026-07-08 06:17:25 JST
-- 出典: NVD
-- 概要: Serena is a powerful MCP toolkit for coding that provides semantic retrieval and editing capabilities. Prior to v1.5.2, Serena's built-in web dashboard exposes an unauthenticated Flask API on a fixed, predictable port, with no authentication, no CSRF protection, and no Host header validation. A DNS rebinding attack all...
-- 参照:
-  - https://github.com/oraios/serena/commit/016ccbe1c095a3eed7967737ac1d4df2754f5d96
-  - https://github.com/oraios/serena/releases/tag/v1.5.2
-  - https://github.com/oraios/serena/security/advisories/GHSA-37h2-6p4f-mp3q
-
-### CVE-2026-57172
-
-- 重要度: HIGH
-- CVSS: 8.3
-- KEV掲載: no
-- 関連キーワード: -
+- タイトル: CVE-2026-55647
+- AI要約: DataEaseのダッシュボードテキストコンポーネントでサーバー側のHTMLサニタイズが不十分なため、認証ユーザーによる任意のHTML/JS注入が可能です。バージョン2.10.24で修正済みです。
+- 関連キーワード: vue
 - 影響製品: -
 - 公開日: 2026-07-08 06:17:28 JST
 - 更新日: 2026-07-08 06:17:28 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, ShareSecretManage uses a hardcoded default share link signature key, allowing an attacker who can obtain a passwordless share for a resource and user to use the known key link-pwd-fit2cloud to forge linkToken JWTs, bypass TokenFilter ver...
 - 参照:
-  - https://github.com/dataease/dataease/commit/356e83b518603f5612104760ced80aae8fc5d675
-  - https://github.com/dataease/dataease/security/advisories/GHSA-7cpg-f4cj-7pgm
+  - https://github.com/dataease/dataease/commit/9565812980da781eda04c0a3632bf5dc8b0469f6
+  - https://github.com/dataease/dataease/commit/adab5f1e8954ff91830a3b2f052a42a139d978e1
+  - https://github.com/dataease/dataease/security/advisories/GHSA-4v63-24fg-pfg7
 
-### CVE-2026-55076
+### [CVE-2026-12948](https://www.digi.com/resources/security)
 
-- 重要度: HIGH
-- CVSS: 7.4
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **4.8** / KEV: **no**
+
+- タイトル: CVE-2026-12948
+- AI要約: Digi製品のWeb管理インターフェースにおいて、認証済み管理者がシステム設定フィールドにスクリプトを注入できる保存型XSS脆弱性があります。管理画面の入力検証強化が必要です。
+- 関連キーワード: xss
 - 影響製品: -
-- 公開日: 2026-07-08 08:16:55 JST
-- 更新日: 2026-07-08 08:16:55 JST
+- 公開日: 2026-07-08 00:16:42 JST
+- 更新日: 2026-07-08 01:16:37 JST
 - 出典: NVD
-- 概要: Coder allows organizations to provision remote development environments via Terraform. Prior to versions 2.29.7, 2.32.7, 2.33.8, and 2.34.2, Coder's OIDC callback checked `email_verified` with a direct Go `bool` type assertion. When an IdP returned the claim as a non-boolean (for example the string `"false"`) or omitte...
 - 参照:
-  - https://github.com/coder/coder/pull/25712
-  - https://github.com/coder/coder/pull/25713
-  - https://github.com/coder/coder/releases/tag/v2.29.17
-  - https://github.com/coder/coder/releases/tag/v2.32.7
-  - https://github.com/coder/coder/releases/tag/v2.33.8
+  - https://www.digi.com/resources/security
 
-### CVE-2026-50007
+### [CVE-2026-36162](https://docs.liquidfiles.com/release_notes/version_4-2-x.html)
 
-- 重要度: HIGH
-- CVSS: 7.2
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **UNKNOWN** / CVSS: **-** / KEV: **no**
+
+- タイトル: CVE-2026-36162
+- AI要約: LiquidFiles v4.2.7のアップロードファイル共有APIにて、認証ユーザーがNameパラメータに悪意あるスクリプトを注入可能な保存型XSS脆弱性があります。入力値の適切なサニタイズが必要です。
+- 関連キーワード: javascript, xss
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:25 JST
-- 更新日: 2026-07-08 06:17:25 JST
+- 公開日: 2026-07-08 08:16:54 JST
+- 更新日: 2026-07-08 08:16:54 JST
 - 出典: NVD
-- 概要: Actual is an open-source personal finance application. Prior to 26.7.0, a missing authorization issue allows a shared user with user_access on a budget file to perform owner-only file management actions. A non-owner shared user can call file-management endpoints intended for higher-privilege users, including /delete-us...
 - 参照:
-  - https://github.com/actualbudget/actual/commit/18a8dc03c48eeb2e8252669a80673e6a9933b5fd
-  - https://github.com/actualbudget/actual/commit/3b9e79ed5ee795a80bbae214d6ebb2755289d7f2
-  - https://github.com/actualbudget/actual/pull/7977
-  - https://github.com/actualbudget/actual/pull/8333
-  - https://github.com/actualbudget/actual/security/advisories/GHSA-23vm-ffgg-qvjr
+  - https://docs.liquidfiles.com/release_notes/version_4-2-x.html
+  - https://securing.pl/en/bypassing-csp-to-exploit-stored-xss-in-liquidfiles/
 
-### CVE-2026-55631
+### [CVE-2026-55592](https://github.com/lissy93/dashy/commit/4bc620e21cc8e3466f32b8bc40614b0d0eb5648b)
 
-- 重要度: HIGH
-- CVSS: 7.2
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **LOW** / CVSS: **3.9** / KEV: **no**
+
+- タイトル: CVE-2026-55592
+- AI要約: DashyのワークスペースビューでURLクエリパラメータを検証せずiframeのsrcに設定するため、javascript:スキームを利用したXSS攻撃が可能です。バージョン4.3.7で修正済みです。
+- 関連キーワード: javascript
 - 影響製品: -
 - 公開日: 2026-07-08 06:17:27 JST
 - 更新日: 2026-07-08 06:17:27 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, the font management module allows authenticated users to submit an arbitrary fileTransName when creating a font record; when the record is later deleted, the backend concatenates that stored value with the font storage directory and pass...
 - 参照:
-  - https://github.com/dataease/dataease/commit/8892a6945b0b7a329a156155270fae58afa895bc
-  - https://github.com/dataease/dataease/releases/tag/v2.10.24
-  - https://github.com/dataease/dataease/security/advisories/GHSA-r99p-w8fc-93g6
+  - https://github.com/lissy93/dashy/commit/4bc620e21cc8e3466f32b8bc40614b0d0eb5648b
+  - https://github.com/lissy93/dashy/releases/tag/4.3.7
+  - https://github.com/lissy93/dashy/security/advisories/GHSA-58mp-4qr3-vmrc
 
-### CVE-2026-50530
+### [CVE-2026-55430](https://github.com/coder/coder/pull/26204)
 
-- 重要度: HIGH
-- CVSS: 7.1
-- KEV掲載: no
-- 関連キーワード: -
+> **フロントエンド最優先** / **MEDIUM** / CVSS: **5.8** / KEV: **no**
+
+- タイトル: CVE-2026-55430
+- AI要約: CoderのワークスペースアプリプロキシがX-Forwarded-Hostヘッダーを適切に検証せず、サブドメインルーティング環境でのヘッダー偽装による攻撃が可能です。指定バージョンで修正されています。
+- 関連キーワード: javascript
 - 影響製品: -
-- 公開日: 2026-07-08 06:17:26 JST
-- 更新日: 2026-07-08 06:17:26 JST
+- 公開日: 2026-07-08 10:16:27 JST
+- 更新日: 2026-07-08 10:16:27 JST
 - 出典: NVD
-- 概要: DataEase is an open source data visualization and analysis tool. Prior to 2.10.24, a share mode chart data interface only validates that sceneId matches the resourceId in the link token and fails to validate whether tableId and field IDs in the request body belong to the shared resource, allowing an attacker with a val...
 - 参照:
-  - https://github.com/dataease/dataease/commit/c4e85a981e53c95b1ea73757db31e3025efdc410
-  - https://github.com/dataease/dataease/releases/tag/v2.10.24
-  - https://github.com/dataease/dataease/security/advisories/GHSA-qcf4-345v-6vg9
+  - https://github.com/coder/coder/pull/26204
+  - https://github.com/coder/coder/releases/tag/v2.29.17
+  - https://github.com/coder/coder/releases/tag/v2.32.7
+  - https://github.com/coder/coder/releases/tag/v2.33.8
+  - https://github.com/coder/coder/releases/tag/v2.34.2
+
+### [CVE-2026-36163](https://docs.liquidfiles.com/release_notes/version_4-2-x.html)
+
+> **フロントエンド最優先** / **UNKNOWN** / CVSS: **-** / KEV: **no**
+
+- タイトル: CVE-2026-36163
+- AI要約: LiquidFiles v4.2.7のファイルビューエンドポイントにHTMLインジェクションがあり、認証ユーザーが悪意あるHTMLファイルをアップロードしてJavaScriptを実行可能です。アップロードファイルの検証強化が必要です。
+- 関連キーワード: javascript
+- 影響製品: -
+- 公開日: 2026-07-08 08:16:54 JST
+- 更新日: 2026-07-08 08:16:54 JST
+- 出典: NVD
+- 参照:
+  - https://docs.liquidfiles.com/release_notes/version_4-2-x.html
+  - https://securing.pl/en/bypassing-csp-to-exploit-stored-xss-in-liquidfiles/
