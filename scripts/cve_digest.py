@@ -97,15 +97,21 @@ def severity_from_cvss(score: float | None) -> str:
 
 def extract_cvss_and_severity(cve: dict[str, Any]) -> tuple[float | None, str]:
     metrics = cve.get("metrics", {})
-    metric_keys = ["cvssMetricV40", "cvssMetricV31", "cvssMetricV30", "cvssMetricV2"]
+    if not isinstance(metrics, dict):
+        return None, "UNKNOWN"
+
     best_score: float | None = None
     best_severity = "UNKNOWN"
-    for key in metric_keys:
+    for key in ["cvssMetricV40", "cvssMetricV31", "cvssMetricV30", "cvssMetricV2"]:
         values = metrics.get(key) or []
         if not isinstance(values, list):
             continue
         for item in values:
-            cvss_data = item.get("cvssData", {}) if isinstance(item, dict) else {}
+            if not isinstance(item, dict):
+                continue
+            cvss_data = item.get("cvssData", {})
+            if not isinstance(cvss_data, dict):
+                continue
             try:
                 score = float(cvss_data.get("baseScore"))
             except (TypeError, ValueError):
@@ -125,6 +131,8 @@ def extract_affected_products(cve: dict[str, Any]) -> list[str]:
 
     def walk_node(node: dict[str, Any]) -> None:
         for match in node.get("cpeMatch", []) or []:
+            if not isinstance(match, dict):
+                continue
             criteria = str(match.get("criteria", ""))
             parts = criteria.split(":")
             if len(parts) >= 5:
@@ -137,6 +145,8 @@ def extract_affected_products(cve: dict[str, Any]) -> list[str]:
                 walk_node(child)
 
     for config in configurations:
+        if not isinstance(config, dict):
+            continue
         for node in config.get("nodes", []) or []:
             if isinstance(node, dict):
                 walk_node(node)
@@ -144,12 +154,21 @@ def extract_affected_products(cve: dict[str, Any]) -> list[str]:
 
 
 def extract_references(cve: dict[str, Any]) -> list[str]:
-    refs = cve.get("references", {}).get("referenceData", [])
+    raw_references = cve.get("references", [])
+    refs: list[Any]
+
+    if isinstance(raw_references, dict):
+        reference_data = raw_references.get("referenceData", [])
+        refs = reference_data if isinstance(reference_data, list) else []
+    elif isinstance(raw_references, list):
+        refs = raw_references
+    else:
+        refs = []
+
     urls: list[str] = []
-    if isinstance(refs, list):
-        for ref in refs:
-            if isinstance(ref, dict) and ref.get("url"):
-                urls.append(str(ref["url"]))
+    for ref in refs:
+        if isinstance(ref, dict) and ref.get("url"):
+            urls.append(str(ref["url"]))
     return urls[:5]
 
 
@@ -218,6 +237,9 @@ def fetch_cisa_kev(config: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]], config: dict[str, Any]) -> Vulnerability | None:
     cve = item.get("cve", {})
+    if not isinstance(cve, dict):
+        return None
+
     cve_id = str(cve.get("id") or "")
     if not cve_id:
         return None
@@ -290,7 +312,7 @@ def is_recent_kev(item: dict[str, Any], now: datetime, lookback_days: int) -> bo
     return added_date >= threshold
 
 
-def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str, Any]) -> Vulnerability | None:
+def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str, Any], now: datetime) -> Vulnerability | None:
     vendor = str(item.get("vendorProject") or "")
     product = str(item.get("product") or "")
     vulnerability_name = str(item.get("vulnerabilityName") or cve_id)
@@ -305,7 +327,7 @@ def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str,
     )
     if excluded:
         return None
-    if not (matched or is_recent_kev(item, datetime.now(JST), int(config.get("lookback_days", 2)))):
+    if not (matched or is_recent_kev(item, now, int(config.get("lookback_days", 2)))):
         return None
     return Vulnerability(
         cve_id=cve_id,
@@ -439,7 +461,7 @@ def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list
     for cve_id, kev_item in kev_map.items():
         if cve_id in vulnerabilities_by_id:
             continue
-        vuln = normalize_kev_only_item(cve_id, kev_item, config)
+        vuln = normalize_kev_only_item(cve_id, kev_item, config, now)
         if vuln:
             vulnerabilities_by_id[cve_id] = vuln
 
