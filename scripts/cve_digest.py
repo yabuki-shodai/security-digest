@@ -530,6 +530,33 @@ def render_category_summary(vulnerabilities: list[Vulnerability], now: datetime,
     return "\n".join(lines)
 
 
+def render_today(vulnerabilities: list[Vulnerability], now: datetime) -> str:
+    date_text = now.strftime("%Y-%m-%d")
+    docs_dir = f"docs/{date_text}"
+    frontend_count = sum(1 for vuln in vulnerabilities if vuln.category == "frontend")
+    backend_count = sum(1 for vuln in vulnerabilities if vuln.category == "backend")
+    critical_count = sum(1 for vuln in vulnerabilities if vuln.severity == "CRITICAL")
+    high_count = sum(1 for vuln in vulnerabilities if vuln.severity == "HIGH")
+    kev_count = sum(1 for vuln in vulnerabilities if vuln.kev)
+    lines = [
+        f"# CVE Digest Today ({date_text})",
+        "",
+        f"- 今日取得件数: {len(vulnerabilities)}",
+        f"- Frontend件数: {frontend_count}",
+        f"- Backend件数: {backend_count}",
+        f"- Critical件数: {critical_count}",
+        f"- High件数: {high_count}",
+        f"- KEV件数: {kev_count}",
+        "",
+        "## Links",
+        "",
+        f"- [Frontend Summary]({docs_dir}/frontend-summary.md)",
+        f"- [Backend Summary]({docs_dir}/backend-summary.md)",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list[Vulnerability], list[str]]:
     errors: list[str] = []
     kev_map: dict[str, dict[str, Any]] = {}
@@ -580,6 +607,10 @@ def main() -> int:
         output_path = output_dir / filename
         output_path.write_text(content, encoding="utf-8")
         print(f"created: {output_path.relative_to(ROOT_DIR)}")
+
+    today_path = ROOT_DIR / "today.md"
+    today_path.write_text(render_today(new_vulnerabilities, now), encoding="utf-8")
+    print(f"created: {today_path.relative_to(ROOT_DIR)}")
 
     write_json(HISTORY_PATH, update_history(history, new_vulnerabilities, now))
     if errors:
