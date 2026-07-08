@@ -61,9 +61,8 @@ def fetch_json(url: str, params: dict[str, str] | None = None, timeout: int = 45
 def parse_datetime(value: str | None) -> datetime | None:
     if not value:
         return None
-    normalized = value.replace("Z", "+00:00")
     try:
-        return datetime.fromisoformat(normalized)
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         return None
 
@@ -81,35 +80,7 @@ def compact_text(value: str | None, max_length: int = 320) -> str:
     if not value:
         return "-"
     text = " ".join(str(value).split())
-    if len(text) > max_length:
-        return text[:max_length].rstrip() + "..."
-    return text
-
-
-def extract_cvss_and_severity(cve: dict[str, Any]) -> tuple[float | None, str]:
-    metrics = cve.get("metrics", {})
-    metric_keys = ["cvssMetricV40", "cvssMetricV31", "cvssMetricV30", "cvssMetricV2"]
-    best_score: float | None = None
-    best_severity = "UNKNOWN"
-
-    for key in metric_keys:
-        values = metrics.get(key) or []
-        if not isinstance(values, list):
-            continue
-        for item in values:
-            cvss_data = item.get("cvssData", {}) if isinstance(item, dict) else {}
-            score = cvss_data.get("baseScore")
-            if score is None:
-                continue
-            try:
-                score_float = float(score)
-            except (TypeError, ValueError):
-                continue
-            severity = item.get("baseSeverity") or cvss_data.get("baseSeverity") or severity_from_cvss(score_float)
-            if best_score is None or score_float > best_score:
-                best_score = score_float
-                best_severity = str(severity).upper()
-    return best_score, best_severity
+    return text[:max_length].rstrip() + "..." if len(text) > max_length else text
 
 
 def severity_from_cvss(score: float | None) -> str:
@@ -122,6 +93,28 @@ def severity_from_cvss(score: float | None) -> str:
     if score >= 4.0:
         return "MEDIUM"
     return "LOW"
+
+
+def extract_cvss_and_severity(cve: dict[str, Any]) -> tuple[float | None, str]:
+    metrics = cve.get("metrics", {})
+    metric_keys = ["cvssMetricV40", "cvssMetricV31", "cvssMetricV30", "cvssMetricV2"]
+    best_score: float | None = None
+    best_severity = "UNKNOWN"
+    for key in metric_keys:
+        values = metrics.get(key) or []
+        if not isinstance(values, list):
+            continue
+        for item in values:
+            cvss_data = item.get("cvssData", {}) if isinstance(item, dict) else {}
+            try:
+                score = float(cvss_data.get("baseScore"))
+            except (TypeError, ValueError):
+                continue
+            severity = item.get("baseSeverity") or cvss_data.get("baseSeverity") or severity_from_cvss(score)
+            if best_score is None or score > best_score:
+                best_score = score
+                best_severity = str(severity).upper()
+    return best_score, best_severity
 
 
 def extract_affected_products(cve: dict[str, Any]) -> list[str]:
@@ -155,25 +148,22 @@ def extract_references(cve: dict[str, Any]) -> list[str]:
     urls: list[str] = []
     if isinstance(refs, list):
         for ref in refs:
-            url = ref.get("url") if isinstance(ref, dict) else None
-            if url:
-                urls.append(str(url))
+            if isinstance(ref, dict) and ref.get("url"):
+                urls.append(str(ref["url"]))
     return urls[:5]
 
 
-def match_keywords(text: str, keywords: list[str], exclude_keywords: list[str]) -> tuple[bool, list[str]]:
+def match_keywords(text: str, keywords: list[str], exclude_keywords: list[str]) -> tuple[bool, list[str], bool]:
     lower_text = text.lower()
-    if any(keyword.lower() in lower_text for keyword in exclude_keywords):
-        return False, []
+    excluded = any(keyword.lower() in lower_text for keyword in exclude_keywords)
+    if excluded:
+        return False, [], True
     matched = [keyword for keyword in keywords if keyword.lower() in lower_text]
-    return bool(matched), matched
+    return bool(matched), matched, False
 
 
 def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], description: str) -> int:
-    score = 0
-    lower_description = description.lower()
-    if kev:
-        score += 100
+    score = 100 if kev else 0
     if cvss is not None:
         if cvss >= 9.0:
             score += 50
@@ -182,15 +172,15 @@ def calculate_score(cvss: float | None, kev: bool, matched_keywords: list[str], 
         elif cvss >= 4.0:
             score += 10
     score += len(matched_keywords) * 10
-    danger_words = [
+    lower_description = description.lower()
+    for word in [
         "remote code execution",
         "rce",
         "authentication bypass",
         "privilege escalation",
         "sql injection",
         "command injection",
-    ]
-    for word in danger_words:
+    ]:
         if word in lower_description:
             score += 15
     return score
@@ -200,17 +190,12 @@ def fetch_nvd(config: dict[str, Any], now: datetime) -> list[dict[str, Any]]:
     source = config.get("sources", {}).get("nvd", {})
     if not source.get("enabled", True):
         return []
-
     lookback_days = int(config.get("lookback_days", 2))
     start = (now.astimezone(UTC) - timedelta(days=lookback_days)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     end = now.astimezone(UTC).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     data = fetch_json(
         str(source.get("url")),
-        {
-            "pubStartDate": start,
-            "pubEndDate": end,
-            "resultsPerPage": "200",
-        },
+        {"pubStartDate": start, "pubEndDate": end, "resultsPerPage": "200"},
     )
     vulnerabilities = data.get("vulnerabilities", [])
     return vulnerabilities if isinstance(vulnerabilities, list) else []
@@ -245,19 +230,16 @@ def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]],
         description = str(selected.get("value") or "") if isinstance(selected, dict) else ""
 
     cvss, severity = extract_cvss_and_severity(cve)
-    if severity == "UNKNOWN":
-        severity = severity_from_cvss(cvss)
-
+    severity = severity if severity != "UNKNOWN" else severity_from_cvss(cvss)
     affected_products = extract_affected_products(cve)
     references = extract_references(cve)
     kev_item = kev_map.get(cve_id)
     is_kev = kev_item is not None
+
     if is_kev and kev_item:
         affected_products = affected_products or [
             " ".join(
-                part
-                for part in [str(kev_item.get("vendorProject") or ""), str(kev_item.get("product") or "")]
-                if part
+                part for part in [str(kev_item.get("vendorProject") or ""), str(kev_item.get("product") or "")] if part
             ).strip()
         ]
         if kev_item.get("notes"):
@@ -269,19 +251,18 @@ def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]],
     elif affected_products:
         title = f"{cve_id}: {affected_products[0]}"
 
-    search_text = " ".join([title, description, " ".join(affected_products), severity])
-    matched, matched_keywords = match_keywords(
-        search_text,
-        [str(item) for item in config.get("watch_keywords", [])],
-        [str(item) for item in config.get("exclude_keywords", [])],
+    keywords = [str(item) for item in config.get("watch_keywords", [])]
+    excludes = [str(item) for item in config.get("exclude_keywords", [])]
+    matched, matched_keywords, excluded = match_keywords(
+        " ".join([title, description, " ".join(affected_products), severity]), keywords, excludes
     )
-
-    min_cvss = float(config.get("min_cvss", 7.0))
-    should_include = is_kev or matched or (cvss is not None and cvss >= min_cvss)
-    if not should_include:
+    if excluded:
         return None
 
-    score = calculate_score(cvss, is_kev, matched_keywords, description)
+    min_cvss = float(config.get("min_cvss", 7.0))
+    if not (is_kev or matched or (cvss is not None and cvss >= min_cvss)):
+        return None
+
     return Vulnerability(
         cve_id=cve_id,
         title=title,
@@ -295,11 +276,21 @@ def normalize_nvd_item(item: dict[str, Any], kev_map: dict[str, dict[str, Any]],
         affected_products=[item for item in affected_products if item],
         matched_keywords=matched_keywords,
         references=references,
-        score=score,
+        score=calculate_score(cvss, is_kev, matched_keywords, description),
     )
 
 
-def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str, Any]) -> Vulnerability:
+def is_recent_kev(item: dict[str, Any], now: datetime, lookback_days: int) -> bool:
+    date_added = str(item.get("dateAdded") or "")
+    try:
+        added_date = datetime.strptime(date_added, "%Y-%m-%d").date()
+    except ValueError:
+        return False
+    threshold = (now - timedelta(days=lookback_days)).date()
+    return added_date >= threshold
+
+
+def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str, Any]) -> Vulnerability | None:
     vendor = str(item.get("vendorProject") or "")
     product = str(item.get("product") or "")
     vulnerability_name = str(item.get("vulnerabilityName") or cve_id)
@@ -307,11 +298,15 @@ def normalize_kev_only_item(cve_id: str, item: dict[str, Any], config: dict[str,
     title = f"{cve_id}: {vulnerability_name}"
     affected = " ".join(part for part in [vendor, product] if part).strip()
     search_text = " ".join([title, description, affected])
-    _, matched_keywords = match_keywords(
+    matched, matched_keywords, excluded = match_keywords(
         search_text,
         [str(item) for item in config.get("watch_keywords", [])],
         [str(item) for item in config.get("exclude_keywords", [])],
     )
+    if excluded:
+        return None
+    if not (matched or is_recent_kev(item, datetime.now(JST), int(config.get("lookback_days", 2)))):
+        return None
     return Vulnerability(
         cve_id=cve_id,
         title=title,
@@ -376,13 +371,10 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         "- 出力対象: 新規CVEのみ",
         "",
     ]
-
     if errors:
         lines.extend(["## 取得エラー", ""])
-        for error in errors:
-            lines.append(f"- {error}")
+        lines.extend(f"- {error}" for error in errors)
         lines.append("")
-
     if not vulnerabilities:
         lines.extend(["## 結果", "", "条件に一致する新規脆弱性はありませんでした。", ""])
         return "\n".join(lines)
@@ -393,7 +385,6 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
         ("High", lambda vuln: not vuln.kev and vuln.severity == "HIGH"),
         ("Other", lambda vuln: not vuln.kev and vuln.severity not in {"CRITICAL", "HIGH"}),
     ]
-
     for heading, predicate in groups:
         items = [vuln for vuln in vulnerabilities if predicate(vuln)]
         if not items:
@@ -420,10 +411,8 @@ def render_summary(vulnerabilities: list[Vulnerability], now: datetime, errors: 
                     "- 参照:",
                 ]
             )
-            for ref in references[:5]:
-                lines.append(f"  - {ref}")
+            lines.extend(f"  - {ref}" for ref in references[:5])
             lines.append("")
-
     return "\n".join(lines)
 
 
@@ -431,12 +420,10 @@ def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list
     errors: list[str] = []
     kev_map: dict[str, dict[str, Any]] = {}
     nvd_items: list[dict[str, Any]] = []
-
     try:
         kev_map = fetch_cisa_kev(config)
     except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError) as error:
         errors.append(f"CISA KEV: {error}")
-
     try:
         nvd_items = fetch_nvd(config, now)
     except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError) as error:
@@ -444,20 +431,21 @@ def collect_vulnerabilities(config: dict[str, Any], now: datetime) -> tuple[list
 
     vulnerabilities_by_id: dict[str, Vulnerability] = {}
     for item in nvd_items:
-        if not isinstance(item, dict):
-            continue
-        vuln = normalize_nvd_item(item, kev_map, config)
-        if vuln:
-            vulnerabilities_by_id[vuln.cve_id] = vuln
+        if isinstance(item, dict):
+            vuln = normalize_nvd_item(item, kev_map, config)
+            if vuln:
+                vulnerabilities_by_id[vuln.cve_id] = vuln
 
     for cve_id, kev_item in kev_map.items():
-        if cve_id not in vulnerabilities_by_id:
-            vulnerabilities_by_id[cve_id] = normalize_kev_only_item(cve_id, kev_item, config)
+        if cve_id in vulnerabilities_by_id:
+            continue
+        vuln = normalize_kev_only_item(cve_id, kev_item, config)
+        if vuln:
+            vulnerabilities_by_id[cve_id] = vuln
 
     vulnerabilities = list(vulnerabilities_by_id.values())
     vulnerabilities.sort(key=lambda vuln: (vuln.score, vuln.cvss or 0), reverse=True)
-    max_items = int(config.get("max_items", 30))
-    return vulnerabilities[:max_items], errors
+    return vulnerabilities[: int(config.get("max_items", 30))], errors
 
 
 def main() -> int:
@@ -465,20 +453,16 @@ def main() -> int:
     config = load_json(CONFIG_PATH, {})
     history = load_json(HISTORY_PATH, {"seen": {}})
     history = prune_history(history, now, int(config.get("history_retention_days", 120)))
-
     vulnerabilities, errors = collect_vulnerabilities(config, now)
     new_vulnerabilities = filter_new(vulnerabilities, history)
 
-    summary = render_summary(new_vulnerabilities, now, errors)
     output_dir = OUTPUT_ROOT / now.strftime("%Y-%m-%d")
     output_dir.mkdir(parents=True, exist_ok=True)
     output_path = output_dir / "summary.md"
-    output_path.write_text(summary, encoding="utf-8")
+    output_path.write_text(render_summary(new_vulnerabilities, now, errors), encoding="utf-8")
     print(f"created: {output_path.relative_to(ROOT_DIR)}")
 
-    history = update_history(history, new_vulnerabilities, now)
-    write_json(HISTORY_PATH, history)
-
+    write_json(HISTORY_PATH, update_history(history, new_vulnerabilities, now))
     if errors:
         print("warning: one or more sources failed, but summary.md was generated", file=sys.stderr)
     return 0
