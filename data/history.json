@@ -1,0 +1,214 @@
+{
+  "seen": {
+    "CVE-2010-1871": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2010-1871: Red Hat Linux JBoss Seam 2 Remote Code Execution Vulnerability"
+    },
+    "CVE-2013-2094": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2013-2094: Linux Kernel Privilege Escalation Vulnerability"
+    },
+    "CVE-2013-2596": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2013-2596: Linux Kernel Integer Overflow Vulnerability"
+    },
+    "CVE-2013-6282": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2013-6282: Linux Kernel Improper Input Validation Vulnerability"
+    },
+    "CVE-2018-14634": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2018-14634: Linux Kernel Integer Overflow Vulnerability"
+    },
+    "CVE-2019-2215": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2019-2215: Android Kernel Use-After-Free Vulnerability"
+    },
+    "CVE-2020-0069": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2020-0069: Mediatek Multiple Chipsets Insufficient Input Validation Vulnerability"
+    },
+    "CVE-2020-15415": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2020-15415: DrayTek Multiple Vigor Routers OS Command Injection Vulnerability"
+    },
+    "CVE-2020-28949": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2020-28949: PEAR Archive_Tar Deserialization of Untrusted Data Vulnerability"
+    },
+    "CVE-2020-36193": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2020-36193: PEAR Archive_Tar Improper Link Resolution Vulnerability"
+    },
+    "CVE-2021-21315": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2021-21315: System Information Library for Node.JS Command Injection"
+    },
+    "CVE-2021-22555": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2021-22555: Linux Kernel Heap Out-of-Bounds Write Vulnerability"
+    },
+    "CVE-2021-22600": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2021-22600: Linux Kernel Privilege Escalation Vulnerability"
+    },
+    "CVE-2021-3493": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2021-3493: Linux Kernel Privilege Escalation Vulnerability"
+    },
+    "CVE-2022-0492": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2022-0492: Linux Kernel Improper Authentication Vulnerability"
+    },
+    "CVE-2023-0266": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2023-0266: Linux Kernel Use-After-Free Vulnerability"
+    },
+    "CVE-2023-28434": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2023-28434: MinIO Security Feature Bypass Vulnerability"
+    },
+    "CVE-2023-34362": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2023-34362: Progress MOVEit Transfer SQL Injection Vulnerability"
+    },
+    "CVE-2024-1086": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2024-1086: Linux Kernel Use-After-Free Vulnerability"
+    },
+    "CVE-2024-36971": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2024-36971: Android Kernel Remote Code Execution Vulnerability"
+    },
+    "CVE-2024-50302": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2024-50302: Linux Kernel Use of Uninitialized Resource Vulnerability"
+    },
+    "CVE-2024-55591": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2024-55591: Fortinet FortiOS and FortiProxy Authentication Bypass Vulnerability"
+    },
+    "CVE-2025-11953": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2025-11953: React Native Community CLI OS Command Injection Vulnerability"
+    },
+    "CVE-2025-30066": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2025-30066: tj-actions/changed-files GitHub Action Embedded Malicious Code Vulnerability"
+    },
+    "CVE-2025-55182": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2025-55182: Meta React Server Components Remote Code Execution Vulnerability"
+    },
+    "CVE-2026-20253": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2026-20253: Splunk Enterprise Missing Authentication for Critical Function Vulnerability"
+    },
+    "CVE-2026-31431": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2026-31431: Linux Kernel Incorrect Resource Transfer Between Spheres Vulnerability"
+    },
+    "CVE-2026-45321": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2026-45321: TanStack Unspecified Vulnerability"
+    },
+    "CVE-2026-54420": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2026-54420: LiteSpeed cPanel Plugin UNIX Symbolic Link (Symlink) Following Vulnerability"
+    },
+    "CVE-2026-56290": {
+      "cvss": null,
+      "first_seen": "2026-07-08",
+      "kev": true,
+      "severity": "KEV",
+      "title": "CVE-2026-56290: Joomlack Page Builder Improper Access Control Vulnerability"
+    }
+  }
+}
