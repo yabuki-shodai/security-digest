@@ -1,37 +1,42 @@
-# CVE Digest Dashboard (2026-07-10)
+# CVE Digest Dashboard (2026-07-11)
 
 ## Overview
 
-- Total: 2
-- Critical件数: 1
-- High件数: 1
+- Total: 30
+- Critical件数: 2
+- High件数: 14
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 2
-- GitHub Models総括: GitHub Models
+- Frontend件数: 10
+- Backend件数: 20
+- GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-07-10/frontend-summary.md)
-- [Backend Summary](docs/2026-07-10/backend-summary.md)
+- [Frontend Summary](docs/2026-07-11/frontend-summary.md)
+- [Backend Summary](docs/2026-07-11/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-54769](https://github.com/langroid/langroid/security/advisories/GHSA-q9p7-wqxg-mrhc) CVE-2026-54769 / CRITICAL / backend
-- [CVE-2026-15317](https://github.com/sipeed/picoclaw/) CVE-2026-15317 / HIGH / backend
+- [CVE-2026-12761](https://plugins.trac.wordpress.org/browser/miniorange-login-openid/tags/7.7.0/class-mo-openid-login-widget.php#L1502) CVE-2026-12761 / CRITICAL / backend
+- [CVE-2026-61444](https://github.com/MervinPraison/PraisonAI/security/advisories/GHSA-g6j7-pffp-8whg) CVE-2026-61444 / CRITICAL / backend
+- [CVE-2026-55229](https://github.com/gotenberg/gotenberg/commit/98fc40347885ad510a311b990a73397c6d4143db) CVE-2026-55229 / HIGH / backend
+- [CVE-2026-57220](https://github.com/rabbitmq/rabbitmq-server/commit/595ec28fa1621b1f2c28124e4e0466a8ad963547) CVE-2026-57220 / HIGH / backend
+- [CVE-2026-53450](https://github.com/coturn/coturn/commit/b057acbebe721c8f2f202ddad5e16289e295c754) CVE-2026-53450 / HIGH / backend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-本日は、サーバーサイドリクエストフォージェリ（SSRF）やサンドボックス回避によるリモートコード実行（RCE）など、リモート攻撃に直結する重大な脆弱性が報告されました。特に、Go言語のWebツールとPythonの大規模言語モデルフレームワークに影響する問題が含まれています。
+
+対象CVEは30件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。
 
 ## 優先して確認すべき3〜5件
-1. CVE-2026-54769（CRITICAL, CVSS 10.0）  
-   Langroidフレームワークにおけるサンドボックス回避によるRCE。バージョン0.65.2未満が対象。  
-2. CVE-2026-15317（HIGH, CVSS 7.5）  
-   Sipeed PicoClawのWebFetchTool.Execute関数におけるSSRF。リモートからの攻撃が可能。
+
+- CVE-2026-12761: CVE-2026-12761
+- CVE-2026-61444: CVE-2026-61444
+- CVE-2026-55229: CVE-2026-55229
+- CVE-2026-57220: CVE-2026-57220
+- CVE-2026-56305: CVE-2026-56305
 
 ## 開発者向けコメント
-- Langroidの脆弱性は、Pythonの`eval()`関数のサンドボックス制御が不完全であることに起因します。外部からの入力を評価する際は、信頼できる環境でのみ実行し、可能な限り`eval()`の使用を避けるか安全な代替手段を検討してください。  
-- Sipeed PicoClawのSSRF問題は、外部リクエストの入力検証不足が原因です。外部URLの取り扱い時はホワイトリストやアクセス制限を設け、不正なリクエストを防止してください。  
-- いずれの脆弱性も公開済みのため、速やかなアップデートと影響範囲の確認を推奨します。
+
+使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
