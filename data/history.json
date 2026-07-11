@@ -1108,6 +1108,14 @@
       "severity": "MEDIUM",
       "title": "CVE-2026-58191"
     },
+    "CVE-2026-58281": {
+      "category": "security",
+      "cvss": 8.3,
+      "first_seen": "2026-07-12",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-58281"
+    },
     "CVE-2026-58473": {
       "cvss": 9.3,
       "first_seen": "2026-07-08",
