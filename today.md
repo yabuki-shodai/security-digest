@@ -1,52 +1,43 @@
-# CVE Digest Dashboard (2026-07-14)
+# CVE Digest Dashboard (2026-07-15)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
-- High件数: 11
+- Critical件数: 2
+- High件数: 18
 - KEV件数: 0
 - Frontend件数: 9
-- Backend件数: 19
+- Backend件数: 21
 - GitHub Models総括: GitHub Models
 
 ## Links
 
-- [Frontend Summary](docs/2026-07-14/frontend-summary.md)
-- [Backend Summary](docs/2026-07-14/backend-summary.md)
+- [Frontend Summary](docs/2026-07-15/frontend-summary.md)
+- [Backend Summary](docs/2026-07-15/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-59801](https://github.com/decolua/9router/security/advisories/GHSA-vjc7-jrh9-9j86) CVE-2026-59801 / CRITICAL / frontend
-- [CVE-2026-62327](https://github.com/decolua/9router/security/advisories/GHSA-vjc7-jrh9-9j86) CVE-2026-62327 / CRITICAL / frontend
-- [CVE-2026-61462](https://github.com/zereight/gitlab-mcp) CVE-2026-61462 / CRITICAL / security
-- [CVE-2026-6875](https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB3137947) CVE-2026-6875 / CRITICAL / security
-- [CVE-2026-58409](https://github.com/ChurchCRM/CRM/security/advisories/GHSA-37mf-vq43-5qp9) CVE-2026-58409 / CRITICAL / backend
+- [CVE-2026-15265](https://www.tenable.com/security/tns-2026-18) CVE-2026-15265 / CRITICAL / backend
+- [CVE-2026-58479](https://www.vulncheck.com/advisories/sustainable-irrigation-platform-rce-via-cli-control-plugin-command-injection) CVE-2026-58479: dan-in-ca sustainable irrigation platform / CRITICAL / backend
+- [CVE-2026-11403](https://help.sonatype.com/en/sonatype-nexus-repository-3-93-0-release-notes.html) CVE-2026-11403 / HIGH / frontend
+- [CVE-2026-15697](https://github.com/svgdotjs/svg.js/) CVE-2026-15697 / MEDIUM / frontend
+- [CVE-2026-15694](https://github.com/cve-a/dexingzhiqing/issues/4) CVE-2026-15694 / HIGH / backend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-本日公開されたCVEには、Next.jsを利用した9RouterのAPI認証欠如による重大な情報漏洩・不正操作（CVE-2026-59801、CVE-2026-62327）や、Rejetto HFSのセッション管理の脆弱性による管理者権限奪取（CVE-2026-61500）など、認証・認可の不備に起因するクリティカルな脆弱性が目立ちます。また、ChurchCRMのプラグインによるRCE（CVE-2026-58409）やLaravel-MediableのファイルアップロードによるRCE（CVE-2026-49972）など、サーバー側でのコード実行リスクも複数報告されています。XSSや情報漏洩、権限昇格など多様な攻撃ベクトルが含まれているため、幅広い対策が求められます。
+本日のCVEでは、フロントエンドとバックエンド双方に高リスクの脆弱性が多数報告されています。特にnpmやDocker関連のAPIキー不正取得、Stored XSS、スタックバッファオーバーフロー、JWT署名検証バイパス、Python Pillowライブラリのメモリ破壊問題、そしてSustainable Irrigation Platformのコマンドインジェクションなどが目立ちます。これらはリモート攻撃や権限昇格、情報漏洩、サービス妨害につながるため注意が必要です。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-59801 (CRITICAL, CVSS 9.8)**  
-   Next.js APIルートの認証欠如により、プロバイダー管理APIが無認証で操作可能。OAuthトークンやAPIキーの漏洩、AIトラフィックの乗っ取りリスクあり。
-
-2. **CVE-2026-62327 (CRITICAL, CVSS 9.3)**  
-   同じくNext.jsのAPIで認証なしに全AIプロバイダーのAPIキーを平文で取得可能。無断利用や不正アクセスの危険性が高い。
-
-3. **CVE-2026-61500 (CRITICAL, CVSS 9.8)**  
-   Rejetto HFSのセッションキーが非暗号的乱数から生成され、攻撃者が管理者セッションを偽造可能。完全な管理権限奪取とRCEにつながる。
-
-4. **CVE-2026-58409 (CRITICAL, CVSS 9.1)**  
-   ChurchCRMのプラグイン機能により、管理者権限で悪意あるPHPコードを実行可能。サーバーの完全制御リスクあり。
-
-5. **CVE-2026-49972 (HIGH, CVSS 8.8)**  
-   Laravel-Mediableのファイルアップロードで、偽装されたPHPファイルにより未認証でRCEが可能。ウェブサーバー設定依存のため注意。
+1. **CVE-2026-15701 (CRITICAL, CVSS 9.4)** - Tenable Agentのパストラバーサルによる任意ファイル書き込み。リモートコード実行の恐れあり。
+2. **CVE-2026-58479 (CRITICAL, CVSS 9.8)** - Sustainable Irrigation Platformのコマンドインジェクション。未認証でOSコマンド実行可能。
+3. **CVE-2026-11403 (HIGH, CVSS 8.7)** - Nexus Repository ManagerのAPIキー生成の脆弱性。リポジトリ操作の不正アクセスを許す。
+4. **CVE-2026-15694/15695/15696 (HIGH, CVSS 9.0)** - Tenda BE12 Proの複数のスタックバッファオーバーフロー。リモート攻撃可能。
+5. **CVE-2026-59204/59205/59198/59199/59203 (HIGH〜8.7)** - Python Pillowの複数のメモリ破壊やDoS、情報漏洩問題。画像処理ライブラリ利用者は要注意。
 
 ## 開発者向けコメント
-- Next.jsを利用している場合は、APIルートの認証ミドルウェアの実装漏れに注意し、全ての管理系APIに適切な認証・認可を必ず設けてください。特に外部APIキーやOAuthトークンを扱う部分は厳重に管理しましょう。
-- Rejetto HFSのようにセッション管理に非暗号的乱数を使う設計は避け、強力な暗号的擬似乱数生成器を用いることが必須です。セッションキーの漏洩は即座に管理権限奪取に直結します。
-- プラグインやファイルアップロード機能は、許可する拡張子や内容の検証を厳格に行い、特にPHPなどの実行可能ファイルのアップロードを許さない設定を徹底してください。
-- XSSやHTMLインジェクション対策としては、ユーザー入力の適切なサニタイズとコンテキストに応じたエスケープ処理を実装し、信頼できないデータを直接HTMLやJavaScriptに埋め込まないようにしましょう。
-- サーバー側の設定（例：Apache/nginxのMIMEタイプ判定や実行設定）も脆弱性の影響範囲に大きく関わるため、セキュアな設定を維持し、不要な機能は無効化することが重要です。
+- APIキーや認証トークンの生成・検証処理は堅牢に実装し、アルゴリズムの妥当性チェックや権限検証を必ず行いましょう。
+- フロントエンドではユーザー入力の適切なサニタイズとエスケープを徹底し、特にStored XSSのリスクを低減してください。
+- バッファオーバーフローのようなメモリ管理の脆弱性は、入力検証と境界チェックを厳格に行い、可能な限り安全な言語機能やライブラリを利用しましょう。
+- 依存ライブラリ（例：Pillow、svg.js、Snowflake SQLAlchemyなど）は最新バージョンに更新し、既知の脆弱性を速やかに修正してください。
+- IoTや組み込み系プラットフォーム（例：Sustainable Irrigation Platform）では、認証・認可の強化とCSRF対策、パスフレーズ管理を徹底し、不正操作を防止しましょう。
