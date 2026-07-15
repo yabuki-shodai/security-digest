@@ -1,43 +1,52 @@
-# CVE Digest Dashboard (2026-07-15)
+# CVE Digest Dashboard (2026-07-16)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 2
-- High件数: 18
+- Critical件数: 5
+- High件数: 19
 - KEV件数: 0
-- Frontend件数: 9
-- Backend件数: 21
+- Frontend件数: 26
+- Backend件数: 4
 - GitHub Models総括: GitHub Models
 
 ## Links
 
-- [Frontend Summary](docs/2026-07-15/frontend-summary.md)
-- [Backend Summary](docs/2026-07-15/backend-summary.md)
+- [Frontend Summary](docs/2026-07-16/frontend-summary.md)
+- [Backend Summary](docs/2026-07-16/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-15265](https://www.tenable.com/security/tns-2026-18) CVE-2026-15265 / CRITICAL / backend
-- [CVE-2026-58479](https://www.vulncheck.com/advisories/sustainable-irrigation-platform-rce-via-cli-control-plugin-command-injection) CVE-2026-58479: dan-in-ca sustainable irrigation platform / CRITICAL / backend
-- [CVE-2026-11403](https://help.sonatype.com/en/sonatype-nexus-repository-3-93-0-release-notes.html) CVE-2026-11403 / HIGH / frontend
-- [CVE-2026-15697](https://github.com/svgdotjs/svg.js/) CVE-2026-15697 / MEDIUM / frontend
-- [CVE-2026-15694](https://github.com/cve-a/dexingzhiqing/issues/4) CVE-2026-15694 / HIGH / backend
+- [CVE-2026-55445](https://github.com/whyour/qinglong/commit/6bec52dca158481258315ba0fc2f11206df7b719) CVE-2026-55445 / CRITICAL / frontend
+- [CVE-2026-53512](https://github.com/better-auth/better-auth/commit/1f2ff4215c4affff0b140b0c0a712c0dde35659c) CVE-2026-53512 / CRITICAL / frontend
+- [CVE-2026-53513](https://github.com/better-auth/better-auth/commit/37f60cb176cb53147da7dfd5ec15afa5b486e81e) CVE-2026-53513 / CRITICAL / frontend
+- [CVE-2026-46421](https://github.com/cap-js/cds-dbs/security/advisories/GHSA-pvw4-cvr4-97p8) CVE-2026-46421 / CRITICAL / frontend
+- [CVE-2026-54458](https://github.com/WWBN/AVideo/commit/8be71e53ccbe9b84b30870db386fb4d2b11e1c16) CVE-2026-54458 / CRITICAL / frontend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-本日のCVEでは、フロントエンドとバックエンド双方に高リスクの脆弱性が多数報告されています。特にnpmやDocker関連のAPIキー不正取得、Stored XSS、スタックバッファオーバーフロー、JWT署名検証バイパス、Python Pillowライブラリのメモリ破壊問題、そしてSustainable Irrigation Platformのコマンドインジェクションなどが目立ちます。これらはリモート攻撃や権限昇格、情報漏洩、サービス妨害につながるため注意が必要です。
+本日公開されたCVEは主にTypeScriptやJavaScriptを中心としたフロントエンド関連の脆弱性が多く、認証・認可ライブラリBetter Authに関する複数の高・重大度脆弱性が目立ちます。これらはトークン管理の不備や不適切な検証による権限昇格や不正アクセスを招くものです。また、Qinglongの管理者権限リセットやWWBN AVideoのクロスサイトスクリプティング、Cisco RoomOSのバックエンドにおけるアクセス制御やメモリ管理の問題も報告されています。npmパッケージのマルウェア混入も確認されており、サプライチェーンリスクにも注意が必要です。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-15701 (CRITICAL, CVSS 9.4)** - Tenable Agentのパストラバーサルによる任意ファイル書き込み。リモートコード実行の恐れあり。
-2. **CVE-2026-58479 (CRITICAL, CVSS 9.8)** - Sustainable Irrigation Platformのコマンドインジェクション。未認証でOSコマンド実行可能。
-3. **CVE-2026-11403 (HIGH, CVSS 8.7)** - Nexus Repository ManagerのAPIキー生成の脆弱性。リポジトリ操作の不正アクセスを許す。
-4. **CVE-2026-15694/15695/15696 (HIGH, CVSS 9.0)** - Tenda BE12 Proの複数のスタックバッファオーバーフロー。リモート攻撃可能。
-5. **CVE-2026-59204/59205/59198/59199/59203 (HIGH〜8.7)** - Python Pillowの複数のメモリ破壊やDoS、情報漏洩問題。画像処理ライブラリ利用者は要注意。
+1. **CVE-2026-53513 (Better Auth, CRITICAL, CVSS 9.6)**  
+   OIDC設定の検証不足によるサーバーサイドリクエストフォージェリ（SSRF）とアカウントリンクの可能性。認証基盤に直結するため最優先で対応を。
+
+2. **CVE-2026-55445 (Qinglong, CRITICAL, CVSS 9.3)**  
+   認証ガードの不備による管理者資格情報リセット。初期化済みインスタンスの管理者権限を奪われる恐れあり。
+
+3. **CVE-2026-53512 (Better Auth, CRITICAL, CVSS 9.1)**  
+   クライアントシークレット未検証のトークンリフレッシュで不正アクセストークン発行が可能。認証の根幹に関わる重大問題。
+
+4. **CVE-2026-46421 (SAP CAP, CRITICAL, CVSS 9.3)**  
+   npmパッケージのマルウェア混入による資格情報漏洩と自己拡散。サプライチェーン攻撃のリスクが高い。
+
+5. **CVE-2026-54458 (WWBN AVideo, CRITICAL, CVSS 9.6)**  
+   管理者画面でのストアドXSS。認証済み管理者のブラウザで任意スクリプト実行が可能。
 
 ## 開発者向けコメント
-- APIキーや認証トークンの生成・検証処理は堅牢に実装し、アルゴリズムの妥当性チェックや権限検証を必ず行いましょう。
-- フロントエンドではユーザー入力の適切なサニタイズとエスケープを徹底し、特にStored XSSのリスクを低減してください。
-- バッファオーバーフローのようなメモリ管理の脆弱性は、入力検証と境界チェックを厳格に行い、可能な限り安全な言語機能やライブラリを利用しましょう。
-- 依存ライブラリ（例：Pillow、svg.js、Snowflake SQLAlchemyなど）は最新バージョンに更新し、既知の脆弱性を速やかに修正してください。
-- IoTや組み込み系プラットフォーム（例：Sustainable Irrigation Platform）では、認証・認可の強化とCSRF対策、パスフレーズ管理を徹底し、不正操作を防止しましょう。
+- 認証・認可ライブラリのアップデートは最優先で行い、特にBetter Authの1.6.11以降への更新を推奨します。トークン管理やOIDC設定の検証強化が必須です。  
+- Qinglongの管理者初期化機能は2.20.1以降で修正済みのため、早急にバージョンアップしてください。  
+- npmパッケージの信頼性を再確認し、特にSAP CAP関連のパッケージは不審なバージョンを避けること。CI/CDパイプラインでの署名検証や依存関係監査を強化しましょう。  
+- クロスサイトスクリプティング（XSS）対策として、ユーザー入力の適切なサニタイズとエスケープ処理を徹底してください。特に管理者向けUIでの外部入力は厳重に検証が必要です。  
+- Cisco RoomOSの脆弱性は内部レビューによるもので、アクセス制御やメモリ管理のベストプラクティスを改めて見直す良い機会です。安全なリソース管理を心がけてください。
