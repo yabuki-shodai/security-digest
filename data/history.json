@@ -2702,6 +2702,246 @@
       "severity": "LOW",
       "title": "CVE-2026-6352"
     },
+    "CVE-2026-63838": {
+      "category": "frontend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63838"
+    },
+    "CVE-2026-63858": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63858"
+    },
+    "CVE-2026-63861": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63861"
+    },
+    "CVE-2026-63871": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63871"
+    },
+    "CVE-2026-63872": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63872"
+    },
+    "CVE-2026-63876": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63876"
+    },
+    "CVE-2026-63877": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63877"
+    },
+    "CVE-2026-63880": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63880"
+    },
+    "CVE-2026-63886": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63886"
+    },
+    "CVE-2026-63887": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63887"
+    },
+    "CVE-2026-63888": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63888"
+    },
+    "CVE-2026-63892": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63892"
+    },
+    "CVE-2026-63902": {
+      "category": "frontend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63902"
+    },
+    "CVE-2026-63905": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63905"
+    },
+    "CVE-2026-63911": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63911"
+    },
+    "CVE-2026-63913": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63913"
+    },
+    "CVE-2026-63914": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63914"
+    },
+    "CVE-2026-63934": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63934"
+    },
+    "CVE-2026-63942": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63942"
+    },
+    "CVE-2026-63950": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63950"
+    },
+    "CVE-2026-63956": {
+      "category": "frontend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63956"
+    },
+    "CVE-2026-63962": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63962"
+    },
+    "CVE-2026-63979": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63979"
+    },
+    "CVE-2026-63986": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63986"
+    },
+    "CVE-2026-63996": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-63996"
+    },
+    "CVE-2026-64007": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-64007"
+    },
+    "CVE-2026-64013": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-64013"
+    },
+    "CVE-2026-64026": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-64026"
+    },
+    "CVE-2026-64032": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-64032"
+    },
+    "CVE-2026-64034": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-07-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-64034"
+    },
     "CVE-2026-6875": {
       "category": "security",
       "cvss": 9.5,

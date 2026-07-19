@@ -1,52 +1,39 @@
-# CVE Digest Dashboard (2026-07-19)
+# CVE Digest Dashboard (2026-07-20)
 
 ## Overview
 
-- Total: 14
+- Total: 30
 - Critical件数: 0
-- High件数: 8
+- High件数: 0
 - KEV件数: 0
-- Frontend件数: 2
-- Backend件数: 5
+- Frontend件数: 3
+- Backend件数: 27
 - GitHub Models総括: GitHub Models
 
 ## Links
 
-- [Frontend Summary](docs/2026-07-19/frontend-summary.md)
-- [Backend Summary](docs/2026-07-19/backend-summary.md)
+- [Frontend Summary](docs/2026-07-20/frontend-summary.md)
+- [Backend Summary](docs/2026-07-20/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-16152](https://github.com/justconter/cve/issues/6) CVE-2026-16152 / HIGH / security
-- [CVE-2026-16154](https://github.com/justconter/cve/issues/5) CVE-2026-16154 / HIGH / security
-- [CVE-2026-16125](https://github.com/zevorn/rt-claw/) CVE-2026-16125 / HIGH / security
-- [CVE-2026-16126](https://github.com/zevorn/rt-claw/) CVE-2026-16126 / HIGH / security
-- [CVE-2026-16127](https://github.com/zevorn/rt-claw/) CVE-2026-16127 / HIGH / security
+- [CVE-2026-63872](https://git.kernel.org/stable/c/2982e599fff6faa21c8df147d96fc7af6c1a2f24) CVE-2026-63872 / UNKNOWN / backend
+- [CVE-2026-63876](https://git.kernel.org/stable/c/237dc8c08de3cb293b6607aaee8b13b3a671e267) CVE-2026-63876 / UNKNOWN / backend
+- [CVE-2026-63877](https://git.kernel.org/stable/c/2ff0401ffddaccc85f758c8259912d686d052b31) CVE-2026-63877 / UNKNOWN / backend
+- [CVE-2026-63880](https://git.kernel.org/stable/c/1eb86334e391695d4a40743b114afc15df4dc506) CVE-2026-63880 / UNKNOWN / backend
+- [CVE-2026-63913](https://git.kernel.org/stable/c/2006979a15af5404bf932a325357683c0bac1656) CVE-2026-63913 / UNKNOWN / backend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-本日のCVEでは、特にGo言語製のnextlevelbuilder GoClawやzevorn rt-clawに関する複数のリモートからの認可不備やサーバーサイドリクエストフォージェリ（SSRF）脆弱性が目立ちます。また、フロントエンドではWordPressプラグインやJavaScriptベースのLollmsにおけるクロスサイトスクリプティング（XSS）問題が報告されています。さらに、SQLインジェクションやバッファオーバーフローなどの深刻な脆弱性も複数含まれています。
+本日掲載されたCVEはすべてLinuxカーネルに関するもので、多くがメモリ管理、デバイスドライバ、ネットワークスタック、USBやSCSIなどのサブシステムに関わる脆弱性修正です。特に境界チェック不備によるバッファオーバーフローやメモリ破壊、競合状態、リソースリーク、データ競合など多様な問題が含まれています。深刻度は不明ですが、カーネルの安定性やセキュリティに影響するため注意が必要です。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-12228 (HIGH, CVSS 8.7)**  
-   parisneo/lollmsの保存型XSS。サーバー側のサニタイズ不足により、DM UIで悪意あるスクリプトが実行される恐れあり。
-
-2. **CVE-2026-53994 (HIGH, CVSS 7.7)**  
-   ProFTPD mod_sftpの認証済みユーザーによるヒープベースのバッファオーバーフロー。メモリ破壊のリスク。
-
-3. **CVE-2026-16124 (MEDIUM, CVSS 6.5)**  
-   nextlevelbuilder GoClawのSSRF脆弱性。リモートからの攻撃が可能で、既にパッチが提供されている。
-
-4. **CVE-2026-16152 / CVE-2026-16154 (HIGH, CVSS 7.5)**  
-   SourceCodester Class and Exam Timetabling SystemにおけるSQLインジェクション。リモート攻撃が可能で、公開済みのエクスプロイトあり。
-
-5. **CVE-2026-16125〜16128 (HIGH, CVSS 7.5)**  
-   zevorn rt-clawに複数のSSRFおよび認可不備脆弱性。リモート攻撃が可能で、開発元の対応が遅れている。
+1. **CVE-2026-63913** - TCPコネクションの状態遷移における不正なRSTパケットによる誤ったCLOSE状態遷移。ネットワーク通信の信頼性に影響。
+2. **CVE-2026-63888** - iSCSIターゲットのCRCバッファオーバーリードと二重解放。ストレージ関連で深刻なメモリ破壊の可能性。
+3. **CVE-2026-63905** - USBIPのvudc_removeでの競合によるUse-After-Free。USB仮想化環境でのクラッシュや攻撃リスク。
+4. **CVE-2026-63942** - parportサブシステムの初期化競合によるクラッシュ。モジュールロード時の安定性問題。
+5. **CVE-2026-63996** - ethtoolのSFPモジュール応答長検証不備によるバッファオーバーライト。ハードウェア異常や攻撃に対する防御強化。
 
 ## 開発者向けコメント
-- フロントエンドでは、ユーザー入力のサニタイズをサーバー側でも確実に実施し、フロントエンドの正規表現ベースのサニタイザーに過信しないことが重要です。特にv-htmlのような危険なHTML挿入は避け、信頼できるライブラリの利用を検討してください。
-- GoClawやrt-clawのようなバックエンドでは、外部からのリクエストを扱う際の認可チェックを厳密に行い、SSRF対策としてホワイトリストやIP制限を実装してください。公開済みのエクスプロイトがあるため、速やかなアップデートが推奨されます。
-- SQLインジェクション対策としては、パラメータ化クエリの利用や入力値の厳格な検証を徹底してください。
-- バッファオーバーフローの脆弱性はメモリ管理の不備に起因するため、外部からの入力長チェックや境界検査を強化し、可能な限り安全なAPIを利用することが望ましいです。
-- 既に公開されている脆弱性については、早急にパッチ適用やバージョンアップを実施し、影響範囲の調査と対応を優先してください。
+Linuxカーネルの多様なサブシステムで境界チェックやリソース管理の不備が複数報告されています。特にデバイスドライバやネットワーク関連のコードは、外部からの入力やハードウェアの異常に対して堅牢性を高める必要があります。カーネルモジュールの初期化順序や競合状態にも注意し、最新のパッチを適用してください。ユーザースペースとのインターフェース（例：netlink、USB、SCSI）も安全なデータ検証を徹底し、不正な入力によるメモリ破壊やクラッシュを防ぐ設計を心がけましょう。
