@@ -1,57 +1,52 @@
-# CVE Digest Dashboard (2026-07-21)
+# CVE Digest Dashboard (2026-07-22)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
-- High件数: 7
+- Critical件数: 9
+- High件数: 11
 - KEV件数: 0
-- Frontend件数: 20
-- Backend件数: 10
+- Frontend件数: 7
+- Backend件数: 23
 - GitHub Models総括: GitHub Models
 
 ## Links
 
-- [Frontend Summary](docs/2026-07-21/frontend-summary.md)
-- [Backend Summary](docs/2026-07-21/backend-summary.md)
+- [Frontend Summary](docs/2026-07-22/frontend-summary.md)
+- [Backend Summary](docs/2026-07-22/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-54051](https://github.com/Jovancoding/Network-AI/commit/379f77656b578144e03415c5b134d8309a4b5792) CVE-2026-54051 / CRITICAL / frontend
-- [CVE-2026-46412](https://github.com/BeProduct/beproduct-org-nestjs-auth/security/advisories/GHSA-6xwp-cp5h-q856) CVE-2026-46412 / CRITICAL / frontend
-- [CVE-2026-35048](https://github.com/Piwigo/Piwigo/security/advisories/GHSA-gphq-34pv-gvf3) CVE-2026-35048 / CRITICAL / backend
-- [CVE-2026-53595](https://github.com/freescout-help-desk/freescout/security/advisories/GHSA-jqj5-r72v-v29g) CVE-2026-53595 / CRITICAL / frontend
-- [CVE-2026-35198](https://github.com/heyform/heyform/commit/cc97d27a57ae400fec23abf5dcf6f9533c3b5db3) CVE-2026-35198 / CRITICAL / frontend
+- [CVE-2026-47407](https://github.com/MervinPraison/PraisonAI/commit/24385d64876577620f749957bd4814f162f4ca47) CVE-2026-47407 / CRITICAL / backend
+- [CVE-2026-8982](https://cyberdanube.com/security-research/multiple-vulnerabilities-in-autel-maxi-charger/) CVE-2026-8982 / CRITICAL / backend
+- [CVE-2026-64824](https://github.com/home-assistant/core/commit/1e457600f1093c15e1325742d03e2b76498c79c1) CVE-2026-64824 / CRITICAL / backend
+- [CVE-2026-47391](https://github.com/MervinPraison/PraisonAI/commit/e0fb8e7dd1ee6759c18ed07f436c21dbd9c20747) CVE-2026-47391 / CRITICAL / backend
+- [CVE-2026-47392](https://github.com/MervinPraison/PraisonAI/commit/b0d8f777528f3253a0cfb0a3ef65455da6ae32f6) CVE-2026-47392 / CRITICAL / backend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-本日のCVEでは、特にTypeScript/Node.js製のNetwork-AIに多数の脆弱性が報告されており、権限管理の不備やパス操作の不適切な検証、クロスサイトスクリプティング（XSS）など多岐にわたる問題が含まれています。また、認証不要でのアカウント乗っ取りや任意コード実行の脆弱性も複数見られ、特にnpmパッケージのマルウェア混入やPHP設定ファイルへのコード注入など、開発者の注意が必要な重大な問題が散見されます。
+本日のCVEでは、フロントエンド・バックエンド問わず多様な高リスク脆弱性が報告されています。特にPythonやGo、JavaScript関連のライブラリやフレームワークで、認証回避、リモートコード実行、SQLインジェクション、クロスサイトスクリプティング（XSS）、サーバーサイドリクエストフォージェリ（SSRF）などの深刻な問題が目立ちます。Docker環境やクラウドサービス連携部分の脆弱性も含まれており、幅広い開発環境での影響が懸念されます。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-46412**（@beproduct/nestjs-auth）  
-   - npmパッケージの悪意あるバージョン公開によるトークン・認証情報の窃取。  
-   - クリティカル（CVSS 10.0）
+1. **CVE-2026-47392 (CRITICAL, CVSS 9.9)**  
+   PraisonAIのPythonサンドボックス回避による任意OSコマンド実行。完全なリモートコード実行が可能で、即時対応が必須。
 
-2. **CVE-2026-54051**（Network-AI）  
-   - コマンド実行のallowlist回避による任意コマンド実行。  
-   - クリティカル（CVSS 9.9）
+2. **CVE-2026-8982 (CRITICAL, CVSS 10.0)**  
+   Autel Maxi Charger Singleのファームウェアに存在する管理者権限を持つ隠しアカウント。ファームウェア利用環境は特に注意。
 
-3. **CVE-2026-53595**（FreeScout）  
-   - 認証不要でアカウント乗っ取り可能な認証バイパス。  
-   - クリティカル（CVSS 9.4）
+3. **CVE-2026-64824 (CRITICAL, CVSS 9.3)**  
+   Home Assistant Coreのバックアップ復元機能におけるパストラバーサル。Docker環境でroot権限のファイル書き込みが可能。
 
-4. **CVE-2026-35048**（Piwigo）  
-   - インストーラーの設定ファイルに未検証のPHPコード注入。  
-   - クリティカル（CVSS 9.8）
+4. **CVE-2026-47407 (CRITICAL, CVSS 9.4)**  
+   PraisonAI Platformの認可チェック不備によるリソースアクセス制御回避。重要なAPIの権限管理を見直す必要あり。
 
-5. **CVE-2026-39878**（Chamilo LMS）  
-   - 未認証者による管理者アカウント乗っ取り可能なストアドXSS。  
-   - クリティカル（CVSS 9.3）
+5. **CVE-2026-55084 (HIGH, CVSS 8.8)**  
+   DHIS2のSQLインジェクション。認証済みユーザーによる任意SQL実行が可能で、データベースの完全な制御リスクあり。
 
 ## 開発者向けコメント
-- 依存パッケージの信頼性を常に確認し、特にnpmなどの公開リポジトリからのパッケージは署名や公式ソースの検証を徹底してください。  
-- 権限チェックの不備や認証バイパスは重大なリスクを伴うため、ユーザー権限の検証を厳格に実装し、サーバーサイドでのアクセス制御を強化しましょう。  
-- コマンド実行やファイル操作においては、allowlistの実装方法やパスの正規化・検証を厳密に行い、シェルインジェクションやディレクトリトラバーサルを防止してください。  
-- クロスサイトスクリプティング（XSS）対策として、ユーザー入力の適切なサニタイズとエスケープを徹底し、CSP（Content Security Policy）の導入も検討してください。  
-- 脆弱性情報は速やかにキャッチアップし、可能な限り早期にパッチ適用やバージョンアップを行うことが重要です。
+- 依存ライブラリやフレームワークのアップデートを速やかに適用し、特に認証・認可周りの脆弱性は優先的に対処してください。
+- ユーザー入力の適切な検証・エスケープ処理を徹底し、プロトタイプ汚染やXSS、SQLインジェクションなどの基本的な脆弱性を防止しましょう。
+- Dockerやクラウド環境での権限管理に注意し、特権コンテナでの実行を避けるなど最小権限の原則を守ることが重要です。
+- 開発環境のローカルサーバーやAPIは外部からアクセス可能な状態にしないよう設定を見直し、不必要なエンドポイントは無効化してください。
+- 複雑なコード生成やサンドボックス機能を利用する場合は、セキュリティ境界の検証を厳密に行い、既知のバイパス手法に注意を払う必要があります。
