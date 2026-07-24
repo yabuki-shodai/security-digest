@@ -1,0 +1,39 @@
+name: Security News
+
+on:
+  workflow_dispatch:
+  schedule:
+    # JST 07:30
+    - cron: "30 22 * * *"
+
+permissions:
+  contents: write
+  models: read
+
+concurrency:
+  group: security-news
+  cancel-in-progress: false
+
+jobs:
+  security-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate security news digest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/security_news.py
+
+      - name: Commit generated news
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update security news"
+          file_pattern: "security-news.md docs/**/security-news.md"
