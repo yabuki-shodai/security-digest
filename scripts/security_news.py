@@ -34,6 +34,9 @@ VALID_IMPORTANCE = {"HIGH", "MEDIUM", "LOW"}
 FEEDS = [
     ("SecurityWeek", "https://www.securityweek.com/feed/"),
     ("Krebs on Security", "https://krebsonsecurity.com/feed/"),
+    ("BleepingComputer", "https://www.bleepingcomputer.com/feed/"),
+    ("The Record", "https://therecord.media/feed/"),
+    ("Dark Reading", "https://www.darkreading.com/rss.xml"),
 ]
 
 
@@ -236,11 +239,11 @@ def fallback_summary(item: NewsItem) -> str:
 
 def render_markdown(items: list[NewsItem], overview: str, generated_at: datetime) -> str:
     lines = [
-        "# セキュリティニュース",
+        "# セキュリティーニュース",
         "",
         f"更新日時: {generated_at.astimezone(JST).strftime('%Y-%m-%d %H:%M:%S JST')}",
         "",
-        "SecurityWeek と Krebs on Security のRSSから、JST基準で本日公開されたセキュリティ関連記事を収集しています。",
+        "SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、JST基準で本日公開されたセキュリティ関連記事を収集しています。",
         "",
         "## 今日の総括",
         "",
@@ -270,7 +273,7 @@ def render_markdown(items: list[NewsItem], overview: str, generated_at: datetime
 def render_dashboard_section(items: list[NewsItem], overview: str) -> str:
     lines = [
         NEWS_SECTION_START,
-        "## セキュリティニュース",
+        "## セキュリティーニュース",
         "",
         "### 今日の総括",
         "",
@@ -282,7 +285,7 @@ def render_dashboard_section(items: list[NewsItem], overview: str) -> str:
     else:
         for item in items[:DASHBOARD_ITEMS]:
             lines.append(f"- **{item.importance}** [{item.title}]({item.url}) — {item.source}")
-        lines.extend(["", "- [セキュリティニュースをすべて見る](security-news.md)"])
+        lines.extend(["", "- [セキュリティーニュースをすべて見る](security-news.md)"])
     lines.extend(["", NEWS_SECTION_END])
     return "\n".join(lines)
 
