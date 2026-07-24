@@ -29,6 +29,7 @@ MAX_ITEMS = 10
 DASHBOARD_ITEMS = 5
 NEWS_SECTION_START = "<!-- SECURITY_NEWS_START -->"
 NEWS_SECTION_END = "<!-- SECURITY_NEWS_END -->"
+VALID_IMPORTANCE = {"HIGH", "MEDIUM", "LOW"}
 
 FEEDS = [
     ("SecurityWeek", "https://www.securityweek.com/feed/"),
@@ -44,6 +45,7 @@ class NewsItem:
     published_at: datetime | None
     description: str
     summary_ja: str | None = None
+    importance: str = "MEDIUM"
 
 
 def clean_html(value: str | None) -> str:
@@ -139,9 +141,39 @@ def parse_json_object(content: str) -> dict[str, Any] | None:
     return parsed if isinstance(parsed, dict) else None
 
 
-def add_ai_summaries(items: list[NewsItem], config: dict[str, Any]) -> list[NewsItem]:
+def fallback_importance(item: NewsItem) -> str:
+    text = f"{item.title} {item.description}".lower()
+    high_keywords = [
+        "actively exploited",
+        "zero-day",
+        "zero day",
+        "ransomware",
+        "critical vulnerability",
+        "remote code execution",
+        "data breach",
+        "supply chain attack",
+        "国家支援",
+    ]
+    low_keywords = ["conference", "funding", "appointment", "award", "podcast"]
+    if any(keyword in text for keyword in high_keywords):
+        return "HIGH"
+    if any(keyword in text for keyword in low_keywords):
+        return "LOW"
+    return "MEDIUM"
+
+
+def fallback_overview(items: list[NewsItem]) -> str:
     if not items:
-        return items
+        return "本日公開されたニュースはありません。"
+    high_count = sum(item.importance == "HIGH" for item in items)
+    sources = "、".join(sorted({item.source for item in items}))
+    return f"本日は{sources}から{len(items)}件を収集しました。重要度HIGHは{high_count}件です。"
+
+
+def analyze_news(items: list[NewsItem], config: dict[str, Any]) -> tuple[list[NewsItem], str]:
+    fallback_items = [replace(item, importance=fallback_importance(item)) for item in items]
+    if not items:
+        return fallback_items, fallback_overview(fallback_items)
 
     rows = [
         {
@@ -154,9 +186,13 @@ def add_ai_summaries(items: list[NewsItem], config: dict[str, Any]) -> list[News
     ]
     prompt = "\n".join(
         [
-            "次のセキュリティニュースを日本語で要約してください。",
-            "JSONオブジェクトだけを返してください。キーは入力のid、値は2文以内の日本語要約にしてください。",
-            "記事に書かれていない事実は追加せず、不明点は断定しないでください。",
+            "次のセキュリティニュースを日本語で分析してください。",
+            "JSONオブジェクトだけを返してください。形式は overview と items を持つオブジェクトです。",
+            "overview は本日の主要傾向を3文以内でまとめてください。",
+            "items は入力idをキーとし、summary と importance を持つオブジェクトにしてください。",
+            "summary は2文以内の日本語要約、importance は HIGH・MEDIUM・LOW のいずれかです。",
+            "重要度は、広範な影響、実際の悪用、重大な情報漏えい、ランサムウェア、ゼロデイを重視してください。",
+            "記事にない事実は追加せず、不明点は断定しないでください。",
             json.dumps(rows, ensure_ascii=False),
         ]
     )
@@ -169,18 +205,27 @@ def add_ai_summaries(items: list[NewsItem], config: dict[str, Any]) -> list[News
             {"role": "user", "content": prompt},
         ],
         config,
-        max(1200, len(items) * 180),
+        max(1400, len(items) * 220),
     )
     parsed = parse_json_object(content) if content else None
     if not parsed:
-        return items
+        return fallback_items, fallback_overview(fallback_items)
 
-    enriched: list[NewsItem] = []
-    for index, item in enumerate(items):
-        summary = parsed.get(str(index))
-        normalized = clean_html(str(summary)) if isinstance(summary, str) else ""
-        enriched.append(replace(item, summary_ja=normalized or None))
-    return enriched
+    raw_items = parsed.get("items")
+    analyzed: list[NewsItem] = []
+    for index, fallback_item in enumerate(fallback_items):
+        raw = raw_items.get(str(index)) if isinstance(raw_items, dict) else None
+        if not isinstance(raw, dict):
+            analyzed.append(fallback_item)
+            continue
+        summary = clean_html(str(raw.get("summary") or "")) or None
+        importance = str(raw.get("importance") or "").upper()
+        if importance not in VALID_IMPORTANCE:
+            importance = fallback_item.importance
+        analyzed.append(replace(fallback_item, summary_ja=summary, importance=importance))
+
+    overview = clean_html(str(parsed.get("overview") or ""))
+    return analyzed, overview or fallback_overview(analyzed)
 
 
 def fallback_summary(item: NewsItem) -> str:
@@ -189,13 +234,17 @@ def fallback_summary(item: NewsItem) -> str:
     return "記事の詳細はリンク先を確認してください。"
 
 
-def render_markdown(items: list[NewsItem], generated_at: datetime) -> str:
+def render_markdown(items: list[NewsItem], overview: str, generated_at: datetime) -> str:
     lines = [
         "# セキュリティニュース",
         "",
         f"更新日時: {generated_at.astimezone(JST).strftime('%Y-%m-%d %H:%M:%S JST')}",
         "",
         "SecurityWeek と Krebs on Security のRSSから、JST基準で本日公開されたセキュリティ関連記事を収集しています。",
+        "",
+        "## 今日の総括",
+        "",
+        overview,
         "",
     ]
     if not items:
@@ -208,6 +257,7 @@ def render_markdown(items: list[NewsItem], generated_at: datetime) -> str:
             [
                 f"## [{item.title}]({item.url})",
                 "",
+                f"- 重要度: **{item.importance}**",
                 f"- メディア: {item.source}",
                 f"- 公開日時: {published}",
                 f"- 要約: {item.summary_ja or fallback_summary(item)}",
@@ -217,24 +267,28 @@ def render_markdown(items: list[NewsItem], generated_at: datetime) -> str:
     return "\n".join(lines)
 
 
-def render_dashboard_section(items: list[NewsItem]) -> str:
+def render_dashboard_section(items: list[NewsItem], overview: str) -> str:
     lines = [
         NEWS_SECTION_START,
         "## セキュリティニュース",
+        "",
+        "### 今日の総括",
+        "",
+        overview,
         "",
     ]
     if not items:
         lines.append("本日公開されたニュースはありません。")
     else:
         for item in items[:DASHBOARD_ITEMS]:
-            lines.append(f"- [{item.title}]({item.url}) — {item.source}")
+            lines.append(f"- **{item.importance}** [{item.title}]({item.url}) — {item.source}")
         lines.extend(["", "- [セキュリティニュースをすべて見る](security-news.md)"])
     lines.extend(["", NEWS_SECTION_END])
     return "\n".join(lines)
 
 
-def update_today_dashboard(items: list[NewsItem]) -> None:
-    section = render_dashboard_section(items)
+def update_today_dashboard(items: list[NewsItem], overview: str) -> None:
+    section = render_dashboard_section(items, overview)
     current = TODAY_OUTPUT.read_text(encoding="utf-8") if TODAY_OUTPUT.exists() else "# CVE Digest Dashboard\n"
     pattern = re.compile(
         rf"{re.escape(NEWS_SECTION_START)}.*?{re.escape(NEWS_SECTION_END)}",
@@ -255,9 +309,9 @@ def main() -> int:
 
     for source, url in FEEDS:
         try:
-            items = fetch_feed(source, url)
-            print(f"Fetched {len(items)} articles from {source}")
-            collected.extend(items)
+            feed_items = fetch_feed(source, url)
+            print(f"Fetched {len(feed_items)} articles from {source}")
+            collected.extend(feed_items)
         except (urllib.error.URLError, TimeoutError, OSError, ET.ParseError, ValueError) as error:
             print(f"Failed to fetch {source}: {error}", file=sys.stderr)
 
@@ -273,14 +327,22 @@ def main() -> int:
         key=lambda item: item.published_at or datetime.min.replace(tzinfo=timezone.utc),
         reverse=True,
     )[:MAX_ITEMS]
-    items = add_ai_summaries(items, config)
+    items, overview = analyze_news(items, config)
+    importance_order = {"HIGH": 0, "MEDIUM": 1, "LOW": 2}
+    items = sorted(
+        items,
+        key=lambda item: (
+            importance_order.get(item.importance, 1),
+            -(item.published_at.timestamp() if item.published_at else 0),
+        ),
+    )
 
-    markdown = render_markdown(items, now)
+    markdown = render_markdown(items, overview, now)
     archive_path = OUTPUT_ROOT / now.astimezone(JST).strftime("%Y-%m-%d") / "security-news.md"
     archive_path.parent.mkdir(parents=True, exist_ok=True)
     archive_path.write_text(markdown, encoding="utf-8")
     LATEST_OUTPUT.write_text(markdown, encoding="utf-8")
-    update_today_dashboard(items)
+    update_today_dashboard(items, overview)
 
     print(f"Wrote {LATEST_OUTPUT.relative_to(ROOT_DIR)}")
     print(f"Wrote {archive_path.relative_to(ROOT_DIR)}")
