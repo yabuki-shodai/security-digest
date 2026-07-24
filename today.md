@@ -2,13 +2,13 @@
 
 ## Overview
 
-- Total: 30
-- Critical件数: 13
-- High件数: 8
+- Total: 5
+- Critical件数: 2
+- High件数: 2
 - KEV件数: 0
-- Frontend件数: 7
-- Backend件数: 23
-- GitHub Models総括: fallback
+- Frontend件数: 5
+- Backend件数: 0
+- GitHub Models総括: GitHub Models
 
 ## Links
 
@@ -17,26 +17,22 @@
 
 ## Today TOP5
 
-- [CVE-2025-71389](https://github.com/advisories/GHSA-9qr9-h5gf-34mp) CVE-2025-71389 / CRITICAL / frontend
-- [CVE-2024-58353](https://github.com/calcom/cal.diy/commit/00689fda0a30b8f933c096f02c1fe092a4206def) CVE-2024-58353 / CRITICAL / frontend
-- [CVE-2024-58355](https://github.com/calcom/cal.diy/commit/00689fda0a30b8f933c096f02c1fe092a4206def) CVE-2024-58355 / CRITICAL / frontend
-- [CVE-2026-47724](https://github.com/forgekeep/nebula-mesh/commit/9d8bcd7667ecd0c2975cc71fb35a02fe131f76f2) CVE-2026-47724 / CRITICAL / backend
-- [CVE-2024-58354](https://github.com/calcom/cal.diy/commit/9aa60fae41a6b6b101c86bf430754b439f440871) CVE-2024-58354 / CRITICAL / frontend
+- [CVE-2026-28698](https://www.cisa.gov/news-events/ics-advisories/icsa-26-204-04) CVE-2026-28698 / CRITICAL / frontend
+- [CVE-2026-42933](https://www.cisa.gov/news-events/ics-advisories/icsa-26-204-04) CVE-2026-42933 / CRITICAL / frontend
+- [CVE-2026-40430](https://www.cisa.gov/news-events/ics-advisories/icsa-26-204-04) CVE-2026-40430 / HIGH / frontend
+- [CVE-2026-50044](https://www.cisa.gov/news-events/ics-advisories/icsa-26-204-04) CVE-2026-50044 / HIGH / frontend
+- [CVE-2026-44955](https://www.cisa.gov/news-events/ics-advisories/icsa-26-204-04) CVE-2026-44955 / MEDIUM / frontend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-
-対象CVEは30件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+本日報告された脆弱性はすべてPronetiqs IntraVUE 3.2.1a14以前のバージョンに集中しており、主にフロントエンド（Vue.js）関連の問題です。重大度はクリティカルからミディアムまで幅広く、特に認証情報の漏洩や不適切なアクセス制御に関わるものが多く見られます。
 
 ## 優先して確認すべき3〜5件
-
-- CVE-2025-71389: CVE-2025-71389
-- CVE-2024-58353: CVE-2024-58353
-- CVE-2024-58355: CVE-2024-58355
-- CVE-2026-47724: CVE-2026-47724
-- CVE-2024-58354: CVE-2024-58354
+1. CVE-2026-42933（CRITICAL, CVSS 10.0）: アクティブプロキシを悪用しOTセグメンテーションを回避される恐れ。
+2. CVE-2026-28698（CRITICAL, CVSS 9.2）: 未承認の制御領域にシステム情報が漏洩し、ホストや共有ファイルシステムが露出。
+3. CVE-2026-40430（HIGH, CVSS 8.7）: API経由でパスワードが平文保存されている問題。
+4. CVE-2026-50044（HIGH, CVSS 7.6）: 弱い暗号化により管理者資格情報が盗まれるリスク。
 
 ## 開発者向けコメント
-
-使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+Pronetiqs IntraVUEの旧バージョンを使用している場合は、速やかに最新バージョンへのアップデートを推奨します。特に認証情報の管理やアクセス制御の強化が必要です。パスワードの平文保存や弱いハッシュ利用は直ちに見直し、APIのセキュリティ設計も再検討してください。OTネットワークのセグメンテーション回避を許すプロキシ設定も要注意です。
