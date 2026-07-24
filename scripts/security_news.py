@@ -23,8 +23,12 @@ JST = timezone(timedelta(hours=9), "JST")
 ROOT_DIR = SCRIPT_DIR.parent
 OUTPUT_ROOT = ROOT_DIR / "docs"
 LATEST_OUTPUT = ROOT_DIR / "security-news.md"
+TODAY_OUTPUT = ROOT_DIR / "today.md"
 USER_AGENT = "cve-digest-security-news/1.0"
 MAX_ITEMS = 10
+DASHBOARD_ITEMS = 5
+NEWS_SECTION_START = "<!-- SECURITY_NEWS_START -->"
+NEWS_SECTION_END = "<!-- SECURITY_NEWS_END -->"
 
 FEEDS = [
     ("SecurityWeek", "https://www.securityweek.com/feed/"),
@@ -191,19 +195,15 @@ def render_markdown(items: list[NewsItem], generated_at: datetime) -> str:
         "",
         f"更新日時: {generated_at.astimezone(JST).strftime('%Y-%m-%d %H:%M:%S JST')}",
         "",
-        "SecurityWeek と Krebs on Security のRSSから、最新のセキュリティ関連記事を収集しています。",
+        "SecurityWeek と Krebs on Security のRSSから、JST基準で本日公開されたセキュリティ関連記事を収集しています。",
         "",
     ]
     if not items:
-        lines.extend(["本日のニュースは取得できませんでした。", ""])
+        lines.extend(["本日公開されたニュースはありません。", ""])
         return "\n".join(lines)
 
     for item in items:
-        published = (
-            item.published_at.astimezone(JST).strftime("%Y-%m-%d %H:%M JST")
-            if item.published_at
-            else "日時不明"
-        )
+        published = item.published_at.astimezone(JST).strftime("%Y-%m-%d %H:%M JST")
         lines.extend(
             [
                 f"## [{item.title}]({item.url})",
@@ -217,8 +217,39 @@ def render_markdown(items: list[NewsItem], generated_at: datetime) -> str:
     return "\n".join(lines)
 
 
+def render_dashboard_section(items: list[NewsItem]) -> str:
+    lines = [
+        NEWS_SECTION_START,
+        "## セキュリティニュース",
+        "",
+    ]
+    if not items:
+        lines.append("本日公開されたニュースはありません。")
+    else:
+        for item in items[:DASHBOARD_ITEMS]:
+            lines.append(f"- [{item.title}]({item.url}) — {item.source}")
+        lines.extend(["", "- [セキュリティニュースをすべて見る](security-news.md)"])
+    lines.extend(["", NEWS_SECTION_END])
+    return "\n".join(lines)
+
+
+def update_today_dashboard(items: list[NewsItem]) -> None:
+    section = render_dashboard_section(items)
+    current = TODAY_OUTPUT.read_text(encoding="utf-8") if TODAY_OUTPUT.exists() else "# CVE Digest Dashboard\n"
+    pattern = re.compile(
+        rf"{re.escape(NEWS_SECTION_START)}.*?{re.escape(NEWS_SECTION_END)}",
+        flags=re.DOTALL,
+    )
+    if pattern.search(current):
+        updated = pattern.sub(section, current)
+    else:
+        updated = current.rstrip() + "\n\n" + section + "\n"
+    TODAY_OUTPUT.write_text(updated, encoding="utf-8")
+
+
 def main() -> int:
     now = datetime.now(timezone.utc)
+    today_jst = now.astimezone(JST).date()
     config = digest.load_json(digest.CONFIG_PATH, {})
     collected: list[NewsItem] = []
 
@@ -232,6 +263,8 @@ def main() -> int:
 
     deduplicated: dict[str, NewsItem] = {}
     for item in collected:
+        if item.published_at is None or item.published_at.astimezone(JST).date() != today_jst:
+            continue
         key = item.url.split("#", 1)[0].rstrip("/") or item.title.lower()
         deduplicated.setdefault(key, item)
 
@@ -247,9 +280,11 @@ def main() -> int:
     archive_path.parent.mkdir(parents=True, exist_ok=True)
     archive_path.write_text(markdown, encoding="utf-8")
     LATEST_OUTPUT.write_text(markdown, encoding="utf-8")
+    update_today_dashboard(items)
 
     print(f"Wrote {LATEST_OUTPUT.relative_to(ROOT_DIR)}")
     print(f"Wrote {archive_path.relative_to(ROOT_DIR)}")
+    print(f"Updated {TODAY_OUTPUT.relative_to(ROOT_DIR)}")
     return 0
 
 
