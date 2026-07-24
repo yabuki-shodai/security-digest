@@ -1,98 +1,110 @@
-# CVE Digest
+# Security Digest
 
-CVE Digest は、NVD と CISA KEV から脆弱性情報を収集し、開発で使う技術に関連するものを Frontend / Backend に分けて Markdown へ出力する GitHub Actions ベースの自動化ツールです。
+> Daily security digest powered by GitHub Actions and AI.
 
-[![LED Board](https://led-borad-svg.vercel.app/api/led-board?text=%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%83%BC%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%E9%80%9F%E5%A0%B1&duration=11)](https://github.com/yabuki-shodai/cve-digest/blob/main/security-news.md)
+[![LED Board](https://led-borad-svg.vercel.app/api/led-board?text=%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%83%BC%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%E9%80%9F%E5%A0%B1&duration=11)](https://github.com/yabuki-shodai/security-digest/blob/main/security-news.md)
 
-## 概要
+Security Digest は、CVE・CISA KEV・セキュリティーニュースを毎日収集し、日本語で要約・重要度判定を行う OSS プロジェクトです。
 
-毎日 GitHub Actions で実行し、以下の条件に該当する脆弱性を抽出します。
+## ✨ Features
 
-- `config/cve-digest.json` の `watch_keywords` に一致する
-- CVSS が設定値以上
-- CISA KEV に掲載されている
-- `frontend_keywords` / `backend_keywords` に一致する
+### 🛡️ Vulnerability Digest
 
-GitHub Models が利用できる場合、各CVEに以下を追加します。
+毎日公開される脆弱性情報を収集し、日本語で要約します。
+
+#### Sources
+
+- NVD (National Vulnerability Database)
+- CISA Known Exploited Vulnerabilities (KEV)
+
+#### Output
 
 - 日本語要約
-- 影響
-- 推奨対応
+- CVSS
+- CWE
+- 影響製品
+- CISA KEV情報
+- フロントエンド・バックエンド別の分類
 
-GitHub Models が失敗した場合は、元の description を使った fallback 要約を出力します。
+---
 
-## ディレクトリ構成
+### 📰 Security News
 
-```txt
-.
-├── today.md
-├── config/
-│   └── cve-digest.json
-├── scripts/
-│   └── cve_digest.py
-├── docs/
-│   └── YYYY-MM-DD/
-│       ├── frontend-summary.md
-│       └── backend-summary.md
-├── data/
-│   └── history.json
-└── .github/
-    └── workflows/
-        └── cve-digest.yml
+当日公開された主要なセキュリティーニュースを収集します。
+
+#### Sources
+
+- SecurityWeek
+- Krebs on Security
+- BleepingComputer
+- The Record
+- Dark Reading
+
+#### Output
+
+- 日本語要約
+- HIGH / MEDIUM / LOW の重要度
+- 今日の総括
+
+---
+
+## 📋 Dashboard
+
+最新のダイジェスト
+
+- 📊 `today.md`
+
+---
+
+## 📁 Outputs
+
+```text
+today.md
+
+security-news.md
+
+docs/
+└── YYYY-MM-DD/
+    ├── frontend-summary.md
+    ├── backend-summary.md
+    └── security-news.md
 ```
 
-## 出力
+---
 
-`today.md` はダッシュボードです。
+## ⚙️ GitHub Actions
 
-- Overview
-- Today TOP5
-- Frontend Summary へのリンク
-- Backend Summary へのリンク
-- GitHub Models による今日の総括
-- Critical件数
-- KEV件数
-- Frontend件数
-- Backend件数
+毎日自動で実行されます。
 
-日付別の詳細は以下に出力します。
+| Workflow | Description |
+|----------|-------------|
+| CVE Digest | CVE・CISA KEVの収集・要約 |
+| Security News | セキュリティーニュースの収集・要約 |
 
-- `docs/YYYY-MM-DD/frontend-summary.md`
-- `docs/YYYY-MM-DD/backend-summary.md`
+---
 
-`summary.md` は廃止済みです。
+## ⚙️ Configuration
 
-## ローカル実行
+監視設定は以下で変更できます。
 
-```bash
-python scripts/cve_digest.py
+```text
+config/cve-digest.json
 ```
 
-## GitHub Actions
+設定例
 
-毎日 JST 07:10 に実行します。手動実行にも対応しています。
+- 監視キーワード
+- CVSS閾値
+- AI要約の有効・無効
 
-```yaml
-workflow_dispatch:
-schedule:
-  - cron: "10 22 * * *"
-```
+---
 
-## 設定
+## 🤖 AI
 
-監視対象の技術や最小CVSSは `config/cve-digest.json` で変更します。
+GitHub Models を利用して以下を生成します。
 
-```json
-{
-  "watch_keywords": ["python", "django", "fastapi", "react", "docker"],
-  "frontend_keywords": ["typescript", "next.js", "react", "npm"],
-  "backend_keywords": ["django", "fastapi", "go", "aws"],
-  "min_cvss": 7.0,
-  "max_items": 30,
-  "github_models": {
-    "enabled": true,
-    "endpoint": "https://models.github.ai/inference/chat/completions",
-    "model": "openai/gpt-4.1-mini"
-  }
-}
-```
+- 日本語要約
+- 重要度判定
+- 今日の総括
+
+GitHub Models が利用できない場合でも、フォールバック処理によりダイジェストを生成します。
