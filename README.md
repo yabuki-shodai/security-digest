@@ -2,8 +2,6 @@
 
 CVE Digest は、NVD と CISA KEV から脆弱性情報を収集し、開発で使う技術に関連するものを Frontend / Backend に分けて Markdown へ出力する GitHub Actions ベースの自動化ツールです。
 
-## セキュリティーニュース
-
 [![LED Board](https://led-borad-svg.vercel.app/api/led-board?text=%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%83%BC%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%E9%80%9F%E5%A0%B1&duration=11)](https://github.com/yabuki-shodai/cve-digest/blob/main/security-news.md)
 
 ## 概要
