@@ -1,38 +1,48 @@
-# CVE Digest Dashboard (2026-07-27)
+# CVE Digest Dashboard (2026-07-28)
 
 ## Overview
 
-- Total: 5
-- Critical件数: 0
-- High件数: 4
-- KEV件数: 0
-- Frontend件数: 2
-- Backend件数: 2
+- Total: 30
+- Critical件数: 4
+- High件数: 10
+- KEV件数: 1
+- Frontend件数: 16
+- Backend件数: 14
 - GitHub Models総括: GitHub Models
 
 ## Links
 
-- [Frontend Summary](docs/2026-07-27/frontend-summary.md)
-- [Backend Summary](docs/2026-07-27/backend-summary.md)
+- [Frontend Summary](docs/2026-07-28/frontend-summary.md)
+- [Backend Summary](docs/2026-07-28/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-57990](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-57990) CVE-2026-57990 / HIGH / security
-- [CVE-2026-17497](https://github.com/codexu/note-gen) CVE-2026-17497 / HIGH / frontend
-- [CVE-2026-17496](https://github.com/codexu/note-gen) CVE-2026-17496 / HIGH / frontend
-- [CVE-2026-57989](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-57989) CVE-2026-57989 / HIGH / backend
-- [CVE-2026-57978](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-57978) CVE-2026-57978 / MEDIUM / backend
+- [CVE-2026-16812](https://www.arista.com/en/support/advisories-notices/security-advisory/24364-security-advisory-0144) CVE-2026-16812: Arista VeloCloud Orchestrator On-Prem OS Command Injection Vulnerability / CRITICAL / backend
+- [CVE-2026-55953](https://cna.erlef.org/cves/CVE-2026-55953.html) CVE-2026-55953 / CRITICAL / backend
+- [CVE-2025-50455](https://github.com/threatlance-org/security-advisories/blob/main/CVE-2025-50455/advisory.md) CVE-2025-50455 / CRITICAL / backend
+- [CVE-2026-55579](https://github.com/pheditor/pheditor/releases/tag/2.0.6) CVE-2026-55579 / CRITICAL / backend
+- [CVE-2026-64642](https://github.com/vercel/next.js/commit/6bf4df14508ad6c0cd46af50c6051ee42f2d9151) CVE-2026-64642 / HIGH / frontend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
-本日報告された脆弱性は主にNoteGenのフロントエンドとMicrosoft Edge（Chromiumベース）のバックエンドに関するものです。NoteGenでは、任意のOSコマンド実行やクロスサイトスクリプティング（XSS）に起因するリモートコード実行のリスクが高く、Microsoft Edgeではオリジン検証の不備により情報漏洩やなりすましの可能性が指摘されています。
+本日公開された脆弱性は、特にNext.jsを中心としたフロントエンドのReactフレームワーク関連と、Go言語を用いたバックエンドシステムに多く集中しています。Next.jsでは複数の高リスクなサーバーサイドリクエストフォージェリ（SSRF）や認証バイパス、リソース消費問題が報告されており、バージョン16.2.11で修正されています。バックエンドでは、Erlang/OTPのTLS処理の脆弱性やSQLインジェクション、認証バイパスなどが目立ちます。全体的に認証回避やリモートコード実行、クロスサイトスクリプティング（XSS）など、重大な影響を及ぼす問題が多く含まれています。
 
 ## 優先して確認すべき3〜5件
-1. CVE-2026-17497 (NoteGen) - 任意コマンド実行によるリモートコード実行の重大な脆弱性（CVSS 8.3）
-2. CVE-2026-17496 (NoteGen) - XSSを利用したコード実行の脆弱性（CVSS 8.1）
-3. CVE-2026-57989 (Microsoft Edge) - 情報漏洩を引き起こすオリジン検証エラー（CVSS 7.4）
-4. CVE-2026-57990 (Microsoft Edge) - 外部からのファイル・ディレクトリ情報漏洩（CVSS 7.4）
+1. **CVE-2026-16812 (CRITICAL, CVSS 10.0)**  
+   Arista VeloCloud OrchestratorのOSコマンドインジェクション。リモートからの完全な制御を許すため、最優先で対応が必要。
+
+2. **CVE-2026-55579 (CRITICAL, CVSS 9.8)**  
+   Pheditorのハードコードされた管理者パスワードによるリモートコード実行。初期設定のまま運用している場合は即時対策必須。
+
+3. **CVE-2025-50455 (CRITICAL, CVSS 9.1)**  
+   EasyAppointmentsのSQLインジェクション。MySQL環境によってはリモートコード実行に繋がるため注意。
+
+4. **CVE-2026-64642 / CVE-2026-64645 / CVE-2026-64649 (HIGH, CVSS 8.3)**  
+   Next.jsの複数の認証バイパスおよびSSRF脆弱性。対象バージョンを使用している場合は16.2.11へのアップデートが必須。
+
+5. **CVE-2026-59239 (HIGH, CVSS 8.6)**  
+   Roskus Prospero Flow CRMのストアドXSS。管理者権限の乗っ取りに繋がるため、早急な修正が望ましい。
 
 ## 開発者向けコメント
-NoteGenの脆弱性は、外部からの入力を適切にサニタイズせずに危険なAPIを許可している点に起因します。特にWebView内でのスクリプト実行やシェルコマンド実行は厳重に制御すべきです。Microsoft Edge関連の脆弱性はオリジン検証の実装ミスが原因であり、信頼できるオリジンのみを許可する厳密な検証ロジックの導入が必要です。いずれもアップデート適用とともに、外部入力の検証・サニタイズを徹底してください。
+Next.js関連の脆弱性は、App RouterやServer Actionsを利用した最新機能に起因するものが多く、特に外部ホストへのリクエスト制御不備や認証バイパスが目立ちます。これらはサーバーサイドリクエストフォージェリ（SSRF）や認証回避を招き、重大なセキュリティリスクとなるため、必ず最新の16.2.11以上にアップデートしてください。また、バックエンドではTLSハンドシェイクの不備やSQLインジェクション、ハードコードされたパスワードなど基本的なセキュリティ対策の見直しが必要です。クロスサイトスクリプティング（XSS）も多く報告されているため、入力値の適切なサニタイズとエスケープを徹底してください。今回の脆弱性は認証やアクセス制御の甘さに起因するものが多いため、権限管理の強化も併せて推奨します。
