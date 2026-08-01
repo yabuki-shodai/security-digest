@@ -1155,6 +1155,14 @@
       "severity": "HIGH",
       "title": "CVE-2026-18481"
     },
+    "CVE-2026-18556": {
+      "category": "security",
+      "cvss": 8.2,
+      "first_seen": "2026-08-02",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-18556"
+    },
     "CVE-2026-20150": {
       "category": "backend",
       "cvss": 8.8,
@@ -3265,6 +3273,14 @@
       "kev": false,
       "severity": "HIGH",
       "title": "CVE-2026-55730"
+    },
+    "CVE-2026-55735": {
+      "category": "backend",
+      "cvss": 8.2,
+      "first_seen": "2026-08-02",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-55735"
     },
     "CVE-2026-55768": {
       "category": "backend",
