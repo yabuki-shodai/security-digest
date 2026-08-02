@@ -1,9 +1,9 @@
-# CVE Digest Dashboard (2026-08-02)
+# CVE Digest Dashboard (2026-08-03)
 
 ## Overview
 
-- Total: 2
-- Critical件数: 0
+- Total: 3
+- Critical件数: 1
 - High件数: 2
 - KEV件数: 0
 - Frontend件数: 0
@@ -12,24 +12,26 @@
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-02/frontend-summary.md)
-- [Backend Summary](docs/2026-08-02/backend-summary.md)
+- [Frontend Summary](docs/2026-08-03/frontend-summary.md)
+- [Backend Summary](docs/2026-08-03/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-18556](https://uptime.n-able.com/) CVE-2026-18556 / HIGH / security
-- [CVE-2026-55735](https://cna.erlef.org/cves/CVE-2026-55735.html) CVE-2026-55735 / HIGH / backend
+- [CVE-2026-65321](https://github.com/laughingman7743/PyAthena) CVE-2026-65321 / CRITICAL / security
+- [CVE-2026-10848](https://github.com/zephyrproject-rtos/zephyr/commit/e500f7b81b5b8a867e28b2f4e59512cbfdd5ae75) CVE-2026-10848 / HIGH / security
+- [CVE-2026-9856](https://github.com/huggingface/transformers/commit/eaaaf8494dd5386634ae37d1d122212fdc315be5) CVE-2026-9856 / HIGH / backend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
 
-対象CVEは2件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+対象CVEは3件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-18556: CVE-2026-18556
-- CVE-2026-55735: CVE-2026-55735
+- CVE-2026-65321: CVE-2026-65321
+- CVE-2026-10848: CVE-2026-10848
+- CVE-2026-9856: CVE-2026-9856
 
 ## 開発者向けコメント
 
