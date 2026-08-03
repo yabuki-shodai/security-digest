@@ -1,37 +1,41 @@
-# CVE Digest Dashboard (2026-08-03)
+# CVE Digest Dashboard (2026-08-04)
 
 ## Overview
 
-- Total: 3
-- Critical件数: 1
-- High件数: 2
+- Total: 30
+- Critical件数: 4
+- High件数: 10
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 1
+- Frontend件数: 13
+- Backend件数: 17
 - GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-03/frontend-summary.md)
-- [Backend Summary](docs/2026-08-03/backend-summary.md)
+- [Frontend Summary](docs/2026-08-04/frontend-summary.md)
+- [Backend Summary](docs/2026-08-04/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-65321](https://github.com/laughingman7743/PyAthena) CVE-2026-65321 / CRITICAL / security
-- [CVE-2026-10848](https://github.com/zephyrproject-rtos/zephyr/commit/e500f7b81b5b8a867e28b2f4e59512cbfdd5ae75) CVE-2026-10848 / HIGH / security
-- [CVE-2026-9856](https://github.com/huggingface/transformers/commit/eaaaf8494dd5386634ae37d1d122212fdc315be5) CVE-2026-9856 / HIGH / backend
+- [CVE-2026-48031](https://github.com/dhax/go-base/commit/cc82b9740fa6b08e0fad409cd4b418e240dd0e00) CVE-2026-48031 / CRITICAL / backend
+- [CVE-2026-39932](https://jivasecurity.com/writeups/openemr-eval-rce-category-tree-cve-2026-39932) CVE-2026-39932 / CRITICAL / backend
+- [CVE-2026-18248](https://cna.openjsf.org/security-advisories.html) CVE-2026-18248 / CRITICAL / backend
+- [CVE-2026-48063](https://github.com/WhiskeySockets/Baileys/commit/3beb08eecfcb4e65722e674034bd84fb11a9de35) CVE-2026-48063 / CRITICAL / frontend
+- [CVE-2026-18648](https://github.com/actuator/me.bluemail.mail) CVE-2026-18648 / MEDIUM / frontend
 
 ## GitHub Modelsによる今日の総括
 
 ## 今日のまとめ
 
-対象CVEは3件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+対象CVEは30件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-65321: CVE-2026-65321
-- CVE-2026-10848: CVE-2026-10848
-- CVE-2026-9856: CVE-2026-9856
+- CVE-2026-48031: CVE-2026-48031
+- CVE-2026-39932: CVE-2026-39932
+- CVE-2026-18248: CVE-2026-18248
+- CVE-2026-48063: CVE-2026-48063
+- CVE-2026-18648: CVE-2026-18648
 
 ## 開発者向けコメント
 
