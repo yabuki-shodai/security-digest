@@ -1,27 +1,27 @@
-# CVE Digest Dashboard (2026-08-04)
+# CVE Digest Dashboard (2026-08-05)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 4
-- High件数: 10
+- Critical件数: 10
+- High件数: 7
 - KEV件数: 0
-- Frontend件数: 13
-- Backend件数: 17
+- Frontend件数: 16
+- Backend件数: 14
 - GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-04/frontend-summary.md)
-- [Backend Summary](docs/2026-08-04/backend-summary.md)
+- [Frontend Summary](docs/2026-08-05/frontend-summary.md)
+- [Backend Summary](docs/2026-08-05/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-48031](https://github.com/dhax/go-base/commit/cc82b9740fa6b08e0fad409cd4b418e240dd0e00) CVE-2026-48031 / CRITICAL / backend
-- [CVE-2026-39932](https://jivasecurity.com/writeups/openemr-eval-rce-category-tree-cve-2026-39932) CVE-2026-39932 / CRITICAL / backend
-- [CVE-2026-18248](https://cna.openjsf.org/security-advisories.html) CVE-2026-18248 / CRITICAL / backend
-- [CVE-2026-48063](https://github.com/WhiskeySockets/Baileys/commit/3beb08eecfcb4e65722e674034bd84fb11a9de35) CVE-2026-48063 / CRITICAL / frontend
-- [CVE-2026-18648](https://github.com/actuator/me.bluemail.mail) CVE-2026-18648 / MEDIUM / frontend
+- [CVE-2026-45538](https://github.com/OpenSIPS/opensips/security/advisories/GHSA-37wc-5j8j-95x3) CVE-2026-45538 / CRITICAL / backend
+- [CVE-2026-69098](https://github.com/Cinnamon/kotaemon/issues/844) CVE-2026-69098 / CRITICAL / backend
+- [CVE-2026-69255](https://github.com/FlowiseAI/Flowise/commit/f4e2794f6a576b94578f2fdafbf49c2fb304626c) CVE-2026-69255 / CRITICAL / backend
+- [CVE-2026-70477](https://github.com/FlowiseAI/Flowise/commit/f4e2794f6a576b94578f2fdafbf49c2fb304626c) CVE-2026-70477 / CRITICAL / backend
+- [CVE-2026-69264](https://github.com/FlowiseAI/Flowise/commit/f4e2794f6a576b94578f2fdafbf49c2fb304626c) CVE-2026-69264 / CRITICAL / frontend
 
 ## GitHub Modelsによる今日の総括
 
@@ -31,11 +31,11 @@
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-48031: CVE-2026-48031
-- CVE-2026-39932: CVE-2026-39932
-- CVE-2026-18248: CVE-2026-18248
-- CVE-2026-48063: CVE-2026-48063
-- CVE-2026-18648: CVE-2026-18648
+- CVE-2026-45538: CVE-2026-45538
+- CVE-2026-69098: CVE-2026-69098
+- CVE-2026-69255: CVE-2026-69255
+- CVE-2026-70477: CVE-2026-70477
+- CVE-2026-69264: CVE-2026-69264
 
 ## 開発者向けコメント
 
