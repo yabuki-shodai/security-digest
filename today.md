@@ -1,27 +1,27 @@
-# CVE Digest Dashboard (2026-08-05)
+# CVE Digest Dashboard (2026-08-06)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 10
-- High件数: 7
+- Critical件数: 4
+- High件数: 9
 - KEV件数: 0
-- Frontend件数: 16
-- Backend件数: 14
+- Frontend件数: 28
+- Backend件数: 2
 - GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-05/frontend-summary.md)
-- [Backend Summary](docs/2026-08-05/backend-summary.md)
+- [Frontend Summary](docs/2026-08-06/frontend-summary.md)
+- [Backend Summary](docs/2026-08-06/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-45538](https://github.com/OpenSIPS/opensips/security/advisories/GHSA-37wc-5j8j-95x3) CVE-2026-45538 / CRITICAL / backend
-- [CVE-2026-69098](https://github.com/Cinnamon/kotaemon/issues/844) CVE-2026-69098 / CRITICAL / backend
-- [CVE-2026-69255](https://github.com/FlowiseAI/Flowise/commit/f4e2794f6a576b94578f2fdafbf49c2fb304626c) CVE-2026-69255 / CRITICAL / backend
-- [CVE-2026-70477](https://github.com/FlowiseAI/Flowise/commit/f4e2794f6a576b94578f2fdafbf49c2fb304626c) CVE-2026-70477 / CRITICAL / backend
-- [CVE-2026-69264](https://github.com/FlowiseAI/Flowise/commit/f4e2794f6a576b94578f2fdafbf49c2fb304626c) CVE-2026-69264 / CRITICAL / frontend
+- [CVE-2026-20303](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K) CVE-2026-20303 / CRITICAL / backend
+- [CVE-2026-20304](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K) CVE-2026-20304 / CRITICAL / backend
+- [CVE-2026-71319](https://github.com/nuxt/devtools/commit/a7b2718b930766e1ffb0640259d53f5b041a50b4) CVE-2026-71319 / CRITICAL / frontend
+- [CVE-2026-9195](https://community.progress.com/s/article/Marklogic-Critical-Security-Alert-Bulletin-August-2026) CVE-2026-9195 / CRITICAL / frontend
+- [CVE-2026-66298](https://cna.erlef.org/cves/CVE-2026-66298.html) CVE-2026-66298 / HIGH / frontend
 
 ## GitHub Modelsによる今日の総括
 
@@ -31,11 +31,11 @@
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-45538: CVE-2026-45538
-- CVE-2026-69098: CVE-2026-69098
-- CVE-2026-69255: CVE-2026-69255
-- CVE-2026-70477: CVE-2026-70477
-- CVE-2026-69264: CVE-2026-69264
+- CVE-2026-20303: CVE-2026-20303
+- CVE-2026-20304: CVE-2026-20304
+- CVE-2026-71319: CVE-2026-71319
+- CVE-2026-9195: CVE-2026-9195
+- CVE-2026-66298: CVE-2026-66298
 
 ## 開発者向けコメント
 
