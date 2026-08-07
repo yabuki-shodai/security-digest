@@ -1,27 +1,27 @@
-# CVE Digest Dashboard (2026-08-06)
+# CVE Digest Dashboard (2026-08-07)
 
 ## Overview
 
 - Total: 30
 - Critical件数: 4
-- High件数: 9
+- High件数: 5
 - KEV件数: 0
-- Frontend件数: 28
-- Backend件数: 2
+- Frontend件数: 4
+- Backend件数: 26
 - GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-06/frontend-summary.md)
-- [Backend Summary](docs/2026-08-06/backend-summary.md)
+- [Frontend Summary](docs/2026-08-07/frontend-summary.md)
+- [Backend Summary](docs/2026-08-07/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-20303](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K) CVE-2026-20303 / CRITICAL / backend
-- [CVE-2026-20304](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-sdwan-faLcR3K) CVE-2026-20304 / CRITICAL / backend
-- [CVE-2026-71319](https://github.com/nuxt/devtools/commit/a7b2718b930766e1ffb0640259d53f5b041a50b4) CVE-2026-71319 / CRITICAL / frontend
-- [CVE-2026-9195](https://community.progress.com/s/article/Marklogic-Critical-Security-Alert-Bulletin-August-2026) CVE-2026-9195 / CRITICAL / frontend
-- [CVE-2026-66298](https://cna.erlef.org/cves/CVE-2026-66298.html) CVE-2026-66298 / HIGH / frontend
+- [CVE-2026-65578](https://patchstack.com/database/wordpress/theme/agora/vulnerability/wordpress-agora-theme-1-9-php-object-injection-vulnerability?_s_id=cve) CVE-2026-65578 / CRITICAL / backend
+- [CVE-2026-53975](https://github.com/openchamber/openchamber) CVE-2026-53975 / CRITICAL / backend
+- [CVE-2026-11976](https://wpscan.com/vulnerability/d1250410-b919-4a90-8cf2-04031f9e5e2b/) CVE-2026-11976 / CRITICAL / backend
+- [CVE-2026-14812](https://wpscan.com/vulnerability/0115a640-7139-4ef9-81be-6ee5c755a601/) CVE-2026-14812 / CRITICAL / backend
+- [CVE-2026-19111](https://aws.amazon.com/security/security-bulletins/2026-077-aws/) CVE-2026-19111 / HIGH / backend
 
 ## GitHub Modelsによる今日の総括
 
@@ -31,11 +31,11 @@
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-20303: CVE-2026-20303
-- CVE-2026-20304: CVE-2026-20304
-- CVE-2026-71319: CVE-2026-71319
-- CVE-2026-9195: CVE-2026-9195
-- CVE-2026-66298: CVE-2026-66298
+- CVE-2026-65578: CVE-2026-65578
+- CVE-2026-53975: CVE-2026-53975
+- CVE-2026-11976: CVE-2026-11976
+- CVE-2026-14812: CVE-2026-14812
+- CVE-2026-19111: CVE-2026-19111
 
 ## 開発者向けコメント
 
