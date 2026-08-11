@@ -1,27 +1,27 @@
-# CVE Digest Dashboard (2026-08-11)
+# CVE Digest Dashboard (2026-08-12)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 17
-- High件数: 5
-- KEV件数: 0
-- Frontend件数: 7
-- Backend件数: 23
+- Critical件数: 9
+- High件数: 15
+- KEV件数: 1
+- Frontend件数: 3
+- Backend件数: 22
 - GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-11/frontend-summary.md)
-- [Backend Summary](docs/2026-08-11/backend-summary.md)
+- [Frontend Summary](docs/2026-08-12/frontend-summary.md)
+- [Backend Summary](docs/2026-08-12/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-48158](https://github.com/dai-shi/use-context-selector/security/advisories/GHSA-7h6v-mwq6-jhm8) CVE-2026-48158 / CRITICAL / frontend
-- [CVE-2026-48159](https://github.com/dai-shi/use-reducer-async/security/advisories/GHSA-2786-p4vj-vx8x) CVE-2026-48159 / CRITICAL / frontend
-- [CVE-2026-48160](https://github.com/dai-shi/react-tracked/security/advisories/GHSA-79c5-q7m9-9c6x) CVE-2026-48160 / CRITICAL / frontend
-- [CVE-2026-72869](https://github.com/Dokploy/dokploy/commit/ccd2e83c57d99f725220d37e0152270e0827d71b) CVE-2026-72869 / CRITICAL / backend
-- [CVE-2026-72862](https://github.com/Dokploy/dokploy/commit/b24202e69b244f0ece8d2f56e99cad9bb5e1a248) CVE-2026-72862 / CRITICAL / backend
+- [CVE-2026-20349](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-asaftd-vpn-dos-dzv4mQFF) CVE-2026-20349: Cisco Secure Firewall Adaptive Security Appliance (ASA) and Secure Firewall Threat Defense (FTD) Heap Inspection Vulnerability / HIGH / security
+- [CVE-2025-31114](https://github.com/lllyasviel/Fooocus/issues/3552) CVE-2025-31114 / CRITICAL / security
+- [CVE-2026-47702](https://github.com/baptisteArno/typebot.io/commit/fdcc1784c9318904c180703e1ef4f1e06e6dd50e) CVE-2026-47702 / CRITICAL / security
+- [CVE-2026-48362](https://helpx.adobe.com/security/products/coldfusion/apsb26-90.html) CVE-2026-48362 / CRITICAL / security
+- [CVE-2026-72920](https://github.com/seaweedfs/seaweedfs/commit/5e8f99f40a8abc7b449aefd260516443377041c7) CVE-2026-72920 / CRITICAL / security
 
 ## GitHub Modelsによる今日の総括
 
@@ -31,11 +31,11 @@
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-48158: CVE-2026-48158
-- CVE-2026-48159: CVE-2026-48159
-- CVE-2026-48160: CVE-2026-48160
-- CVE-2026-72869: CVE-2026-72869
-- CVE-2026-72862: CVE-2026-72862
+- CVE-2026-20349: CVE-2026-20349: Cisco Secure Firewall Adaptive Security Appliance (ASA) and Secure Firewall Threat Defense (FTD) Heap Inspection Vulnerability
+- CVE-2025-31114: CVE-2025-31114
+- CVE-2026-48362: CVE-2026-48362
+- CVE-2026-72920: CVE-2026-72920
+- CVE-2026-47702: CVE-2026-47702
 
 ## 開発者向けコメント
 
