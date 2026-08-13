@@ -1,27 +1,27 @@
-# CVE Digest Dashboard (2026-08-13)
+# CVE Digest Dashboard (2026-08-14)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 5
-- High件数: 6
+- Critical件数: 4
+- High件数: 8
 - KEV件数: 0
-- Frontend件数: 11
-- Backend件数: 19
+- Frontend件数: 15
+- Backend件数: 15
 - GitHub Models総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-13/frontend-summary.md)
-- [Backend Summary](docs/2026-08-13/backend-summary.md)
+- [Frontend Summary](docs/2026-08-14/frontend-summary.md)
+- [Backend Summary](docs/2026-08-14/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-73299](https://github.com/microsoft/prompty/commit/e4a0ebf49e3a78d5d7796c8480bf9a4f0c54d19e) CVE-2026-73299 / CRITICAL / frontend
-- [CVE-2026-73263](https://github.com/prowler-cloud/prowler/commit/0b782fcb8c24ece7bd38deede2b8f13d8583e39c) CVE-2026-73263 / CRITICAL / backend
-- [CVE-2026-73300](https://github.com/Budibase/budibase/releases/tag/3.40.0) CVE-2026-73300 / CRITICAL / backend
-- [CVE-2026-63297](https://github.com/canonical/lxd/security/advisories/GHSA-v989-qw7w-xvg4) CVE-2026-63297 / CRITICAL / backend
-- [CVE-2026-73294](https://github.com/semaphoreui/semaphore/commit/7e8a9434bd81b82cf42220151c74801ea97542d6) CVE-2026-73294 / CRITICAL / backend
+- [CVE-2026-67614](https://cyberpanel.net/KnowledgeBase/home/change-logs/) CVE-2026-67614 / CRITICAL / backend
+- [CVE-2026-73653](https://github.com/vitest-dev/vitest/commit/33f96a145ef09ca6a43b4e555eb273e64a87be23) CVE-2026-73653 / CRITICAL / frontend
+- [CVE-2026-73567](https://github.com/JuneAndGreen/sm-crypto/commit/1f9bd7bd160c24efd9c26c8f7fda997c68c823d0) CVE-2026-73567 / CRITICAL / frontend
+- [CVE-2026-73649](https://github.com/shepherdwind/velocity.js/commit/f8e47a6c4607249b9c967d3a1ced959b4dd64dba) CVE-2026-73649 / CRITICAL / frontend
+- [CVE-2026-73555](https://github.com/vllm-project/vllm/commit/e87521626febe2763f997691d1599de4175f4324) CVE-2026-73555 / MEDIUM / backend
 
 ## GitHub Modelsによる今日の総括
 
@@ -31,11 +31,11 @@
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-73299: CVE-2026-73299
-- CVE-2026-73263: CVE-2026-73263
-- CVE-2026-73300: CVE-2026-73300
-- CVE-2026-63297: CVE-2026-63297
-- CVE-2026-73294: CVE-2026-73294
+- CVE-2026-67614: CVE-2026-67614
+- CVE-2026-73653: CVE-2026-73653
+- CVE-2026-73649: CVE-2026-73649
+- CVE-2026-73567: CVE-2026-73567
+- CVE-2026-73555: CVE-2026-73555
 
 ## 開発者向けコメント
 
