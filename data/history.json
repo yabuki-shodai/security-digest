@@ -1827,6 +1827,14 @@
       "severity": "HIGH",
       "title": "CVE-2026-19905"
     },
+    "CVE-2026-19956": {
+      "category": "backend",
+      "cvss": 6.5,
+      "first_seen": "2026-08-17",
+      "kev": false,
+      "severity": "MEDIUM",
+      "title": "CVE-2026-19956"
+    },
     "CVE-2026-20150": {
       "category": "backend",
       "cvss": 8.8,
