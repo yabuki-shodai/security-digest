@@ -25,8 +25,11 @@ def parse_json_object(content: str) -> dict[str, Any] | None:
 
     try:
         parsed = json.loads(text)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as error:
+        print(f"warning: failed to parse Gemini JSON response: {error}\ncontent: {text[:2000]}", file=sys.stderr)
         return None
+    if not isinstance(parsed, dict):
+        print(f"warning: Gemini JSON response was not an object: {text[:2000]}", file=sys.stderr)
     return parsed if isinstance(parsed, dict) else None
 
 
