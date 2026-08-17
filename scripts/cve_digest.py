@@ -95,7 +95,6 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
         "generationConfig": {
             "temperature": 0.2,
             "maxOutputTokens": int(models.get("max_tokens", default_max_tokens)),
-            "thinkingConfig": {"thinkingBudget": 0},
         },
     }
     if system_parts:
