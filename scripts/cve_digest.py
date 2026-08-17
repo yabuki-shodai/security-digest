@@ -92,7 +92,11 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
     user_parts = [str(message.get("content", "")) for message in messages if message.get("role") != "system"]
     payload: dict[str, Any] = {
         "contents": [{"role": "user", "parts": [{"text": "\n\n".join(user_parts)}]}],
-        "generationConfig": {"temperature": 0.2, "maxOutputTokens": int(models.get("max_tokens", default_max_tokens))},
+        "generationConfig": {
+            "temperature": 0.2,
+            "maxOutputTokens": int(models.get("max_tokens", default_max_tokens)),
+            "thinkingConfig": {"thinkingBudget": 0},
+        },
     }
     if system_parts:
         payload["systemInstruction"] = {"parts": [{"text": "\n\n".join(system_parts)}]}
@@ -108,6 +112,9 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
         return None
     candidates = data.get("candidates", [])
     if not candidates or not isinstance(candidates[0], dict):
+        return None
+    if candidates[0].get("finishReason") == "MAX_TOKENS":
+        print("warning: Gemini response truncated (finishReason=MAX_TOKENS)", file=sys.stderr)
         return None
     content = candidates[0].get("content", {})
     parts = content.get("parts", []) if isinstance(content, dict) else []
