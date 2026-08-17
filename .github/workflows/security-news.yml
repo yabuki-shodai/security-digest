@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  models: read
 
 concurrency:
   group: security-news
@@ -29,7 +28,7 @@ jobs:
 
       - name: Generate security news digest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/security_news.py
 
       - name: Commit generated news

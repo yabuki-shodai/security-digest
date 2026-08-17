@@ -18,8 +18,8 @@ CONFIG_PATH = ROOT_DIR / "config" / "cve-digest.json"
 HISTORY_PATH = ROOT_DIR / "data" / "history.json"
 OUTPUT_ROOT = ROOT_DIR / "docs"
 USER_AGENT = "cve-digest/1.0"
-DEFAULT_MODEL_ENDPOINT = "https://models.github.ai/inference/chat/completions"
-DEFAULT_MODEL = "openai/gpt-4.1-mini"
+DEFAULT_MODEL_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models"
+DEFAULT_MODEL = "gemini-2.5-flash"
 FRONTEND_PRIORITY = ["next.js", "nextjs", "react", "typescript", "npm", "pnpm", "yarn", "vite", "tailwind css"]
 BACKEND_PRIORITY = ["django", "fastapi", "nestjs", "nest.js", "go", "golang", "python", "docker", "aws", "postgresql", "mysql", "redis"]
 
@@ -65,48 +65,51 @@ def fetch_json(url: str, params: dict[str, str] | None = None, timeout: int = 45
         return json.loads(response.read().decode("utf-8"))
 
 
-def post_json(url: str, payload: dict[str, Any], token: str, timeout: int = 60) -> dict[str, Any]:
-    request = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"User-Agent": USER_AGENT, "Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {token}"},
-        method="POST",
-    )
+def post_json(url: str, payload: dict[str, Any], headers: dict[str, str], timeout: int = 60) -> dict[str, Any]:
+    request = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
     with urllib.request.urlopen(request, timeout=timeout) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
 def model_config(config: dict[str, Any]) -> dict[str, Any]:
-    raw = config.get("github_models", {})
+    raw = config.get("gemini", {})
     return raw if isinstance(raw, dict) else {}
 
 
-def github_models_enabled(config: dict[str, Any]) -> bool:
+def gemini_enabled(config: dict[str, Any]) -> bool:
     models = model_config(config)
-    return bool(models.get("enabled", config.get("github_models_enabled", True)))
+    return bool(models.get("enabled", config.get("gemini_enabled", True)))
 
 
 def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_max_tokens: int = 700) -> str | None:
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token or not github_models_enabled(config):
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key or not gemini_enabled(config):
         return None
     models = model_config(config)
-    payload = {
-        "model": str(models.get("model") or config.get("github_models_model") or DEFAULT_MODEL),
-        "messages": messages,
-        "temperature": 0.2,
-        "max_tokens": int(models.get("max_tokens", default_max_tokens)),
+    model_name = str(models.get("model") or config.get("gemini_model") or DEFAULT_MODEL)
+    endpoint = f"{str(models.get('endpoint') or DEFAULT_MODEL_ENDPOINT)}/{model_name}:generateContent"
+    system_parts = [str(message.get("content", "")) for message in messages if message.get("role") == "system"]
+    user_parts = [str(message.get("content", "")) for message in messages if message.get("role") != "system"]
+    payload: dict[str, Any] = {
+        "contents": [{"role": "user", "parts": [{"text": "\n\n".join(user_parts)}]}],
+        "generationConfig": {"temperature": 0.2, "maxOutputTokens": int(models.get("max_tokens", default_max_tokens))},
     }
+    if system_parts:
+        payload["systemInstruction"] = {"parts": [{"text": "\n\n".join(system_parts)}]}
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/json", "Content-Type": "application/json", "x-goog-api-key": api_key}
     try:
-        data = post_json(str(models.get("endpoint") or DEFAULT_MODEL_ENDPOINT), payload, token)
+        data = post_json(endpoint, payload, headers)
     except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError):
         return None
-    choices = data.get("choices", [])
-    if not choices or not isinstance(choices[0], dict):
+    candidates = data.get("candidates", [])
+    if not candidates or not isinstance(candidates[0], dict):
         return None
-    message = choices[0].get("message", {})
-    content = message.get("content") if isinstance(message, dict) else None
-    return str(content).strip() if content else None
+    content = candidates[0].get("content", {})
+    parts = content.get("parts", []) if isinstance(content, dict) else []
+    if not parts or not isinstance(parts[0], dict):
+        return None
+    text = parts[0].get("text")
+    return str(text).strip() if text else None
 
 
 def compact_text(value: str | None, max_length: int = 700) -> str:
@@ -400,7 +403,7 @@ def build_today_ai_overview(vulnerabilities: list[Vulnerability], config: dict[s
     if content:
         return content, True
     top_items = sorted(vulnerabilities, key=lambda vuln: (-int(vuln.kev), vuln.severity != "CRITICAL", tech_priority(vuln), -vuln.score))[:5]
-    lines = ["## 今日のまとめ", "", f"対象CVEは{len(vulnerabilities)}件です。GitHub Modelsの総括生成に失敗したため、スコア順の機械的な要約を表示します。", "", "## 優先して確認すべき3〜5件", ""]
+    lines = ["## 今日のまとめ", "", f"対象CVEは{len(vulnerabilities)}件です。Geminiの総括生成に失敗したため、スコア順の機械的な要約を表示します。", "", "## 優先して確認すべき3〜5件", ""]
     lines.extend(f"- {vuln.cve_id}: {vuln.title}" for vuln in top_items)
     lines.extend(["", "## 開発者向けコメント", "", "使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。"])
     return "\n".join(lines), False
@@ -417,7 +420,7 @@ def render_card(vuln: Vulnerability) -> list[str]:
         f"- 影響製品: {', '.join(vuln.affected_products) if vuln.affected_products else '-'}",
         f"- 公開日: {vuln.published_at or '-'}",
         f"- 更新日: {vuln.updated_at or '-'}",
-        f"- 出典: {vuln.source}", "", "#### GitHub Models要約", "", vuln.ai_summary or fallback_ai_summary(vuln), "", "#### References",
+        f"- 出典: {vuln.source}", "", "#### Gemini要約", "", vuln.ai_summary or fallback_ai_summary(vuln), "", "#### References",
     ]
     lines.extend(f"- {ref}" for ref in refs[:5])
     lines.append("")
@@ -428,7 +431,7 @@ def render_category_summary(vulnerabilities: list[Vulnerability], now: datetime,
     date_text = now.strftime("%Y-%m-%d")
     label = "Frontend" if category == "frontend" else "Backend"
     items = sorted([vuln for vuln in vulnerabilities if vuln.category == category], key=lambda vuln: (tech_priority(vuln), -int(vuln.kev), vuln.severity != "CRITICAL", -vuln.score, vuln.cve_id))
-    lines = [f"# {label} CVE Summary ({date_text})", "", "## Overview", "", f"- 取得日時: {now.strftime('%Y-%m-%d %H:%M:%S JST')}", "- 対象: 今日公開されたCVE / 今日CISA KEVに追加されたCVEのみ", f"- 掲載件数: {len(items)}", f"- Critical: {sum(1 for vuln in items if vuln.severity == 'CRITICAL')}", f"- High: {sum(1 for vuln in items if vuln.severity == 'HIGH')}", f"- KEV掲載: {sum(1 for vuln in items if vuln.kev)}", f"- 日本語AI要約: {'GitHub Models' if used_model else 'fallback'}", ""]
+    lines = [f"# {label} CVE Summary ({date_text})", "", "## Overview", "", f"- 取得日時: {now.strftime('%Y-%m-%d %H:%M:%S JST')}", "- 対象: 今日公開されたCVE / 今日CISA KEVに追加されたCVEのみ", f"- 掲載件数: {len(items)}", f"- Critical: {sum(1 for vuln in items if vuln.severity == 'CRITICAL')}", f"- High: {sum(1 for vuln in items if vuln.severity == 'HIGH')}", f"- KEV掲載: {sum(1 for vuln in items if vuln.kev)}", f"- 日本語AI要約: {'Gemini' if used_model else 'fallback'}", ""]
     if errors:
         lines.extend(["## 取得エラー", ""] + [f"- {error}" for error in errors] + [""])
     if not items:
@@ -449,12 +452,12 @@ def render_today(vulnerabilities: list[Vulnerability], now: datetime, ai_overvie
     high_count = sum(1 for vuln in vulnerabilities if vuln.severity == "HIGH")
     kev_count = sum(1 for vuln in vulnerabilities if vuln.kev)
     top_items = sorted(vulnerabilities, key=lambda vuln: (-int(vuln.kev), vuln.severity != "CRITICAL", tech_priority(vuln), -vuln.score, vuln.cve_id))[:5]
-    lines = [f"# CVE Digest Dashboard ({date_text})", "", "## Overview", "", f"- Total: {len(vulnerabilities)}", f"- Critical件数: {critical_count}", f"- High件数: {high_count}", f"- KEV件数: {kev_count}", f"- Frontend件数: {frontend_count}", f"- Backend件数: {backend_count}", f"- GitHub Models総括: {'GitHub Models' if used_model else 'fallback'}", "", "## Links", "", f"- [Frontend Summary]({docs_dir}/frontend-summary.md)", f"- [Backend Summary]({docs_dir}/backend-summary.md)", "", "## Today TOP5", ""]
+    lines = [f"# CVE Digest Dashboard ({date_text})", "", "## Overview", "", f"- Total: {len(vulnerabilities)}", f"- Critical件数: {critical_count}", f"- High件数: {high_count}", f"- KEV件数: {kev_count}", f"- Frontend件数: {frontend_count}", f"- Backend件数: {backend_count}", f"- Gemini総括: {'Gemini' if used_model else 'fallback'}", "", "## Links", "", f"- [Frontend Summary]({docs_dir}/frontend-summary.md)", f"- [Backend Summary]({docs_dir}/backend-summary.md)", "", "## Today TOP5", ""]
     if top_items:
         lines.extend(f"- [{vuln.cve_id}]({vuln.references[0] if vuln.references else f'https://nvd.nist.gov/vuln/detail/{vuln.cve_id}'}) {vuln.title} / {vuln.severity} / {vuln.category}" for vuln in top_items)
     else:
         lines.append("- 条件に一致する今日公開の新規脆弱性はありません。")
-    lines.extend(["", "## GitHub Modelsによる今日の総括", "", ai_overview, ""])
+    lines.extend(["", "## Geminiによる今日の総括", "", ai_overview, ""])
     return "\n".join(lines)
 
 

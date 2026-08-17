@@ -101,10 +101,11 @@ config/cve-digest.json
 
 ## 🤖 AI
 
-GitHub Models を利用して以下を生成します。
+Gemini API を利用して以下を生成します。
 
 - 日本語要約
 - 重要度判定
 - 今日の総括
 
-GitHub Models が利用できない場合でも、フォールバック処理によりダイジェストを生成します。
+Gemini API が利用できない場合でも、フォールバック処理によりダイジェストを生成します。
+利用するには環境変数 `GEMINI_API_KEY`（GitHub Actionsではリポジトリシークレット）にAPIキーを設定してください。
