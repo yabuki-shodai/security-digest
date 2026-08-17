@@ -101,7 +101,7 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
         payload["systemInstruction"] = {"parts": [{"text": "\n\n".join(system_parts)}]}
     headers = {"User-Agent": USER_AGENT, "Accept": "application/json", "Content-Type": "application/json", "x-goog-api-key": api_key}
     try:
-        data = post_json(endpoint, payload, headers)
+        data = post_json(endpoint, payload, headers, timeout=120)
     except urllib.error.HTTPError as error:
         body = error.read().decode("utf-8", errors="replace")
         print(f"warning: Gemini API request failed ({error.code}): {body}", file=sys.stderr)
