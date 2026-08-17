@@ -19,7 +19,7 @@ HISTORY_PATH = ROOT_DIR / "data" / "history.json"
 OUTPUT_ROOT = ROOT_DIR / "docs"
 USER_AGENT = "cve-digest/1.0"
 DEFAULT_MODEL_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models"
-DEFAULT_MODEL = "gemini-2.5-flash"
+DEFAULT_MODEL = "gemini-3.6-flash"
 FRONTEND_PRIORITY = ["next.js", "nextjs", "react", "typescript", "npm", "pnpm", "yarn", "vite", "tailwind css"]
 BACKEND_PRIORITY = ["django", "fastapi", "nestjs", "nest.js", "go", "golang", "python", "docker", "aws", "postgresql", "mysql", "redis"]
 
