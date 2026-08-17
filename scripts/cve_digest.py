@@ -99,7 +99,12 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
     headers = {"User-Agent": USER_AGENT, "Accept": "application/json", "Content-Type": "application/json", "x-goog-api-key": api_key}
     try:
         data = post_json(endpoint, payload, headers)
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError):
+    except urllib.error.HTTPError as error:
+        body = error.read().decode("utf-8", errors="replace")
+        print(f"warning: Gemini API request failed ({error.code}): {body}", file=sys.stderr)
+        return None
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError) as error:
+        print(f"warning: Gemini API request failed: {error}", file=sys.stderr)
         return None
     candidates = data.get("candidates", [])
     if not candidates or not isinstance(candidates[0], dict):
