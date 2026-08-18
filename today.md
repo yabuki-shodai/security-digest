@@ -1,51 +1,53 @@
-# CVE Digest Dashboard (2026-08-18)
+# CVE Digest Dashboard (2026-08-19)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
+- Critical件数: 5
 - High件数: 16
 - KEV件数: 0
-- Frontend件数: 8
-- Backend件数: 22
+- Frontend件数: 12
+- Backend件数: 18
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-18/frontend-summary.md)
-- [Backend Summary](docs/2026-08-18/backend-summary.md)
+- [Frontend Summary](docs/2026-08-19/frontend-summary.md)
+- [Backend Summary](docs/2026-08-19/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-71479](https://github.com/QuantumNous/new-api/commit/c9943d37ad93477dd937fc4901cc3c4e0fd8aaab) CVE-2026-71479 / CRITICAL / backend
-- [CVE-2026-55674](https://github.com/discourse/discourse/security/advisories/GHSA-qx4v-rg4v-pm2g) CVE-2026-55674 / CRITICAL / frontend
-- [CVE-2026-19478](https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-2-4-released/) CVE-2026-19478 / CRITICAL / frontend
-- [CVE-2026-47686](https://github.com/patriksimek/vm2/commit/7e3faaf550f4ab975bf4cdde183fcec49b056d8e) CVE-2026-47686 / CRITICAL / backend
-- [CVE-2026-47698](https://github.com/patriksimek/vm2/commit/a85acb61f81402c6eabf32760aa11272af6d0f9e) CVE-2026-47698 / CRITICAL / backend
+- [CVE-2026-12564](https://access.redhat.com/security/cve/CVE-2026-12564) CVE-2026-12564 / CRITICAL / backend
+- [CVE-2026-52723](https://github.com/fbeta-GmbH/ePA3-Service-OpenSource/commit/197c8c7fc41675f19c7f448696a2bc63fab9db5b) CVE-2026-52723 / CRITICAL / backend
+- [CVE-2026-73366](https://patchstack.com/database/wordpress/plugin/google-maps-easy/vulnerability/wordpress-easy-google-maps-plugin-1-13-0-php-object-injection-vulnerability?_s_id=cve) CVE-2026-73366 / CRITICAL / backend
+- [CVE-2026-75926](https://github.com/gohugoio/hugo) CVE-2026-75926 / CRITICAL / frontend
+- [CVE-2026-45118](https://github.com/mybb/mybb/releases/tag/mybb_1840) CVE-2026-45118 / CRITICAL / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-未認証でリモートコード実行（RCE）が可能な脆弱性（Joomla拡張、Node.js用サンドボックス`vm2`）や、基幹ツールにおける深刻な認証・認可の不備（GitLab、Discourse）など、CRITICALおよびHIGH評価の脆弱性が多数公開されました。また、ライブラリ層（Pythonの`sqlparse`におけるDoSやコード注入など）の脆弱性も多く含まれており、依存関係の確認と早期アップデートが求められます。
+本日掲載された脆弱性には、Webアプリケーションにおける入力検証不備（PHP Object Injection、XSS、オープンリダイレクト）、ビルドツールやワークフロー・LLMエージェントでの権限迂回および任意コード実行（RCE）、Kubernetesサービスアカウントトークンや証明書を巡る認証・資格情報漏洩などが含まれています。特に開発パイプラインや自動化ツールにおける実行権限・分離モデルの不備に注意が必要です。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-74253 (Joomla Regular Labs Sourcerer / CVSS 10.0 - CRITICAL)**
-   - **概要:** 未認証の攻撃者が `{source}` ブロックを介して任意のコードを実行できる脆弱性。
-   - **対応:** Sourcerer 14.0.0 未満を使用している場合は直ちに更新してください。
 
-2. **CVE-2026-47686 / CVE-2026-47698 (Node.js vm2 / CVSS 9.9・9.8 - CRITICAL)**
-   - **概要:** `Error.cause` の処理不備やプロトタイプチェーン操作により、サンドボックスを脱出してホスト上で任意コマンドを実行可能。
-   - **対応:** `vm2` を 3.11.6 以降へアップデートしてください。
-
-3. **CVE-2026-19478 (GitLab CE/EE / CVSS 9.4 - CRITICAL)**
-   - **概要:** 未認証ユーザーが GraphQL ディレクティブを悪用し、パブリックプロジェクトやユーザーデータをリモートで変更・削除できる脆弱性。
-   - **対応:** GitLab を指定の修正バージョン（18.11.11, 19.0.8, 19.1.6, 19.2.4 以降）へ更新してください。
-
-4. **CVE-2026-55674 (Discourse / CVSS 9.3 - CRITICAL)**
-   - **概要:** 特定のCookie値に対するエスケープ処理不足により、NonceベースのCSPをバイパスして任意JavaScriptを実行可能な未認証XSS。
-   - **対応:** 修正済みバージョン（2026.1.6, 2026.5.2, 2026.6.1, 2026.7.0等）へ更新してください。
+1. **CVE-2026-73366**（CVSS 9.8 / CRITICAL）
+   - **対象**: Easy Google Maps
+   - **内容**: 未認証の攻撃者による PHP Object Injection が可能となる脆弱性。システム上で悪意のあるコードを実行される恐れがあります。
+2. **CVE-2026-12564**（CVSS 9.6 / CRITICAL）
+   - **対象**: AAP Controller (awx_plugins)
+   - **内容**: HashiCorp Vault 認証プラグインのテスト時に、Kubernetes サービスアカウントトークンが攻撃者制御のURLへ送信される問題。Kubernetes 制御プレーンへの不正アクセスにつながるリスクがあります。
+3. **CVE-2026-75926**（CVSS 9.3 / CRITICAL）
+   - **対象**: Hugo
+   - **内容**: TailwindCSS のデフォルト許可設定により Node.js のパーミッションモデルが迂回され、ビルド処理中にプロジェクト外のファイルシステムへアクセスされる可能性があります。
+4. **CVE-2026-71539**（CVSS 8.9 / HIGH）
+   - **対象**: n8n
+   - **内容**: Gitクローン処理時のシンボリックリンク操作により、悪意あるリポジトリがカスタムノードとして読み込まれ、サーバー上で任意コードが実行される危険性があります。
+5. **CVE-2026-75858**（CVSS 8.5 / HIGH）
+   - **対象**: CodeWhale
+   - **内容**: `rlm_eval` ツールの承認要件設定の誤りにより、ユーザーの承認プロンプトを経由せずにモデル由来の任意の Python コードが実行されるリスクがあります。
 
 ## 開発者向けコメント
-- **動的実行・サンドボックス利用の再見直し**: Node.js環境（`vm2`）やPython（`eval()` の使用例など）での動的評価処理は極めて高リスクです。該当モジュールのアップデートを実施するとともに、不要な評価処理の削除を検討してください。
-- **GraphQL / APIの境界検証強化**: GETリクエスト経由のミューテーション実行（CVE-2026-19650）やディレクティブの制御不足（CVE-2026-19478）など、API層での想定外の操作を防止する権限チェックとバリデーションを徹底してください。
-- **間接依存ライブラリの更新**: `sqlparse` など、テキスト解析ライブラリに対する crafted 入力による CPU 高負荷（DoS）脆弱性が散見されます。`npm` や `pip` の依存関係ツリーを確認し、ライブラリ全体の最新化を行ってください。
+
+* **開発・ビルドツールの実行権限の再確認**: Hugo や n8n、CodeWhale などのツール・ライブラリで、サブプロセスやスクリプトを実行する際の権限分離（パーミッションモデルや承認フロー）が意図通り機能しているか確認してください。
+* **トークンや秘密情報の外部送信防止**: Kubernetes のサービスアカウントトークンや API キーなど、重要な認証情報を取り扱う処理において、宛先 URL やサーバー証明書（CVE-2026-52723 等）の検証が欠落していないかを徹底してください。
+* **入力検証・エスケープ処理の再点検**: オープンリダイレクトからの JavaScript 注入（CVE-2026-45118）や、プロファイルフィールド・マークダウンパース時のエスケープ漏れ（CVE-2026-45116, CVE-2026-55839）など、UI 側の XSS 対策も改めて見直しが必要です。
