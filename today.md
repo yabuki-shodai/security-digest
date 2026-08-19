@@ -1,53 +1,63 @@
-# CVE Digest Dashboard (2026-08-19)
+# CVE Digest Dashboard (2026-08-20)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 5
-- High件数: 16
+- Critical件数: 20
+- High件数: 6
 - KEV件数: 0
-- Frontend件数: 12
-- Backend件数: 18
+- Frontend件数: 19
+- Backend件数: 11
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-19/frontend-summary.md)
-- [Backend Summary](docs/2026-08-19/backend-summary.md)
+- [Frontend Summary](docs/2026-08-20/frontend-summary.md)
+- [Backend Summary](docs/2026-08-20/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-12564](https://access.redhat.com/security/cve/CVE-2026-12564) CVE-2026-12564 / CRITICAL / backend
-- [CVE-2026-52723](https://github.com/fbeta-GmbH/ePA3-Service-OpenSource/commit/197c8c7fc41675f19c7f448696a2bc63fab9db5b) CVE-2026-52723 / CRITICAL / backend
-- [CVE-2026-73366](https://patchstack.com/database/wordpress/plugin/google-maps-easy/vulnerability/wordpress-easy-google-maps-plugin-1-13-0-php-object-injection-vulnerability?_s_id=cve) CVE-2026-73366 / CRITICAL / backend
-- [CVE-2026-75926](https://github.com/gohugoio/hugo) CVE-2026-75926 / CRITICAL / frontend
-- [CVE-2026-45118](https://github.com/mybb/mybb/releases/tag/mybb_1840) CVE-2026-45118 / CRITICAL / frontend
+- [CVE-2026-62681](https://github.com/orval-labs/orval/commit/8ef1bfdf3f9bcaf9dabfbe2e42887f1c0e159ab6) CVE-2026-62681 / CRITICAL / frontend
+- [CVE-2026-71868](https://github.com/orval-labs/orval/commit/8ef1bfdf3f9bcaf9dabfbe2e42887f1c0e159ab6) CVE-2026-71868 / CRITICAL / frontend
+- [CVE-2026-71869](https://github.com/orval-labs/orval/commit/8ef1bfdf3f9bcaf9dabfbe2e42887f1c0e159ab6) CVE-2026-71869 / CRITICAL / frontend
+- [CVE-2026-71871](https://github.com/orval-labs/orval/commit/8ef1bfdf3f9bcaf9dabfbe2e42887f1c0e159ab6) CVE-2026-71871 / CRITICAL / frontend
+- [CVE-2026-72716](https://github.com/orval-labs/orval/commit/8ef1bfdf3f9bcaf9dabfbe2e42887f1c0e159ab6) CVE-2026-72716 / CRITICAL / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日掲載された脆弱性には、Webアプリケーションにおける入力検証不備（PHP Object Injection、XSS、オープンリダイレクト）、ビルドツールやワークフロー・LLMエージェントでの権限迂回および任意コード実行（RCE）、Kubernetesサービスアカウントトークンや証明書を巡る認証・資格情報漏洩などが含まれています。特に開発パイプラインや自動化ツールにおける実行権限・分離モデルの不備に注意が必要です。
+
+本日の脆弱性一覧では、TypeScript/JavaScriptコード生成ツール「**Orval**」におけるコードインジェクション群（CVSS 9.3）や、**Cisco製品群**における認証回避・SQLi等の最深刻な脆弱性（CVSS 10.0）が目立ちます。
+
+また、API基盤やファイル処理ツール（Grav API Plugin、Gotenberg、Algernonなど）において、SSRF、CORS設定不備、OS固有のパス処理問題に起因する脆弱性が複数報告されています。
+
+---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-73366**（CVSS 9.8 / CRITICAL）
-   - **対象**: Easy Google Maps
-   - **内容**: 未認証の攻撃者による PHP Object Injection が可能となる脆弱性。システム上で悪意のあるコードを実行される恐れがあります。
-2. **CVE-2026-12564**（CVSS 9.6 / CRITICAL）
-   - **対象**: AAP Controller (awx_plugins)
-   - **内容**: HashiCorp Vault 認証プラグインのテスト時に、Kubernetes サービスアカウントトークンが攻撃者制御のURLへ送信される問題。Kubernetes 制御プレーンへの不正アクセスにつながるリスクがあります。
-3. **CVE-2026-75926**（CVSS 9.3 / CRITICAL）
-   - **対象**: Hugo
-   - **内容**: TailwindCSS のデフォルト許可設定により Node.js のパーミッションモデルが迂回され、ビルド処理中にプロジェクト外のファイルシステムへアクセスされる可能性があります。
-4. **CVE-2026-71539**（CVSS 8.9 / HIGH）
-   - **対象**: n8n
-   - **内容**: Gitクローン処理時のシンボリックリンク操作により、悪意あるリポジトリがカスタムノードとして読み込まれ、サーバー上で任意コードが実行される危険性があります。
-5. **CVE-2026-75858**（CVSS 8.5 / HIGH）
-   - **対象**: CodeWhale
-   - **内容**: `rlm_eval` ツールの承認要件設定の誤りにより、ユーザーの承認プロンプトを経由せずにモデル由来の任意の Python コードが実行されるリスクがあります。
+1. **Orval: コード生成時の任意JavaScript実行脆弱性群（CVE-2026-62681, CVE-2026-71868 等）**
+   * **CVSS:** 9.3 (CRITICAL)
+   * **概要:** OpenAPI/Swagger仕様書内のパスやデフォルト値等のエスケープ不備により、生成されたコードやZodスキーマのインポート/呼び出し時に任意のJSが評価・実行されます。開発・CI・アプリ環境に影響します。
+   * **対応:** Orval 8.21.0 以降へアップデート。
+
+2. **Cisco Crosswork / Secure Workload: 認証回避・SQLi・ファイル操作の脆弱性群（CVE-2026-20030, CVE-2026-20315, CVE-2026-20357 等）**
+   * **CVSS:** 10.0 (CRITICAL)
+   * **概要:** 認証の欠如や不適切なアクセス制御、SQLインジェクション、ファイルシステムの外部制御など、複数の極めて深刻な脆弱性が確認されています。
+   * **対応:** Cisco公式の修正リリースを適用。
+
+3. **Grav API Plugin: Webhook機能におけるSSRFおよびファイル読み取り（CVE-2026-62668）**
+   * **CVSS:** 9.4 (CRITICAL)
+   * **概要:** Webhook URLの検証不足およびcURLプロトコル制限の欠如により、ローカルファイルの取得や内部ネットワークへの攻撃リクエストが可能になります。
+   * **対応:** 1.0.6 以降に更新。
+
+4. **Gotenberg: Linux環境におけるパスサニタイズ不備（CVE-2026-44829）**
+   * **CVSS:** 8.8 (HIGH)
+   * **概要:** Linux環境でWindows形式の親ディレクトリパス（`\`）が含まれるファイル名が適切に処理されず、生成されるZipアーカイブのファイルパス構造が改ざんされる恐れがあります。
+   * **対応:** 修正済みバージョン（8.32.0より後のバージョン）へアップデート。
+
+---
 
 ## 開発者向けコメント
 
-* **開発・ビルドツールの実行権限の再確認**: Hugo や n8n、CodeWhale などのツール・ライブラリで、サブプロセスやスクリプトを実行する際の権限分離（パーミッションモデルや承認フロー）が意図通り機能しているか確認してください。
-* **トークンや秘密情報の外部送信防止**: Kubernetes のサービスアカウントトークンや API キーなど、重要な認証情報を取り扱う処理において、宛先 URL やサーバー証明書（CVE-2026-52723 等）の検証が欠落していないかを徹底してください。
-* **入力検証・エスケープ処理の再点検**: オープンリダイレクトからの JavaScript 注入（CVE-2026-45118）や、プロファイルフィールド・マークダウンパース時のエスケープ漏れ（CVE-2026-45116, CVE-2026-55839）など、UI 側の XSS 対策も改めて見直しが必要です。
+* **コード生成ツール（ビルド時リスク）の警戒:** 外部OpenAPI定義からクライアントコードを生成する際、不十分なエスケープにより**開発環境やCI/CDパイプライン上で任意のコードが実行されるリスク**があります。開発ツールのバージョン更新と、信頼できない定義ファイルの読み込み回避を徹底してください。
+* **クロスプラットフォーム対応のパス処理:** GotenbergやAlgernonの例のように、Linux/Windows間でのパス区切り文字（`/` と `\`）の違いや、NTFS代替データストリーム（`::$DATA`）の考慮漏れは、ディレクトリトラバーサルやファイル検証回避の原因になります。ファイル名・パス検証ロジックの見直しを推奨します。
