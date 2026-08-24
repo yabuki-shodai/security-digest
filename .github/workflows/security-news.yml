@@ -35,4 +35,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update security news"
-          file_pattern: "security-news.md docs/**/security-news.md"
+          file_pattern: "security-news.md today.md docs/**/security-news.md"
