@@ -170,10 +170,10 @@ def fallback_importance(item: NewsItem) -> str:
 
 def fallback_overview(items: list[NewsItem]) -> str:
     if not items:
-        return "本日公開されたニュースはありません。"
+        return "直近24時間に公開されたニュースはありません。"
     high_count = sum(item.importance == "HIGH" for item in items)
     sources = "、".join(sorted({item.source for item in items}))
-    return f"本日は{sources}から{len(items)}件を収集しました。重要度HIGHは{high_count}件です。"
+    return f"直近24時間では{sources}から{len(items)}件を収集しました。重要度HIGHは{high_count}件です。"
 
 
 def analyze_news(items: list[NewsItem], config: dict[str, Any]) -> tuple[list[NewsItem], str]:
@@ -194,7 +194,7 @@ def analyze_news(items: list[NewsItem], config: dict[str, Any]) -> tuple[list[Ne
         [
             "次のセキュリティニュースを日本語で分析してください。",
             "JSONオブジェクトだけを返してください。形式は overview と items を持つオブジェクトです。",
-            "overview は本日の主要傾向を3文以内でまとめてください。",
+            "overview は直近24時間の主要傾向を3文以内でまとめてください。",
             "items は入力idをキーとし、summary と importance を持つオブジェクトにしてください。",
             "summary は2文以内の日本語要約、importance は HIGH・MEDIUM・LOW のいずれかです。",
             "重要度は、広範な影響、実際の悪用、重大な情報漏えい、ランサムウェア、ゼロデイを重視してください。",
@@ -246,7 +246,7 @@ def render_markdown(items: list[NewsItem], overview: str, generated_at: datetime
         "",
         f"更新日時: {generated_at.astimezone(JST).strftime('%Y-%m-%d %H:%M:%S JST')}",
         "",
-        "SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、JST基準で本日公開されたセキュリティ関連記事を収集しています。",
+        "SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。",
         "",
         "## 今日の総括",
         "",
@@ -254,7 +254,6 @@ def render_markdown(items: list[NewsItem], overview: str, generated_at: datetime
         "",
     ]
     if not items:
-        lines.extend(["本日公開されたニュースはありません。", ""])
         return "\n".join(lines)
 
     for item in items:
@@ -283,9 +282,7 @@ def render_dashboard_section(items: list[NewsItem], overview: str) -> str:
         overview,
         "",
     ]
-    if not items:
-        lines.append("本日公開されたニュースはありません。")
-    else:
+    if items:
         for item in items[:DASHBOARD_ITEMS]:
             lines.append(f"- **{item.importance}** [{item.title}]({item.url}) — {item.source}")
         lines.extend(["", "- [セキュリティーニュースをすべて見る](security-news.md)"])
@@ -309,7 +306,7 @@ def update_today_dashboard(items: list[NewsItem], overview: str) -> None:
 
 def main() -> int:
     now = datetime.now(timezone.utc)
-    today_jst = now.astimezone(JST).date()
+    cutoff = now - timedelta(hours=24)
     config = digest.load_json(digest.CONFIG_PATH, {})
     collected: list[NewsItem] = []
 
@@ -323,7 +320,10 @@ def main() -> int:
 
     deduplicated: dict[str, NewsItem] = {}
     for item in collected:
-        if item.published_at is None or item.published_at.astimezone(JST).date() != today_jst:
+        if item.published_at is None:
+            continue
+        published_at = item.published_at.astimezone(timezone.utc)
+        if published_at < cutoff or published_at > now:
             continue
         key = item.url.split("#", 1)[0].rstrip("/") or item.title.lower()
         deduplicated.setdefault(key, item)
