@@ -50,3 +50,20 @@
   プロキシ配下で動くアプリケーションにおいて、`X-Forwarded-Uri` や `Set-Cookie`（CRLF関連）などのヘッダー処理は認証回避やインジェクションの標的になりやすい部分です（CVE-2026-76835, CVE-2026-39915）。ヘッダーの信頼境界が正しく設定されているか構成を見直しましょう。
 - **イベントリスナーとリソースの解放漏れ**
   Node.js / JavaScript 環境でのリクエスト処理において、ループやリクエスト受信ごとに `addEventListener` や `on` を登録し直すと、メモリリークおよび DoS の原因になります（CVE-2026-77384）。再利用時は古いリスナーの破棄（`removeEventListener` や `AbortController` の適切な取り扱い）を徹底してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+CISAが緊急対処を求めたZimbraの脆弱性やWordPressプラグインの認証バイパスなど、実際に悪用されている脆弱性への迅速な対応が強く求められています。未修正のルーターにおけるNATバイパス問題や、ランサムウェア前兆となる高度なマルウェアの登場など、新たなセキュリティ上の脅威も報告されています。さらに、セキュリティ企業を標的にしたソーシャルエンジニアリング攻撃やマルウェアの検知回避手法の巧妙化にも警戒が必要です。
+
+- **HIGH** [Exploited Zimbra Flaw Highlights Shrinking Window to Patch](https://www.darkreading.com/vulnerabilities-threats/zimbra-flaw-exploitation-shrinking-window-patch) — Dark Reading
+- **HIGH** [Unpatched Calix flaw lets hackers bypass NAT to expose internal devices](https://www.bleepingcomputer.com/news/security/unpatched-calix-flaw-lets-hackers-bypass-nat-to-expose-internal-devices/) — BleepingComputer
+- **HIGH** [Hackers target WordPress sites in miniOrange auth bypass attacks](https://www.bleepingcomputer.com/news/security/hackers-target-wordpress-sites-in-miniorange-auth-bypass-attacks/) — BleepingComputer
+- **HIGH** [Tricky 'SynkLoader' Multitool May Herald Ransomware](https://www.darkreading.com/threat-intelligence/tricky-synkloader-multitool-ransomware) — Dark Reading
+- **MEDIUM** [Foul Language: WordlistLoader Disguises Malware as Ordinary Text](https://www.darkreading.com/data-privacy/wordlistloader-disguises-malware-ordinary-text) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
