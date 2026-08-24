@@ -37,3 +37,16 @@
 ## 開発者向けコメント
 * **入力値の検証とコマンド・テンプレート実行の分離:** リモートからの入力パラメータ（`cmdinput` 等）を直接OSコマンドやテンプレートエンジンに渡さないよう、安全なAPIの使用や入力値のエスケープ・検証を徹底してください。
 * **安全なセッション/鍵生成の実装:** 時刻（Time::HiRes）やプロセスID（PID）など予測可能な値をシードとして暗号鍵やセッションIDを生成するのは避け、暗号学的に安全な擬似乱数生成器（CSPRNG）を使用する実装に切り替えてください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Androidマルウェア「ToxicPanda」が進化し、多数のアプリケーションを標的とする攻撃手法が拡張されていることが判明しました。VPN権限を悪用してGoogle Playのアクセスをブロックするなどの新しい悪意ある機能が追加されています。リモート制御コマンドの対応数も大幅に増加しており、モバイル脅威の高度化が進んでいます。
+
+- **HIGH** [ToxicPanda Android malware uses VPN permissions to block Google Play](https://www.bleepingcomputer.com/news/security/toxicpanda-android-malware-uses-vpn-permissions-to-block-google-play/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
