@@ -42,3 +42,20 @@
 
 ## 開発者向けコメント
 LLM連携基盤やMCPサーバーを組み込んでいるシステムにおいて、**「入力の安全でない評価（SymPy/eval）」「不十分なCLI引数検証」「未認証でのツール実行エンドポイントの露出」**が大きな攻撃面となっています。AIエージェントやMCPツールを導入している環境では、エンドポイントの認証設定、実行可能なコマンドの厳密なリスト化、プロンプト経由での制御権奪取への対策を直ちに見直してください。また、S3連携などのクラウドインフラ周りでも認証トークンや署名検証に関する致命的な不備があるため、影響を受けるライブラリの最新版へのアップデートを優先して実施してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+政府インフラに対する大規模なDDoS攻撃や、数万人規模の個人・医療情報が流出するデータ侵害インシデントが発生しています。また、音声AIエージェントを用いたパスコードの奪取や、隠しプロンプトによるAIメール要約の操作など、AI技術を悪用した新たな攻撃手法が顕著になっています。一方で、国際的なサイバー犯罪ネットワークの摘発やAIセキュリティの標準化に向けた取り組みも進められています。
+
+- **HIGH** [AnonyMousKIT PhaaS uses voice AI agents to phish iPhone passcodes](https://www.bleepingcomputer.com/news/security/anonymouskit-phaas-uses-voice-ai-agents-to-phish-iphone-passcodes/) — BleepingComputer
+- **HIGH** [Employee benefits platform Paylogix says hackers stole financial and health data](https://therecord.media/paylogix-cyberattack-akira-ransomware) — The Record
+- **HIGH** [Massive DDoS attack disrupts Norway’s government digital services](https://www.bleepingcomputer.com/news/security/massive-ddos-attack-disrupts-norways-government-digital-services/) — BleepingComputer
+- **MEDIUM** [LACMA data breach last year exposed social security and medical data](https://www.bleepingcomputer.com/news/security/lacma-data-breach-last-year-exposed-social-security-and-medical-data/) — BleepingComputer
+- **MEDIUM** [Hackers abuse npm mirrors to host phishing redirect pages](https://www.bleepingcomputer.com/news/security/hackers-abuse-npm-mirrors-to-host-phishing-redirect-pages/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
