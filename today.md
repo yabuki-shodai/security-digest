@@ -49,3 +49,20 @@
 * **未認証APIおよび管理用サービスのバインド設定見直し:** 認証を挟まないエンドポイントやデフォルトで全アドレスに開くWebサービス（NebulaGraphやSENAITEのケース）がないか、インフラ・アプリ両面で点検してください。
 * **動的コード評価（`eval` / `unserialize`）の排除:** AI・LLMからの出力や外部リポジトリ上のファイル名（langfun, whichllm）など、外部入力を動的に評価・デシリアライズするコードはRCEの温床になります。安全なパース手法に切り替えてください。
 * **フロントエンド描画処理の安全化:** `dangerouslySetInnerHTML`（FiftyOne）やリッチテキストエディタ（SunEditor）を通じたHTMLパース時のDOM操作において、不要なスクリプト実行やエスケープ漏れがないか確認しましょう。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+WordPressテーマの未認証RCE脆弱性やNVIDIA GPUに対する攻撃手法、車載システムを標的とするマルウェアなど、多様なプラットフォームにおける深刻な技術的脅威が報告されています。また、医療機器大手へのサイバー攻撃による業務影響や、米政府機関を狙った中国のハッキングツールの摘発など、重要インフラや国家安全保障に関わる事案が目立ちます。さらに、プラットフォーム企業に対する大規模な訴訟和解など、プライバシー保護や安全対策の強化に向けた動きも進んでいます。
+
+- **HIGH** [Critical Avada WordPress theme flaw enables zero-click RCE](https://www.bleepingcomputer.com/news/security/critical-avada-wordpress-theme-flaw-enables-zero-click-rce/) — BleepingComputer
+- **HIGH** [Medical device firm Boston Scientific says cyberattack has disrupted shipment processes](https://therecord.media/boston-scientific-cyberattack-disrupts-shipment-processes) — The Record
+- **HIGH** [New GPUThor attack defeats NVIDIA ECC protection for root access](https://www.bleepingcomputer.com/news/security/new-gputhor-attack-defeats-nvidia-ecc-protection-for-root-access/) — BleepingComputer
+- **HIGH** [Android Malware Hijacks Update System for Car Head Units](https://www.darkreading.com/cyberattacks-data-breaches/android-malware-hijacks-update-system-car-head-units) — Dark Reading
+- **HIGH** [US takes down alleged Chinese hacking tools used against Federal Reserve, DOJ and Senate](https://therecord.media/qscan-qtrouter-us-takedown-alleged-china-hacking-tools) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
