@@ -109,3 +109,9 @@ Gemini API を利用して以下を生成します。
 
 Gemini API が利用できない場合でも、フォールバック処理によりダイジェストを生成します。
 利用するには環境変数 `GEMINI_API_KEY`（GitHub Actionsではリポジトリシークレット）にAPIキーを設定してください。
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
