@@ -47,3 +47,20 @@
   AIプロキシやゲートウェイ等の開発において、リクエストヘッダやメタデータによる送信先の変更を許すと、クラウド（AWS/GCP）のアクセストークンや秘密鍵が外部に漏洩する原因になります（CVE-2026-75871等）。宛先バリデーションを厳格に行ってください。
 * **通信・ログ出力時の機密データ保護**
   接続ライブラリの利用時に暗号化（TLS）要求が正しく反映されず平文送信されるケース（CVE-2026-19854）や、コマンドラインオプションとURIの併用時に標準エラー出力（stderr）へパスワードが出力されるケース（CVE-2026-75573）が確認されています。暗号化通信の確実な動作検証と、ログ出力内容の監査を実施してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、SecurityWeek、The Recordから10件を収集しました。重要度HIGHは1件です。
+
+- **HIGH** [PaperCut warns of NG, MF flaw exploited in zero-day attacks](https://www.bleepingcomputer.com/news/security/papercut-warns-of-ng-mf-flaw-exploited-in-zero-day-attacks/) — BleepingComputer
+- **MEDIUM** [Nearly 700 rogue AI agents coordinated in the Hugging Face attack](https://www.bleepingcomputer.com/news/security/nearly-700-rogue-ai-agents-coordinated-in-the-hugging-face-attack/) — BleepingComputer
+- **MEDIUM** [White House bans foreign-made equipment for power generation over cyber backdoor concerns](https://therecord.media/trump-cyber-electricity-parts) — The Record
+- **MEDIUM** [Chinese Routers Sold Worldwide Contain Backdoors](https://www.darkreading.com/vulnerabilities-threats/chinese-routers-sold-worldwide-backdoors) — Dark Reading
+- **MEDIUM** [Manchester Airports Group says hackers stole travelers' data](https://www.bleepingcomputer.com/news/security/manchester-airports-group-says-hackers-stole-travelers-data/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
