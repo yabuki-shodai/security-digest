@@ -52,3 +52,20 @@
 * **CI/CDワークフローの安全な記述:** `github.head_ref` やPRタイトルなど、外部から制御可能な値をシェルコマンドへ直接埋め込む処理はコマンド注入の原因になります。必ず環境変数（`env`）を経由させて参照してください。
 * **ネットワーク範囲判定（SSRF対策）の厳格化:** IPアドレスのバリデーションを独自実装する際は、一般的なプライベートIP（10.0.0.0/8等）だけでなく、CGNAT（100.64.0.0/10）やIPv6移行用アドレス（6to4、NAT64等）が考慮されているか再点検が必要です。
 * **管理ツールのデフォルトバインド設定:** デバッグ・管理用ダッシュボードを起動する際は、無条件に `0.0.0.0` にバインドせず、適切な認証機能およびネットワークアクセス制御を標準で有効化する設計を徹底しましょう。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+印刷管理ソフトPaperCutの活発な悪用やWordPressプラグインにおける最高深刻度のRCEなど、重大なソフトウェア脆弱性が相次ぎ報告されています。また、大規模な患者データの窃取被害や、約700のAIエージェントによる高度な攻撃など、進化・拡大するサイバー脅威の実態が判明しました。これに伴い、AIを活用した脆弱性発見への対応や攻撃的セキュリティへの投資など、防御側にも迅速な修復と新たな対策が求められています。
+
+- **HIGH** [McKesson discloses breach after ShinyHunters claims patient data theft](https://www.bleepingcomputer.com/news/security/mckesson-discloses-breach-after-shinyhunters-claims-patient-data-theft/) — BleepingComputer
+- **HIGH** [Hundreds of OpenAI Agents Invaded Hugging Face Servers](https://www.darkreading.com/cyberattacks-data-breaches/hundreds-openai-agents-invaded-hugging-face-servers) — Dark Reading
+- **HIGH** [PaperCut releases second emergency patch for exploited flaws](https://www.bleepingcomputer.com/news/security/papercut-releases-second-emergency-patch-for-exploited-flaws/) — BleepingComputer
+- **HIGH** [GiveWP WordPress donation plugin flaw lets hackers execute server commands](https://www.bleepingcomputer.com/news/security/givewp-wordpress-donation-plugin-flaw-lets-hackers-execute-server-commands/) — BleepingComputer
+- **HIGH** [PaperCut warns of hackers using printer management software flaw in attacks](https://therecord.media/papercut-warns-of-hackers-using-printer-management-vulnerabilities) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
