@@ -1,66 +1,54 @@
-# CVE Digest Dashboard (2026-08-28)
+# CVE Digest Dashboard (2026-08-29)
 
 ## Overview
 
-- Total: 23
-- Critical件数: 3
-- High件数: 13
+- Total: 30
+- Critical件数: 7
+- High件数: 9
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 12
+- Frontend件数: 9
+- Backend件数: 21
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-28/frontend-summary.md)
-- [Backend Summary](docs/2026-08-28/backend-summary.md)
+- [Frontend Summary](docs/2026-08-29/frontend-summary.md)
+- [Backend Summary](docs/2026-08-29/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-57499](https://github.com/limanmys/core/security/advisories/GHSA-3jrp-54r2-9g63) CVE-2026-57499 / CRITICAL / security
-- [CVE-2026-16279](https://www.3ds.com/trust-center/security/security-advisories/cve-2026-16279) CVE-2026-16279 / CRITICAL / security
-- [CVE-2026-78251](https://support.dji.com/help/content?customId=en-us03400011149&amp;spaceId=34&amp;re=US&amp;lang=en) CVE-2026-78251 / CRITICAL / security
-- [CVE-2026-30046](https://github.com/open5gs/open5gs/issues/4264) CVE-2026-30046 / HIGH / security
-- [CVE-2026-30047](https://github.com/open5gs/open5gs/issues/4201) CVE-2026-30047 / HIGH / security
+- [CVE-2026-55068](https://github.com/free5gc/free5gc/issues/1056) CVE-2026-55068 / CRITICAL / backend
+- [CVE-2026-54754](https://github.com/klever-io/klever-go/commit/8bcc600b0ac88070740c63c7ce1c8a968dd85251) CVE-2026-54754 / CRITICAL / backend
+- [CVE-2026-54755](https://github.com/klever-io/klever-go/commit/8bcc600b0ac88070740c63c7ce1c8a968dd85251) CVE-2026-54755 / CRITICAL / backend
+- [CVE-2026-82277](https://github.com/argoproj/argo-rollouts) CVE-2026-82277 / CRITICAL / backend
+- [CVE-2026-55378](https://github.com/js-recon/js-recon/commit/447876c4bfa9ec5bc98cbc65d7a3e5f889412491) CVE-2026-55378 / CRITICAL / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日公開された脆弱性には、CRITICAL（最大CVSS 9.3）からHIGHの重大な問題が複数含まれています。特にLimanにおけるOSコマンドインジェクションや3DPassportの認可不備、GitLab AI Gatewayでのクラウド認証情報・秘密鍵漏洩といった深刻なリスクが報告されています。また、通信暗号化の無視（ClickHouseプラグイン）や、5G関連ソフトウェア（free5gc, Open5GS）、rsyslog・Undertow等のミドルウェアに対するDoS攻撃につながる実装上の不備も多くみられます。
+
+本日公開された脆弱性には、CI/CDパイプラインでのコマンド注入、認証・認可の欠如による運用ツールの不正操作、IPアドレス検証ロジックの不備に伴うSSRF、各種Webフレームワークや管理ツールにおけるアクセス制御不全（IDOR）など、幅広いレイヤーの不具合が含まれています。特にインフラ運用ツールや開発パイプラインのセキュリティ設定ミス・入力検証不足は影響度が大きいため、迅速な対応が必要です。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-57499**（CVSS 9.1 / CRITICAL）
-   * **概要**: Limanサーバー管理ソフトのログローテーション設定におけるOSコマンドインジェクション。`ip_address` パラメータのサニタイズ不足により、認証済み管理者が任意コマンドを実行可能です。
-2. **CVE-2026-75871**（CVSS 8.2 / HIGH）
-   * **概要**: GitLab AI Gatewayにおいて、インラインフロー設定によるHTTP Hostヘッダの書き換えを許し、外部エンドポイントへリクエストがリダイレクトされる脆弱性。Google Cloud Vertex AIの認証情報や秘密署名鍵が漏洩する恐れがあります（同影響のCVE-2026-19889も要確認）。
-3. **CVE-2026-16279**（CVSS 9.3 / CRITICAL）
-   * **概要**: 3DSwymer（3DPassport）における不適切な認可の脆弱性。攻撃者によって一部のユーザーアカウントへアクセスされる可能性があります。
-4. **CVE-2026-78002**（CVSS 7.5 / HIGH）
-   * **概要**: rsyslogのRainerScript `replace()` 関数におけるバッファサイズ計算誤りに起因するヒープバッファオーバーフロー。悪意あるsyslogメッセージ受信によるDoSを引き起こします。
+
+1. **CVE-2026-82277 (Argo Rollouts | CVSS: 9.8)**
+   * **概要:** ダッシュボードが認証・認可・CSRF保護なしで全ネットワークインターフェースにバインドされており、同一ネットワーク上の攻撃者がRolloutの促進・中断・イメージ変更等の変更操作を実行可能です。
+   * **対策:** 最新版へのアップデートと、外部露出を制限するアクセス制御の設定を確認してください。
+
+2. **CVE-2026-55378 (JS Recon | CVSS: 9.3)**
+   * **概要:** GitHub Actionsのワークフロー内で、PRのブランチ名やリポジトリ名（`github.head_ref`等）を適切にエスケープせずシェルコマンドに展開しているため、任意コード実行が可能です。
+   * **対策:** ワークフロー定義ファイルで信頼できない入力を環境変数経由で渡すか、スクリプト内で安全に処理する形式へ修正されたバージョン（1.3.1-beta.2以降）へ更新してください。
+
+3. **CVE-2026-55634 (Pimcore | CVSS: 9.9)**
+   * **概要:** クラス定義のインポート用エンドポイントにおいてフィールド名の許可リスト（allowlist）検証がなく、生成されるPHPプロパティや `ALTER TABLE` 識別子へ直接挿入されることでコード/SQL実行に至る恐れがあります。
+   * **対策:** Pimcoreを修正済みバージョン（11.5.19 / 12.3.10 / 2026.1.6 以降）へ即時アップデートしてください。
+
+4. **CVE-2026-55245 (Bifrost | CVSS: 8.7)**
+   * **概要:** AIゲートウェイの `isPublicIP` 関数において、Carrier-Grade NATや特定のIPv6アドレス範囲（6to4, NAT64等）をプライベートIPと認識できず、内部ネットワークへのSSRFを許す脆弱性です。
+   * **対策:** 1.5.17 以降へ更新し、内部ネットワーク範囲の判定ロジックを最新化してください。
 
 ## 開発者向けコメント
-本日のCVE一覧から、開発において特に意識すべきポイントは以下の3点です。
 
-* **外部パラメータの安全な処理とコマンド生成の回避**
-  パラメータをシェルコマンドに直接挿入する実装（CVE-2026-57499）や、ファイルパスの正規化を行わずにファイルアクセス処理に渡す実装（CVE-2026-40526）は極めて危険です。コマンド実行を避けるか、厳密なエスケープ・検証を徹底してください。
-* **プロキシ・リダイレクト処理での認証情報漏洩防止**
-  AIプロキシやゲートウェイ等の開発において、リクエストヘッダやメタデータによる送信先の変更を許すと、クラウド（AWS/GCP）のアクセストークンや秘密鍵が外部に漏洩する原因になります（CVE-2026-75871等）。宛先バリデーションを厳格に行ってください。
-* **通信・ログ出力時の機密データ保護**
-  接続ライブラリの利用時に暗号化（TLS）要求が正しく反映されず平文送信されるケース（CVE-2026-19854）や、コマンドラインオプションとURIの併用時に標準エラー出力（stderr）へパスワードが出力されるケース（CVE-2026-75573）が確認されています。暗号化通信の確実な動作検証と、ログ出力内容の監査を実施してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、Dark Reading、SecurityWeek、The Recordから10件を収集しました。重要度HIGHは1件です。
-
-- **HIGH** [PaperCut warns of NG, MF flaw exploited in zero-day attacks](https://www.bleepingcomputer.com/news/security/papercut-warns-of-ng-mf-flaw-exploited-in-zero-day-attacks/) — BleepingComputer
-- **MEDIUM** [Nearly 700 rogue AI agents coordinated in the Hugging Face attack](https://www.bleepingcomputer.com/news/security/nearly-700-rogue-ai-agents-coordinated-in-the-hugging-face-attack/) — BleepingComputer
-- **MEDIUM** [White House bans foreign-made equipment for power generation over cyber backdoor concerns](https://therecord.media/trump-cyber-electricity-parts) — The Record
-- **MEDIUM** [Chinese Routers Sold Worldwide Contain Backdoors](https://www.darkreading.com/vulnerabilities-threats/chinese-routers-sold-worldwide-backdoors) — Dark Reading
-- **MEDIUM** [Manchester Airports Group says hackers stole travelers' data](https://www.bleepingcomputer.com/news/security/manchester-airports-group-says-hackers-stole-travelers-data/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **CI/CDワークフローの安全な記述:** `github.head_ref` やPRタイトルなど、外部から制御可能な値をシェルコマンドへ直接埋め込む処理はコマンド注入の原因になります。必ず環境変数（`env`）を経由させて参照してください。
+* **ネットワーク範囲判定（SSRF対策）の厳格化:** IPアドレスのバリデーションを独自実装する際は、一般的なプライベートIP（10.0.0.0/8等）だけでなく、CGNAT（100.64.0.0/10）やIPv6移行用アドレス（6to4、NAT64等）が考慮されているか再点検が必要です。
+* **管理ツールのデフォルトバインド設定:** デバッグ・管理用ダッシュボードを起動する際は、無条件に `0.0.0.0` にバインドせず、適切な認証機能およびネットワークアクセス制御を標準で有効化する設計を徹底しましょう。
