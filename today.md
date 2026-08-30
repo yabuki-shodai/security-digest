@@ -39,3 +39,18 @@
 * **認証・ライブラリの更新**: Rodauth（2.46.0 / 2.47.0以降）、pac4j（6.5.6以降）、Cloud Commander（19.20.2以降）など、認証フレームワークや管理ツールを速やかに最新版へアップデートしてください。
 * **入力検証・パス正規化の徹底**: オープンリダイレクトやディレクトリトラバーサルを防ぐため、バックスラッシュや先頭のダブルスラッシュ（`//`）、相対パス記法に対する正規化処理とバリデーションを徹底してください。
 * **未認証APIエンドポイントの再確認**: ファイルアップロード（Documenso）やタスク状態報告（KubeEdge）など、認証・認可が欠落したエンドポイントによるDoSや改ざんリスクを点検してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+大手企業を標的としたサイバー攻撃による個人情報の漏えい事案が公表されています。一方で、Webブラウザにおけるトラッキング防止を目的とした新たなプライバシー保護機能の導入が発表されました。また、AIツールの利用制限変更といったサービス運用に関する動きも見られます。
+
+- **HIGH** [Hasbro Data Breach Exposed Employee Personal Information](https://www.securityweek.com/hasbro-data-breach-exposed-employee-personal-information/) — SecurityWeek
+- **LOW** [Anthropic is cutting Claude Code's current weekly limits by 17%](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent/) — BleepingComputer
+- **LOW** [Brave browser adds email aliases to help users evade tracking](https://www.bleepingcomputer.com/news/security/brave-browser-adds-email-aliases-to-help-users-evade-tracking/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
