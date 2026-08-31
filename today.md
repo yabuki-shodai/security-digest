@@ -54,3 +54,18 @@
 * **GraphQLクエリ制限と認可ロジックの網羅性:** GraphQLの実装では、Offset形式だけでなく Relay や Keyset などあらゆるページネーションパターンに対して複雑度制限（Complexity Limit）が機能しているか再確認してください。また、サブスクリプションやインメモリ評価時もデータ境界ポリシーが適切に適用されているか注意が必要です。
 * **安易な例外処理・ボット判定によるガード迂回:** AVideo (CVE-2026-82644, CVE-2026-82645) のように「User-Agentが未設定ならボットとみなしてキャッシュ書き込み（カウンタ）をスキップする」「特定トークンがあればアクセス制御を解除する」といった安易な例外ロジックは、レート制限や認証の完全な迂回手法として悪用されます。
 * **UI描画時のエスケープ徹底:** ユーザーが入力した識別子やタイトル名を DOM（`innerHTML` 等）にそのまま展開しないよう、フレームワーク標準のエスケープ機構を徹底してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+マルウェアや悪意あるブラウザ拡張機能を介したセッション乗っ取りや機密データ・暗号資産の窃盗被害が相次いで報告されています。また、空港運用グループに対する大規模なサイバー攻撃とデータ窃取の主張など、実害を伴う攻撃が表面化しています。端末や認証セッションの管理、およびサードパーティ製拡張機能の安全確認に注意が必要です。
+
+- **HIGH** [FulcrumSec claims Manchester Airports hack, theft of 86 GB of data](https://www.bleepingcomputer.com/news/security/fulcrumsec-claims-manchester-airports-hack-theft-of-86-gb-of-data/) — BleepingComputer
+- **HIGH** [Chrome Web Store extensions caught stealing crypto, browser data](https://www.bleepingcomputer.com/news/security/chrome-web-store-extensions-caught-stealing-crypto-browser-data/) — BleepingComputer
+- **MEDIUM** [Anthropic warns infostealer malware is hijacking Claude sessions to drain usage](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-warns-infostealer-malware-is-hijacking-claude-sessions-to-drain-usage/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
