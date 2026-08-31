@@ -1,56 +1,56 @@
-# CVE Digest Dashboard (2026-08-30)
+# CVE Digest Dashboard (2026-08-31)
 
 ## Overview
 
-- Total: 15
-- Critical件数: 3
-- High件数: 8
+- Total: 29
+- Critical件数: 5
+- High件数: 11
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 8
+- Frontend件数: 7
+- Backend件数: 12
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-30/frontend-summary.md)
-- [Backend Summary](docs/2026-08-30/backend-summary.md)
+- [Frontend Summary](docs/2026-08-31/frontend-summary.md)
+- [Backend Summary](docs/2026-08-31/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-82460](https://github.com/coderaiser/cloudcmd) CVE-2026-82460 / CRITICAL / security
-- [CVE-2026-15369](https://woocommerce.com/products/custom-user-registration-fields-for-woocommerce/) CVE-2026-15369 / CRITICAL / backend
-- [CVE-2026-82466](https://github.com/jeremyevans/rodauth) CVE-2026-82466 / CRITICAL / backend
-- [CVE-2026-82463](https://github.com/pac4j/pac4j) CVE-2026-82463 / HIGH / security
-- [CVE-2026-82472](https://github.com/documenso/documenso) CVE-2026-82472 / HIGH / security
+- [CVE-2026-82592](https://github.com/Robots10/IoT_vlu/blob/main/reports/Dlink/formDiskFormat/formDiskFormat.md) CVE-2026-82592 / CRITICAL / security
+- [CVE-2026-82593](https://github.com/Robots10/IoT_vlu/blob/main/reports/Dlink/formLtefotaUpgradeFibocom/formLtefotaUpgradeFibocom.md) CVE-2026-82593 / CRITICAL / security
+- [CVE-2026-82653](https://github.com/siyuan-note/siyuan/security/advisories/GHSA-hvwp-43j9-4xgf) CVE-2026-82653 / CRITICAL / security
+- [CVE-2026-82654](https://github.com/siyuan-note/siyuan/security/advisories/GHSA-hf87-qh3j-3p88) CVE-2026-82654 / CRITICAL / security
+- [CVE-2026-82645](https://github.com/WWBN/AVideo/security/advisories/GHSA-c4w3-h888-7ccv) CVE-2026-82645 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日は、認証・認可バイパス（Rodauth, pac4j, WordPressプラグイン等）やディレクトリトラバーサル（Cloud Commander, cohttp）、未認証での権限昇格やリソース操作など、影響度の高い脆弱性（CRITICALおよびHIGH）が多数報告されています。特に認証ライブラリやWeb API、管理ツールの適切なバージョンアップと入力・パス検証の強化が求められます。
+
+本日公開された脆弱性では、**Ash Framework (Elixir/GraphQL/PostgreSQL)** におけるマルチテナンシーや認可制御の破綻・クエリ制限の迂回、ならびに **AVideo** や **SiYuan** などのオープンソース製品における認証回避、蓄積型XSS、パススルー不備が目立ちます。また、ルーターやIoT機器向けファームウェアでのバッファオーバーフローやコマンド注入も報告されています。
+
+特に開発フレームワークやライブラリに起因する脆弱性は、依存パッケージを利用するサービス全般に影響するため注意が必要です。
+
+---
 
 ## 優先して確認すべき3〜5件
-* **CVE-2026-15369 (CVSS 9.8 / CRITICAL)**: Custom User Registration Fields for WooCommerceプラグインにおける未認証からの特権昇格。チェックアウトAPIを介して任意ロールが付与される恐れがあります。
-* **CVE-2026-82460 (CVSS 9.8 / CRITICAL)**: Cloud Commanderにおけるディレクトリトラバーサル。パス正規化不足により、ルートディレクトリ外のファイル読み書きや操作が可能です。
-* **CVE-2026-82466 (CVSS 9.4 / CRITICAL)**: Rodauthの`webauthn_login`ルートにおける認証バイパス。ログイン済みユーザーが任意のアカウントとして認証を通過できてしまいます。
-* **CVE-2026-82461 / CVE-2026-82463 (CVSS 8.6 / HIGH)**: pac4jにおけるOIDCアクセストークンの署名・issuer未検証および認可ロジック反転。権限昇格や認証バイパスに繋がります。
-* **CVE-2026-82474 (CVSS 8.5 / HIGH)**: Sudoにおける`execveat`/`fexecve`呼び出し時のポリシーバイパス。許可された特定のコマンドから禁止プログラムを実行される可能性があります。
+
+1. **CVE-2026-82645 (AVideo) | CVSS 9.2 (Critical)**
+   * **概要:** `getLiveKey.json.php` において `token` パラメータを指定すると認証・所有権チェックが回避され、未認証で外部プラットフォーム（YouTube, Twitch等）の配信資格情報が漏洩する。
+2. **CVE-2026-82653 / CVE-2026-82654 (SiYuan) | CVSS 9.3 (Critical)**
+   * **概要:** パッケージ名やブロック名、メモ欄などの描画時にエスケープ処理が不足しており、UI上で任意JavaScriptが実行される蓄積型XSS脆弱性（v3.8.1未満が影響）。
+3. **CVE-2026-81636 (ash_graphql) | CVSS 8.7 (High)**
+   * **概要:** Relay接続やキーセットページネーション利用時に GraphQL のクエリ複雑度制限（query-complexity limit）を迂回され、未認証の攻撃者によって無制限なDB読み込み（リソース枯渇・DoS）を引き起こされる。
+4. **CVE-2026-78699 (ash_postgres) | CVSS 7.2 (High)**
+   * **概要:** テナント名変更処理で SQL エラーの戻り値を検証せず無条件に成功扱いとするため、同名の既存テナントが存在する場合にスキーマが誤って付け替わり、他テナントのデータへアクセス可能になる。
+5. **CVE-2026-82655 (Admidio) | CVSS 8.7 (High)**
+   * **概要:** `lists_show.php` の `relation_type_list` パラメータに対する入力検証不足により、未認証の攻撃者がブラインドSQLインジェクションを実行しハッシュ等のデータを抽出可能。
+
+---
 
 ## 開発者向けコメント
-* **認証・ライブラリの更新**: Rodauth（2.46.0 / 2.47.0以降）、pac4j（6.5.6以降）、Cloud Commander（19.20.2以降）など、認証フレームワークや管理ツールを速やかに最新版へアップデートしてください。
-* **入力検証・パス正規化の徹底**: オープンリダイレクトやディレクトリトラバーサルを防ぐため、バックスラッシュや先頭のダブルスラッシュ（`//`）、相対パス記法に対する正規化処理とバリデーションを徹底してください。
-* **未認証APIエンドポイントの再確認**: ファイルアップロード（Documenso）やタスク状態報告（KubeEdge）など、認証・認可が欠落したエンドポイントによるDoSや改ざんリスクを点検してください。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-大手企業を標的としたサイバー攻撃による個人情報の漏えい事案が公表されています。一方で、Webブラウザにおけるトラッキング防止を目的とした新たなプライバシー保護機能の導入が発表されました。また、AIツールの利用制限変更といったサービス運用に関する動きも見られます。
-
-- **HIGH** [Hasbro Data Breach Exposed Employee Personal Information](https://www.securityweek.com/hasbro-data-breach-exposed-employee-personal-information/) — SecurityWeek
-- **LOW** [Anthropic is cutting Claude Code's current weekly limits by 17%](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent/) — BleepingComputer
-- **LOW** [Brave browser adds email aliases to help users evade tracking](https://www.bleepingcomputer.com/news/security/brave-browser-adds-email-aliases-to-help-users-evade-tracking/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **エラー・戻り値の無視を行わない:** `ash_postgres` (CVE-2026-78699) の事例のように、DB操作関数の戻り値（`{:error, _}` など）を検証せずに処理を継続すると、データ不整合やマルチテナントの隔離境界破壊など重大なセキュリティ障害につながります。
+* **GraphQLクエリ制限と認可ロジックの網羅性:** GraphQLの実装では、Offset形式だけでなく Relay や Keyset などあらゆるページネーションパターンに対して複雑度制限（Complexity Limit）が機能しているか再確認してください。また、サブスクリプションやインメモリ評価時もデータ境界ポリシーが適切に適用されているか注意が必要です。
+* **安易な例外処理・ボット判定によるガード迂回:** AVideo (CVE-2026-82644, CVE-2026-82645) のように「User-Agentが未設定ならボットとみなしてキャッシュ書き込み（カウンタ）をスキップする」「特定トークンがあればアクセス制御を解除する」といった安易な例外ロジックは、レート制限や認証の完全な迂回手法として悪用されます。
+* **UI描画時のエスケープ徹底:** ユーザーが入力した識別子やタイトル名を DOM（`innerHTML` 等）にそのまま展開しないよう、フレームワーク標準のエスケープ機構を徹底してください。
