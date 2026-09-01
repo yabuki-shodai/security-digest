@@ -1,71 +1,69 @@
-# CVE Digest Dashboard (2026-08-31)
+# CVE Digest Dashboard (2026-09-01)
 
 ## Overview
 
-- Total: 29
+- Total: 30
 - Critical件数: 5
-- High件数: 11
+- High件数: 16
 - KEV件数: 0
-- Frontend件数: 7
-- Backend件数: 12
+- Frontend件数: 10
+- Backend件数: 20
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-08-31/frontend-summary.md)
-- [Backend Summary](docs/2026-08-31/backend-summary.md)
+- [Frontend Summary](docs/2026-09-01/frontend-summary.md)
+- [Backend Summary](docs/2026-09-01/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-82592](https://github.com/Robots10/IoT_vlu/blob/main/reports/Dlink/formDiskFormat/formDiskFormat.md) CVE-2026-82592 / CRITICAL / security
-- [CVE-2026-82593](https://github.com/Robots10/IoT_vlu/blob/main/reports/Dlink/formLtefotaUpgradeFibocom/formLtefotaUpgradeFibocom.md) CVE-2026-82593 / CRITICAL / security
-- [CVE-2026-82653](https://github.com/siyuan-note/siyuan/security/advisories/GHSA-hvwp-43j9-4xgf) CVE-2026-82653 / CRITICAL / security
-- [CVE-2026-82654](https://github.com/siyuan-note/siyuan/security/advisories/GHSA-hf87-qh3j-3p88) CVE-2026-82654 / CRITICAL / security
-- [CVE-2026-82645](https://github.com/WWBN/AVideo/security/advisories/GHSA-c4w3-h888-7ccv) CVE-2026-82645 / CRITICAL / backend
+- [CVE-2026-53552](https://github.com/zhenorzz/goploy/security/advisories/GHSA-26rh-24rg-j3vv) CVE-2026-53552 / CRITICAL / backend
+- [CVE-2026-76133](https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-237-06.json) CVE-2026-76133 / CRITICAL / backend
+- [CVE-2026-79748](https://github.com/samanhappy/mcphub/pull/770) CVE-2026-79748 / CRITICAL / backend
+- [CVE-2026-66047](https://profilepress.com/changelog/) CVE-2026-66047 / CRITICAL / backend
+- [CVE-2026-82954](https://vuldb.com/cve/CVE-2026-82954) CVE-2026-82954 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日公開された脆弱性では、**Ash Framework (Elixir/GraphQL/PostgreSQL)** におけるマルチテナンシーや認可制御の破綻・クエリ制限の迂回、ならびに **AVideo** や **SiYuan** などのオープンソース製品における認証回避、蓄積型XSS、パススルー不備が目立ちます。また、ルーターやIoT機器向けファームウェアでのバッファオーバーフローやコマンド注入も報告されています。
+本日掲載された脆弱性では、CI/CD・デプロイ自動化ツール（Dokploy、Goploy）、マルチMCP管理基盤（MCPHub）、認証・アクセス制御基盤（Pangolin）など、インフラや開発運用を担うツールにおける**リモートコード実行（RCE）や認証・認可バイパス**の深刻な脆弱性が複数報告されています。
 
-特に開発フレームワークやライブラリに起因する脆弱性は、依存パッケージを利用するサービス全般に影響するため注意が必要です。
+また、フロントエンド・Node.js生態系で広く使われるパッケージマネージャー**pnpm**におけるパストラバーサル（任意ファイル書き込み）や、Pythonの標準的なWebフレームワーク**Tornado**におけるリクエスト解析起因のDoSなど、開発・運用環境双方に影響する脆弱性が含まれています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-82645 (AVideo) | CVSS 9.2 (Critical)**
-   * **概要:** `getLiveKey.json.php` において `token` パラメータを指定すると認証・所有権チェックが回避され、未認証で外部プラットフォーム（YouTube, Twitch等）の配信資格情報が漏洩する。
-2. **CVE-2026-82653 / CVE-2026-82654 (SiYuan) | CVSS 9.3 (Critical)**
-   * **概要:** パッケージ名やブロック名、メモ欄などの描画時にエスケープ処理が不足しており、UI上で任意JavaScriptが実行される蓄積型XSS脆弱性（v3.8.1未満が影響）。
-3. **CVE-2026-81636 (ash_graphql) | CVSS 8.7 (High)**
-   * **概要:** Relay接続やキーセットページネーション利用時に GraphQL のクエリ複雑度制限（query-complexity limit）を迂回され、未認証の攻撃者によって無制限なDB読み込み（リソース枯渇・DoS）を引き起こされる。
-4. **CVE-2026-78699 (ash_postgres) | CVSS 7.2 (High)**
-   * **概要:** テナント名変更処理で SQL エラーの戻り値を検証せず無条件に成功扱いとするため、同名の既存テナントが存在する場合にスキーマが誤って付け替わり、他テナントのデータへアクセス可能になる。
-5. **CVE-2026-82655 (Admidio) | CVSS 8.7 (High)**
-   * **概要:** `lists_show.php` の `relation_type_list` パラメータに対する入力検証不足により、未認証の攻撃者がブラインドSQLインジェクションを実行しハッシュ等のデータを抽出可能。
+1. **CVE-2026-79748（MCPHub）- CVSS 9.9（CRITICAL）**
+   * **概要**: サーバー設定エンドポイントにおいて管理者権限チェックが欠落しており、管理者以外の認証済みユーザーが任意コマンド（`child_process.spawn`）を実行可能。
+   * **対策**: バージョン 0.12.15 以降へアップデート。
+
+2. **CVE-2026-82954（Dokploy）- CVSS 9.9（CRITICAL）**
+   * **概要**: SettingsコンポーネントにおけるTraefik設定書き込み処理のパラメータ操作により、リモートから任意のパストラバーサルが可能。
+   * **対策**: 修正版バージョンへの更新または適切な入力検証の実装。
+
+3. **CVE-2026-53552（Goploy）- CVSS 9.6（CRITICAL）**
+   * **概要**: APIエンドポイントでリクエストされたIDの所有・ネームスペース検証が欠落しており、同一システム上の他プロジェクトのファイル取得・編集・削除が可能。
+   * **対策**: バージョン 1.18.0 以降へアップデート。
+
+4. **CVE-2026-72001（Pangolin）- CVSS 8.6（HIGH）**
+   * **概要**: 共有リンク認証エンドポイントのトークン検証時にリソース識別子が漏れるため、有効な共有リンクを1つ保持していれば、他組織を含む任意のリソースに認証を回避してアクセス可能。
+   * **対策**: バージョン 1.22.0 以降へアップデート。
+
+5. **CVE-2026-82393 / CVE-2026-82392（pnpm）- CVSS 7.5 / 7.1（HIGH）**
+   * **概要**: `package.json` の名前フィールドや `pnpm-lock.yaml` のキー検証不足により、`pnpm install` 実行時に `node_modules` 外へ任意ファイルを解凍・書き込みされる危険性。
+   * **対策**: pnpm を 10.34.5 または 11.11.0 以降へアップデート。
 
 ---
 
 ## 開発者向けコメント
 
-* **エラー・戻り値の無視を行わない:** `ash_postgres` (CVE-2026-78699) の事例のように、DB操作関数の戻り値（`{:error, _}` など）を検証せずに処理を継続すると、データ不整合やマルチテナントの隔離境界破壊など重大なセキュリティ障害につながります。
-* **GraphQLクエリ制限と認可ロジックの網羅性:** GraphQLの実装では、Offset形式だけでなく Relay や Keyset などあらゆるページネーションパターンに対して複雑度制限（Complexity Limit）が機能しているか再確認してください。また、サブスクリプションやインメモリ評価時もデータ境界ポリシーが適切に適用されているか注意が必要です。
-* **安易な例外処理・ボット判定によるガード迂回:** AVideo (CVE-2026-82644, CVE-2026-82645) のように「User-Agentが未設定ならボットとみなしてキャッシュ書き込み（カウンタ）をスキップする」「特定トークンがあればアクセス制御を解除する」といった安易な例外ロジックは、レート制限や認証の完全な迂回手法として悪用されます。
-* **UI描画時のエスケープ徹底:** ユーザーが入力した識別子やタイトル名を DOM（`innerHTML` 等）にそのまま展開しないよう、フレームワーク標準のエスケープ機構を徹底してください。
+* **開発環境・CIパイプラインの保護（pnpmの更新）**:
+  悪意ある依存パッケージやロックファイルによって、開発機やCI実行環境上の任意パスへファイルが書き込まれる恐れがあります。プロジェクトで利用する `pnpm` のバージョンを早急に更新してください。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
+* **デプロイ・管理ツールのアクセス制御再点検**:
+  GoployやMCPHubのように、アクセス制御（テナント分離や管理者権限チェック）の欠落によって他データの不正操作や任意コード実行につながる事例が目立ちます。自作APIのエンドポイントでも「ユーザーが所有するリソースか」の認可チェック（IDOR対策）が漏れていないか見直してください。
 
-### 今日の総括
-
-マルウェアや悪意あるブラウザ拡張機能を介したセッション乗っ取りや機密データ・暗号資産の窃盗被害が相次いで報告されています。また、空港運用グループに対する大規模なサイバー攻撃とデータ窃取の主張など、実害を伴う攻撃が表面化しています。端末や認証セッションの管理、およびサードパーティ製拡張機能の安全確認に注意が必要です。
-
-- **HIGH** [FulcrumSec claims Manchester Airports hack, theft of 86 GB of data](https://www.bleepingcomputer.com/news/security/fulcrumsec-claims-manchester-airports-hack-theft-of-86-gb-of-data/) — BleepingComputer
-- **HIGH** [Chrome Web Store extensions caught stealing crypto, browser data](https://www.bleepingcomputer.com/news/security/chrome-web-store-extensions-caught-stealing-crypto-browser-data/) — BleepingComputer
-- **MEDIUM** [Anthropic warns infostealer malware is hijacking Claude sessions to drain usage](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-warns-infostealer-malware-is-hijacking-claude-sessions-to-drain-usage/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **リクエスト解析処理の制限設定（Tornado等）**:
+  Tornado（CVE-2026-82397）のように、フォームデータの解析時に最大フィールド数（`max_num_fields`）制限を設けていない場合、大量のパラメータを送信されるだけでCPU枯渇（DoS）を引き起こします。Webフレームワークのリクエスト制限設定が適切か確認してください。
