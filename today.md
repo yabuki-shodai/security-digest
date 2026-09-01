@@ -67,3 +67,20 @@
 
 * **リクエスト解析処理の制限設定（Tornado等）**:
   Tornado（CVE-2026-82397）のように、フォームデータの解析時に最大フィールド数（`max_num_fields`）制限を設けていない場合、大量のパラメータを送信されるだけでCPU枯渇（DoS）を引き起こします。Webフレームワークのリクエスト制限設定が適切か確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+暗号資産プラットフォームへの大規模攻撃やCiscoルーターを標的にしたスパイ行為など、インフラや脆弱性を悪用した深刻な脅威が報告されています。また、改ざんサイトの偽CAPTCHAから端末へ侵入する攻撃手法や、政府データの盗難に伴う身代金要求といった実害も発生しています。さらに、Exchange OnlineやChatGPTなどの主要サービスで障害が相次ぎ、広範な影響を及ぼしています。
+
+- **HIGH** [Cronos blockchain restarts after $74 million Tectonic exploit](https://www.bleepingcomputer.com/news/security/cronos-blockchain-restarts-after-74-million-tectonic-exploit/) — BleepingComputer
+- **HIGH** [Fraudsters steal $6 million from Tectonic crypto platform after inflating token price](https://therecord.media/crypto-tectonic-hack-cronos) — The Record
+- **HIGH** [Microsoft warns of TerminalFix attacks deploying reverse tunnels](https://www.bleepingcomputer.com/news/security/microsoft-warns-of-terminalfix-attacks-deploying-reverse-tunnels/) — BleepingComputer
+- **HIGH** [Microsoft Exchange Online outage causes email failures, auth issues](https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-online-outage-causes-email-failures-auth-issues/) — BleepingComputer
+- **HIGH** [Chinese Fire Ant hackers turn Cisco routers into spying platforms](https://www.bleepingcomputer.com/news/security/chinese-fire-ant-hackers-turn-cisco-routers-into-spying-platforms/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
