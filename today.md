@@ -1,86 +1,53 @@
-# CVE Digest Dashboard (2026-09-01)
+# CVE Digest Dashboard (2026-09-02)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 5
-- High件数: 16
+- Critical件数: 1
+- High件数: 22
 - KEV件数: 0
-- Frontend件数: 10
-- Backend件数: 20
+- Frontend件数: 16
+- Backend件数: 14
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-01/frontend-summary.md)
-- [Backend Summary](docs/2026-09-01/backend-summary.md)
+- [Frontend Summary](docs/2026-09-02/frontend-summary.md)
+- [Backend Summary](docs/2026-09-02/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-53552](https://github.com/zhenorzz/goploy/security/advisories/GHSA-26rh-24rg-j3vv) CVE-2026-53552 / CRITICAL / backend
-- [CVE-2026-76133](https://github.com/cisagov/CSAF/blob/develop/csaf_files/OT/white/2026/icsa-26-237-06.json) CVE-2026-76133 / CRITICAL / backend
-- [CVE-2026-79748](https://github.com/samanhappy/mcphub/pull/770) CVE-2026-79748 / CRITICAL / backend
-- [CVE-2026-66047](https://profilepress.com/changelog/) CVE-2026-66047 / CRITICAL / backend
-- [CVE-2026-82954](https://vuldb.com/cve/CVE-2026-82954) CVE-2026-82954 / CRITICAL / backend
+- [CVE-2026-78012](https://pyramidsolutions.com/netstax-v-5-6-1-protecting-against-silent-buffer-overflow-in-ethernet-ip-stack-explicit-messages/) CVE-2026-78012 / CRITICAL / backend
+- [CVE-2026-83619](https://github.com/xmldom/xmldom/commit/3abb0934f5a8a84d83a1f9cde0f2bd04c08b2a09) CVE-2026-83619 / HIGH / frontend
+- [CVE-2026-49329](https://access.redhat.com/security/cve/CVE-2026-49329) CVE-2026-49329 / HIGH / backend
+- [CVE-2026-84304](https://github.com/grpc/grpc-go/commit/7354d9c8debb4bcf2225bf429857078de310c176) CVE-2026-84304 / HIGH / backend
+- [CVE-2026-84308](https://github.com/phpseclib/phpseclib/commit/fb56bc5bb9009b54a6c26b31aeec8ed944f17373) CVE-2026-84308 / MEDIUM / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-本日掲載された脆弱性では、CI/CD・デプロイ自動化ツール（Dokploy、Goploy）、マルチMCP管理基盤（MCPHub）、認証・アクセス制御基盤（Pangolin）など、インフラや開発運用を担うツールにおける**リモートコード実行（RCE）や認証・認可バイパス**の深刻な脆弱性が複数報告されています。
-
-また、フロントエンド・Node.js生態系で広く使われるパッケージマネージャー**pnpm**におけるパストラバーサル（任意ファイル書き込み）や、Pythonの標準的なWebフレームワーク**Tornado**におけるリクエスト解析起因のDoSなど、開発・運用環境双方に影響する脆弱性が含まれています。
+JavaScript向けの標準XML解析ライブラリである **`xmldom`（`@xmldom/xmldom`）において大量の脆弱性（DoS、検証バイパス、マークアップインジェクション等）**が一括して公表されました。
+また、**gRPC-Go** でのメモリ枯渇DoSやアクセス制御回避、**ModelScope** や **Fooocus** などのAI/ML・データ処理関連ツールにおける不安全な読み込み・評価（RCE）、および **NetStaX EtherNet/IP Stack** での最高深刻度（CVSS 9.8）のバッファオーバーフローが報告されています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-79748（MCPHub）- CVSS 9.9（CRITICAL）**
-   * **概要**: サーバー設定エンドポイントにおいて管理者権限チェックが欠落しており、管理者以外の認証済みユーザーが任意コマンド（`child_process.spawn`）を実行可能。
-   * **対策**: バージョン 0.12.15 以降へアップデート。
-
-2. **CVE-2026-82954（Dokploy）- CVSS 9.9（CRITICAL）**
-   * **概要**: SettingsコンポーネントにおけるTraefik設定書き込み処理のパラメータ操作により、リモートから任意のパストラバーサルが可能。
-   * **対策**: 修正版バージョンへの更新または適切な入力検証の実装。
-
-3. **CVE-2026-53552（Goploy）- CVSS 9.6（CRITICAL）**
-   * **概要**: APIエンドポイントでリクエストされたIDの所有・ネームスペース検証が欠落しており、同一システム上の他プロジェクトのファイル取得・編集・削除が可能。
-   * **対策**: バージョン 1.18.0 以降へアップデート。
-
-4. **CVE-2026-72001（Pangolin）- CVSS 8.6（HIGH）**
-   * **概要**: 共有リンク認証エンドポイントのトークン検証時にリソース識別子が漏れるため、有効な共有リンクを1つ保持していれば、他組織を含む任意のリソースに認証を回避してアクセス可能。
-   * **対策**: バージョン 1.22.0 以降へアップデート。
-
-5. **CVE-2026-82393 / CVE-2026-82392（pnpm）- CVSS 7.5 / 7.1（HIGH）**
-   * **概要**: `package.json` の名前フィールドや `pnpm-lock.yaml` のキー検証不足により、`pnpm install` 実行時に `node_modules` 外へ任意ファイルを解凍・書き込みされる危険性。
-   * **対策**: pnpm を 10.34.5 または 11.11.0 以降へアップデート。
+1. **CVE-2026-78012 (CVSS 9.8 - CRITICAL): NetStaX EtherNet/IP Stack のバッファオーバーフロー**
+   - **概要:** クラス3の明示的メッセージの受信バッファオーバーフローにより、メモリ破壊、デバイスのクラッシュ、および潜在的なリモート攻撃が可能です。
+2. **CVE-2026-84202 (CVSS 8.8 - HIGH): ModelScope の PyYAML 不安全デシリアライズによる RCE**
+   - **概要:** PyYAML の不安全な `yaml.Loader` を使用しているため、悪意あるモデル設定ファイルを読み込むだけで任意の Python コードが実行されるリスクがあります。
+3. **CVE-2026-84304 (CVSS 8.7 - HIGH) / CVE-2026-84303 (CVSS 6.3 - MEDIUM): gRPC-Go のDoSおよびRBACバイパス**
+   - **概要:** v1.83.1 未満において、大量の1バイト HTTP/2 DATA フレーム処理によるヒープメモリ枯渇（DoS）が発生します。また、xDS RBAC フィルタでヘッダー名の大文字・小文字比較の不備により拒否ポリシーが回避される脆弱性も含まれます。
+4. **CVE-2026-83619 ほか多数 (CVSS 8.7 - HIGH): `@xmldom/xmldom` の複数の脆弱性**
+   - **概要:** 正規表現の二次バックトラックによる DoS、タグ名や属性名の検証不備によるマークアップインジェクションが広範囲のバージョンに存在します。修正版（`0.8.15` / `0.9.12` 等）への更新が必要です。
+5. **CVE-2026-83551 (CVSS 8.5 - HIGH): Amazon SageMaker Python SDK の HMAC 鍵平文保存**
+   - **概要:** API 応答内に HMAC 署名鍵が平文保存されているため、同 AWS アカウント内の別ユーザーのパイプライン実行コンテキストで任意コード実行が可能になります（v3.11.0 / v2.256.0 未満が影響）。
 
 ---
 
 ## 開発者向けコメント
 
-* **開発環境・CIパイプラインの保護（pnpmの更新）**:
-  悪意ある依存パッケージやロックファイルによって、開発機やCI実行環境上の任意パスへファイルが書き込まれる恐れがあります。プロジェクトで利用する `pnpm` のバージョンを早急に更新してください。
-
-* **デプロイ・管理ツールのアクセス制御再点検**:
-  GoployやMCPHubのように、アクセス制御（テナント分離や管理者権限チェック）の欠落によって他データの不正操作や任意コード実行につながる事例が目立ちます。自作APIのエンドポイントでも「ユーザーが所有するリソースか」の認可チェック（IDOR対策）が漏れていないか見直してください。
-
-* **リクエスト解析処理の制限設定（Tornado等）**:
-  Tornado（CVE-2026-82397）のように、フォームデータの解析時に最大フィールド数（`max_num_fields`）制限を設けていない場合、大量のパラメータを送信されるだけでCPU枯渇（DoS）を引き起こします。Webフレームワークのリクエスト制限設定が適切か確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-暗号資産プラットフォームへの大規模攻撃やCiscoルーターを標的にしたスパイ行為など、インフラや脆弱性を悪用した深刻な脅威が報告されています。また、改ざんサイトの偽CAPTCHAから端末へ侵入する攻撃手法や、政府データの盗難に伴う身代金要求といった実害も発生しています。さらに、Exchange OnlineやChatGPTなどの主要サービスで障害が相次ぎ、広範な影響を及ぼしています。
-
-- **HIGH** [Cronos blockchain restarts after $74 million Tectonic exploit](https://www.bleepingcomputer.com/news/security/cronos-blockchain-restarts-after-74-million-tectonic-exploit/) — BleepingComputer
-- **HIGH** [Fraudsters steal $6 million from Tectonic crypto platform after inflating token price](https://therecord.media/crypto-tectonic-hack-cronos) — The Record
-- **HIGH** [Microsoft warns of TerminalFix attacks deploying reverse tunnels](https://www.bleepingcomputer.com/news/security/microsoft-warns-of-terminalfix-attacks-deploying-reverse-tunnels/) — BleepingComputer
-- **HIGH** [Microsoft Exchange Online outage causes email failures, auth issues](https://www.bleepingcomputer.com/news/microsoft/microsoft-exchange-online-outage-causes-email-failures-auth-issues/) — BleepingComputer
-- **HIGH** [Chinese Fire Ant hackers turn Cisco routers into spying platforms](https://www.bleepingcomputer.com/news/security/chinese-fire-ant-hackers-turn-cisco-routers-into-spying-platforms/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **`xmldom` および `gRPC-Go` 依存パッケージの緊急更新:** Node.js/JavaScript 環境で `@xmldom/xmldom` を利用しているプロジェクトは、最新版（`0.8.15` または `0.9.12` 以降）へ即座にアップデートしてください。Go バックエンド環境も `gRPC-Go` を `1.83.1` 以上へ更新することを推奨します。
+* **AI/ML ライブラリのデータパース処理見直し:** YAML パース時の `yaml.SafeLoader` 利用や、画像 EXIF 等のメタデータ解析時の `eval()` 排除など、信頼できない入力に対する処理を再点検してください。
+* **認証・認可ヘッダーの正規化処理:** 通信フレームワークやプロキシを通る際、ヘッダー名の大文字小文字の扱いによってセキュリティポリシーを不適用（Fail Open）にされないよう、システム全体のインターフェース検証が必要です。
