@@ -51,3 +51,20 @@ JavaScript向けの標準XML解析ライブラリである **`xmldom`（`@xmldom
 * **`xmldom` および `gRPC-Go` 依存パッケージの緊急更新:** Node.js/JavaScript 環境で `@xmldom/xmldom` を利用しているプロジェクトは、最新版（`0.8.15` または `0.9.12` 以降）へ即座にアップデートしてください。Go バックエンド環境も `gRPC-Go` を `1.83.1` 以上へ更新することを推奨します。
 * **AI/ML ライブラリのデータパース処理見直し:** YAML パース時の `yaml.SafeLoader` 利用や、画像 EXIF 等のメタデータ解析時の `eval()` 排除など、信頼できない入力に対する処理を再点検してください。
 * **認証・認可ヘッダーの正規化処理:** 通信フレームワークやプロキシを通る際、ヘッダー名の大文字小文字の扱いによってセキュリティポリシーを不適用（Fail Open）にされないよう、システム全体のインターフェース検証が必要です。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+AI開発基盤やリポジトリ管理ツールに対する重大な脆弱性の悪用が急速に広がっています。また、1億5000万件超の運転免許証データや950万人分の医療データといった大規模な情報漏えい被害も相次いで発覚しています。さらに、正規管理ツールの悪用やCiscoルーターの侵害など、インフラや信頼層を標的とした高度な攻撃手法が確認されています。
+
+- **HIGH** [FBI Probes Service Selling 153M+ Drivers Licenses](https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/) — Krebs on Security
+- **HIGH** [Attackers Pounce on Critical Artifactory Flaw Following Disclosure](https://www.darkreading.com/application-security/attackers-pounce-critical-artifactory-flaw-disclosure) — Dark Reading
+- **HIGH** [Hackers abuse Faronics Deploy admin tool to install ScreenConnect](https://www.bleepingcomputer.com/news/security/hackers-abuse-faronics-deploy-admin-tool-to-install-screenconnect/) — BleepingComputer
+- **HIGH** [Critical Langflow Flaw Exploited as Attacks on AI Platform Rise](https://www.darkreading.com/vulnerabilities-threats/critical-langflow-flaw-exploited-attacks-rise) — Dark Reading
+- **HIGH** [China's 'Fire Ant' campaign used compromised Cisco routers as platform for more attacks](https://therecord.media/router-hacks-fire-ant-group-china) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
