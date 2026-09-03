@@ -61,3 +61,20 @@
   入力検証で正規表現を用いる際は、先頭と末尾のアンカー（`^...$`）を確実に指定し、不完全なマッチによるコマンド注入（CVE-2026-53611）を防いでください。また、エラーや例外発生時にデフォルトでアクセスを許可してしまう「Fail-Open」の実装（CVE-2026-18329）を避け、エラー時は必ず拒否する「Fail-Closed」の原則で認可ロジックを設計することが重要です。
 - **セキュリティ解析における除外設定の穴**: 
   Tencent AI-Infra-Guardやclaude-skill-antivirus（CVE-2026-84809〜84811）では、Pythonのコンパイル済みバイトコード（`.pyc`）や特定ファイルをスキャン対象外としていたため、バイパス手法が存在しました。静的解析や検証ツールを構築・利用する際は、スキップルールが悪用されないか見直す必要があります。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+SonicWallやJFrog Artifactory、Sangomaなどの脆弱性に対する実際の悪用攻撃が相次いで報告されています。また、WordPressプラグインの影響による多数のサイトへの危険や、950万人を超える規模の医療情報漏洩など深刻な被害も発生しています。AIを活用した防御ツールや攻撃者のAI利用動向、ビッシング攻撃といった多様な脅威トレンドも観測されています。
+
+- **HIGH** [Hackers exploit Sangoma Switchvox flaw to deploy reverse shells](https://www.bleepingcomputer.com/news/security/hackers-exploit-sangoma-switchvox-flaw-to-deploy-reverse-shells/) — BleepingComputer
+- **HIGH** [SonicWall SMA 1000 Zero-Days Enable Unauthenticated RCE](https://www.darkreading.com/vulnerabilities-threats/sonicwall-sma-1000-zero-days-unauthenticated-rce) — Dark Reading
+- **HIGH** [WordPress backup plugin flaw exposes millions of sites to takeover attacks](https://www.bleepingcomputer.com/news/security/wordpress-backup-plugin-flaw-exposes-millions-of-sites-to-takeover-attacks/) — BleepingComputer
+- **HIGH** [Health data of more than 9.5 million people leaked from Aesto record system](https://therecord.media/health-data-aesto-cyberattack-leak) — The Record
+- **HIGH** [Hackers exploit critical JFrog Artifactory flaw to forge admin tokens](https://www.bleepingcomputer.com/news/security/hackers-exploit-critical-jfrog-artifactory-flaw-to-forge-admin-tokens/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
