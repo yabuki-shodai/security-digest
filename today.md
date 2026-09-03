@@ -1,70 +1,63 @@
-# CVE Digest Dashboard (2026-09-02)
+# CVE Digest Dashboard (2026-09-03)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 1
-- High件数: 22
+- Critical件数: 5
+- High件数: 20
 - KEV件数: 0
-- Frontend件数: 16
-- Backend件数: 14
+- Frontend件数: 14
+- Backend件数: 16
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-02/frontend-summary.md)
-- [Backend Summary](docs/2026-09-02/backend-summary.md)
+- [Frontend Summary](docs/2026-09-03/frontend-summary.md)
+- [Backend Summary](docs/2026-09-03/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-78012](https://pyramidsolutions.com/netstax-v-5-6-1-protecting-against-silent-buffer-overflow-in-ethernet-ip-stack-explicit-messages/) CVE-2026-78012 / CRITICAL / backend
-- [CVE-2026-83619](https://github.com/xmldom/xmldom/commit/3abb0934f5a8a84d83a1f9cde0f2bd04c08b2a09) CVE-2026-83619 / HIGH / frontend
-- [CVE-2026-49329](https://access.redhat.com/security/cve/CVE-2026-49329) CVE-2026-49329 / HIGH / backend
-- [CVE-2026-84304](https://github.com/grpc/grpc-go/commit/7354d9c8debb4bcf2225bf429857078de310c176) CVE-2026-84304 / HIGH / backend
-- [CVE-2026-84308](https://github.com/phpseclib/phpseclib/commit/fb56bc5bb9009b54a6c26b31aeec8ed944f17373) CVE-2026-84308 / MEDIUM / backend
+- [CVE-2026-20274](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-iosxr-qg64NcM) CVE-2026-20274 / CRITICAL / backend
+- [CVE-2026-20279](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-iosxr-qg64NcM) CVE-2026-20279 / CRITICAL / backend
+- [CVE-2026-78689](https://my.f5.com/manage/s/article/K000162602) CVE-2026-78689 / CRITICAL / frontend
+- [CVE-2026-53649](https://github.com/BishopFox/joro/releases/tag/1.1.1) CVE-2026-53649 / CRITICAL / frontend
+- [CVE-2026-53611](https://github.com/AS203038/looking-glass/releases/tag/1.3.5) CVE-2026-53611 / CRITICAL / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-JavaScript向けの標準XML解析ライブラリである **`xmldom`（`@xmldom/xmldom`）において大量の脆弱性（DoS、検証バイパス、マークアップインジェクション等）**が一括して公表されました。
-また、**gRPC-Go** でのメモリ枯渇DoSやアクセス制御回避、**ModelScope** や **Fooocus** などのAI/ML・データ処理関連ツールにおける不安全な読み込み・評価（RCE）、および **NetStaX EtherNet/IP Stack** での最高深刻度（CVSS 9.8）のバッファオーバーフローが報告されています。
+
+本日掲載された30件のCVEでは、インフラ基盤（Cisco IOS XRなど）のセキュリティ更新に加え、Webアプリケーションフレームワーク、リバースプロキシ（NGINX njs）、開発・AI関連ツールにおける脆弱性が多数確認されました。
+
+特に、正規表現の不備によるOSコマンドインジェクション（CVSS 9.8）や、ローカルAPIにおける無認証およびワイルドカードCORSに起因するリモートコード実行（CVSS 9.6）、NGINX JavaScriptモジュールでのメモリ破壊やアクセス制御のFail-Open（認可回避）など、認証・認可および入力検証の基本設計に関するCRITICAL/HIGHレベルの脆弱性が顕著です。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-78012 (CVSS 9.8 - CRITICAL): NetStaX EtherNet/IP Stack のバッファオーバーフロー**
-   - **概要:** クラス3の明示的メッセージの受信バッファオーバーフローにより、メモリ破壊、デバイスのクラッシュ、および潜在的なリモート攻撃が可能です。
-2. **CVE-2026-84202 (CVSS 8.8 - HIGH): ModelScope の PyYAML 不安全デシリアライズによる RCE**
-   - **概要:** PyYAML の不安全な `yaml.Loader` を使用しているため、悪意あるモデル設定ファイルを読み込むだけで任意の Python コードが実行されるリスクがあります。
-3. **CVE-2026-84304 (CVSS 8.7 - HIGH) / CVE-2026-84303 (CVSS 6.3 - MEDIUM): gRPC-Go のDoSおよびRBACバイパス**
-   - **概要:** v1.83.1 未満において、大量の1バイト HTTP/2 DATA フレーム処理によるヒープメモリ枯渇（DoS）が発生します。また、xDS RBAC フィルタでヘッダー名の大文字・小文字比較の不備により拒否ポリシーが回避される脆弱性も含まれます。
-4. **CVE-2026-83619 ほか多数 (CVSS 8.7 - HIGH): `@xmldom/xmldom` の複数の脆弱性**
-   - **概要:** 正規表現の二次バックトラックによる DoS、タグ名や属性名の検証不備によるマークアップインジェクションが広範囲のバージョンに存在します。修正版（`0.8.15` / `0.9.12` 等）への更新が必要です。
-5. **CVE-2026-83551 (CVSS 8.5 - HIGH): Amazon SageMaker Python SDK の HMAC 鍵平文保存**
-   - **概要:** API 応答内に HMAC 署名鍵が平文保存されているため、同 AWS アカウント内の別ユーザーのパイプライン実行コンテキストで任意コード実行が可能になります（v3.11.0 / v2.256.0 未満が影響）。
+1. **CVE-2026-53611 (CVSS 9.8 / CRITICAL)**
+   - **対象**: Looking Glass (1.3.5未満)
+   - **概要**: 入力検証レイヤーにおける正規表現のアンカー指定漏れ（固定されていない正規表現）により、OSコマンドインジェクションが発生します。バージョン1.3.5への修正パッチが提供されています。
+2. **CVE-2026-53649 (CVSS 9.6 / CRITICAL)**
+   - **対象**: Joro (1.1.1未満)
+   - **概要**: デフォルトのプロキシモードで127.0.0.1:9090に起動するローカルAPIが無認証かつワイルドカードCORSを許容しているため、閲覧中の外部WebサイトからクロスオリジンJavaScript経由で特権プラグインをアップロード・実行される恐れがあります。
+3. **CVE-2026-78689 (CVSS 9.2 / CRITICAL)**
+   - **対象**: NGINX JavaScript (njs / QuickJS)
+   - **概要**: XMLモジュールの接頭辞リストパーサー（`xml.exclusiveC14n()`）において、外部から制御可能なXMLプレフィックスリストを渡すことでヒープ領域外への書き込み（Out-of-bounds write）が発生します。
+4. **CVE-2026-18329 (CVSS 8.8 / HIGH)**
+   - **対象**: NGINX JavaScript (njs / QuickJS)
+   - **概要**: `js_access` ハンドラーで非同期リクエストボディ処理中に例外が発生した場合、明確な拒否を返す前に評価が失敗し、アクセス制御が「Fail-Open（許可状態）」になって認証回避が発生します。
+5. **CVE-2026-84381 (CVSS 8.1 / HIGH)**
+   - **対象**: HTTPX2 (2.10.0未満)
+   - **概要**: SOCKS5プロキシ経由で `wss://` を利用した際、TLSハンドシェイクが正しく開始されず通信が平文で送信されるため、認証ヘッダーやクッキーなどの情報が漏洩するリスクがあります。バージョン2.10.0で修正されています。
 
 ---
 
 ## 開発者向けコメント
 
-* **`xmldom` および `gRPC-Go` 依存パッケージの緊急更新:** Node.js/JavaScript 環境で `@xmldom/xmldom` を利用しているプロジェクトは、最新版（`0.8.15` または `0.9.12` 以降）へ即座にアップデートしてください。Go バックエンド環境も `gRPC-Go` を `1.83.1` 以上へ更新することを推奨します。
-* **AI/ML ライブラリのデータパース処理見直し:** YAML パース時の `yaml.SafeLoader` 利用や、画像 EXIF 等のメタデータ解析時の `eval()` 排除など、信頼できない入力に対する処理を再点検してください。
-* **認証・認可ヘッダーの正規化処理:** 通信フレームワークやプロキシを通る際、ヘッダー名の大文字小文字の扱いによってセキュリティポリシーを不適用（Fail Open）にされないよう、システム全体のインターフェース検証が必要です。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-AI開発基盤やリポジトリ管理ツールに対する重大な脆弱性の悪用が急速に広がっています。また、1億5000万件超の運転免許証データや950万人分の医療データといった大規模な情報漏えい被害も相次いで発覚しています。さらに、正規管理ツールの悪用やCiscoルーターの侵害など、インフラや信頼層を標的とした高度な攻撃手法が確認されています。
-
-- **HIGH** [FBI Probes Service Selling 153M+ Drivers Licenses](https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/) — Krebs on Security
-- **HIGH** [Attackers Pounce on Critical Artifactory Flaw Following Disclosure](https://www.darkreading.com/application-security/attackers-pounce-critical-artifactory-flaw-disclosure) — Dark Reading
-- **HIGH** [Hackers abuse Faronics Deploy admin tool to install ScreenConnect](https://www.bleepingcomputer.com/news/security/hackers-abuse-faronics-deploy-admin-tool-to-install-screenconnect/) — BleepingComputer
-- **HIGH** [Critical Langflow Flaw Exploited as Attacks on AI Platform Rise](https://www.darkreading.com/vulnerabilities-threats/critical-langflow-flaw-exploited-attacks-rise) — Dark Reading
-- **HIGH** [China's 'Fire Ant' campaign used compromised Cisco routers as platform for more attacks](https://therecord.media/router-hacks-fire-ant-group-china) — The Record
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **CORSとローカルAPIの結合リスク**: 
+  `Joro`（CVE-2026-53649）や `Windows ML CLI`（CVE-2026-84452）のように、「ローカル実行用」として提供されているAPIであっても、無認証かつワイルドカードCORS（`Access-Control-Allow-Origin: *`）を設定していると、悪意ある外部Webサイトを閲覧したユーザーのブラウザを経由してローカルのAPIが不正操作されます。ローカルAPIであってもオリジン検証と適切な認証を徹底してください。
+- **入力検証の正規表現とFail-Closedな認可設計**: 
+  入力検証で正規表現を用いる際は、先頭と末尾のアンカー（`^...$`）を確実に指定し、不完全なマッチによるコマンド注入（CVE-2026-53611）を防いでください。また、エラーや例外発生時にデフォルトでアクセスを許可してしまう「Fail-Open」の実装（CVE-2026-18329）を避け、エラー時は必ず拒否する「Fail-Closed」の原則で認可ロジックを設計することが重要です。
+- **セキュリティ解析における除外設定の穴**: 
+  Tencent AI-Infra-Guardやclaude-skill-antivirus（CVE-2026-84809〜84811）では、Pythonのコンパイル済みバイトコード（`.pyc`）や特定ファイルをスキャン対象外としていたため、バイパス手法が存在しました。静的解析や検証ツールを構築・利用する際は、スキップルールが悪用されないか見直す必要があります。
