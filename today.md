@@ -41,3 +41,20 @@
 
 ## 開発者向けコメント
 認証や署名検証を担うエコシステム（JWT/JOSE関連ライブラリ）での脆弱性が顕著です。特に `python-jose` や `node-forge` のように過去の修正が不十分だったケースが含まれているため、ライブラリのバージョンアップ状況および利用している署名検証ロジックを至急確認してください。また、ReactのServer Actions等を利用するフロントエンド/フルスタック開発においては、フレームワーク側で `Origin` ヘッダー等の検証が適切に行われているバージョン（Waku 1.0.0-beta.1以降など）へ更新することが求められます。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+大規模なデータ漏洩や開発基盤への侵入によるサプライチェーン攻撃、ネットワーク機器の深刻な脆弱性修正など、重大な影響を及ぼす事案が相次いで報告されています。また、大企業を狙う偽M&A詐欺や標的型スパイウェア攻撃、主要AIサービスの大規模障害など多様な脅威が発生しています。露出した管理者キーの悪用や基盤インフラの侵害に対するセキュリティ対策の徹底が求められます。
+
+- **HIGH** [Coder's registry infrastructure compromised to push malicious modules](https://www.bleepingcomputer.com/news/security/coders-registry-infrastructure-compromised-to-push-malicious-modules/) — BleepingComputer
+- **HIGH** [HPE patches critical ArubaOS-CX remote code execution flaw](https://www.bleepingcomputer.com/news/security/hpe-patches-critical-arubaos-cx-remote-code-execution-flaw/) — BleepingComputer
+- **HIGH** [Manchester Airports Group Data on 8.8 Million People Leaked After Ransom Refusal](https://www.securityweek.com/manchester-airports-group-data-on-8-8-million-people-leaked-after-ransom-refusal/) — SecurityWeek
+- **MEDIUM** [French hospital fined €500,000 after breach exposes data of 727,000](https://www.bleepingcomputer.com/news/security/french-hospital-fined-500-000-after-breach-exposes-data-of-727-000/) — BleepingComputer
+- **MEDIUM** [Large Enterprises Targeted in Fake Merger & Acquisition Scams](https://www.darkreading.com/cyberattacks-data-breaches/large-enterprises-fake-merger-acquisition-scams) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
