@@ -45,3 +45,20 @@
 * **AI/LLM連携の安全性確保**: LLMが処理する入力データ（間接的なプロンプトインジェクションの可能性）や、LLMが生成したコード・クエリの扱い（`eval`や未パラメータ化SQLへの挿入など）には十分な検証とサニタイズを実施してください。
 * **入力検証とパス制御**: ファイルアップロードやファイル参照を実装する際は、ディレクトリ・トラバーサル対策としてファイル名やパスの厳格な検証を行ってください。
 * **権限設計とアクセス制御**: Kubernetesのオペレーター開発におけるリソース識別管理や、マルチテナント/複数ユーザー環境での所有権検証（SupabaseやPDF参照等のアクセス制御）を再確認し、認可の漏れを防ぐ構造にしてください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Citrix NetScalerの脆弱性に対する実際の悪用発生やHPE製品のクリティカルなRCEパッチ公開など、インフラ製品の脆弱性対応が急務となっています。また、1億5,300万人規模のデータ侵害疑惑やパスキー認証の回避手法など、データ管理や認証技術を巡る脅威も浮き彫りになりました。これに対し、AIを用いた自律型攻撃への懸念が高まる一方で、重要インフラ防衛に向けた支援策や国際連携などの対抗策も進められています。
+
+- **HIGH** [IDScan sued over alleged data breach affecting 153 million drivers](https://www.bleepingcomputer.com/news/security/idscan-sued-over-alleged-data-breach-affecting-153-million-drivers/) — BleepingComputer
+- **HIGH** [HPE Patches Critical RCE Vulnerabilities in AOS-CX](https://www.securityweek.com/hpe-patches-critical-rce-vulnerabilities-in-aos-cx/) — SecurityWeek
+- **HIGH** [Critical Citrix NetScaler auth bypass now leveraged in attacks](https://www.bleepingcomputer.com/news/security/hackers-target-critical-citrix-netscaler-auth-bypass-in-attacks/) — BleepingComputer
+- **MEDIUM** [In Other News: Microsoft’s Cloud Patches, Hacked Dropbox Accounts, Guardio’s $1.1B Valuation](https://www.securityweek.com/in-other-news-microsofts-cloud-patches-hacked-dropbox-accounts-guardios-1-1b-valuation/) — SecurityWeek
+- **MEDIUM** [OpenAI Pledges $1 Billion to Bring Frontier AI to Critical Infrastructure Defenders](https://www.securityweek.com/openai-pledges-1-billion-to-bring-frontier-ai-to-critical-infrastructure-defenders/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
