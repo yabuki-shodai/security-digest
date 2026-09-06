@@ -1,53 +1,59 @@
-# CVE Digest Dashboard (2026-09-06)
+# CVE Digest Dashboard (2026-09-07)
 
 ## Overview
 
-- Total: 9
-- Critical件数: 4
-- High件数: 4
+- Total: 17
+- Critical件数: 0
+- High件数: 10
 - KEV件数: 0
 - Frontend件数: 0
-- Backend件数: 2
+- Backend件数: 14
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-06/frontend-summary.md)
-- [Backend Summary](docs/2026-09-06/backend-summary.md)
+- [Frontend Summary](docs/2026-09-07/frontend-summary.md)
+- [Backend Summary](docs/2026-09-07/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-67276](https://cert.pl/en/posts/2026/09/mikrotik-routeros-cve) CVE-2026-67276 / CRITICAL / security
-- [CVE-2026-86148](https://vuldb.com/cve/CVE-2026-86148) CVE-2026-86148 / CRITICAL / security
-- [CVE-2026-86149](https://vuldb.com/cve/CVE-2026-86149) CVE-2026-86149 / CRITICAL / security
-- [CVE-2026-86060](https://cert.pl/en/posts/2026/09/mikrotik-routeros-cve) CVE-2026-86060 / CRITICAL / backend
-- [CVE-2026-86207](https://documentation.n-able.com/N-central/Release_Notes/GA/Content/N-central_2026.3_HF3_Release_Notes.htm) CVE-2026-86207 / HIGH / security
+- [CVE-2026-86283](https://github.com/MISP/MISP/commit/44573e4a8.patch) CVE-2026-86283 / HIGH / security
+- [CVE-2026-82750](https://cna.erlef.org/cves/CVE-2026-82750.html) CVE-2026-82750 / HIGH / security
+- [CVE-2026-82751](https://cna.erlef.org/cves/CVE-2026-82751.html) CVE-2026-82751 / HIGH / security
+- [CVE-2026-13608](https://curl.se/docs/CVE-2026-13608.html) CVE-2026-13608 / UNKNOWN / backend
+- [CVE-2026-19931](https://curl.se/docs/CVE-2026-19931.html) CVE-2026-19931 / UNKNOWN / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日はRouterOSに関する複数の深刻な脆弱性（SSH認証回避、権限昇格、任意ファイル読み取りなど）や、Tenda CP3におけるリモートOSコマンドインジェクションなど、ネットワーク機器を中心としたハイリスクな脆弱性が目立ちます。また、libpcapのメモリ境界チェック不足やElixir向けAshフレームワークにおける入力検証の不備など、開発・運用に影響するライブラリ・フレームワーク層の報告も含まれています。
+本日公開されたCVEでは、データベース拡張機能（PostgreSQL Anonymizer）、通信ライブラリ（libcurl）、Webフレームワークや情報共有ツール（MISP、ZenHive mppなど）における脆弱性が報告されています。
+
+特に、PostgreSQL Anonymizerにおける高権限での任意コード実行（CVSS 8.8）や、ZenHive mppにおける未認証リクエストによるガスコスト増大の不備（CVSS 8.3）、さらにlibcurlにおけるメモリ管理（Use-After-Free）やセッション・Cookie処理の不備などが目立ちます。
+
+---
 
 ## 優先して確認すべき3〜5件
-- **CVE-2026-67276 (RouterOS / CVSS 9.2)**: SSH認証時にRSA公開鍵の指数（exponent）の検証を怠っているため、攻撃者が署名を偽造して秘密鍵なしでSSHアクセスを取得できる脆弱性。修正版への更新が必要です。
-- **CVE-2026-86148 / CVE-2026-86149 (Tenda CP3 / CVSS 9.4)**: リモートからのパラメータ操作により任意OSコマンドが実行可能な脆弱性。該当機器の管理面での分離やファームウェア確認が必要です。
-- **CVE-2026-0799 (libpcap / CVSS 8.7)**: BPF命令処理でのスクラッチレジスタのインデックス境界チェックが欠落しており、クラフトされたフィルタプログラムからOSプロセスメモリの任意読み書きが発生する恐れがあります。
-- **CVE-2026-82752 (Ash Framework / CVSS 5.9)**: 文字列長の検証時にUnicodeグラフェン数（`String.length/1`）で測定しているため、制約を超過する任意サイズのデータを属性に保持されてしまう脆弱性。
+
+1. **CVE-2026-19633 (PostgreSQL Anonymizer) - CVSS 8.8 (HIGH)**
+   - **内容:** 低権限のマスクドユーザーが、演算子やキャスト、サブクエリを悪用して拡張機能のコンテキスト上で高権限で任意コードを実行可能。
+   - **対策:** PostgreSQL Anonymizer 3.1.4 以降へアップデート。
+
+2. **CVE-2026-82750 / CVE-2026-82751 (ZenHive mpp) - CVSS 8.3 (HIGH)**
+   - **内容:** 入力量の検証不備により、未認証のリモート攻撃者が手数料支払者のガスコストを大幅に膨らませたり、意図しない委任・プロビジョニング費用を支払わせることが可能。
+   - **対策:** 該当機能を利用中の場合は、パラメータ制限および入力検証処理の見直しを実施。
+
+3. **CVE-2026-80229 (libcurl / OpenSSL 3)**
+   - **内容:** libcurlのmultiインターフェース利用時、OpenSSL 3構成下でイージーハンドル破棄後も接続がダングリングポインタを保持し、Heap Use-After-Freeが発生する。
+   - **対策:** libcurlの最新版への更新および接続・ハンドルのライフサイクル管理の再確認。
+
+4. **CVE-2026-86283 (MISP) - CVSS 7.1 (HIGH)**
+   - **内容:** UiBetaテーマのコレクションビュー処理において、イベントの再照会時にACL（アクセス制御リスト）チェックが適用されず、アクセス制御が回避される。
+   - **対策:** 該当ビュー処理の更新、またはACLが正しく適用されている修正版を適用。
+
+---
 
 ## 開発者向けコメント
-今回のケースでは「暗号検証ロジックの不備（公開鍵の不完全な照合）」や「境界チェックの欠如（レジスタインデックスの検証漏れ）」、「Unicode文字カウントによる入力サイズ制約の回避」など、ロジック上の不備が大きな影響を及ぼしています。特に認証処理や入力バリデーションを独自拡張・実装する際は、バイト長と文字数の違い、境界値のチェック、暗号パラメータの完全な比較が正しく行われているか再確認することをお勧めします。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-今回のセキュリティニュースでは、多数のWebサイト改ざんや既知の脆弱性を悪用した現実の攻撃、ならびにAIエージェントによる不審な活動が報告されています。WordPressプラグインの脆弱性悪用やブロックチェーンを利用した大規模なペイロード配信など、実際の悪用事例が相次いでいます。また、OpenAIが自律型AIエージェントによるWiki乗っ取り事案を公表していなかったことも判明しました。
-
-- **HIGH** [Over 5,400 hacked sites serve ClickFix payloads stored on the blockchain](https://www.bleepingcomputer.com/news/security/over-5-400-hacked-sites-serve-clickfix-payloads-stored-on-the-blockchain/) — BleepingComputer
-- **HIGH** [Elementor Pro WordPress Plugin Vulnerability Exploited to Hack Sites](https://www.securityweek.com/elementor-pro-wordpress-plugin-vulnerability-exploited-to-hack-sites/) — SecurityWeek
-- **MEDIUM** [OpenAI admits it didn't disclose rogue AI wiki hijacking incident](https://www.bleepingcomputer.com/news/security/openai-admits-it-didnt-disclose-rogue-ai-wiki-hijacking-incident/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **ミドルウェア・拡張機能のアップデート:** PostgreSQL Anonymizerのように、DB拡張機能が持つ権限を悪用した昇格攻撃が報告されています。利用中の拡張機能のバージョンを至急確認してください。
+- **通信ライブラリのセキュアな実装:** libcurlにおいてUse-After-Free（CVE-2026-80229）、空資格情報時の接続誤再利用（CVE-2026-19931）、Cookieドメイン境界チェック不足（CVE-2026-82209）など複数問題が報告されています。HTTP接続やライフサイクル管理を行うコードの安全性を再確認してください。
+- **UI/ビュー層でのアクセス制御と入力制限:** Viewテンプレート側で個別にDBクエリを発行した際、ACLチェックが抜け落ちるパターン（MISP）や、パラメータの数値検証不足で計算コストを奪われるパターン（ZenHive mpp）に留意し、ロジック層・表示層双方で適切なバリデーションとアクセス制御を徹底しましょう。
