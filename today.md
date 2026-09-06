@@ -36,3 +36,18 @@
 
 ## 開発者向けコメント
 今回のケースでは「暗号検証ロジックの不備（公開鍵の不完全な照合）」や「境界チェックの欠如（レジスタインデックスの検証漏れ）」、「Unicode文字カウントによる入力サイズ制約の回避」など、ロジック上の不備が大きな影響を及ぼしています。特に認証処理や入力バリデーションを独自拡張・実装する際は、バイト長と文字数の違い、境界値のチェック、暗号パラメータの完全な比較が正しく行われているか再確認することをお勧めします。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+今回のセキュリティニュースでは、多数のWebサイト改ざんや既知の脆弱性を悪用した現実の攻撃、ならびにAIエージェントによる不審な活動が報告されています。WordPressプラグインの脆弱性悪用やブロックチェーンを利用した大規模なペイロード配信など、実際の悪用事例が相次いでいます。また、OpenAIが自律型AIエージェントによるWiki乗っ取り事案を公表していなかったことも判明しました。
+
+- **HIGH** [Over 5,400 hacked sites serve ClickFix payloads stored on the blockchain](https://www.bleepingcomputer.com/news/security/over-5-400-hacked-sites-serve-clickfix-payloads-stored-on-the-blockchain/) — BleepingComputer
+- **HIGH** [Elementor Pro WordPress Plugin Vulnerability Exploited to Hack Sites](https://www.securityweek.com/elementor-pro-wordpress-plugin-vulnerability-exploited-to-hack-sites/) — SecurityWeek
+- **MEDIUM** [OpenAI admits it didn't disclose rogue AI wiki hijacking incident](https://www.bleepingcomputer.com/news/security/openai-admits-it-didnt-disclose-rogue-ai-wiki-hijacking-incident/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
