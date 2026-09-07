@@ -57,3 +57,16 @@
 - **ミドルウェア・拡張機能のアップデート:** PostgreSQL Anonymizerのように、DB拡張機能が持つ権限を悪用した昇格攻撃が報告されています。利用中の拡張機能のバージョンを至急確認してください。
 - **通信ライブラリのセキュアな実装:** libcurlにおいてUse-After-Free（CVE-2026-80229）、空資格情報時の接続誤再利用（CVE-2026-19931）、Cookieドメイン境界チェック不足（CVE-2026-82209）など複数問題が報告されています。HTTP接続やライフサイクル管理を行うコードの安全性を再確認してください。
 - **UI/ビュー層でのアクセス制御と入力制限:** Viewテンプレート側で個別にDBクエリを発行した際、ACLチェックが抜け落ちるパターン（MISP）や、パラメータの数値検証不足で計算コストを奪われるパターン（ZenHive mpp）に留意し、ロジック層・表示層双方で適切なバリデーションとアクセス制御を徹底しましょう。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+フィッシング攻撃において、電子メールセキュリティフィルタを回避するために不可視のUnicode文字を利用する手法が悪用されています。攻撃者はASCIIスマグリング手法を用いてフィッシングのおとりを隠蔽しています。これにより、既存のセキュリティ対策を回避する新たな脅威への注意が必要です。
+
+- **MEDIUM** [Attackers conceal phishing lures using invisible Unicode characters](https://www.bleepingcomputer.com/news/security/attackers-conceal-phishing-lures-using-invisible-unicode-characters/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
