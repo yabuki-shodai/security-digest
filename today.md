@@ -40,3 +40,20 @@
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+MagentoやAdobe Commerceにおける「StyleSmuggler」ゼロデイ脆弱性の実際の悪用や、複数製品のゼロデイエクスプロイト公開が報告されています。また、100万人以上の情報漏えいや200以上の組織を標的としたMFA回避フィッシングなど、広範な影響を及ぼす被害が相次いでいます。さらに、北朝鮮によるLinuxスパイツールやAIエージェントの悪用など、多様化する脅威への警戒が必要です。
+
+- **HIGH** [Magento StyleSmuggler zero-day exploited to deploy Linux backdoor](https://www.bleepingcomputer.com/news/security/magento-stylesmuggler-zero-day-exploited-to-deploy-linux-backdoor/) — BleepingComputer
+- **HIGH** [BigBear Microsoft 365 phishing service bypassed MFA at 258 organizations](https://www.bleepingcomputer.com/news/security/bigbear-microsoft-365-phishing-service-bypassed-mfa-at-258-organizations/) — BleepingComputer
+- **HIGH** [Mathspace discloses data breach affecting over 1 million people](https://www.bleepingcomputer.com/news/security/mathspace-discloses-data-breach-affecting-over-1-million-people/) — BleepingComputer
+- **HIGH** [Nightmare Eclipse Drops CrowdStrike, Nvidia, Avast Zero-Day Exploits](https://www.securityweek.com/nightmare-eclipse-drops-crowdstrike-nvidia-avast-zero-day-exploits/) — SecurityWeek
+- **HIGH** [Adobe Commerce Zero-Day Exploited to Backdoor Online Stores](https://www.securityweek.com/adobe-commerce-zero-day-exploited-to-backdoor-online-stores/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
