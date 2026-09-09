@@ -52,3 +52,20 @@
 * **ヘッダーベースのアクセス制御回避:** クライアントが供給する `Host` などのHTTPヘッダーのみを信頼して認証・認可を行うと、簡単に偽装される危険があります。TCP接続の送信元や適切な認証トークンによる検証を行ってください（CVE-2026-82533参照）。
 * **外部コマンド呼び出し時の引数・モード指定:** SQLファイルや外部テキストを CLI ツール（`mysql` 等）へ投入する際は、ツール固有のエスケープシーケンスやインサイドコマンド（例: `\!`）が解釈されないよう、`--binary-mode` の付与や厳格な事前サニタイズを徹底してください（CVE-2026-86733参照）。
 * **認証エンドポイントの網羅的なレート制限:** レギュラーなログイン処理だけでなく、別名・互換用として用意した認証系APIエンドポイントに対しても、同等のレート制限や制御を適用しているか見直す必要があります（CVE-2026-86729参照）。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Microsoftが過去最多となる約970件の脆弱性を修正する更新プログラムを公開し、すでに一部でアクティブな悪用が確認されています。また、F5ネットワーク機器へのルートキット注入や大規模な偽ECサイトによるクレカ情報窃取など、深刻な攻撃手法が報じられています。さらに、アクティブに悪用された脆弱性を24時間以内に報告させるEUサイバーレジリエンス法への対応など、規制面の課題も浮上しています。
+
+- **HIGH** [Microsoft posts nearly 1,000 bugs for Patch Tuesday as CISA warns two being exploited](https://therecord.media/microsoft-patch-tuesday-september-2026) — The Record
+- **HIGH** [Microsoft Plugs Nearly 1,000 Security Holes](https://krebsonsecurity.com/2026/09/microsoft-plugs-nearly-1000-security-holes/) — Krebs on Security
+- **HIGH** [Patch Tuesday Sets Another Record With 974 CVEs](https://www.darkreading.com/vulnerabilities-threats/patch-tuesday-another-record-974-cves) — Dark Reading
+- **HIGH** [DoppelCart fraud network uses 119,000 fake shops to steal credit cards](https://www.bleepingcomputer.com/news/security/doppelcart-fraud-network-uses-119-000-fake-shops-to-steal-credit-cards/) — BleepingComputer
+- **HIGH** [Hackers breach F5 BIG-IP APM devices to deploy Linux rootkit](https://www.bleepingcomputer.com/news/security/hackers-breach-f5-big-ip-apm-devices-to-deploy-linux-rootkit/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
