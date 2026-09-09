@@ -1,59 +1,54 @@
-# CVE Digest Dashboard (2026-09-08)
+# CVE Digest Dashboard (2026-09-09)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 7
-- High件数: 16
+- Critical件数: 4
+- High件数: 18
 - KEV件数: 0
 - Frontend件数: 1
-- Backend件数: 7
-- Gemini総括: fallback
+- Backend件数: 29
+- Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-08/frontend-summary.md)
-- [Backend Summary](docs/2026-09-08/backend-summary.md)
+- [Frontend Summary](docs/2026-09-09/frontend-summary.md)
+- [Backend Summary](docs/2026-09-09/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-18922](https://access.redhat.com/security/cve/CVE-2026-18922) CVE-2026-18922 / CRITICAL / security
-- [CVE-2026-7861](https://siberguvenlik.gov.tr/guvenlik-bildirimleri/detay/tr-26-1027) CVE-2026-7861 / CRITICAL / security
-- [CVE-2026-86478](https://www.jetbrains.com/privacy-security/issues-fixed/) CVE-2026-86478 / CRITICAL / security
-- [CVE-2026-86480](https://www.jetbrains.com/privacy-security/issues-fixed/) CVE-2026-86480 / CRITICAL / security
-- [CVE-2026-86542](https://github.com/knowns-dev/knowns/blob/v0.29.1/internal/server/routes/imports.go#L376-L420) CVE-2026-86542 / CRITICAL / security
+- [CVE-2026-82067](https://jira.mongodb.org/browse/SERVER-131229) CVE-2026-82067 / CRITICAL / backend
+- [CVE-2026-82533](https://github.com/deepseek-ai/deepseek-harness/commit/3e24087bfaeabe40b58ba2f7b936895b8f93fe27) CVE-2026-82533 / CRITICAL / backend
+- [CVE-2026-86729](https://github.com/WWBN/AVideo/security/advisories/GHSA-vvqm-mgc5-hhx3) CVE-2026-86729 / CRITICAL / backend
+- [CVE-2026-61516](https://hackwithmike.com/research/advisories/netis/cve-2026-61516) CVE-2026-61516 / CRITICAL / backend
+- [CVE-2026-82058](https://jira.mongodb.org/browse/SERVER-130926) CVE-2026-82058 / HIGH / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-対象CVEは30件です。Geminiの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+本日掲載されたCVEでは、**MongoDB Serverに関する大量の脆弱性報告**（起動時の認証機能無効化、OutOfBoundsメモリ書き込み、リソース枯渇によるDoSなど）が大部分を占めています。また、AI関連ツール（DeepSeek Harness）でのHostヘッダー偽装による認証バイパスや、ネットワーク機器（Netis NX10）、Webアプリケーション（WWBN AVideo、Snipe-IT）における深刻な認証回避・リモートコード実行（RCE）・資格情報漏洩も確認されています。
+
+---
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-18922: CVE-2026-18922
-- CVE-2026-7861: CVE-2026-7861
-- CVE-2026-86478: CVE-2026-86478
-- CVE-2026-86480: CVE-2026-86480
-- CVE-2026-86543: CVE-2026-86543
+1. **CVE-2026-82533（CVSS 9.6 / CRITICAL）：DeepSeek Harness の認証バイパス**
+   - **概要:** HTTPコントロールプレーンAPIが送信元IPではなくクライアントが指定したHostヘッダーのみを検証しているため、ヘッダー偽装により未認証でフルエージェント制御や危険なコマンドの実行が可能になります。
+2. **CVE-2026-82067（CVSS 9.2 / CRITICAL）：MongoDB Server の起動時認証無効化**
+   - **概要:** 設定検証における大文字・小文字の取り扱い不備により、サーバー起動時に認証サブシステムが無効状態のまま維持されることがあります。ネットワークアクセス可能な未認証攻撃者が管理者操作を実行可能です。
+3. **CVE-2026-61516（CVSS 9.8 / CRITICAL）：Netis NX10 の管理者パスワード漏洩**
+   - **概要:** Web管理インターフェースの `sysinfo` リクエストにセッション検証がなく、未認証で管理者パスワードを取得・再利用して管理者セッションを確立できてしまいます。
+4. **CVE-2026-86729（CVSS 9.1 / CRITICAL）：WWBN AVideo のレート制限なし認証エンドポイント**
+   - **概要:** レート制限（`checkRateLimit`）が適用されていないエンドポイント（`get_api_preauthorize`）が露出しており、無制限のブルートフォース攻撃やアカウント存在チェックに悪用される恐れがあります。
+5. **CVE-2026-86733（CVSS 8.6 / HIGH）：Snipe-IT のリストア処理におけるRCE**
+   - **概要:** アップロードされたバックアップZIP内のSQLを `--binary-mode` オプションなしで `mysql` コマンドラインクライアントにストリーミングするため、`\!` などの特殊コマンドを用いた任意のローカルシェルコマンド実行が可能です。
+
+---
 
 ## 開発者向けコメント
 
-使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-MagentoやAdobe Commerceにおける「StyleSmuggler」ゼロデイ脆弱性の実際の悪用や、複数製品のゼロデイエクスプロイト公開が報告されています。また、100万人以上の情報漏えいや200以上の組織を標的としたMFA回避フィッシングなど、広範な影響を及ぼす被害が相次いでいます。さらに、北朝鮮によるLinuxスパイツールやAIエージェントの悪用など、多様化する脅威への警戒が必要です。
-
-- **HIGH** [Magento StyleSmuggler zero-day exploited to deploy Linux backdoor](https://www.bleepingcomputer.com/news/security/magento-stylesmuggler-zero-day-exploited-to-deploy-linux-backdoor/) — BleepingComputer
-- **HIGH** [BigBear Microsoft 365 phishing service bypassed MFA at 258 organizations](https://www.bleepingcomputer.com/news/security/bigbear-microsoft-365-phishing-service-bypassed-mfa-at-258-organizations/) — BleepingComputer
-- **HIGH** [Mathspace discloses data breach affecting over 1 million people](https://www.bleepingcomputer.com/news/security/mathspace-discloses-data-breach-affecting-over-1-million-people/) — BleepingComputer
-- **HIGH** [Nightmare Eclipse Drops CrowdStrike, Nvidia, Avast Zero-Day Exploits](https://www.securityweek.com/nightmare-eclipse-drops-crowdstrike-nvidia-avast-zero-day-exploits/) — SecurityWeek
-- **HIGH** [Adobe Commerce Zero-Day Exploited to Backdoor Online Stores](https://www.securityweek.com/adobe-commerce-zero-day-exploited-to-backdoor-online-stores/) — SecurityWeek
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **MongoDB依存関係の更新:** MongoDB Serverでは認証回避・権限昇格からメモリクラッシュ・DoSまで多数の脆弱性が報告されています。利用中の構成・バージョンを緊急で確認してください。
+* **ヘッダーベースのアクセス制御回避:** クライアントが供給する `Host` などのHTTPヘッダーのみを信頼して認証・認可を行うと、簡単に偽装される危険があります。TCP接続の送信元や適切な認証トークンによる検証を行ってください（CVE-2026-82533参照）。
+* **外部コマンド呼び出し時の引数・モード指定:** SQLファイルや外部テキストを CLI ツール（`mysql` 等）へ投入する際は、ツール固有のエスケープシーケンスやインサイドコマンド（例: `\!`）が解釈されないよう、`--binary-mode` の付与や厳格な事前サニタイズを徹底してください（CVE-2026-86733参照）。
+* **認証エンドポイントの網羅的なレート制限:** レギュラーなログイン処理だけでなく、別名・互換用として用意した認証系APIエンドポイントに対しても、同等のレート制限や制御を適用しているか見直す必要があります（CVE-2026-86729参照）。
