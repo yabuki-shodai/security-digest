@@ -46,3 +46,20 @@
 - **AI/LLM連携ツール（MCPサーバー）の安全策:** MCPサーバー等で「アプリ側でのSQL構文解析による読み取り専用化」に依存すると、コメント挿入や特定文脈（`COPY TO PROGRAM`等）でバイパスされるリスクが生じます。アプリ側のフィルタだけでなく、DBユーザー権限自体を読み取り専用（`SELECT`のみ許可）に絞り込む多層防御を行ってください。
 - **DOMレンダー時の危険な指令の回避:** Vueの`v-html`やjQueryでの`html().text()`によるデコード・注入は、依然として深刻なXSSの温床になっています。生のHTMLレンダリングを避け、テキストバインディング（`v-text`や標準のテキストノード展開）を徹底してください。
 - **暗号鍵の管理と認証実装の再点検:** デフォルトで共通の暗号化キーを出荷する実装（MaxSite CMS）や、クッキー値の検証で十分な身元確認を行わないロジック（MantisBT）は一打でシステム全体の奪取につながります。秘密鍵のユニーク生成と安全なセッション検証ロジックを実装してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Cisco製品における悪用中の致命的な脆弱性や、410万人規模に及ぶ医療データの漏洩など、重大なセキュリティインシデントが報告されています。また、米政府によるサイバー詐欺エコシステムの摘発や、中国AI企業によるデータ抽出疑惑など、法執行や国際情勢に関する動きも見られます。さらに、コンシューマー向け機器の脆弱性や企業のプライバシー訴訟など、多角的な課題が浮き彫りとなっています。
+
+- **HIGH** [Cisco confirms CVE-2026-20079 Secure FMC flaw exploited in attacks](https://www.bleepingcomputer.com/news/security/cisco-confirms-cve-2026-20079-secure-fmc-flaw-exploited-in-attacks/) — BleepingComputer
+- **HIGH** [AdaptHealth confirms 4.1 million people exposed in July cyberattack](https://www.bleepingcomputer.com/news/security/adapthealth-confirms-41-million-people-exposed-in-july-cyberattack/) — BleepingComputer
+- **MEDIUM** [Skullcandy Dime 3 earbuds expose users to Bluetooth hijacking](https://www.bleepingcomputer.com/news/security/skullcandy-dime-3-earbuds-expose-users-to-bluetooth-hijacking/) — BleepingComputer
+- **MEDIUM** [US disrupts Xinbi Guarantee marketplace fueling the cyber scam economy](https://therecord.media/us-disrupts-xinbi-guarantee-marketplace-cybercrime) — The Record
+- **MEDIUM** [US Government Accuses Chinese AI Firms of Distilling Frontier Models](https://www.darkreading.com/application-security/us-government-chinese-ai-firms-distilling-frontier-models) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
