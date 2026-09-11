@@ -1,65 +1,53 @@
-# CVE Digest Dashboard (2026-09-10)
+# CVE Digest Dashboard (2026-09-11)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
-- High件数: 14
+- Critical件数: 3
+- High件数: 20
 - KEV件数: 0
-- Frontend件数: 7
-- Backend件数: 22
+- Frontend件数: 10
+- Backend件数: 20
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-10/frontend-summary.md)
-- [Backend Summary](docs/2026-09-10/backend-summary.md)
+- [Frontend Summary](docs/2026-09-11/frontend-summary.md)
+- [Backend Summary](docs/2026-09-11/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-67401](https://support.cpanel.net/hc/en-us/articles/43187903921559-Security-CVE-2026-67401-SQL-Injection-Vulnerability-in-cPanel-s-EmailTrack-Functionality-September-8-2026) CVE-2026-67401 / CRITICAL / security
-- [CVE-2026-87911](https://aws.amazon.com/security/security-bulletins/2026-104-aws/) CVE-2026-87911 / CRITICAL / backend
-- [CVE-2026-54694](https://github.com/NationalSecurityAgency/skills-service/security/advisories/GHSA-hqfg-c8wf-w2g8) CVE-2026-54694 / CRITICAL / frontend
-- [CVE-2026-47156](https://github.com/mantisbt/mantisbt/commit/e3571c319b1721b41b0dc4b5b5203cbdcbe0c2ee) CVE-2026-47156 / CRITICAL / backend
-- [CVE-2026-67403](https://helpcenter.sara.sage.com/hc/en-us/articles/52106283946651-June-R2-Release-2026) CVE-2026-67403 / CRITICAL / backend
+- [CVE-2026-88007](https://github.com/traefik/traefik/commit/ff39c47d7459dec9cd8de63c1a4e7aa7315bdc1c) CVE-2026-88007 / CRITICAL / backend
+- [CVE-2026-88018](https://github.com/rclone/rclone/commit/90595f34f27f569be6b27c57fe5ab65057d323bd) CVE-2026-88018 / CRITICAL / backend
+- [CVE-2026-88044](https://github.com/rclone/rclone/commit/739403963abf6f58003c2becd5f7c4ad0d644153) CVE-2026-88044 / CRITICAL / backend
+- [CVE-2026-88032](https://jira.mongodb.org/browse/JAVA-6276) CVE-2026-88032 / HIGH / frontend
+- [CVE-2026-88056](https://github.com/angular/angular/commit/3e924cc8dbbb57f23b262cb8f0d7e2bd0673034c) CVE-2026-88056 / HIGH / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日掲載された脆弱性では、cPanelにおけるroot権限奪取が可能なRCEや、MCP（Model Context Protocol）サーバーの読み取り専用制限をバイパスするOSコマンド注入、ハードコードされた暗号鍵によるセッション捏造など、重大度の高い脆弱性が複数報告されています。また、フロントエンドにおけるVueの`v-html`悪用や不適切なクライアントサイドでのエスケープ解除処理に起因するXSS、さらにOAuth/SSRF関連の脆弱性も目立ちます。
+
+本日掲載された23件の脆弱性ダイジェストでは、**rclone** および **Traefik** における重大な認証バイパスやコネクション共有の脆弱性（CVSS 9.0以上が複数件）が顕著です。また、各種主要言語（Python, Java, Rust, C#, PHP, Ruby, C/C++, Go）の **MongoDB ドライバー/ライブラリ** におけるGridFSデータクエリ誤解釈の共通問題や、**Angular (SSR)** に関連するURL検証・エスケープ不備の脆弱性が多数含まれています。
+
+---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-67401 (CVSS 9.9 / CRITICAL)**
-   - **概要:** cPanelのEmailTrackコンポーネントにおけるSQLインジェクション脆弱性。メール有効アカウントからroot権限でのリモートコード実行（RCE）が可能です。
-2. **CVE-2026-87929 (CVSS 9.8 / CRITICAL)**
-   - **概要:** MaxSite CMSにハードコードされたセッション暗号化キーが存在。未認証の第三者が管理者セッションクッキー（HMAC-SHA1）を捏造して管理者権限を奪取できます。
-3. **CVE-2026-87911 (CVSS 9.6 / CRITICAL)**
-   - **概要:** Amazon awslabsの`postgres-mcp-server`におけるSQL検証の不備。デフォルトの読み取り専用モードであっても、`COPY ... TO PROGRAM`文を含んだ入力を処理させることでホスト上でOSコマンドが実行可能です。
-4. **CVE-2026-47156 (CVSS 9.3 / CRITICAL)**
-   - **概要:** MantisBTのSOAP API（`mci_check_login`）における認証バイパス。有効な`cookie_string`を1つ把握できれば、パスワードなしで任意のユーザー（管理者含む）として認証可能です。
-5. **CVE-2026-54694 (CVSS 9.6 / CRITICAL)**
-   - **概要:** SkillTreeにおけるエスケープなしの文字列結合とVueの`v-html`（`innerHTML`設定）の組み合わせによる攻撃チェーン。任意のスクリプト実行につながる重大なXSSが発生します。
+1. **CVE-2026-88018 (rclone / CVSS 9.8: CRITICAL)**
+   - `--auth-proxy` 構成時にアクセスキー検証が不十分となり、空のシークレットに対してSigV4署名がパスして認証バイパスが可能になる脆弱性。
+2. **CVE-2026-88007 (Traefik / CVSS 9.1: CRITICAL)**
+   - HTTP/3有効時に、バックエンドのNTLM/Negotiate認証接続が別クライアント間で共有・再利用され、他人のセッション情報が閲覧可能になる問題。
+3. **CVE-2026-88044 (rclone / CVSS 9.1: CRITICAL)**
+   - S3/FTPサーバーのRCインターフェース構築時にグローバル設定が参照され、認証プロキシ設定が無視されて認証未実施状態になる問題。
+4. **CVE-2026-88009 (Traefik / CVSS 8.8: HIGH)**
+   - HTTP/1リクエストの `URL.Opaque` 処理不備により、正規化と転送先URLに乖離が生じ、パスベースの認可やルーティング制限を迂回される脆弱性。
+5. **CVE-2026-88056, CVE-2026-88058, CVE-2026-88060 (Angular / 各CVSS 8.6: HIGH)**
+   - `@angular/platform-server`（SSR）において、URL検証時の先頭空白除去や、DOM serialization時のエスケープ不足に起因する脆弱性群。
+
+---
 
 ## 開発者向けコメント
 
-- **AI/LLM連携ツール（MCPサーバー）の安全策:** MCPサーバー等で「アプリ側でのSQL構文解析による読み取り専用化」に依存すると、コメント挿入や特定文脈（`COPY TO PROGRAM`等）でバイパスされるリスクが生じます。アプリ側のフィルタだけでなく、DBユーザー権限自体を読み取り専用（`SELECT`のみ許可）に絞り込む多層防御を行ってください。
-- **DOMレンダー時の危険な指令の回避:** Vueの`v-html`やjQueryでの`html().text()`によるデコード・注入は、依然として深刻なXSSの温床になっています。生のHTMLレンダリングを避け、テキストバインディング（`v-text`や標準のテキストノード展開）を徹底してください。
-- **暗号鍵の管理と認証実装の再点検:** デフォルトで共通の暗号化キーを出荷する実装（MaxSite CMS）や、クッキー値の検証で十分な身元確認を行わないロジック（MantisBT）は一打でシステム全体の奪取につながります。秘密鍵のユニーク生成と安全なセッション検証ロジックを実装してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-Cisco製品における悪用中の致命的な脆弱性や、410万人規模に及ぶ医療データの漏洩など、重大なセキュリティインシデントが報告されています。また、米政府によるサイバー詐欺エコシステムの摘発や、中国AI企業によるデータ抽出疑惑など、法執行や国際情勢に関する動きも見られます。さらに、コンシューマー向け機器の脆弱性や企業のプライバシー訴訟など、多角的な課題が浮き彫りとなっています。
-
-- **HIGH** [Cisco confirms CVE-2026-20079 Secure FMC flaw exploited in attacks](https://www.bleepingcomputer.com/news/security/cisco-confirms-cve-2026-20079-secure-fmc-flaw-exploited-in-attacks/) — BleepingComputer
-- **HIGH** [AdaptHealth confirms 4.1 million people exposed in July cyberattack](https://www.bleepingcomputer.com/news/security/adapthealth-confirms-41-million-people-exposed-in-july-cyberattack/) — BleepingComputer
-- **MEDIUM** [Skullcandy Dime 3 earbuds expose users to Bluetooth hijacking](https://www.bleepingcomputer.com/news/security/skullcandy-dime-3-earbuds-expose-users-to-bluetooth-hijacking/) — BleepingComputer
-- **MEDIUM** [US disrupts Xinbi Guarantee marketplace fueling the cyber scam economy](https://therecord.media/us-disrupts-xinbi-guarantee-marketplace-cybercrime) — The Record
-- **MEDIUM** [US Government Accuses Chinese AI Firms of Distilling Frontier Models](https://www.darkreading.com/application-security/us-government-chinese-ai-firms-distilling-frontier-models) — Dark Reading
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **プロキシ・ストレージ利用環境（Traefik / rclone）:** HTTP/3やS3/FTPの認証プロキシ機能を使用している場合、認証回避や別ユーザーの接続乗っ取りが発生する可能性があるため、最優先でバージョンアップを実施してください。
+* **MongoDB利用アプリケーション:** GridFSやLaravel統合パッケージを使用している環境において、入力値がデータ検索条件として誤解釈され、ファイルの不正取得や一括削除につながるリスク（CVSS 8.1〜8.3）が広範囲の言語向けドライバーで発生しています。ライブラリの更新を行ってください。
+* **Angular SSR環境:** AngularのSSR（Server-Side Rendering）機能を利用したフロントエンド開発では、エスケープ漏れやURLパーサー検証回避の影響を受けるため、修正済みバージョン（20.3.30, 21.2.22, 22.1.4 等）への更新を推奨します。
