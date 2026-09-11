@@ -51,3 +51,20 @@
 * **プロキシ・ストレージ利用環境（Traefik / rclone）:** HTTP/3やS3/FTPの認証プロキシ機能を使用している場合、認証回避や別ユーザーの接続乗っ取りが発生する可能性があるため、最優先でバージョンアップを実施してください。
 * **MongoDB利用アプリケーション:** GridFSやLaravel統合パッケージを使用している環境において、入力値がデータ検索条件として誤解釈され、ファイルの不正取得や一括削除につながるリスク（CVSS 8.1〜8.3）が広範囲の言語向けドライバーで発生しています。ライブラリの更新を行ってください。
 * **Angular SSR環境:** AngularのSSR（Server-Side Rendering）機能を利用したフロントエンド開発では、エスケープ漏れやURLパーサー検証回避の影響を受けるため、修正済みバージョン（20.3.30, 21.2.22, 22.1.4 等）への更新を推奨します。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+ランサムウェアとスパイウェアの機能を兼ね備えた新たなAndroidマルウェアの発生や、1億5千件規模の免許証スキャンデータの漏えいなど、深刻なサイバー脅威が報告されています。また、Microsoft Graph APIを悪用した企業データ侵入や、Windows Server等の更新プログラムによる障害など、実運用における影響度の高い課題が目立ちます。さらに米財務省による詐欺情報共有の呼びかけや人事・M&Aなど業界動向も報じられました。
+
+- **HIGH** [New Android malware encrypts files, steals data, and harasses victims](https://www.bleepingcomputer.com/news/security/new-android-malware-encrypts-files-steals-data-and-harasses-victims/) — BleepingComputer
+- **HIGH** [Voice Callers Exploit BYOD to Reach Microsoft 365, Corporate Data](https://www.darkreading.com/threat-intelligence/voice-callers-exploit-byod-microsoft-365-corporate-data) — Dark Reading
+- **HIGH** [September Windows Server updates break Remote Desktop Services](https://www.bleepingcomputer.com/news/microsoft/september-windows-server-updates-break-remote-desktop-services/) — BleepingComputer
+- **HIGH** [IDScan confirms breach after hackers offer 153 million driver’s license scans for sale](https://therecord.media/idscan-data-breach-notice-drivers-licenses) — The Record
+- **MEDIUM** [Treasury urges banks to file cyber scam reports, noting nearly $13 billion in losses since 2023](https://therecord.media/treasury-urges-banks-report-cyber-scams) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
