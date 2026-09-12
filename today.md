@@ -1,79 +1,51 @@
-# CVE Digest Dashboard (2026-09-12)
+# CVE Digest Dashboard (2026-09-13)
 
 ## Overview
 
-- Total: 30
+- Total: 7
 - Critical件数: 2
-- High件数: 6
+- High件数: 5
 - KEV件数: 0
-- Frontend件数: 6
-- Backend件数: 24
+- Frontend件数: 0
+- Backend件数: 1
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-12/frontend-summary.md)
-- [Backend Summary](docs/2026-09-12/backend-summary.md)
+- [Frontend Summary](docs/2026-09-13/frontend-summary.md)
+- [Backend Summary](docs/2026-09-13/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-3869](https://download.se.com/files?p_Doc_Ref=SEVD-2026-251-04&p_enDocType=Security+and+Safety+Notice&p_File_Name=SEVD-2026-251-04.pdf) CVE-2026-3869 / CRITICAL / backend
-- [CVE-2026-54072](https://github.com/authorizerdev/authorizer/security/advisories/GHSA-h29v-hj44-q8cv) CVE-2026-54072 / CRITICAL / frontend
-- [CVE-2026-68497](https://github.com/FasterXML/jackson-databind/commit/a99b7e74c8928f43f6975773a8c862c8316178bd) CVE-2026-68497 / HIGH / backend
-- [CVE-2026-89090](https://aws.amazon.com/security/security-bulletins/2026-110-aws/) CVE-2026-89090 / HIGH / backend
-- [CVE-2026-89099](https://jira.mongodb.org/browse/SERVER-134063) CVE-2026-89099 / HIGH / backend
+- [CVE-2026-90558](https://github.com/irontec/sngrep) CVE-2026-90558 / CRITICAL / security
+- [CVE-2026-90647](https://www.ase-systems.com/wp-content/uploads/2026/07/CYB_2026_86278_Advisory_v1.0.pdf) CVE-2026-90647 / CRITICAL / security
+- [CVE-2026-90556](https://github.com/freeciv/freeciv) CVE-2026-90556 / HIGH / security
+- [CVE-2026-90559](https://github.com/xerial/snappy-java) CVE-2026-90559 / HIGH / security
+- [CVE-2026-90560](https://github.com/luben/zstd-jni) CVE-2026-90560 / HIGH / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日の脆弱性情報では、**OAuth認証サーバーにおけるトークン奪取につながる欠陥**や**GraphQL/API層での認可制御の不備**、さらには**SQLインジェクション**や**SDK・DBのクラッシュ（DoS）問題**が目立ちます。特に、認証基盤や各種フレームワーク・ライブラリのセキュリティ構成に関する確認が重要です。
+本日公開された脆弱性は全7件で、最高でCVSS 9.8の深刻な脆弱性が含まれています。パケット解析ツール（sngrep）におけるリモートコード実行（RCE）の恐れがあるスタックバッファオーバーフローや、通信テストツール（ASE2000）での中間者攻撃（MitM）につながる証明書検証の不備がCRITICALとして報告されています。また、Java開発で広く使われるライブラリ（`zstd-jni`, `snappy-java`）での境界外アクセスによるJVM停止、Flatpakのサンドボックス回避、openstatusでのSSRFなど、多様な層で影響のある脆弱性が含まれています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-54072 (CRITICAL, CVSS 9.3) - Authorizer 認証サーバー**
-   - **概要:** `/authorize` エンドポイントで `redirect_uri` の検証が行われず、リダイレクト時にアクセストークンやリフレッシュトークンが外部へ漏洩する。
-   - **対策:** 2.2.1 以降へアップデート。
-
-2. **CVE-2026-3869 (CRITICAL, CVSS 9.2) - PLC 認証メカニズム**
-   - **概要:** 認証アルゴリズムの実装不備（CWE-303）により、機密性・完全性・利用可能性が脅かされる可能性がある。
-   - **対策:** 関連機器・プロジェクトのアクセス制御および修正パッチの確認。
-
-3. **CVE-2026-72708 (HIGH, CVSS 8.7) - SPIP (CMS)**
-   - **概要:** サイトマップ用エスケープ処理の欠陥により、未認証の攻撃者が任意SQLを実行できる Blind SQL Injection 脆弱性。
-   - **対策:** SPIP 4.4.18 以降へアップデート。
-
-4. **CVE-2026-89090 (HIGH, CVSS 8.2) - AWS SDK for Go v2**
-   - **概要:** 不正なイベントストリームデータを受信した際、未復旧のパニック（Go panic）が発生し、アプリプロセスが停止する。
-   - **対策:** `release-2026-03-23` 以降に更新。
-
-5. **CVE-2026-49463 (MEDIUM, CVSS 6.5) / CVE-2026-49462 (MEDIUM, CVSS 5.3) - NL Portal (GraphQL)**
-   - **概要:** GraphQLリゾルバでのユーザー別認可チェックの欠如（他人のドキュメント等の参照）および本番環境でのGraphiQL/スキーマ参照の露出。
-   - **対策:** 3.0.1 以降への更新とイントロスペクション設定の確認。
+1. **CVE-2026-90558（sngrep / CVSS 9.8: CRITICAL）**
+   - **概要:** 255バイトを超えるSIPヘッダ値のフォーマット処理においてスタックバッファオーバーフローが発生。悪意のあるパケットによるクラッシュや任意コード実行の恐れ。
+2. **CVE-2026-90647（ASE2000 V2 Communication Test Set / CVSS 9.1: CRITICAL）**
+   - **概要:** TLSクライアント処理での不適切な証明書検証により、ネットワーク上の攻撃者による中間者（MitM）攻撃および暗号化通信のバイパスが可能。
+3. **CVE-2026-90560 & CVE-2026-90559（zstd-jni: CVSS 8.8 / snappy-java: CVSS 8.7: HIGH）**
+   - **概要:** 解凍・辞書処理時のオフセットやバッファ容量の検証欠如により、境界外読み取り/書き込みが発生。攻撃者によるメモリ情報の漏洩やJVMの異常終了を引き起こす可能性。
+4. **CVE-2026-90616（Flatpak / CVSS 7.4: HIGH）**
+   - **概要:** シンボリックリンク保護の不備により、サンドボックス内の悪意あるアプリがホスト上の任意ファイルへアクセスし、ホスト上での任意コード実行へ権限昇格できる問題。
 
 ---
 
 ## 開発者向けコメント
 
-- **OAuth/認証リダイレクトの再確認:** `redirect_uri` のドメイン検証漏れは、認証トークンがそのまま第三者に渡る重大な欠陥となります。ホワイトリスト検証が確実に行われているか再点検してください。
-- **GraphQLにおける認可とデバッグ機能制御:** スキーマ定義だけでなく、各リゾルバ層で「認証済みユーザーがそのオブジェクトへのアクセス権を持つか（BOLA対策）」を個別に検証してください。また、本番環境での GraphiQL ツールやスキーマイントロスペクションの無効化も徹底しましょう。
-- **サードパーティライブラリの例外ハンドリング:** SDKや共通ライブラリ（AWS SDK, jackson-databind等）のデータパース時にアプリ全体が落とされないよう、最新版への追従と適切なエラー処理を行ってください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-生成AIを悪用したフィッシングメールの自動作成やアプリからの機密抽出など、AIを利用した攻撃の高度化が顕著になっています。また、窃取された認証情報を悪用したフロリダ州の運転データベース侵害や、パスキーを装ったMicrosoft 365からのデータ窃取など、実際の被害も相次いでいます。これに対し、政府機関による透明性の高い障害報告の要請やAIガバナンスの緊急整備が求められています。
-
-- **HIGH** [Hackers abused Claude to extract secrets from 1.8M Android apps](https://www.bleepingcomputer.com/news/security/hackers-abused-claude-to-extract-secrets-from-18m-android-apps/) — BleepingComputer
-- **HIGH** [Florida says motor vehicle data breach tied to credentials stolen from officer’s personal device](https://therecord.media/florida-shiny-hunters-motor-vehicle) — The Record
-- **HIGH** [Threat Actor Generates 1M Personalized Fraud Emails in 3 Days](https://www.darkreading.com/cyberattacks-data-breaches/1m-personalized-fraud-emails-3-days) — Dark Reading
-- **HIGH** [Florida confirms DMV database breached via stolen police account](https://www.bleepingcomputer.com/news/security/florida-confirms-dmv-database-breached-via-stolen-police-account/) — BleepingComputer
-- **HIGH** [Passkey-themed phishing attacks lead to Microsoft 365 data theft](https://www.bleepingcomputer.com/news/security/passkey-themed-phishing-attacks-lead-to-microsoft-365-data-theft/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **Java系圧縮・解凍ライブラリの確認:** `zstd-jni` や `snappy-java` を利用しているプロジェクトでは、不正なデータ入力によってJVMが強制終了するリスクがあります。依存関係のバージョンチェックを実施してください。
+* **入力バッファおよび証明書検証の再確認:** `sngrep` のようにパケットヘッダ長を盲信した処理や、`ASE2000` のように証明書の検証ロジックをバイパスできる構成は致命的な脆弱性につながります。C/C++でのバッファ境界チェックや、TLS実装時の検証処理を徹底しましょう。
+* **アクセス制御とパス検証:** サンドボックス構造（Flatpak）でのシンボリックリンク攻撃や、プロキシ処理（openstatusのSSRF）に見られるように、ユーザーが制御可能なパスやURLを扱う際は適切な検証・制限を組み込むことが重要です。
