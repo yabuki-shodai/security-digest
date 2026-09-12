@@ -60,3 +60,20 @@
 - **OAuth/認証リダイレクトの再確認:** `redirect_uri` のドメイン検証漏れは、認証トークンがそのまま第三者に渡る重大な欠陥となります。ホワイトリスト検証が確実に行われているか再点検してください。
 - **GraphQLにおける認可とデバッグ機能制御:** スキーマ定義だけでなく、各リゾルバ層で「認証済みユーザーがそのオブジェクトへのアクセス権を持つか（BOLA対策）」を個別に検証してください。また、本番環境での GraphiQL ツールやスキーマイントロスペクションの無効化も徹底しましょう。
 - **サードパーティライブラリの例外ハンドリング:** SDKや共通ライブラリ（AWS SDK, jackson-databind等）のデータパース時にアプリ全体が落とされないよう、最新版への追従と適切なエラー処理を行ってください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+生成AIを悪用したフィッシングメールの自動作成やアプリからの機密抽出など、AIを利用した攻撃の高度化が顕著になっています。また、窃取された認証情報を悪用したフロリダ州の運転データベース侵害や、パスキーを装ったMicrosoft 365からのデータ窃取など、実際の被害も相次いでいます。これに対し、政府機関による透明性の高い障害報告の要請やAIガバナンスの緊急整備が求められています。
+
+- **HIGH** [Hackers abused Claude to extract secrets from 1.8M Android apps](https://www.bleepingcomputer.com/news/security/hackers-abused-claude-to-extract-secrets-from-18m-android-apps/) — BleepingComputer
+- **HIGH** [Florida says motor vehicle data breach tied to credentials stolen from officer’s personal device](https://therecord.media/florida-shiny-hunters-motor-vehicle) — The Record
+- **HIGH** [Threat Actor Generates 1M Personalized Fraud Emails in 3 Days](https://www.darkreading.com/cyberattacks-data-breaches/1m-personalized-fraud-emails-3-days) — Dark Reading
+- **HIGH** [Florida confirms DMV database breached via stolen police account](https://www.bleepingcomputer.com/news/security/florida-confirms-dmv-database-breached-via-stolen-police-account/) — BleepingComputer
+- **HIGH** [Passkey-themed phishing attacks lead to Microsoft 365 data theft](https://www.bleepingcomputer.com/news/security/passkey-themed-phishing-attacks-lead-to-microsoft-365-data-theft/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
