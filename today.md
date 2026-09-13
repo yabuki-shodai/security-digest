@@ -49,3 +49,18 @@
 * **Java系圧縮・解凍ライブラリの確認:** `zstd-jni` や `snappy-java` を利用しているプロジェクトでは、不正なデータ入力によってJVMが強制終了するリスクがあります。依存関係のバージョンチェックを実施してください。
 * **入力バッファおよび証明書検証の再確認:** `sngrep` のようにパケットヘッダ長を盲信した処理や、`ASE2000` のように証明書の検証ロジックをバイパスできる構成は致命的な脆弱性につながります。C/C++でのバッファ境界チェックや、TLS実装時の検証処理を徹底しましょう。
 * **アクセス制御とパス検証:** サンドボックス構造（Flatpak）でのシンボリックリンク攻撃や、プロキシ処理（openstatusのSSRF）に見られるように、ユーザーが制御可能なパスやURLを扱う際は適切な検証・制限を組み込むことが重要です。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+オランダNCSCがCheck Point VPNにおける深刻な脆弱性の悪用が差し迫っていると警告しています。また、ChromeやWindowsのゼロデイ脆弱性を組み合わせたエクスプロイトキットの悪用が確認されています。さらに、AIを用いた兵器開発の試みとその失敗に関する事例も報告されました。
+
+- **HIGH** [Dutch NCSC: Critical Check Point VPN flaws exploitation is imminent](https://www.bleepingcomputer.com/news/security/dutch-ncsc-critical-check-point-vpn-flaws-exploitation-is-imminent/) — BleepingComputer
+- **HIGH** [BlueMoon Exploit Kit Chains Recent Chrome, Windows Zero-Days](https://www.securityweek.com/bluemoon-exploit-kit-chains-recent-chrome-windows-zero-days/) — SecurityWeek
+- **MEDIUM** [Users in Houthi-Held Yemen Tried to Develop Advanced Weapons With AI, Anthropic Says](https://www.securityweek.com/users-in-houthi-held-yemen-tried-to-develop-advanced-weapons-with-ai-anthropic-says/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
