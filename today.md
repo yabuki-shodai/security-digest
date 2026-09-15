@@ -56,3 +56,20 @@
 * **オブジェクトキーとプロトタイプ汚染の対策**: JavaScriptライブラリ（Yayson、gettext-converter）に見られるように、外部からの入力値をプレーンオブジェクトのキーとして直接扱う実装はプロトタイプ汚染を引き起こします。入力キーにおける `__proto__` や `constructor` の検証・拒否、または `Map` オブジェクトの採用を徹底してください。
 * **入力値の妥当性検証とサニタイズ**: LangChain MongoDBでのNoSQLインジェクションやArgos SDKでのCIパラメータ経由のコマンド注入（`execSync`）など、信頼できない入力値がバックエンドやシェルコマンドに直接渡る実装が散見されます。演算子や特殊文字の無害化・検証処理を実装してください。
 * **依存ライブラリの最新化**: gRPC-Goやcontainred、devpiなどの基盤ライブラリ・ツールにも脆弱性が報告されています。利用している依存パッケージのバージョンを確認し、修正版への更新を推奨します。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+GitLabにおける最高深刻度の脆弱性や、露出したVite開発サーバーを狙う大規模スキャンなど、開発・クラウド基盤を標的とした深刻な脅威が報告されています。また、日本のデジタル庁におけるVPN脆弱性を原因とした個人情報漏えいや、Cisco脆弱性を連鎖悪用する攻撃グループ「Sandworm」など、実被害を伴う攻撃も相次いでいます。さらに、今月のセキュリティ更新に起因する障害に対処するため、Microsoftが緊急の帯域外アップデートを配信しています。
+
+- **HIGH** ['Sandworm' Chains Cisco Vulnerabilities to Deploy Cyclops Blink](https://www.darkreading.com/cyberattacks-data-breaches/sandworm-chains-cisco-vulnerabilities-cyclops-blink) — Dark Reading
+- **HIGH** [Japan's Digital Agency says VPN flaw exposed 246,000 personnel records](https://www.bleepingcomputer.com/news/security/japans-digital-agency-says-vpn-flaw-exposed-246-000-personnel-records/) — BleepingComputer
+- **HIGH** [Maximum Severity GitLab Flaw Puts Supply Chains at Risk](https://www.darkreading.com/cyberattacks-data-breaches/maximum-severity-gitlab-flaw-supply-chains-risk) — Dark Reading
+- **HIGH** [Hackers target exposed Vite dev servers to steal AWS, Azure secrets](https://www.bleepingcomputer.com/news/security/hackers-target-exposed-vite-dev-servers-to-steal-aws-azure-secrets/) — BleepingComputer
+- **MEDIUM** [Microsoft releases emergency Windows updates to fix RDS failures](https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-emergency-windows-updates-to-fix-rds-failures/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
