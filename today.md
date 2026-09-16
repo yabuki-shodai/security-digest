@@ -48,3 +48,20 @@
 
 AI/MCP連携ツールやCI/CD基盤など、高度な自動化権限を持つミドルウェアのセキュリティアップデートを最優先で実施してください。
 開発においては、**「パイプライン定義ファイル」や「コンテナイメージのメタデータ（OCIラベル等）」などの設定値を安易に信用せず、実行権限の適用前に対象の権限チェックや入力値のバリデーションを厳格に行うこと**が必要です。また、npx等の外部パッケージ動的実行や、Kubernetes ServiceAccountの引き継ぎ設定に対する最小権限原則の徹底を推奨します。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+プラグインを標的とした悪用中の脆弱性やサプライチェーン攻撃によるバックドア設置など、実際の攻撃事例が相次いで報告されています。また、大手エネルギー企業における顧客データの漏洩や、イランのサイバースパイによる標的型ハッキングなど具体的な被害も確認されました。さらに、Microsoftによるパッチ適用後の緊急修正や新たなMaaSプラットフォームの登場など、多様なセキュリティ動向が見られます。
+
+- **HIGH** [Acronis warns of actively exploited flaw in its cPanel backup plugin](https://www.bleepingcomputer.com/news/security/acronis-warns-of-actively-exploited-flaw-in-its-cpanel-backup-plugin/) — BleepingComputer
+- **HIGH** [Malcious Admin Menu Editor Pro plugin backdoors 1,500 WordPress sites](https://www.bleepingcomputer.com/news/security/malcious-admin-menu-editor-pro-plugin-backdoors-1-500-wordpress-sites/) — BleepingComputer
+- **HIGH** [CenterPoint Energy confirms customer data stolen in cyberattack](https://www.bleepingcomputer.com/news/security/centerpoint-energy-confirms-customer-data-stolen-in-cyberattack/) — BleepingComputer
+- **MEDIUM** [Microsoft Issues Emergency Fixes After Massive Patch Tuesday](https://www.darkreading.com/application-security/microsoft-emergency-fixes-patch-tuesday) — Dark Reading
+- **MEDIUM** [VectraRAT Can Hack Windows Enterprises for $250 per Month](https://www.darkreading.com/endpoint-security/vectrarat-hack-windows-enterprises) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
