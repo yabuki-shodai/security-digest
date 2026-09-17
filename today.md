@@ -40,3 +40,20 @@
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、Krebs on Security、The Recordから10件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [Anthropic wants Claude to analyze your bank account and financial data](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-wants-claude-to-analyze-your-bank-account-and-financial-data/) — BleepingComputer
+- **MEDIUM** [AI Security Spending Jumps as Fear Outpaces Proof of Value](https://www.darkreading.com/cybersecurity-operations/ai-security-spending-jumps-fear-outpaces-proof-value) — Dark Reading
+- **MEDIUM** [Key lawmaker suggests action on AI safety legislation will wait until 2027](https://therecord.media/frontier-act-ai-bill-house-brett-guthrie) — The Record
+- **MEDIUM** [Windows 11 KB5124008 update breaks domain trust for some users](https://www.bleepingcomputer.com/news/microsoft/windows-11-kb5124008-update-breaks-domain-trust-for-some-users/) — BleepingComputer
+- **MEDIUM** [Iranian hackers use CHOSEN BRICK Windows malware to spy on targets](https://www.bleepingcomputer.com/news/security/iranian-hackers-use-chosen-brick-windows-malware-to-spy-on-targets/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
