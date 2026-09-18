@@ -59,3 +59,20 @@
 
 - **ヘッダー起因の認証・信頼境界に注意:** プロキシやWebサーバー経由の認証情報（`REMOTE_USER`等）を扱う際は、リクエストヘッダーからの安易なフォールバックを許可せず、環境変数からのみ取得する設計を徹底してください。
 - **依存ライブラリの最新化:** `Sanic`（ヘッダー/リクエスト分離問題）、`AsyncHttpClient`（クレデンシャル漏洩）、`ExifReader` / `Soup Sieve`（DoS/ReDoS）など、バックエンド・フロントエンド問わずライブラリのアップデートを速やかに実施してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、SecurityWeek、The Recordから10件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [New RatHat Android malware uses AI to automate device control](https://www.bleepingcomputer.com/news/security/new-rathat-android-malware-uses-ai-to-automate-device-control/) — BleepingComputer
+- **MEDIUM** [CISA Ditches Weekly Vulnerability Roundups for Risk-Based Focus](https://www.darkreading.com/cyber-risk/cisa-ditches-weekly-vuln-roundups-risk-based-focus) — Dark Reading
+- **MEDIUM** [European Commission set to push social media restrictions, safety requirements into law](https://therecord.media/european-commission-set-to-push-social-media-kids-restrictions-into-law) — The Record
+- **MEDIUM** [China's FamousSparrow APT Spies on US Politics in Latin America](https://www.darkreading.com/cyberattacks-data-breaches/china-famoussparrow-spies-latin-america) — Dark Reading
+- **MEDIUM** [OpenAI details more cases of AI agents taking unauthorized actions](https://www.bleepingcomputer.com/news/security/openai-details-more-cases-of-ai-agents-taking-unauthorized-actions/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
