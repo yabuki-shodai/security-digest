@@ -55,3 +55,20 @@
 - **Mongoid 利用箇所の急務な点検とアップデート**: 本日 Mongoid に関して、リフレクションによるコード実行・データ削除（CVE-2026-93762, CVE-2026-93765）、JS インジェクション（CVE-2026-93759）、IDOR（CVE-2026-93758）など複数の危険な脆弱性が提示されました。ライブラリの更新に加え、外部からの入力をそのままクエリや埋め込みフィールド名に渡していないかコードを確認してください。
 - **アーカイブ・ドキュメント処理ライブラリの安全対策**: `adm-zip` のように非圧縮サイズを信用してメモリ割り当てを行う脆弱性や、ドキュメントプレビューにおける unsafe URL scheme（`javascript:` 等）の非エスケープ（CVE-2026-91127）が確認されています。入力ファイルの妥当性検証およびライブラリのバージョンアップを実施してください。
 - **HTTP メソッド別の認可・アクセス制御の再確認**: `zot` の事例のように、GET/HEAD 以外の HTTP メソッド（特に DELETE 等）に対する権限検証漏れや、マルチテナント間での識別子照合漏れ（CVE-2026-81505）を防ぐため、API エンドポイントごとのアクセス制御処理を再確認することを推奨します。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Ciscoのゼロデイ脆弱性やGyazoでの大規模なデータ漏えいなど、深刻なインシデントが報告されています。また、偽リポジトリを用いた新たなインフォスチーラーの拡散やAI導入に対するガバナンスの遅れも懸念されています。組織には、ゼロデイ攻撃への対処や厳格なアクセス制御といったセキュリティ対策の強化が求められています。
+
+- **HIGH** [Cisco Zero-Day Highlights API Endpoint Authentication Issues](https://www.darkreading.com/vulnerabilities-threats/cisco-zero-day-api-endpoint-authentication-issues) — Dark Reading
+- **HIGH** [Gyazo server flaw exploited to steal 23.6 million user records](https://www.bleepingcomputer.com/news/security/gyazo-server-flaw-exploited-to-steal-236-million-user-records/) — BleepingComputer
+- **HIGH** [Fake LastPass Authenticator GitHub repos push new Rapuncel infostealer](https://www.bleepingcomputer.com/news/security/fake-lastpass-authenticator-github-repos-push-new-rapuncel-infostealer/) — BleepingComputer
+- **MEDIUM** [In Other News: Ransomware Developer Sentenced, Plugin4Shell AI Attack, Critical SAP Flaw](https://www.securityweek.com/in-other-news-ransomware-developer-sentenced-plugin4shell-ai-attack-critical-sap-flaw/) — SecurityWeek
+- **LOW** [Vectra AI Launches Ascent to Help Address New Era of AI-Driven Attacks](https://www.darkreading.com/cyberattacks-data-breaches/vectra-ai-launches-ascent-new-era-ai-driven-attacks) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
