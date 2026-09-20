@@ -52,3 +52,20 @@
 * **外部データ・リポジトリ処理の安全化**: Gitフックの自動実行やアーカイブの自動解凍（AutoExtract）など、利便性のための自動化処理が攻撃経路（RCEや任意ファイル書き込み）になっています。処理実行前の適切な信頼検証および解凍時のパスバリデーションを徹底してください。
 * **パーサー・文字コード処理の更新**: XMLパーサー（Expat）のような基盤ライブラリの文字コード検証不備は、アプリケーション層でのインジェクションにつながります。依存ライブラリのパッチ適用状況を確認してください。
 * **認可ロジック（否定条件）の検証**: Argo Workflowsの例のように、「〜以外（NotEquals）」といった否定演算子を用いたクエリやフィルター処理において、アクセス制御チェックが正しく適用されているか設計・コードレビューで確認することが推奨されます。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+北朝鮮のハッカー集団による世界規模のデバイス侵害や、AIブラウザエージェントを標的とした新たな脆弱性の発見が報告されています。また、脅迫グループがランサムウェア組織のリークサイトをハックして秘密鍵等を奪う異例の事態も発生しています。その他、AIサービスのプライバシー収集問題やセキュリティ企業の資金調達ニュースも含まれます。
+
+- **HIGH** [BragJack attacks hijack AI browser agents through malicious extensions](https://www.bleepingcomputer.com/news/security/bragjack-attacks-hijack-ai-browser-agents-through-malicious-extensions/) — BleepingComputer
+- **HIGH** [North Korean WaterPlum hackers infected 30,000 devices worldwide](https://www.bleepingcomputer.com/news/security/north-korean-waterplum-hackers-infected-30-000-devices-worldwide/) — BleepingComputer
+- **HIGH** [ShinyHunters hacks Clop leak site, threatens to extort ransomware gang](https://www.bleepingcomputer.com/news/security/shinyhunters-hacks-clop-leak-site-threatens-to-extort-ransomware-gang/) — BleepingComputer
+- **LOW** [TigerByte Cyber Emerges From Stealth With $3 Million in Funding](https://www.securityweek.com/tigerbyte-cyber-emerges-from-stealth-with-3-million-in-funding/) — SecurityWeek
+- **LOW** [Viral AI actress' hotline face-scans every caller, watches their mood](https://www.bleepingcomputer.com/news/security/viral-ai-actress-hotline-face-scans-every-caller-watches-their-mood/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
