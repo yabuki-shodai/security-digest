@@ -13158,6 +13158,14 @@
       "severity": "MEDIUM",
       "title": "CVE-2026-82556"
     },
+    "CVE-2026-82560": {
+      "category": "backend",
+      "cvss": null,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "UNKNOWN",
+      "title": "CVE-2026-82560"
+    },
     "CVE-2026-82578": {
       "category": "backend",
       "cvss": 8.7,
@@ -15277,6 +15285,70 @@
       "kev": false,
       "severity": "CRITICAL",
       "title": "CVE-2026-93765"
+    },
+    "CVE-2026-93956": {
+      "category": "backend",
+      "cvss": 4.0,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "MEDIUM",
+      "title": "CVE-2026-93956"
+    },
+    "CVE-2026-93988": {
+      "category": "security",
+      "cvss": 7.1,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-93988"
+    },
+    "CVE-2026-93990": {
+      "category": "security",
+      "cvss": 8.7,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-93990"
+    },
+    "CVE-2026-93991": {
+      "category": "backend",
+      "cvss": 8.3,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-93991"
+    },
+    "CVE-2026-93992": {
+      "category": "backend",
+      "cvss": 8.1,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-93992"
+    },
+    "CVE-2026-93993": {
+      "category": "security",
+      "cvss": 8.8,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-93993"
+    },
+    "CVE-2026-94054": {
+      "category": "security",
+      "cvss": 7.0,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-94054"
+    },
+    "CVE-2026-94056": {
+      "category": "security",
+      "cvss": 7.5,
+      "first_seen": "2026-09-20",
+      "kev": false,
+      "severity": "HIGH",
+      "title": "CVE-2026-94056"
     },
     "CVE-2026-9585": {
       "category": "frontend",

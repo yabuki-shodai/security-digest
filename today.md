@@ -1,74 +1,54 @@
-# CVE Digest Dashboard (2026-09-19)
+# CVE Digest Dashboard (2026-09-20)
 
 ## Overview
 
-- Total: 30
-- Critical件数: 3
-- High件数: 11
+- Total: 9
+- Critical件数: 0
+- High件数: 7
 - KEV件数: 0
-- Frontend件数: 9
-- Backend件数: 21
+- Frontend件数: 0
+- Backend件数: 4
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-19/frontend-summary.md)
-- [Backend Summary](docs/2026-09-19/backend-summary.md)
+- [Frontend Summary](docs/2026-09-20/frontend-summary.md)
+- [Backend Summary](docs/2026-09-20/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2023-54399](https://cn-sec.com/archives/1861976.html) CVE-2023-54399 / CRITICAL / backend
-- [CVE-2026-93762](https://jira.mongodb.org/browse/MONGOID-5973) CVE-2026-93762 / CRITICAL / backend
-- [CVE-2026-93765](https://jira.mongodb.org/browse/MONGOID-5973) CVE-2026-93765 / CRITICAL / backend
-- [CVE-2026-93559](https://github.com/Forget-C/Jellyfish/issues/37) CVE-2026-93559 / HIGH / backend
-- [CVE-2026-84992](https://github.com/imzbf/md-editor-v3/commit/2c07360420e74087f5bc63032ab155d93e0a0b10) CVE-2026-84992 / MEDIUM / frontend
+- [CVE-2026-93993](https://github.com/mistralai/mistral-vibe) CVE-2026-93993 / HIGH / security
+- [CVE-2026-93988](https://github.com/Qloapps/QloApps) CVE-2026-93988 / HIGH / security
+- [CVE-2026-93990](https://github.com/libexpat/libexpat) CVE-2026-93990 / HIGH / security
+- [CVE-2026-94054](https://lists.exim.org/lurker/message/20260918.121220.0f87338e.en.html) CVE-2026-94054 / HIGH / security
+- [CVE-2026-94056](https://lists.exim.org/lurker/message/20260918.121220.0f87338e.en.html) CVE-2026-94056 / HIGH / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日公表された脆弱性では、**Mongoid (ODM) に関連する無制限リフレクションやクエリ評価不備（CVSS 9.8 を含む）** が多発している点が最も特筆されます。また、**Hongjing e-HR** での認証不要な SQL インジェクションや **zot** コンテナレジストリにおける削除権限バイパスなど、重大なデータ侵害につながるバックエンドの脆弱性が報告されています。さらに、フロントエンドや Node.js ライブラリ領域でも **adm-zip** の DoS (メモリ枯渇) や各種コンポーネントでの XSS / 不適切な URL スキーム許容が確認されています。
+
+本日掲載された脆弱性は計9件です。そのうち7件が「HIGH」の深刻度として評価されています。
+主な影響として、Mistral Vibeにおけるリモートコード実行（RCE）、ExpatでのUTF-16サロゲート検証不備によるXMLインジェクション、Argo Workflowsでの認可バイパスによる情報漏洩、GopeedやQloAppsにおけるパストラバーサル、Eximでのメモリ制御不備（境界外書き込み・未初期化メモリ読み取り）などが含まれています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2023-54399 (CVSS 9.8 / CRITICAL)**
-   - **対象**: Hongjing e-HR (8.2 未満)
-   - **概要**: `/servlet/codesettree` の `categories` パラメータにおける SQL インジェクションの脆弱性。未認証のリモート攻撃者が任意データを閲覧可能で、資格情報テーブルの漏洩リスクがあります。
-2. **CVE-2026-93762 (CVSS 9.8 / CRITICAL)**
-   - **対象**: Mongoid
-   - **概要**: 埋め込みドキュメント処理における安全でないリフレクションの脆弱性。外部からの入力フィールド名により、未認証の第三者が格納データの一覧取得や永久削除を引き起こす恐れがあります。
-3. **CVE-2026-93765 (CVSS 9.1 / CRITICAL)**
-   - **対象**: Mongoid
-   - **概要**: 永続化レイヤーにおける安全でないリフレクション。外部から供給されたキーの処理不備により、意図しない内部メソッドが呼び出され、レコードの削除やアプリケーションの応答停止につながります。
-4. **CVE-2026-61833 (CVSS 8.1 / HIGH)**
-   - **対象**: zot (OCI コンテナレジストリ)
-   - **概要**: Bearer 認証処理において DELETE リクエストに対する独立した削除権限チェックが行われず、特定の認証トークンを持つユーザーが権限を越えてマニフェストや Blob を削除できる問題です。
-5. **CVE-2026-77301 (CVSS 7.5 / HIGH)**
-   - **対象**: adm-zip (0.6.1 未満)
-   - **概要**: ZIP エントリの展開前サイズを検証せずにメモリ割り当て (`Buffer.alloc`) を行うため、細工された小さな ZIP ファイルにより過剰なメモリが消費され DoS に陥ります。
+1. **CVE-2026-93993**（Mistral Vibe | CVSS 8.8 | HIGH）
+   - **概要**: worktree作成時に信頼検証を行う前にgit hooksを実行してしまう脆弱性。攻撃者のリポジトリ（post-checkoutフック）を読み込むことで、任意のシェルコマンドを実行される（RCE）リスクがあります。バージョン2.25.5未満が対象。
+2. **CVE-2026-93990**（Expat | CVSS 8.7 | HIGH）
+   - **概要**: UTF-16入力における上位サロゲートに続く下位サロゲートの検証不備。不正なサロゲートシーケンスによって構文文字がパーサーから隠蔽され、XMLインジェクション攻撃を許す可能性があります。バージョン2.8.4以下が対象。
+3. **CVE-2026-93991**（Argo Workflows | CVSS 8.3 | HIGH）
+   - **概要**: `ListArchivedWorkflows`において`NotEquals`演算子を使用した場合にクラスタースコープのアクセス検証が適用されない脆弱性。ネームスペーススコープの権限を持つ攻撃者が他ネームスペースのアーカイブ情報を取得可能になります。バージョン4.1.0〜4.1.3が対象。
+4. **CVE-2026-93992**（Gopeed | CVSS 8.1 | HIGH）
+   - **概要**: アーカイブ解凍処理におけるパストラバーサルの脆弱性。AutoExtract機能が有効な場合、展開先ディレクトリ外への任意ファイル書き込みが行われるリスクがあります。バージョン2.0.0-beta.3以下が対象。
+5. **CVE-2026-94054** / **CVE-2026-94056**（Exim | CVSS 7.0 / 7.5 | HIGH）
+   - **概要**: 攻撃者が制御するProxy-Protocol使用時に、境界外書き込み（94054）やスタック上の未初期化メモリ読み取り（94056）が発生します。バージョン4.100.1未満が対象。
 
 ---
 
 ## 開発者向けコメント
 
-- **Mongoid 利用箇所の急務な点検とアップデート**: 本日 Mongoid に関して、リフレクションによるコード実行・データ削除（CVE-2026-93762, CVE-2026-93765）、JS インジェクション（CVE-2026-93759）、IDOR（CVE-2026-93758）など複数の危険な脆弱性が提示されました。ライブラリの更新に加え、外部からの入力をそのままクエリや埋め込みフィールド名に渡していないかコードを確認してください。
-- **アーカイブ・ドキュメント処理ライブラリの安全対策**: `adm-zip` のように非圧縮サイズを信用してメモリ割り当てを行う脆弱性や、ドキュメントプレビューにおける unsafe URL scheme（`javascript:` 等）の非エスケープ（CVE-2026-91127）が確認されています。入力ファイルの妥当性検証およびライブラリのバージョンアップを実施してください。
-- **HTTP メソッド別の認可・アクセス制御の再確認**: `zot` の事例のように、GET/HEAD 以外の HTTP メソッド（特に DELETE 等）に対する権限検証漏れや、マルチテナント間での識別子照合漏れ（CVE-2026-81505）を防ぐため、API エンドポイントごとのアクセス制御処理を再確認することを推奨します。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-Ciscoのゼロデイ脆弱性やGyazoでの大規模なデータ漏えいなど、深刻なインシデントが報告されています。また、偽リポジトリを用いた新たなインフォスチーラーの拡散やAI導入に対するガバナンスの遅れも懸念されています。組織には、ゼロデイ攻撃への対処や厳格なアクセス制御といったセキュリティ対策の強化が求められています。
-
-- **HIGH** [Cisco Zero-Day Highlights API Endpoint Authentication Issues](https://www.darkreading.com/vulnerabilities-threats/cisco-zero-day-api-endpoint-authentication-issues) — Dark Reading
-- **HIGH** [Gyazo server flaw exploited to steal 23.6 million user records](https://www.bleepingcomputer.com/news/security/gyazo-server-flaw-exploited-to-steal-236-million-user-records/) — BleepingComputer
-- **HIGH** [Fake LastPass Authenticator GitHub repos push new Rapuncel infostealer](https://www.bleepingcomputer.com/news/security/fake-lastpass-authenticator-github-repos-push-new-rapuncel-infostealer/) — BleepingComputer
-- **MEDIUM** [In Other News: Ransomware Developer Sentenced, Plugin4Shell AI Attack, Critical SAP Flaw](https://www.securityweek.com/in-other-news-ransomware-developer-sentenced-plugin4shell-ai-attack-critical-sap-flaw/) — SecurityWeek
-- **LOW** [Vectra AI Launches Ascent to Help Address New Era of AI-Driven Attacks](https://www.darkreading.com/cyberattacks-data-breaches/vectra-ai-launches-ascent-new-era-ai-driven-attacks) — Dark Reading
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **外部データ・リポジトリ処理の安全化**: Gitフックの自動実行やアーカイブの自動解凍（AutoExtract）など、利便性のための自動化処理が攻撃経路（RCEや任意ファイル書き込み）になっています。処理実行前の適切な信頼検証および解凍時のパスバリデーションを徹底してください。
+* **パーサー・文字コード処理の更新**: XMLパーサー（Expat）のような基盤ライブラリの文字コード検証不備は、アプリケーション層でのインジェクションにつながります。依存ライブラリのパッチ適用状況を確認してください。
+* **認可ロジック（否定条件）の検証**: Argo Workflowsの例のように、「〜以外（NotEquals）」といった否定演算子を用いたクエリやフィルター処理において、アクセス制御チェックが正しく適用されているか設計・コードレビューで確認することが推奨されます。
