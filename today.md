@@ -1,71 +1,62 @@
-# CVE Digest Dashboard (2026-09-20)
+# CVE Digest Dashboard (2026-09-21)
 
 ## Overview
 
-- Total: 9
-- Critical件数: 0
+- Total: 14
+- Critical件数: 4
 - High件数: 7
 - KEV件数: 0
 - Frontend件数: 0
-- Backend件数: 4
+- Backend件数: 8
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-20/frontend-summary.md)
-- [Backend Summary](docs/2026-09-20/backend-summary.md)
+- [Frontend Summary](docs/2026-09-21/frontend-summary.md)
+- [Backend Summary](docs/2026-09-21/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-93993](https://github.com/mistralai/mistral-vibe) CVE-2026-93993 / HIGH / security
-- [CVE-2026-93988](https://github.com/Qloapps/QloApps) CVE-2026-93988 / HIGH / security
-- [CVE-2026-93990](https://github.com/libexpat/libexpat) CVE-2026-93990 / HIGH / security
-- [CVE-2026-94054](https://lists.exim.org/lurker/message/20260918.121220.0f87338e.en.html) CVE-2026-94054 / HIGH / security
-- [CVE-2026-94056](https://lists.exim.org/lurker/message/20260918.121220.0f87338e.en.html) CVE-2026-94056 / HIGH / security
+- [CVE-2026-88856](https://www.OrdaSoft.com/) CVE-2026-88856 / CRITICAL / security
+- [CVE-2026-88857](https://www.OrdaSoft.com/) CVE-2026-88857 / CRITICAL / security
+- [CVE-2026-94089](https://github.com/Walnut1337/CVE/blob/main/poc/poc_crash.py) CVE-2026-94089 / CRITICAL / security
+- [CVE-2026-88854](https://www.OrdaSoft.com/) CVE-2026-88854 / CRITICAL / backend
+- [CVE-2026-94038](https://github.com/NonceGeek/dim-sum-app/) CVE-2026-94038 / HIGH / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-本日掲載された脆弱性は計9件です。そのうち7件が「HIGH」の深刻度として評価されています。
-主な影響として、Mistral Vibeにおけるリモートコード実行（RCE）、ExpatでのUTF-16サロゲート検証不備によるXMLインジェクション、Argo Workflowsでの認可バイパスによる情報漏洩、GopeedやQloAppsにおけるパストラバーサル、Eximでのメモリ制御不備（境界外書き込み・未初期化メモリ読み取り）などが含まれています。
+本日掲載されたCVEでは、CMS拡張機能（Joomlaプラグイン）におけるRCEや未認証SQLインジェクション、ルータ製品における最高深刻度（CVSS 10.0）のスタックバッファオーバーフローが目立ちます。また、機械学習ライブラリにおける不安全なデシリアライズや、Web/API層におけるSSRF・Path Traversalなど、実装上の入力検証不備に起因する脆弱性が多数報告されています。公表済みエクスプロイトが存在する案件も多いため、迅速な把握と対処が求められます。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-93993**（Mistral Vibe | CVSS 8.8 | HIGH）
-   - **概要**: worktree作成時に信頼検証を行う前にgit hooksを実行してしまう脆弱性。攻撃者のリポジトリ（post-checkoutフック）を読み込むことで、任意のシェルコマンドを実行される（RCE）リスクがあります。バージョン2.25.5未満が対象。
-2. **CVE-2026-93990**（Expat | CVSS 8.7 | HIGH）
-   - **概要**: UTF-16入力における上位サロゲートに続く下位サロゲートの検証不備。不正なサロゲートシーケンスによって構文文字がパーサーから隠蔽され、XMLインジェクション攻撃を許す可能性があります。バージョン2.8.4以下が対象。
-3. **CVE-2026-93991**（Argo Workflows | CVSS 8.3 | HIGH）
-   - **概要**: `ListArchivedWorkflows`において`NotEquals`演算子を使用した場合にクラスタースコープのアクセス検証が適用されない脆弱性。ネームスペーススコープの権限を持つ攻撃者が他ネームスペースのアーカイブ情報を取得可能になります。バージョン4.1.0〜4.1.3が対象。
-4. **CVE-2026-93992**（Gopeed | CVSS 8.1 | HIGH）
-   - **概要**: アーカイブ解凍処理におけるパストラバーサルの脆弱性。AutoExtract機能が有効な場合、展開先ディレクトリ外への任意ファイル書き込みが行われるリスクがあります。バージョン2.0.0-beta.3以下が対象。
-5. **CVE-2026-94054** / **CVE-2026-94056**（Exim | CVSS 7.0 / 7.5 | HIGH）
-   - **概要**: 攻撃者が制御するProxy-Protocol使用時に、境界外書き込み（94054）やスタック上の未初期化メモリ読み取り（94056）が発生します。バージョン4.100.1未満が対象。
+1. **CVE-2026-94089 (CVSS 10.0: CRITICAL)**
+   * **対象**: D-Link DIR-868L 認証ハンドラ
+   * **概要**: `strcpy` の不備に起因するスタックベースのバッファオーバーフロー。リモートから認証ID/パスワード引数を操作することで任意コード実行やDoSを引き起こす可能性があります。
+
+2. **CVE-2026-88854 / CVE-2026-88856 / CVE-2026-88857 (CVSS 9.3〜9.4: CRITICAL)**
+   * **対象**: OrdaSoft Joomla Gallery 拡張機能 (< 6.2.7)
+   * **概要**: 未認証でのSQLインジェクション（CVE-2026-88854）のほか、任意PHP関数の直呼び出し（CVE-2026-88856）や拡張子検証なしのファイルアップロード（CVE-2026-88857）によるRCEが複合的に存在します。
+
+3. **CVE-2026-94093 (CVSS 7.5: HIGH)**
+   * **対象**: stable-baselines3 (<= 2.9.0)
+   * **概要**: モデル/リプレイバッファ読み込み時の不安全なデシリアライズ。セキュリティ強化（PyTorchの `weights_only=True`）が後の変更で先祖返り（Revert）したことで、リモートからの不審なモデル読み込みによる攻撃リスクが生じています。
+
+4. **CVE-2026-94044 (CVSS 7.5: HIGH)**
+   * **対象**: 03-lovepreetSingh MCP (ファイル作成API)
+   * **概要**: `filePath` / `content` 引数の検証不備によるPath Traversal。リモートから意図しないディレクトリ構造へファイルが書き込まれるリスクがあります。
 
 ---
 
 ## 開発者向けコメント
 
-* **外部データ・リポジトリ処理の安全化**: Gitフックの自動実行やアーカイブの自動解凍（AutoExtract）など、利便性のための自動化処理が攻撃経路（RCEや任意ファイル書き込み）になっています。処理実行前の適切な信頼検証および解凍時のパスバリデーションを徹底してください。
-* **パーサー・文字コード処理の更新**: XMLパーサー（Expat）のような基盤ライブラリの文字コード検証不備は、アプリケーション層でのインジェクションにつながります。依存ライブラリのパッチ適用状況を確認してください。
-* **認可ロジック（否定条件）の検証**: Argo Workflowsの例のように、「〜以外（NotEquals）」といった否定演算子を用いたクエリやフィルター処理において、アクセス制御チェックが正しく適用されているか設計・コードレビューで確認することが推奨されます。
+* **サニタイズ処理とフレームワークの安全な利用**
+  SQLiやPath Traversal（CVE-2026-88854, CVE-2026-94044）の多くは、フレームワークの不適切な関数使用や独自フィルターの過信、文字列の直接結合が原因です。プレースホルダーを用いた安全なデータバインドとパスの正規化・境界チェックを徹底してください。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
+* **デシリアライズ処理の回帰テスト・設定保持**
+  MLモデル等のデータロード処理（CVE-2026-94093）では、セーフモード設定の解除やPRの先祖返りによって脆弱性が再発するリスクがあります。セキュリティに関わる設定値はテスト等で固定・監視する仕組みを推奨します。
 
-### 今日の総括
-
-北朝鮮のハッカー集団による世界規模のデバイス侵害や、AIブラウザエージェントを標的とした新たな脆弱性の発見が報告されています。また、脅迫グループがランサムウェア組織のリークサイトをハックして秘密鍵等を奪う異例の事態も発生しています。その他、AIサービスのプライバシー収集問題やセキュリティ企業の資金調達ニュースも含まれます。
-
-- **HIGH** [BragJack attacks hijack AI browser agents through malicious extensions](https://www.bleepingcomputer.com/news/security/bragjack-attacks-hijack-ai-browser-agents-through-malicious-extensions/) — BleepingComputer
-- **HIGH** [North Korean WaterPlum hackers infected 30,000 devices worldwide](https://www.bleepingcomputer.com/news/security/north-korean-waterplum-hackers-infected-30-000-devices-worldwide/) — BleepingComputer
-- **HIGH** [ShinyHunters hacks Clop leak site, threatens to extort ransomware gang](https://www.bleepingcomputer.com/news/security/shinyhunters-hacks-clop-leak-site-threatens-to-extort-ransomware-gang/) — BleepingComputer
-- **LOW** [TigerByte Cyber Emerges From Stealth With $3 Million in Funding](https://www.securityweek.com/tigerbyte-cyber-emerges-from-stealth-with-3-million-in-funding/) — SecurityWeek
-- **LOW** [Viral AI actress' hotline face-scans every caller, watches their mood](https://www.bleepingcomputer.com/news/security/viral-ai-actress-hotline-face-scans-every-caller-watches-their-mood/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **アップロード機能における多層防御**
+  ファイルアップロード処理（CVE-2026-88857）では、クライアント側のファイル名やContent-Typeを一切信用せず、サーバー側でのホワイトリスト形式の拡張子検証および実行権限のないディレクトリへのランダム名保存を徹底してください。
