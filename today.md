@@ -60,3 +60,17 @@
 
 * **アップロード機能における多層防御**
   ファイルアップロード処理（CVE-2026-88857）では、クライアント側のファイル名やContent-Typeを一切信用せず、サーバー側でのホワイトリスト形式の拡張子検証および実行権限のないディレクトリへのランダム名保存を徹底してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputerから2件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [Malicious npm packages evade install-script defenses at runtime](https://www.bleepingcomputer.com/news/security/malicious-npm-packages-evade-install-script-defenses-at-runtime/) — BleepingComputer
+- **MEDIUM** [Researchers escape OpenAI Codex sandbox to run commands on host](https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
