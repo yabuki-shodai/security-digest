@@ -64,3 +64,20 @@
 
 * **サードパーティ機能・AI統合機能の認可チェック**
   MaxKB（CVE-2026-77521）のようなAI統合アプリケーションでは、モデルが生成した指示やツール呼び出し（MCP tool / Sandbox Shell等）に対して「人間による承認（human-in-the-loop）」や最小権限原則を強制するガードレールを明示的に組み込むことが不可欠です。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+CISAによるLinuxカーネル脆弱性の能動的悪用警告や、WordPress Coreにおける「Click2Shell」脆弱性のPoC公開など、深刻なシステム脅威が報告されています。また、BigCommerceを狙ったサプライチェーン侵害や偽LastPassインストーラーによるセキュリティ製品回避型マルウェアなど、巧妙な攻撃事例が相次いでいます。さらに、EUによるGoogleへの巨額のプライバシー制裁金や、ハックされたランサムウェアグループによる被害者の再脅迫リスクなど、データ保護を巡る懸念も拡大しています。
+
+- **HIGH** [BigCommerce alerts merchants of data breach linked to Ribon apps](https://www.bleepingcomputer.com/news/security/bigcommerce-alerts-merchants-of-data-breach-linked-to-ribon-apps/) — BleepingComputer
+- **HIGH** [CISA alerts of active exploitation of three Linux kernel flaws](https://www.bleepingcomputer.com/news/security/cisa-alerts-of-active-exploitation-of-three-linux-kernel-flaws/) — BleepingComputer
+- **HIGH** [ShinyHunters Hacked Clop. Now What About Clop's Victims?](https://www.darkreading.com/cyberattacks-data-breaches/shinyhunters-hacked-clop-what-about-clops-victims) — Dark Reading
+- **HIGH** [WordPress Click2Shell flaw lets hackers execute PHP on the server](https://www.bleepingcomputer.com/news/security/wordpress-click2shell-flaw-lets-hackers-execute-php-on-the-server/) — BleepingComputer
+- **HIGH** [Fake LastPass Installers Push Kernel-Level EDR Killer, ‘Rapuncel’ Stealer](https://www.securityweek.com/fake-lastpass-installers-push-kernel-level-edr-killer-rapuncel-stealer/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
