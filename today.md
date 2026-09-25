@@ -40,3 +40,20 @@
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、SecurityWeek、The Recordから10件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** ['Salesbleed' Exploits Salesforce Agents to Enable Slack Phishing](https://www.darkreading.com/application-security/salesbleed-exploits-salesforce-agents-slack-phishing) — Dark Reading
+- **MEDIUM** [MacSync malware uses public iCloud calendars to deliver new payloads](https://www.bleepingcomputer.com/news/security/macsync-malware-uses-public-icloud-calendars-to-deliver-new-payloads/) — BleepingComputer
+- **MEDIUM** [Autonomous AI Hacks Raise Thorny Questions of Legal Accountability](https://www.securityweek.com/autonomous-ai-hacks-raise-thorny-questions-of-legal-accountability/) — SecurityWeek
+- **MEDIUM** [SectopRAT Returns, Hiding Inside a Legitimate Application](https://www.darkreading.com/cyberattacks-data-breaches/sectoprat-returns-hiding-inside-legitimate-application) — Dark Reading
+- **MEDIUM** [Digital forensics firm with US federal contracts covered up ties to Russia, DOJ alleges](https://therecord.media/russia-forensics-technology-doj) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
