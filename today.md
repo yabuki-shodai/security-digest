@@ -42,3 +42,20 @@
 掲載された脆弱性の多くは、Webアプリケーションやプラグインにおける入力検証・権限管理の不備に起因しています。
 * **ファイルアップロード・受信処理の検証徹底**: 拡張子チェックの欠落（CVE-2026-94132）や不十分なファイル検証（CVE-2026-82901）は、Webルートへの悪意あるコード配置（RCE）に直結します。適切なアクセス制御と厳しいバリデーションを設定してください。
 * **認証・認可チェックの厳格化**: リクエストパラメータを過信した認証回避（CVE-2026-85984）や、オブジェクト所有者の適切なチェックを怠る認可不備（CVE-2026-72662, CVE-2026-77203）を防止するため、サーバーサイドでの確実な権限判定を実装してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、SecurityWeekから8件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [ShinyHunters uses WAF bypass trick in Oracle PeopleSoft attacks](https://www.bleepingcomputer.com/news/security/shinyhunters-uses-waf-bypass-trick-in-oracle-peoplesoft-attacks/) — BleepingComputer
+- **MEDIUM** [China and US Agree to Establish AI Safety Channel and Continue Trade and Military Talks](https://www.securityweek.com/china-and-us-agree-to-establish-ai-safety-channel-and-continue-trade-and-military-talks/) — SecurityWeek
+- **MEDIUM** [Claude Opus 5.5 uses 95% fewer em dashes, but its answers are getting longer](https://www.bleepingcomputer.com/news/artificial-intelligence/claude-opus-55-uses-95-percent-fewer-em-dashes-but-its-answers-are-getting-longer/) — BleepingComputer
+- **MEDIUM** [Microsoft pauses KB5002907 update after Office license deactivations](https://www.bleepingcomputer.com/news/microsoft/microsoft-365-kb5002907-update-paused-after-office-license-deactivations/) — BleepingComputer
+- **MEDIUM** [GitHub Actions re-enabled with Mini Shai-Hulud payload still active](https://www.bleepingcomputer.com/news/security/github-actions-re-enabled-with-mini-shai-hulud-payload-still-active/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
