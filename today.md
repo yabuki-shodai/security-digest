@@ -1,59 +1,44 @@
-# CVE Digest Dashboard (2026-09-26)
+# CVE Digest Dashboard (2026-09-27)
 
 ## Overview
 
-- Total: 30
-- Critical件数: 3
-- High件数: 10
+- Total: 12
+- Critical件数: 6
+- High件数: 5
 - KEV件数: 0
-- Frontend件数: 8
-- Backend件数: 22
-- Gemini総括: fallback
+- Frontend件数: 0
+- Backend件数: 8
+- Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-26/frontend-summary.md)
-- [Backend Summary](docs/2026-09-26/backend-summary.md)
+- [Frontend Summary](docs/2026-09-27/frontend-summary.md)
+- [Backend Summary](docs/2026-09-27/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-42322](https://github.com/Piwigo/Piwigo/commit/1e7f7262cb30e6916779f93e66d5d6579ec75a11) CVE-2026-42322 / CRITICAL / backend
-- [CVE-2026-62262](https://github.com/Piwigo/Piwigo/commit/9755d88edf38b94bafdedb0b3aba7304a94e2e5c) CVE-2026-62262 / CRITICAL / backend
-- [CVE-2026-84458](https://github.com/zammad/zammad/commit/0dba387df8e2b46956907975034cd44e4d021b1c) CVE-2026-84458 / CRITICAL / backend
-- [CVE-2026-94445](https://go.dev/cl/838485) CVE-2026-94445 / HIGH / backend
-- [CVE-2026-42323](https://github.com/Piwigo/Piwigo/commit/c7e30da5c1775b531ce9a30aac04134cd714b472) CVE-2026-42323 / HIGH / backend
+- [CVE-2026-94132](https://www.acymailing.com/) CVE-2026-94132 / CRITICAL / security
+- [CVE-2026-82901](https://plugins.trac.wordpress.org/browser/ultimate-addons-for-contact-form-7/tags/3.5.48/addons/pdf-generator/pdf-generator.php#L608) CVE-2026-82901 / CRITICAL / backend
+- [CVE-2026-85984](https://plugins.trac.wordpress.org/browser/miniorange-otp-verification/tags/5.5.5/includes/js/loginform.js#L176) CVE-2026-85984 / CRITICAL / backend
+- [CVE-2026-97160](https://up.lomart.fr/) CVE-2026-97160 / CRITICAL / backend
+- [CVE-2026-97161](https://up.lomart.fr/) CVE-2026-97161 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-対象CVEは30件です。Geminiの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+本日公開された12件の脆弱性一覧では、主にJoomlaやWordPressなどのCMS向けプラグイン・拡張機能における深刻度CRITICALおよびHIGHの脆弱性が多数を占めています。未認証でのリモートコード実行（RCE）、認証バイパス、任意ファイルアップロード、SQLインジェクションのほか、Kibanaにおける認可バイパスや権限昇格の脆弱性が報告されています。
 
 ## 優先して確認すべき3〜5件
-
-- CVE-2026-42322: CVE-2026-42322
-- CVE-2026-62262: CVE-2026-62262
-- CVE-2026-84458: CVE-2026-84458
-- CVE-2026-94445: CVE-2026-94445
-- CVE-2026-42323: CVE-2026-42323
+1. **CVE-2026-97163** (Joomla UP plugin / CVSS 10.0 - CRITICAL)
+   - UPプラグイン拡張機能（5.0.0〜5.2.0、6.0.0〜6.0.29）に存在する、未認証でリモートコードインストールが可能な最高深刻度の脆弱性。
+2. **CVE-2026-85984** (WordPress miniOrange OTP Login / CVSS 9.8 - CRITICAL)
+   - プラグイン（<=5.5.5）の `mo_wp_login_intent` パラメータ不備により、未認証の攻撃者が管理者権限等の認証をバイパスできる脆弱性。
+3. **CVE-2026-94132** (Joomla AcyMailing Enterprise / CVSS 9.5 - CRITICAL)
+   - AcyMailing Enterprise（<11.1.0）のメールボックスアクション機能にて、受信メールの添付ファイルが拡張子チェックなしでWebルート配下に保存され、RCEに繋がる脆弱性。
+4. **CVE-2026-82901** (WordPress Ultra Addons for Contact Form 7 / CVSS 9.8 - CRITICAL)
+   - プラグイン（<=3.5.50）のPDF Generatorモジュール有効時において、ファイル種別の検証不足により未認証での任意ファイルアップロードおよびRCEが可能となる脆弱性。
 
 ## 開発者向けコメント
-
-使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近では、政府機関からの警告を受けたKiteworksによるゼロデイ攻撃防止のためのサーバー一時停止要請や、CISAによる悪用中の脆弱性（WSO2等）に関する注意喚起など、緊急対応を要する情報が相次いでいます。また、WordPress人気プラグイン「Elementor」における深刻な脆弱性報告や、1億人超のデータ侵害に関与した人物への実刑判決も発表されました。さらに、ランサムウェアグループのリークサイトが未修正の脆弱性を突かれて改ざんされる事態も発生しています。
-
-- **HIGH** [U.S. Soldier Gets 70 Months in Prison for AT&T, Verizon Extortions](https://krebsonsecurity.com/2026/09/u-s-soldier-gets-70-months-in-prison-for-att-verizon-extortions/) — Krebs on Security
-- **HIGH** [Kiteworks urges 6-hour server shutdown over potential zero-day attacks](https://www.bleepingcomputer.com/news/security/kiteworks-urges-6-hour-server-shutdown-over-potential-zero-day-attacks/) — BleepingComputer
-- **HIGH** [ShinyHunters hacked Clop leak site using Grav CMS path traversal flaw](https://www.bleepingcomputer.com/news/security/shinyhunters-hacked-clop-leak-site-using-grav-cms-path-traversal-flaw/) — BleepingComputer
-- **HIGH** [Kiteworks urges customers to stop using platform after warning from federal intelligence agencies](https://therecord.media/kiteworks-urges-customers-to-stop-using-systems-incident) — The Record
-- **HIGH** [Elementor WordPress flaw lets attackers create admin accounts](https://www.bleepingcomputer.com/news/security/elementor-wordpress-flaw-lets-attackers-create-admin-accounts/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+掲載された脆弱性の多くは、Webアプリケーションやプラグインにおける入力検証・権限管理の不備に起因しています。
+* **ファイルアップロード・受信処理の検証徹底**: 拡張子チェックの欠落（CVE-2026-94132）や不十分なファイル検証（CVE-2026-82901）は、Webルートへの悪意あるコード配置（RCE）に直結します。適切なアクセス制御と厳しいバリデーションを設定してください。
+* **認証・認可チェックの厳格化**: リクエストパラメータを過信した認証回避（CVE-2026-85984）や、オブジェクト所有者の適切なチェックを怠る認可不備（CVE-2026-72662, CVE-2026-77203）を防止するため、サーバーサイドでの確実な権限判定を実装してください。
