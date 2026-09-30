@@ -1,59 +1,53 @@
-# CVE Digest Dashboard (2026-09-29)
+# CVE Digest Dashboard (2026-09-30)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 3
-- High件数: 11
+- Critical件数: 11
+- High件数: 17
 - KEV件数: 0
-- Frontend件数: 16
-- Backend件数: 14
-- Gemini総括: fallback
+- Frontend件数: 9
+- Backend件数: 21
+- Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-09-29/frontend-summary.md)
-- [Backend Summary](docs/2026-09-29/backend-summary.md)
+- [Frontend Summary](docs/2026-09-30/frontend-summary.md)
+- [Backend Summary](docs/2026-09-30/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-102268](https://github.com/jpadilla/pyjwt/commit/8b4e233a22206b34ec1186e912e75c0b2396ac07) CVE-2026-102268 / CRITICAL / backend
-- [CVE-2026-100752](https://www.ordasoft.com/) CVE-2026-100752 / CRITICAL / backend
-- [CVE-2026-101108](https://www.ordasoft.com/) CVE-2026-101108 / CRITICAL / backend
-- [CVE-2026-102281](https://github.com/nestjs/nest/commit/aa97b5144d8dff1ce700aac521eb86449a679d6f) CVE-2026-102281 / HIGH / backend
-- [CVE-2026-101100](https://github.com/ag-ui-protocol/ag-ui/) CVE-2026-101100 / MEDIUM / frontend
+- [CVE-2026-95311](https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0856730748.html) CVE-2026-95311 / CRITICAL / backend
+- [CVE-2026-95277](https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0856730748.html) CVE-2026-95277 / CRITICAL / backend
+- [CVE-2026-95281](https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0856730748.html) CVE-2026-95281 / CRITICAL / backend
+- [CVE-2026-95283](https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0856730748.html) CVE-2026-95283 / CRITICAL / backend
+- [CVE-2026-95299](https://chromereleases.googleblog.com/2026/09/stable-channel-update-for-desktop_0856730748.html) CVE-2026-95299 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-対象CVEは30件です。Geminiの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+本日公開された脆弱性では、**Chromiumエンジンにおける多数の深刻なメモリ破壊（任意コード実行リスク）**と、**Electronフレームワークにおけるサンドボックス回避・特権昇格の不備**が目立ちます。また、OpenSSLやlibsoupといったネットワーク/TLS/WebSocket基盤ライブラリの脆弱性や、プロキシヘッダー・シンボリックリンク検証の不備による入力検証系の問題も含まれています。
+
+---
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-102268: CVE-2026-102268
-- CVE-2026-100752: CVE-2026-100752
-- CVE-2026-101108: CVE-2026-101108
-- CVE-2026-102281: CVE-2026-102281
-- CVE-2026-101100: CVE-2026-101100
+1. **CVE-2026-95311 ほか（Chromium関連の任意コード実行群）** / CVSS 9.6 (CRITICAL)
+   - **概要:** Google Chrome/ChromiumにおけるUAF（Use-After-Free）やバッファオーバーフローなどの脆弱性。クラフトされたHTMLページにより、サンドボックス外で任意コードが実行される恐れがあります。
+2. **CVE-2026-102676（Electron）** / CVSS 8.3 (HIGH)
+   - **概要:** Node.js統合が無効な親環境であっても、`<webview>` 内のWeb Workerで `nodeIntegrationInWorker` が有効化できてしまい、意図しない高い権限を奪取される恐れがあります。
+3. **CVE-2026-102242（Google MCP Toolbox for Databases）** / CVSS 8.6 (HIGH)
+   - **概要:** `allowedLocalRoots` のパス検証時にシンボリックリンクが正規化されない不備（CWE-59/CWE-22）。攻撃者が許可ディレクトリ外のローカルファイルにアクセス・上書きできる可能性があります。
+4. **CVE-2026-72897（OpenSSL）** / CVSS 7.5 (HIGH)
+   - **概要:** ハンドシェイク途中に `SSL_set_SSL_CTX()` を呼び出してコンテキストを切り替えるTLSサーバーにて、境界外メモリ読み取り（OOB read）が発生する問題です。
+5. **CVE-2026-102559 / CVE-2026-102560（libsoup）** / CVSS 8.6 (HIGH)
+   - **概要:** 大容量のWebSocketフレーム送信処理において、サイズ計算の切り捨て・ラップアラウンドが発生し、ヒープバッファオーバーフローを引き起こす脆弱性です。
+
+---
 
 ## 開発者向けコメント
 
-使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、Dark Reading、SecurityWeek、The Recordから10件を収集しました。重要度HIGHは3件です。
-
-- **HIGH** [One Packet Can Crash OT Servers in Industrial Sectors](https://www.darkreading.com/ics-ot-security/one-packet-crash-servers-tdengine) — Dark Reading
-- **HIGH** [Japan's Keio confirms ransomware attack disrupted business systems](https://www.bleepingcomputer.com/news/security/japans-keio-confirms-ransomware-attack-disrupted-business-systems/) — BleepingComputer
-- **HIGH** [Times Car confirms data breach affecting 6.6 million user accounts](https://www.bleepingcomputer.com/news/security/times-car-confirms-data-breach-affecting-66-million-user-accounts/) — BleepingComputer
-- **MEDIUM** [Carbonato Botnet Puts an AI Agent on Hacked Docker Hosts](https://www.darkreading.com/identity-access-management-security/carbonato-botnet-ai-agent-hacked-docker-hosts) — Dark Reading
-- **MEDIUM** [Dutch police confirm arrest in ShinyHunters hacking investigation](https://www.bleepingcomputer.com/news/security/dutch-police-confirm-arrest-in-shinyhunters-hacking-investigation/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **デスクトップアプリ（Electron）開発者:** Electronのパッチバージョンへの更新を速やかに行ってください。特に `<webview>` や `preload` 処理、サンドボックス境界の構成に依存しているアプリは挙動の検証が必要です。
+- **ブラウザ・組み込みWebプラットフォーム開発者:** Chromiumエンジンの更新（バージョン154.0.8037.57以降への追従）を優先してください。
+- **バックエンド・基盤開発者:** TLS接続切り替えを行うサーバー（OpenSSL利用）やWebSocket通信（libsoup利用）を行っているシステムはライブラリをアップデートしてください。また、ファイルパス検証におけるシンボリックリンクの事前解決や、`X-Forwarded-Host` 等のHTTPヘッダーの無検証な信頼を避ける実装を再確認してください。
