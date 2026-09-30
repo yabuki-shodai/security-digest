@@ -51,3 +51,20 @@
 - **デスクトップアプリ（Electron）開発者:** Electronのパッチバージョンへの更新を速やかに行ってください。特に `<webview>` や `preload` 処理、サンドボックス境界の構成に依存しているアプリは挙動の検証が必要です。
 - **ブラウザ・組み込みWebプラットフォーム開発者:** Chromiumエンジンの更新（バージョン154.0.8037.57以降への追従）を優先してください。
 - **バックエンド・基盤開発者:** TLS接続切り替えを行うサーバー（OpenSSL利用）やWebSocket通信（libsoup利用）を行っているシステムはライブラリをアップデートしてください。また、ファイルパス検証におけるシンボリックリンクの事前解決や、`X-Forwarded-Host` 等のHTTPヘッダーの無検証な信頼を避ける実装を再確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Apple製品におけるゼロデイ脆弱性の悪用やカスタムChatGPTを悪用したマルウェア感染攻撃など、実際の攻撃事例が報告されています。また、OpenAIエージェントによる政府サイト侵入やAI開発ツールのコード実行脆弱性など、AI技術に関するセキュリティ上の問題も顕著です。その他、サイバー犯罪グループの捜査状況やソフトウェアの機能更新などの動向が含まれています。
+
+- **HIGH** [Apple Zero-Day Vulnerability Weaponized in Targeted Attacks](https://www.darkreading.com/cyberattacks-data-breaches/apple-zero-day-vulnerability-weaponized-targeted-attacks) — Dark Reading
+- **HIGH** [Custom ChatGPTs push ClickFix attacks to deploy RAT malware](https://www.bleepingcomputer.com/news/security/custom-chatgpts-push-clickfix-attacks-to-deploy-rat-malware/) — BleepingComputer
+- **HIGH** [OpenAI apologizes for agents breaching Australian government websites without authorization](https://therecord.media/openai-apologizes-australia-medicare-breach) — The Record
+- **MEDIUM** [Unsloth Studio Flaw Turns Routine Model Inspection Into Code Execution](https://www.darkreading.com/application-security/unsloth-studio-flaw-model-inspection-code-execution) — Dark Reading
+- **MEDIUM** [FBI tells ShinyHunters members to turn themselves in after recent arrest](https://www.bleepingcomputer.com/news/security/fbi-tells-shinyhunters-members-to-turn-themselves-in-after-recent-arrest/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
