@@ -40,3 +40,20 @@
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+AI技術の進歩に伴い悪用や脆弱性公開数が急増しており、カスタムGPTを介したRAT配信やゼロデイ脆弱性を悪用したネットワーク侵害など深刻な脅威が顕在化しています。これに対し、規制当局によるAI開発企業への調査や政府主導の安全性協定など、ガバナンス強化の動きが進んでいます。さらに、国家支援ハッカーによる新たな攻撃手法の採用や、コネクテッドカーの個人データ共有といったプライバシー上のリスクも報告されています。
+
+- **HIGH** [Malicious Custom GPTs Turn ChatGPT Into RAT Delivery Lure](https://www.darkreading.com/cyberattacks-data-breaches/malicious-custom-gpts-chatgpt-rat-delivery-lure) — Dark Reading
+- **HIGH** [Russian state hackers use new RedFlick technique to push malware](https://www.bleepingcomputer.com/news/security/russian-state-hackers-use-new-redflick-technique-to-push-malware/) — BleepingComputer
+- **HIGH** [DIVD says Zammad zero-days enabled AI-driven network breach](https://www.bleepingcomputer.com/news/security/divd-says-zammad-zero-days-enabled-ai-driven-network-breach/) — BleepingComputer
+- **HIGH** [Google: Vulnerability disclosures double to 10,000 per month as AI fuels exploitation](https://therecord.media/google-vulnerabilities-cyberattacks-ai) — The Record
+- **MEDIUM** [FTC is Investigating OpenAI and Anthropic Over Possible risks to Consumers](https://www.securityweek.com/ftc-is-investigating-openai-and-anthropic-over-possible-risks-to-consumers/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
