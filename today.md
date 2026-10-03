@@ -47,3 +47,20 @@
 WebフロントエンドおよびNode.js環境に関連する主要パッケージ（Next.js、Nx、Tinypool、ProseMirrorなど）に多数の脆弱性が集中しています。
 
 自社プロジェクトの依存関係（`package-lock.json` や `pnpm-lock.yaml` 等）を速やかに点検し、修正済みバージョンへの更新を行ってください。特にビルドツール（Nx）や開発サーバー（`next dev`）、ワーカー関連ライブラリ（Tinypool）など、開発・CI/CD環境やサーバーサイド処理に影響するリスクが高いため、本番環境のコードだけでなく依存ライブラリ全般のアップデートを優先的に進めることを推奨します。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは3件です。
+
+- **HIGH** [Frontline Education breach exposes school district employee data](https://www.bleepingcomputer.com/news/security/frontline-education-data-breach-impacts-school-district-employees/) — BleepingComputer
+- **HIGH** [Warlock ransomware breach SharePoint in water, telecom operator attacks](https://www.bleepingcomputer.com/news/security/warlock-ransomware-breach-sharepoint-in-water-telecom-operator-attacks/) — BleepingComputer
+- **HIGH** [Kiteworks & Citrix Incidents Show Challenges of Zero-Day Response](https://www.darkreading.com/cybersecurity-operations/kiteworks-citrix-incidents-challenges-zero-day-response) — Dark Reading
+- **MEDIUM** [Judge dismisses spyware case brought by Salvadoran journalists targeted with Pegasus](https://therecord.media/judge-dismisses-spyware-case-brought-by-salvadoran-journalists) — The Record
+- **MEDIUM** [RemoteThreat Bets Security Teams Need to Test What Happens After Defenses Fail](https://www.darkreading.com/cybersecurity-operations/remotethreat-bets-security-teams-need-to-test-what-happens-after-defenses-fail) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
