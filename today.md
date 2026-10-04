@@ -61,3 +61,20 @@
   設定取得APIなどでは、内部で保持しているAPIキーやシークレット情報をそのままレスポンスに含めないよう、フィルタリングロジックを実装してください。
 * **未認証APIへのリソース消費攻撃（DoS）対策:** 
   パスワードリセットなどの未認証エンドポイントで外部サービスAPI呼び出しやサードパーティ検証を行う場合は、レートリミットを導入し、クォータ枯渇（DoS）を防ぐ設計にしましょう。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、SecurityWeekから5件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [Google Gemini could soon get full access to your Mac’s files, apps and the web](https://www.bleepingcomputer.com/news/google/google-gemini-could-soon-get-full-access-to-your-macs-files-apps-and-the-web/) — BleepingComputer
+- **MEDIUM** [ShinyHunters hacker reportedly detained in Jordan, aiding FBI](https://www.bleepingcomputer.com/news/security/shinyhunters-hacker-reportedly-detained-in-jordan-aiding-fbi/) — BleepingComputer
+- **MEDIUM** [Danish university DTU breach exposes data of up to 200,000 people](https://www.bleepingcomputer.com/news/security/danish-university-dtu-breach-exposes-data-of-up-to-200-000-people/) — BleepingComputer
+- **MEDIUM** [doxx.net Raises $38 Million to Prevent AI Agent-on-the-Internet Misadventures](https://www.securityweek.com/doxx-net-raises-38-million-to-prevent-ai-agent-on-the-internet-misadventures/) — SecurityWeek
+- **MEDIUM** [Fortra Patches Critical Vulnerabilities in BoKS](https://www.securityweek.com/fortra-patches-critical-vulnerabilities-in-boks/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
