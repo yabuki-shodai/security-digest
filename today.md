@@ -1,66 +1,63 @@
-# CVE Digest Dashboard (2026-10-03)
+# CVE Digest Dashboard (2026-10-04)
 
 ## Overview
 
-- Total: 30
-- Critical件数: 3
-- High件数: 8
+- Total: 8
+- Critical件数: 0
+- High件数: 6
 - KEV件数: 0
-- Frontend件数: 22
-- Backend件数: 8
+- Frontend件数: 0
+- Backend件数: 3
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-03/frontend-summary.md)
-- [Backend Summary](docs/2026-10-03/backend-summary.md)
+- [Frontend Summary](docs/2026-10-04/frontend-summary.md)
+- [Backend Summary](docs/2026-10-04/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-103628](https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop.html) CVE-2026-103628 / CRITICAL / backend
-- [CVE-2026-104848](https://github.com/tinylibs/tinypool/commit/24df4e730e7d0857a6d226c9b58f8924227404fd) CVE-2026-104848 / CRITICAL / frontend
-- [CVE-2026-104849](https://github.com/tinylibs/tinypool/commit/f41411a3e23324c674f35a19a3240f7a7c40ffbf) CVE-2026-104849 / CRITICAL / frontend
-- [CVE-2026-94483](https://github.com/vercel/next.js/commit/e002ad68bd676bb0ed0c87bb22e3590304763e0b) CVE-2026-94483 / HIGH / frontend
-- [CVE-2026-94484](https://github.com/vercel/next.js/commit/52c94abdd2ea5f416f5e8353ea8a2edd3fe311b8) CVE-2026-94484 / MEDIUM / frontend
+- [CVE-2026-103342](https://patchstack.com/database/wordpress/plugin/unlimited-elements-for-elementor/vulnerability/wordpress-unlimited-elements-for-elementor-free-widgets-addons-templates-plugin-2-0-20-cross-site-scripting-xss-vulnerability?_s_id=cve) CVE-2026-103342 / HIGH / security
+- [CVE-2026-105123](https://github.com/vincent-peugnet/wcms) CVE-2026-105123 / HIGH / security
+- [CVE-2026-96451](https://patchstack.com/database/wordpress/plugin/ultimate-member/vulnerability/wordpress-ultimate-member-plugin-2-13-1-privilege-escalation-vulnerability?_s_id=cve) CVE-2026-96451 / HIGH / security
+- [CVE-2026-103065](https://patchstack.com/database/wordpress/plugin/kirki/vulnerability/wordpress-kirki-plugin-6-3-1-arbitrary-code-execution-vulnerability?_s_id=cve) CVE-2026-103065 / HIGH / security
+- [CVE-2026-105129](https://github.com/laradashboard/laradashboard) CVE-2026-105129 / HIGH / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日公開されたCVEでは、JavaScript/Node.jsエコシステム（Tinypool、Next.js、Nx、ProseMirror、Angularなど）およびブラウザ（Chrome）に関する脆弱性が多数報告されています。特にTinypoolやChromeでCVSS 9.5以上のCritical（緊急）な脆弱性が確認されたほか、Next.jsのSSRFやNxのビルド・開発環境における不備など、Webアプリケーションおよび開発パイプラインに影響を与えるHighクラスの脆弱性が目立ちます。
+本日公開された脆弱性は8件で、CMSや管理ダッシュボード（LaraDashboard、wcms、WordPress関連プラグイン等）に関する脆弱性が中心です。特に、認証・認可の欠陥による**権限昇格**、ファイルアップロード処理の不備による**リモートコード実行（RCE）**、およびAPIからの**機密情報漏洩**が高リスク（HIGH）として報告されています。
+
+---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-103628 (Google Chrome)** - **CVSS 9.6 (CRITICAL)**
-   - WebGLにおける境界外書き込みの脆弱性。巧妙に作成されたHTMLページを介して、サンドボックス外で任意コードが実行されるリスクがあります。
-2. **CVE-2026-104848 / CVE-2026-104849 (Tinypool)** - **CVSS 9.5 (CRITICAL)**
-   - Node.jsワーカープール実装におけるプロトタイプ汚染の脆弱性。`Object.prototype`を汚染されることで、新規ワーカーの生成時に任意JavaScriptの読み込みやモジュールの置換が行われる恐れがあります。
-3. **CVE-2026-94483 (Next.js)** - **CVSS 8.3 (HIGH)**
-   - Image Optimization機能におけるSSRFの脆弱性。`images.remotePatterns`の検証通過後に攻撃者制御のDNS解決を追跡することで、内部プライベートIPアドレスにリクエストが到達する可能性があります。
-4. **CVE-2026-104854 / CVE-2026-104859 (Nx)** - **CVSS 8.5 / 7.3 (HIGH)**
-   - モノレポ管理ツールNxにおける権限不備およびコマンド注入の脆弱性。共有ビルドサーバーでの非特権ユーザーによるUNIXドメインソケットへのアクセスや、Dockerリリース時の不適切な文字列補間によるコマンド実行が可能です。
-5. **CVE-2026-104847 (ProseMirror View)** - **CVSS 8.5 (HIGH)**
-   - クリップボードからのHTMLペースト処理における検証不足の脆弱性。悪意のあるHTMLをエディタにペーストすることで任意JavaScriptが実行される（XSS）危険性があります。
+1. **CVE-2026-105123（wcms / CVSS 8.8 HIGH）**
+   * **概要:** メディアアップロードAPIにおけるパス検証の不備。
+   * **影響:** 認証済みユーザー（エディター権限等）が任意ディレクトリへのPHPファイル設置によるRCEや、任意ファイルの削除を行う可能性があります。
+
+2. **CVE-2026-96451（Ultimate Member / CVSS 8.8 HIGH）**
+   * **概要:** ユーザー制御キーに起因する認可バイパス。
+   * **影響:** 攻撃者が制限を迂回して特権を取得（権限昇格）する恐れがあります。
+
+3. **CVE-2026-105126（LaraDashboard / CVSS 8.6 HIGH）**
+   * **概要:** ロール編集時の不適切な権限管理。
+   * **影響:** Adminロールを持つユーザーがSuperadminへ権限昇格し、最終的に任意コード実行（モジュール追加等）に至る可能性があります（バージョン1.4.8未満が対象）。
+
+4. **CVE-2026-105129（LaraDashboard / CVSS 7.1 HIGH）**
+   * **概要:** 設定API（`/api/settings`）における認可不足。
+   * **影響:** 閲覧権限のみを持つユーザーが、平文で保持されたAI APIキーやメールパスワードなどの機密情報を取得できてしまいます（バージョン1.4.8未満が対象）。
+
+---
 
 ## 開発者向けコメント
 
-WebフロントエンドおよびNode.js環境に関連する主要パッケージ（Next.js、Nx、Tinypool、ProseMirrorなど）に多数の脆弱性が集中しています。
-
-自社プロジェクトの依存関係（`package-lock.json` や `pnpm-lock.yaml` 等）を速やかに点検し、修正済みバージョンへの更新を行ってください。特にビルドツール（Nx）や開発サーバー（`next dev`）、ワーカー関連ライブラリ（Tinypool）など、開発・CI/CD環境やサーバーサイド処理に影響するリスクが高いため、本番環境のコードだけでなく依存ライブラリ全般のアップデートを優先的に進めることを推奨します。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは3件です。
-
-- **HIGH** [Frontline Education breach exposes school district employee data](https://www.bleepingcomputer.com/news/security/frontline-education-data-breach-impacts-school-district-employees/) — BleepingComputer
-- **HIGH** [Warlock ransomware breach SharePoint in water, telecom operator attacks](https://www.bleepingcomputer.com/news/security/warlock-ransomware-breach-sharepoint-in-water-telecom-operator-attacks/) — BleepingComputer
-- **HIGH** [Kiteworks & Citrix Incidents Show Challenges of Zero-Day Response](https://www.darkreading.com/cybersecurity-operations/kiteworks-citrix-incidents-challenges-zero-day-response) — Dark Reading
-- **MEDIUM** [Judge dismisses spyware case brought by Salvadoran journalists targeted with Pegasus](https://therecord.media/judge-dismisses-spyware-case-brought-by-salvadoran-journalists) — The Record
-- **MEDIUM** [RemoteThreat Bets Security Teams Need to Test What Happens After Defenses Fail](https://www.darkreading.com/cybersecurity-operations/remotethreat-bets-security-teams-need-to-test-what-happens-after-defenses-fail) — Dark Reading
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **パスパラメータのトラバーサル対策とアップロード制限:** 
+  ファイル操作APIでは、`../` 等のシーケンスを排除するパス正規化・検証を徹底し、実行可能拡張子（.phpなど）の保存や任意パスへの書き込みを防止してください。
+* **ロール/権限変更ロジックの再確認:** 
+  ロール名の変更や権限付与を行う処理では、「操作者が自分以上の権限を自分や他人に付与できてしまわないか」をバックエンド側で厳密に認可チェックしてください。
+* **APIレスポンスのマスキング/レスポンスフィルタ:** 
+  設定取得APIなどでは、内部で保持しているAPIキーやシークレット情報をそのままレスポンスに含めないよう、フィルタリングロジックを実装してください。
+* **未認証APIへのリソース消費攻撃（DoS）対策:** 
+  パスワードリセットなどの未認証エンドポイントで外部サービスAPI呼び出しやサードパーティ検証を行う場合は、レートリミットを導入し、クォータ枯渇（DoS）を防ぐ設計にしましょう。
