@@ -44,3 +44,18 @@
 - **認証基盤（ZITADEL等）の緊急アップデート**: ZITADELを利用中の場合は、一次認証前の要素登録や外部IdP連携における認証バイパスが多数判明しているため、速やかに修正済みバージョン（4.17.3 / 3.4.15 等以降）へ更新してください。
 - **通信ライブラリのTLS検証設定の確認**: GoやRuby、PHP等のサードパーティ製ライブラリ（`go-micro`, `gopay`, `gist`, `alexpechkarev/google-maps` など）でTLS証明書検証がデフォルト無効になっている事例が頻発しています。依存ライブラリの更新と明示的なTLS検証設定の確認を行ってください。
 - **入力値処理とリソース制限**: ファイル解析時のReDoS（Mammoth.js）や、内部リダイレクトによるSSRF（ZITADELのhttp.Get使用例）など、外部からの入力値を検証せずに処理する実装がないかコードレビューを行ってください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、SecurityWeekから3件を収集しました。重要度HIGHは1件です。
+
+- **HIGH** [Citrix patches NetScaler SAML zero-day exploited in attacks](https://www.bleepingcomputer.com/news/security/citrix-patches-netscaler-saml-zero-day-exploited-in-attacks/) — BleepingComputer
+- **MEDIUM** [Trump Names National Intelligence Director Jay Clayton to Lead a New Federal AI Task Force](https://www.securityweek.com/trump-names-national-intelligence-director-jay-clayton-to-lead-a-new-federal-ai-task-force/) — SecurityWeek
+- **MEDIUM** [Anthropic asks Claude users to share voice data for AI model training](https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-asks-claude-users-to-share-voice-data-for-ai-model-training/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
