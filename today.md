@@ -1,80 +1,46 @@
-# CVE Digest Dashboard (2026-10-04)
+# CVE Digest Dashboard (2026-10-05)
 
 ## Overview
 
-- Total: 8
-- Critical件数: 0
-- High件数: 6
+- Total: 23
+- Critical件数: 10
+- High件数: 11
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 3
+- Frontend件数: 1
+- Backend件数: 15
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-04/frontend-summary.md)
-- [Backend Summary](docs/2026-10-04/backend-summary.md)
+- [Frontend Summary](docs/2026-10-05/frontend-summary.md)
+- [Backend Summary](docs/2026-10-05/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-103342](https://patchstack.com/database/wordpress/plugin/unlimited-elements-for-elementor/vulnerability/wordpress-unlimited-elements-for-elementor-free-widgets-addons-templates-plugin-2-0-20-cross-site-scripting-xss-vulnerability?_s_id=cve) CVE-2026-103342 / HIGH / security
-- [CVE-2026-105123](https://github.com/vincent-peugnet/wcms) CVE-2026-105123 / HIGH / security
-- [CVE-2026-96451](https://patchstack.com/database/wordpress/plugin/ultimate-member/vulnerability/wordpress-ultimate-member-plugin-2-13-1-privilege-escalation-vulnerability?_s_id=cve) CVE-2026-96451 / HIGH / security
-- [CVE-2026-103065](https://patchstack.com/database/wordpress/plugin/kirki/vulnerability/wordpress-kirki-plugin-6-3-1-arbitrary-code-execution-vulnerability?_s_id=cve) CVE-2026-103065 / HIGH / security
-- [CVE-2026-105129](https://github.com/laradashboard/laradashboard) CVE-2026-105129 / HIGH / security
+- [CVE-2026-105086](https://github.com/WWBN/AVideo/commit/c4b6ca95a0ae3efa09919a98879870086cff150e) CVE-2026-105086 / CRITICAL / security
+- [CVE-2026-105209](https://github.com/zitadel/zitadel/security/advisories/GHSA-pq2q-2c6r-75c4) CVE-2026-105209 / CRITICAL / security
+- [CVE-2026-105216](https://github.com/micro/go-micro) CVE-2026-105216 / CRITICAL / backend
+- [CVE-2026-105222](https://github.com/alexpechkarev/google-maps) CVE-2026-105222 / CRITICAL / backend
+- [CVE-2026-105218](https://github.com/go-pay/gopay) CVE-2026-105218 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-本日公開された脆弱性は8件で、CMSや管理ダッシュボード（LaraDashboard、wcms、WordPress関連プラグイン等）に関する脆弱性が中心です。特に、認証・認可の欠陥による**権限昇格**、ファイルアップロード処理の不備による**リモートコード実行（RCE）**、およびAPIからの**機密情報漏洩**が高リスク（HIGH）として報告されています。
-
----
+本日掲載された脆弱性では、ID管理・認証基盤である**ZITADELにおける多数の深刻な認証バイパスおよびアカウント乗っ取りの脆弱性**（CVSS 9.8含む）と、各種通信ライブラリ・SDKにおける**デフォルトでのTLS証明書検証無効化**（CVSS 9.1）が目立ちます。その他にもReDoSやXSSからの任意コード実行、SQLインジェクションなどが報告されており、認証実装および依存ライブラリの設定見直しが強く求められます。
 
 ## 優先して確認すべき3〜5件
-
-1. **CVE-2026-105123（wcms / CVSS 8.8 HIGH）**
-   * **概要:** メディアアップロードAPIにおけるパス検証の不備。
-   * **影響:** 認証済みユーザー（エディター権限等）が任意ディレクトリへのPHPファイル設置によるRCEや、任意ファイルの削除を行う可能性があります。
-
-2. **CVE-2026-96451（Ultimate Member / CVSS 8.8 HIGH）**
-   * **概要:** ユーザー制御キーに起因する認可バイパス。
-   * **影響:** 攻撃者が制限を迂回して特権を取得（権限昇格）する恐れがあります。
-
-3. **CVE-2026-105126（LaraDashboard / CVSS 8.6 HIGH）**
-   * **概要:** ロール編集時の不適切な権限管理。
-   * **影響:** Adminロールを持つユーザーがSuperadminへ権限昇格し、最終的に任意コード実行（モジュール追加等）に至る可能性があります（バージョン1.4.8未満が対象）。
-
-4. **CVE-2026-105129（LaraDashboard / CVSS 7.1 HIGH）**
-   * **概要:** 設定API（`/api/settings`）における認可不足。
-   * **影響:** 閲覧権限のみを持つユーザーが、平文で保持されたAI APIキーやメールパスワードなどの機密情報を取得できてしまいます（バージョン1.4.8未満が対象）。
-
----
+1. **CVE-2026-105207 (ZITADEL) - CVSS 9.8 (CRITICAL)**
+   - 一次認証や権限確認なしに外部IdPアカウントを結合できる不備。ログイン名を知る攻撃者によるアカウント乗っ取りが可能です。
+2. **CVE-2026-105209 (ZITADEL) - CVSS 9.6 (CRITICAL)**
+   - パスキー/パスワードレス登録コード発行時の組織（テナント）チェック不備。別組織のユーザーアカウントの乗っ取りが可能です。
+3. **CVE-2026-105216 (go-micro) - CVSS 9.1 (CRITICAL)**
+   - 共通TLSヘルパーで `InsecureSkipVerify` がデフォルトで `true` に設定されており、中間者（MitM）攻撃によりgRPCやRabbitMQ等の通信盗聴・改ざんが可能です。
+4. **CVE-2026-105218 (gopay) - CVSS 9.1 (CRITICAL)**
+   - デフォルトクライアントでTLS検証が無効化されており、決済プロバイダAPIとの通信が盗聴・改ざんされ、加盟店認証情報や取引データが漏洩する恐れがあります。
+5. **CVE-2026-105211 (ZITADEL) - CVSS 9.2 (CRITICAL)**
+   - Login V2においてサーバーレスポンスからOTPコードが取得できる不備。MFAを突破したアカウント乗っ取りが可能です。
 
 ## 開発者向けコメント
-
-* **パスパラメータのトラバーサル対策とアップロード制限:** 
-  ファイル操作APIでは、`../` 等のシーケンスを排除するパス正規化・検証を徹底し、実行可能拡張子（.phpなど）の保存や任意パスへの書き込みを防止してください。
-* **ロール/権限変更ロジックの再確認:** 
-  ロール名の変更や権限付与を行う処理では、「操作者が自分以上の権限を自分や他人に付与できてしまわないか」をバックエンド側で厳密に認可チェックしてください。
-* **APIレスポンスのマスキング/レスポンスフィルタ:** 
-  設定取得APIなどでは、内部で保持しているAPIキーやシークレット情報をそのままレスポンスに含めないよう、フィルタリングロジックを実装してください。
-* **未認証APIへのリソース消費攻撃（DoS）対策:** 
-  パスワードリセットなどの未認証エンドポイントで外部サービスAPI呼び出しやサードパーティ検証を行う場合は、レートリミットを導入し、クォータ枯渇（DoS）を防ぐ設計にしましょう。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、SecurityWeekから5件を収集しました。重要度HIGHは0件です。
-
-- **MEDIUM** [Google Gemini could soon get full access to your Mac’s files, apps and the web](https://www.bleepingcomputer.com/news/google/google-gemini-could-soon-get-full-access-to-your-macs-files-apps-and-the-web/) — BleepingComputer
-- **MEDIUM** [ShinyHunters hacker reportedly detained in Jordan, aiding FBI](https://www.bleepingcomputer.com/news/security/shinyhunters-hacker-reportedly-detained-in-jordan-aiding-fbi/) — BleepingComputer
-- **MEDIUM** [Danish university DTU breach exposes data of up to 200,000 people](https://www.bleepingcomputer.com/news/security/danish-university-dtu-breach-exposes-data-of-up-to-200-000-people/) — BleepingComputer
-- **MEDIUM** [doxx.net Raises $38 Million to Prevent AI Agent-on-the-Internet Misadventures](https://www.securityweek.com/doxx-net-raises-38-million-to-prevent-ai-agent-on-the-internet-misadventures/) — SecurityWeek
-- **MEDIUM** [Fortra Patches Critical Vulnerabilities in BoKS](https://www.securityweek.com/fortra-patches-critical-vulnerabilities-in-boks/) — SecurityWeek
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **認証基盤（ZITADEL等）の緊急アップデート**: ZITADELを利用中の場合は、一次認証前の要素登録や外部IdP連携における認証バイパスが多数判明しているため、速やかに修正済みバージョン（4.17.3 / 3.4.15 等以降）へ更新してください。
+- **通信ライブラリのTLS検証設定の確認**: GoやRuby、PHP等のサードパーティ製ライブラリ（`go-micro`, `gopay`, `gist`, `alexpechkarev/google-maps` など）でTLS証明書検証がデフォルト無効になっている事例が頻発しています。依存ライブラリの更新と明示的なTLS検証設定の確認を行ってください。
+- **入力値処理とリソース制限**: ファイル解析時のReDoS（Mammoth.js）や、内部リダイレクトによるSSRF（ZITADELのhttp.Get使用例）など、外部からの入力値を検証せずに処理する実装がないかコードレビューを行ってください。
