@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -100,15 +101,48 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
     if system_parts:
         payload["systemInstruction"] = {"parts": [{"text": "\n\n".join(system_parts)}]}
     headers = {"User-Agent": USER_AGENT, "Accept": "application/json", "Content-Type": "application/json", "x-goog-api-key": api_key}
-    try:
-        data = post_json(endpoint, payload, headers, timeout=120)
-    except urllib.error.HTTPError as error:
-        body = error.read().decode("utf-8", errors="replace")
-        print(f"warning: Gemini API request failed ({error.code}): {body}", file=sys.stderr)
+
+    max_retries = max(0, int(models.get("retry_attempts", 3)))
+    base_delay = max(0.0, float(models.get("retry_base_delay_seconds", 5)))
+    max_delay = max(base_delay, float(models.get("retry_max_delay_seconds", 30)))
+    retryable_status_codes = {429, 500, 502, 503, 504}
+
+    for attempt in range(max_retries + 1):
+        try:
+            data = post_json(endpoint, payload, headers, timeout=120)
+            break
+        except urllib.error.HTTPError as error:
+            body = error.read().decode("utf-8", errors="replace")
+            can_retry = error.code in retryable_status_codes and attempt < max_retries
+            if not can_retry:
+                print(f"warning: Gemini API request failed ({error.code}): {body}", file=sys.stderr)
+                return None
+
+            delay = min(max_delay, base_delay * (2**attempt))
+            print(
+                f"warning: Gemini API request failed ({error.code}), "
+                f"retrying in {delay:g}s ({attempt + 1}/{max_retries}): {body}",
+                file=sys.stderr,
+            )
+            time.sleep(delay)
+        except (urllib.error.URLError, TimeoutError, OSError) as error:
+            if attempt >= max_retries:
+                print(f"warning: Gemini API request failed: {error}", file=sys.stderr)
+                return None
+
+            delay = min(max_delay, base_delay * (2**attempt))
+            print(
+                f"warning: Gemini API request failed, "
+                f"retrying in {delay:g}s ({attempt + 1}/{max_retries}): {error}",
+                file=sys.stderr,
+            )
+            time.sleep(delay)
+        except (ValueError, json.JSONDecodeError) as error:
+            print(f"warning: Gemini API request failed: {error}", file=sys.stderr)
+            return None
+    else:
         return None
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError) as error:
-        print(f"warning: Gemini API request failed: {error}", file=sys.stderr)
-        return None
+
     candidates = data.get("candidates", [])
     if not candidates or not isinstance(candidates[0], dict):
         return None
@@ -121,7 +155,6 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
         return None
     text = parts[0].get("text")
     return str(text).strip() if text else None
-
 
 def compact_text(value: str | None, max_length: int = 700) -> str:
     if not value:
