@@ -28,7 +28,7 @@
 
 ### 今日の総括
 
-アパレル大手ASOSやアリゾナ州裁判所での大規模なデータ侵害、WordPressプラグイン脆弱性の実際の悪用など、実害を伴う重大インシデントが相次ぎ報告されました。また、Atlassian製品のクリティカルな脆弱性やPwn2Ownでの多数のゼロデイ脆弱性の発見など、迅速な修正対応が求められるリスクも浮き彫りとなっています。さらに、攻撃者によるペイロード隠蔽手法の進化や、AIを活用した脆弱性診断の推進など、技術面での新たな動きも見られます。
+Atlassian製品での重大な任意ファイルアクセス脆弱性やWordPressプラグインを悪用した実際のハッキング、大規模な個人情報漏えいなど深刻なセキュリティ事案が相次いでいます。また、Pwn2Ownイベントでは多数のゼロデイ脆弱性が実証されたほか、DNSやキャッシュを利用した検知回避手法の進化も報告されています。一方で、AIを活用した脆弱性検査や耐量子暗号への移行準備など、防衛側の技術や組織の対応も焦点となっています。
 
 - **HIGH** [Personal Information for Over 1 Million People Stolen in a Cyberattack on Arizona’s Court System](https://www.securityweek.com/personal-information-for-over-1-million-people-stolen-in-a-cyberattack-on-arizonas-court-system/) — SecurityWeek
 - **HIGH** [Ninja Forms plugin flaw exploited to hack WordPress sites](https://www.bleepingcomputer.com/news/security/ninja-forms-plugin-flaw-exploited-to-hack-wordpress-sites/) — BleepingComputer
