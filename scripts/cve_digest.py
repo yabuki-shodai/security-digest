@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import os
 import sys
-import time
+import time as time_module
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -124,7 +124,7 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
                 f"retrying in {delay:g}s ({attempt + 1}/{max_retries}): {body}",
                 file=sys.stderr,
             )
-            time.sleep(delay)
+            time_module.sleep(delay)
         except (urllib.error.URLError, TimeoutError, OSError) as error:
             if attempt >= max_retries:
                 print(f"warning: Gemini API request failed: {error}", file=sys.stderr)
@@ -136,7 +136,7 @@ def model_text(messages: list[dict[str, str]], config: dict[str, Any], default_m
                 f"retrying in {delay:g}s ({attempt + 1}/{max_retries}): {error}",
                 file=sys.stderr,
             )
-            time.sleep(delay)
+            time_module.sleep(delay)
         except (ValueError, json.JSONDecodeError) as error:
             print(f"warning: Gemini API request failed: {error}", file=sys.stderr)
             return None
