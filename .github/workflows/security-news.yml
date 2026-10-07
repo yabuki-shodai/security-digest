@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: security-news
+  group: security-digest-main-writer
   cancel-in-progress: false
 
 jobs:
@@ -30,6 +30,16 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/security_news.py
+
+      - name: Sync with latest main
+        run: |
+          if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            git stash push --include-untracked -m generated-security-news-output
+            git pull --rebase origin main
+            git stash pop
+          else
+            git pull --rebase origin main
+          fi
 
       - name: Commit generated news
         uses: stefanzweifel/git-auto-commit-action@v5
