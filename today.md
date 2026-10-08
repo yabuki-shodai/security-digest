@@ -60,3 +60,20 @@
   - Cisco製品を利用する環境では多数のCRITICAL/HIGH脆弱性が公開されています。基盤運用チームと連携し、メーカーが提供する修正版へのアップデートを優先的に進めてください。
 - **フロントエンド・ビルド成果物の確認**:
   - Splunkの事例（CVE-2026-76276）のように、本番環境向けのJavaScriptビルド成果物にソースマップが埋め込まれ、意図しないソースコード漏洩につながるケースがあります。ビルド設定でソースマップの出力・公開範囲が適切制御されているか確認しましょう。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは1件です。
+
+- **HIGH** [Ransomware recovery CEO charged over secret ransom payments](https://www.bleepingcomputer.com/news/security/ransomware-recovery-ceo-charged-over-secret-ransom-payments/) — BleepingComputer
+- **MEDIUM** [Australian Gov't Weighs Mandatory AI Incident Reporting](https://www.darkreading.com/cybersecurity-operations/australian-govt-ai-incident-reporting) — Dark Reading
+- **MEDIUM** [FBI: Ongoing FortiBleed attacks lock out FortiGate VPN admins](https://www.bleepingcomputer.com/news/security/fbi-ongoing-fortibleed-attacks-lock-out-fortigate-vpn-admins/) — BleepingComputer
+- **MEDIUM** [Citizen Lab Slams Trump Administration, 'Techno-Fascist' Executives](https://www.darkreading.com/cyber-risk/citizen-lab-slams-trump-administration-techno-fascist-executives) — Dark Reading
+- **MEDIUM** [Anthropic Gives Vetted Defenders Fewer Claude Guardrails](https://www.darkreading.com/vulnerabilities-threats/anthropic-vetted-defenders-claude-guardrails) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
