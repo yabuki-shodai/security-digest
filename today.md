@@ -40,3 +40,20 @@
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは2件です。
+
+- **HIGH** [Ransomware attack disrupts Japan's IDCF Cloud used by govt clients](https://www.bleepingcomputer.com/news/security/ransomware-attack-disrupts-japans-idcf-cloud-used-by-govt-clients/) — BleepingComputer
+- **HIGH** [DOJ charges ransomware recovery CEO for secretly paying hackers](https://therecord.media/ransomware-recovery-charges-doj) — The Record
+- **MEDIUM** [FBI disrupts Chinese hacking tools used to breach critical infrastructure](https://www.bleepingcomputer.com/news/security/fbi-disrupts-chinese-hacking-tools-used-to-breach-critical-infrastructure/) — BleepingComputer
+- **MEDIUM** ['AgentCorruption' Puts AWS Environments At Risk With Single Prompt](https://www.darkreading.com/cloud-security/agentcorruption-aws-environments-at-risk-single-prompt) — Dark Reading
+- **MEDIUM** [Lawmakers warn Google could expose Spirit Airlines data in $10 million AI training deal](https://therecord.media/lawmakers-warn-of-google-spirit-ai-training-deal) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
