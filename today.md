@@ -1,59 +1,41 @@
-# CVE Digest Dashboard (2026-10-09)
+# CVE Digest Dashboard (2026-10-10)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 2
-- High件数: 14
+- Critical件数: 7
+- High件数: 11
 - KEV件数: 0
-- Frontend件数: 18
-- Backend件数: 12
-- Gemini総括: fallback
+- Frontend件数: 5
+- Backend件数: 25
+- Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-09/frontend-summary.md)
-- [Backend Summary](docs/2026-10-09/backend-summary.md)
+- [Frontend Summary](docs/2026-10-10/frontend-summary.md)
+- [Backend Summary](docs/2026-10-10/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-104075](https://code-white.com/public-vulnerability-list/#authentication-bypass-in-tvu-receiver-transceiver-web-management-interface) CVE-2026-104075 / CRITICAL / frontend
-- [CVE-2026-107700](https://gist.github.com/R3tro16/e094e4318a040f189fd5d2d33e8c3ec2) CVE-2026-107700 / CRITICAL / frontend
-- [CVE-2026-107303](https://github.com/jhipster/generator-jhipster/commit/efe95edd4dedc3379735094936439410a51ce3d9) CVE-2026-107303 / HIGH / frontend
-- [CVE-2026-107375](https://github.com/jhipster/generator-jhipster/commit/f6f1579581da8db0d1b8bd28dd473b56951c83af) CVE-2026-107375 / HIGH / frontend
-- [CVE-2026-107376](https://github.com/webonyx/graphql-php/commit/6c1d6009a0f7557f66753bcfd07badd15acf77f4) CVE-2026-107376 / HIGH / frontend
+- [CVE-2026-108109](https://github.com/hotspotbilling/phpnuxbill) CVE-2026-108109 / CRITICAL / backend
+- [CVE-2026-108267](https://github.com/Privasys/go/commit/00a7d21ba53bba0ea09ac7a67eb2c6714e651700) CVE-2026-108267 / CRITICAL / backend
+- [CVE-2026-108269](https://github.com/Privasys/ra-tls-clients/commit/b8de9bcadd0f81ca8882d15095fc0d9c50e40148) CVE-2026-108269 / CRITICAL / backend
+- [CVE-2026-108263](https://github.com/iflytek/astron-agent/commit/848daba03e5e045435863815be7ab6dfbcefc18f) CVE-2026-108263 / CRITICAL / backend
+- [CVE-2026-108264](https://github.com/wizarrrr/wizarr/commit/6aa3c33c1b3d945e055ef116cc531028b3735bb7) CVE-2026-108264 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-対象CVEは30件です。Geminiの総括生成に失敗したため、スコア順の機械的な要約を表示します。
+本日掲載されたCVEでは、AIワークフロー基盤での任意コード実行や、コンテナイメージ内の固定資格情報、認証・パスワードリセットにおける検証不足など、重大な影響を及ぼすCRITICAL〜HIGHレベルの脆弱性が多数含まれています。また、ライブラリやフレームワーク（Argo CD、OWASP Coraza WAF、Google Guavaなど）における入力検証不備やDoS脆弱性も広く確認されています。
 
 ## 優先して確認すべき3〜5件
-
-- CVE-2026-104075: CVE-2026-104075
-- CVE-2026-107700: CVE-2026-107700
-- CVE-2026-107375: CVE-2026-107375
-- CVE-2026-107376: CVE-2026-107376
-- CVE-2026-107303: CVE-2026-107303
+1. **CVE-2026-108263 (CVSS 9.9 - CRITICAL)**: Astron Agentのコードノード実行において、デフォルトでサンドボックス化されていない`LocalExecutor`が使用され、低権限ユーザーがコンテナ内でroot権限の任意コードを実行可能。
+2. **CVE-2026-105278 (CVSS 9.8 - CRITICAL)**: openPDCの公開Dockerイメージに固定の管理者資格情報が含まれており、管理インタフェース経由で全管理権限を奪取されるリスクが存在。
+3. **CVE-2026-108109 (CVSS 9.3 - CRITICAL)**: PHPNuxBillのパスワードリセット機能で6桁のOTPコードに対する試行制限・ロックアウトがなく、ブルートフォース攻撃によるアカウント乗っ取りが可能。
+4. **CVE-2026-108261 (CVSS 9.3 - CRITICAL)**: Tina CMSのプレビュー用ルートにおけるURL検証の不備により、未認証の攻撃者がGraphQLメッセージチャネルを介した攻撃を実行可能。
+5. **CVE-2026-108267 / CVE-2026-108269 (CVSS 9.1 - CRITICAL)**: Privasys GoおよびRA-TLS Clientsにおいて、アテステーション（Quote）がアクティブなTLSセッションに紐付けられておらず、接続の中継・偽装が可能。
 
 ## 開発者向けコメント
-
-使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは2件です。
-
-- **HIGH** [Ransomware attack disrupts Japan's IDCF Cloud used by govt clients](https://www.bleepingcomputer.com/news/security/ransomware-attack-disrupts-japans-idcf-cloud-used-by-govt-clients/) — BleepingComputer
-- **HIGH** [DOJ charges ransomware recovery CEO for secretly paying hackers](https://therecord.media/ransomware-recovery-charges-doj) — The Record
-- **MEDIUM** [FBI disrupts Chinese hacking tools used to breach critical infrastructure](https://www.bleepingcomputer.com/news/security/fbi-disrupts-chinese-hacking-tools-used-to-breach-critical-infrastructure/) — BleepingComputer
-- **MEDIUM** ['AgentCorruption' Puts AWS Environments At Risk With Single Prompt](https://www.darkreading.com/cloud-security/agentcorruption-aws-environments-at-risk-single-prompt) — Dark Reading
-- **MEDIUM** [Lawmakers warn Google could expose Spirit Airlines data in $10 million AI training deal](https://therecord.media/lawmakers-warn-of-google-spirit-ai-training-deal) — The Record
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **動的コード実行・テンプレート評価の厳格化**: Astron AgentやWizarr（Jinja2）に見られるように、動的コード実行やテンプレートのレンダリング処理で十分なサンドボックス化が行われていないと、任意コード実行につながります。コンテキストの安全性を再確認してください。
+- **認証フローと初期設定のセキュリティ確保**: openPDCのハードコードされた資格情報や、PHPNuxBillでのレートリミット欠如など、基本設計の不備が致命的なリスクを生んでいます。デフォルト設定の見直しと試行制限の実装を徹底してください。
+- **依存ライブラリと検証処理の更新**: 暗号・アテステーション検証（RA-TLS）やプロキシ処理（Argo CD）、入力解釈（Coraza WAF、Guava）における不具合が多く報告されています。利用しているフレームワークおよびパッケージの最新化を実施してください。
