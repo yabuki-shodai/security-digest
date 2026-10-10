@@ -39,3 +39,20 @@
 - **動的コード実行・テンプレート評価の厳格化**: Astron AgentやWizarr（Jinja2）に見られるように、動的コード実行やテンプレートのレンダリング処理で十分なサンドボックス化が行われていないと、任意コード実行につながります。コンテキストの安全性を再確認してください。
 - **認証フローと初期設定のセキュリティ確保**: openPDCのハードコードされた資格情報や、PHPNuxBillでのレートリミット欠如など、基本設計の不備が致命的なリスクを生んでいます。デフォルト設定の見直しと試行制限の実装を徹底してください。
 - **依存ライブラリと検証処理の更新**: 暗号・アテステーション検証（RA-TLS）やプロキシ処理（Argo CD）、入力解釈（Coraza WAF、Guava）における不具合が多く報告されています。利用しているフレームワークおよびパッケージの最新化を実施してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近のニュースでは、FBI侵害に関与したShinyHuntersやQilinランサムウェア関係者の逮捕など、脅威アクターに対する法執行機関の動きが目立っています。また、未修正のAhsayCBSの脆弱性悪用や検索広告を用いた攻撃など、実際の悪用事例も報告されています。さらに、SaaSやAI利用に伴う情報管理リスク、企業のM&A動向についても取り上げられています。
+
+- **HIGH** [FBI Arrests Founder of Ransomware Negotiation Firm](https://krebsonsecurity.com/2026/10/fbi-arrests-founder-of-ransomware-negotiation-firm/) — Krebs on Security
+- **HIGH** [Hackers abuse Google Ads, Bing redirects to push Claude ClickFix attacks](https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/) — BleepingComputer
+- **HIGH** [Japan confirms arrest of Russian Qilin operative, extradition to Germany](https://therecord.media/japan-germany-ransomware-arrest) — The Record
+- **HIGH** [Unpatched AhsayCBS flaws exploited to deploy webshells, mine crypto](https://www.bleepingcomputer.com/news/security/unpatched-ahsaycbs-flaws-exploited-to-deploy-webshells-mine-crypto/) — BleepingComputer
+- **HIGH** [FBI arrests another suspected ShinyHunters hacker after agency breach](https://www.bleepingcomputer.com/news/security/fbi-arrests-another-suspected-shinyhunters-hacker-after-agency-breach/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
