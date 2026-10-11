@@ -1,79 +1,37 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-10 10:51:43 JST
+更新日時: 2026-10-11 10:09:27 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近のニュースでは、FBI侵害に関与したShinyHuntersやQilinランサムウェア関係者の逮捕など、脅威アクターに対する法執行機関の動きが目立っています。また、未修正のAhsayCBSの脆弱性悪用や検索広告を用いた攻撃など、実際の悪用事例も報告されています。さらに、SaaSやAI利用に伴う情報管理リスク、企業のM&A動向についても取り上げられています。
+直近のニュースでは、ハッキンググループへの関与やインサイダーによる恐喝事件に対する摘発・懲役刑といった法執行の動きが目立っています。また、金融機関への実際の攻撃においてAIツールやAIエージェントが悪用された事例も確認されました。その他、AIを活用した攻撃表面管理（ASM）ソリューションの発表なども行われています。
 
-## [FBI Arrests Founder of Ransomware Negotiation Firm](https://krebsonsecurity.com/2026/10/fbi-arrests-founder-of-ransomware-negotiation-firm/)
-
-- 重要度: **HIGH**
-- メディア: Krebs on Security
-- 公開日時: 2026-10-10 09:17 JST
-- 要約: FBIは、機密データを奪ったShinyHuntersへの調査に関連し、カナダのセキュリティ企業共同創業者を逮捕しました。
-
-## [Hackers abuse Google Ads, Bing redirects to push Claude ClickFix attacks](https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/)
+## [Cyber exec arrested in case allegedly tied to ShinyHunters hackers](https://www.bleepingcomputer.com/news/security/cyber-exec-arrested-in-case-allegedly-tied-to-shinyhunters-hackers/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-10 05:31 JST
-- 要約: ハッカーがGoogle検索広告とBingのリダイレクトを悪用し、ClickFix攻撃を仕込む偽のClaudeインストーラーへ誘導しています。
+- 公開日時: 2026-10-11 00:07 JST
+- 要約: ShinyHuntersハッキンググループに関連するとみられる恐喝行為に関与したとして、カナダのサイバーセキュリティ企業幹部が逮捕されました。この逮捕は、同グループに対するFBIの取り締まりに関連していると報じられています。
 
-## [Japan confirms arrest of Russian Qilin operative, extradition to Germany](https://therecord.media/japan-germany-ransomware-arrest)
-
-- 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-10-10 03:45 JST
-- 要約: 日本の警察庁は、Qilinランサムウェアに関与したとされるロシア人容疑者を逮捕し、ドイツへ引き渡したことを確認しました。
-
-## [Unpatched AhsayCBS flaws exploited to deploy webshells, mine crypto](https://www.bleepingcomputer.com/news/security/unpatched-ahsaycbs-flaws-exploited-to-deploy-webshells-mine-crypto/)
+## [ARTEX AI, Claude agents used in cyberattacks on South Korean banks](https://www.bleepingcomputer.com/news/security/hacker-used-artex-ai-and-claude-agents-to-target-south-korean-banks/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-10 02:17 JST
-- 要約: AhsayCBSバックアッププラットフォームの未修正の脆弱性が悪用され、ウェブシェルの配置や暗号資産マイニングが行われています。
+- 公開日時: 2026-10-10 23:16 JST
+- 要約: 今月初めに韓国の金融セクターで発生したサイバー攻撃は、中国のハッカーが侵入テストツール「ARTEX AI」や「Claude」エージェントを使用して実行したことが明らかになりました。攻撃者が高度なAI技術を悪用した事例となっています。
 
-## [FBI arrests another suspected ShinyHunters hacker after agency breach](https://www.bleepingcomputer.com/news/security/fbi-arrests-another-suspected-shinyhunters-hacker-after-agency-breach/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-10 02:02 JST
-- 要約: FBIは、自組織のシステム侵害に関与したとみられるShinyHuntersグループの別の容疑者を逮捕したと発表しました。
-
-## [OpenAI Fires 3 Safety Researchers in Dispute Over AI Risks](https://www.securityweek.com/openai-fires-3-safety-researchers-in-dispute-over-ai-risks/)
+## [Insider Cyber Extortion Plot Against Industrial Firm Lands Engineer in Prison](https://www.securityweek.com/insider-cyber-extortion-plot-against-industrial-firm-lands-engineer-in-prison/)
 
 - 重要度: **MEDIUM**
 - メディア: SecurityWeek
-- 公開日時: 2026-10-10 06:07 JST
-- 要約: OpenAIは、機密情報取り扱いポリシーへの違反を理由に、AIリスクを巡り対立していた3名の安全研究者を解雇しました。
+- 公開日時: 2026-10-10 20:00 JST
+- 要約: 産業企業の元インフラエンジニアが管理者アカウントの削除や大量のパスワードリセットを行い、サーバー復旧と引き換えに20ビットコインを要求した事件で実刑判決が下されました。内部関係者による重大な恐喝およびシステム妨害行為として扱われています。
 
-## [ASOS Breach Reveals the Risks in Customer-Facing SaaS](https://www.darkreading.com/cyberattacks-data-breaches/asos-breach-risks-customer-facing-saas)
-
-- 重要度: **MEDIUM**
-- メディア: Dark Reading
-- 公開日時: 2026-10-10 05:58 JST
-- 要約: 英国の小売大手ASOSへの攻撃により、単一のアカウント侵害が企業ネットワークへ深部侵入を許すリスクが浮き彫りになりました。
-
-## [What We Missed: FBI Strikes Back at ShinyHunters](https://www.darkreading.com/identity-access-management-security/fbi-shinyhunters-claims-hack)
-
-- 重要度: **MEDIUM**
-- メディア: Dark Reading
-- 公開日時: 2026-10-10 02:21 JST
-- 要約: Dark Readingの編集者が、ShinyHunters容疑者の逮捕や米国防総省データセンターの侵害など未報道のニュースを議論しています。
-
-## [AI Scramble Drives Cybersecurity M&A Boom](https://www.darkreading.com/cybersecurity-analytics/ai-scramble-cybersecurity-ma-boom)
+## [Criminal IP Introduces AITEM as the Next Evolution of Attack Surface Management](https://www.bleepingcomputer.com/news/security/criminal-ip-introduces-aitem-as-the-next-evolution-of-attack-surface-management/)
 
 - 重要度: **LOW**
-- メディア: Dark Reading
-- 公開日時: 2026-10-10 04:26 JST
-- 要約: AIの普及に伴いサイバーセキュリティ分野のM&Aが急増しており、非セキュリティ企業による買収事例が増加しています。
-
-## [Security Threats Don't Stop at the Office: Why Executives' Families Need Training, Too](https://www.darkreading.com/cyber-risk/security-threats-don-t-stop-at-the-office-why-executives-families-need-training-too)
-
-- 重要度: **LOW**
-- メディア: Dark Reading
-- 公開日時: 2026-10-10 01:25 JST
-- 要約: 経営幹部の家族が攻撃の侵入起点になるのを防ぐため、オフィス外でも家族向けのセキュリティ訓練が必要とされています。
+- メディア: BleepingComputer
+- 公開日時: 2026-10-10 21:30 JST
+- 要約: Criminal IPは、AIを活用した新たな攻撃表面管理（ASM）アプローチ「AITEM」を発表しました。従来の資産発見にとどまらず、調査やリスクの優先順位付け、対応までを連携させます。

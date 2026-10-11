@@ -51,3 +51,19 @@
 - **生成コード・クライアントライブラリのチェック:** `openapi-typescript-codegen` のように外部スキーマからコードを自動生成するツールでは、エスケープ漏れがそのままコード実行につながります。スキーマの受入検証とライブラリのアップデートを実施してください。
 - **MCP・AIエージェント連携時の権限設計:** MCPサーバー（`argocd-mcp`, `Tabularis`, `1MCP Agent`など）を導入している場合、プロンプトインジェクションや否定条件フィルタを用いたアクセス制御迂回のリスクを考慮してください。「リードオンリーモード」であっても副作用を持つSQL関数（`setval`やXML変換を利用した処理など）が実行されないよう厳格なホワイトリスト制御が必要です。
 - **Webhook・APIエンドポイントの認証見直し:** `cc-connect`のようにシークレット未設定時に認証をスルーしてしまう設計がないか、独自実装のインターフェースやサードパーティ製ツールの設定を再点検してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近のニュースでは、ハッキンググループへの関与やインサイダーによる恐喝事件に対する摘発・懲役刑といった法執行の動きが目立っています。また、金融機関への実際の攻撃においてAIツールやAIエージェントが悪用された事例も確認されました。その他、AIを活用した攻撃表面管理（ASM）ソリューションの発表なども行われています。
+
+- **HIGH** [Cyber exec arrested in case allegedly tied to ShinyHunters hackers](https://www.bleepingcomputer.com/news/security/cyber-exec-arrested-in-case-allegedly-tied-to-shinyhunters-hackers/) — BleepingComputer
+- **HIGH** [ARTEX AI, Claude agents used in cyberattacks on South Korean banks](https://www.bleepingcomputer.com/news/security/hacker-used-artex-ai-and-claude-agents-to-target-south-korean-banks/) — BleepingComputer
+- **MEDIUM** [Insider Cyber Extortion Plot Against Industrial Firm Lands Engineer in Prison](https://www.securityweek.com/insider-cyber-extortion-plot-against-industrial-firm-lands-engineer-in-prison/) — SecurityWeek
+- **LOW** [Criminal IP Introduces AITEM as the Next Evolution of Attack Surface Management](https://www.bleepingcomputer.com/news/security/criminal-ip-introduces-aitem-as-the-next-evolution-of-attack-surface-management/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
