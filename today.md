@@ -39,3 +39,16 @@
 - **引数インジェクションの対策**: 外部コマンド（エクスポートツール等）を呼ぶ際、シェルエスケープやクォートを行っていても `--result-file` のようなオプション引数が注入されるとRCEに繋がります（CVE-2026-108963）。引数として渡すパラメータのバリデーションを徹底してください。
 - **低レイヤ・C言語における入力検証**: 未検証のサイズ入力に基づくスタック割り当て（VLA）や配列インデックスの境界チェック漏れは、クラッシュや領域外アクセスに直結します。システムコールやドライバ境界での入力値検証を徹底してください。
 - **脆弱性修正の再検証**: 過去の修正パッチが不完全で再発する例（CVE-2026-108976）が見られます。セキュリティ修正を行う際は、正規表現の抜け漏れやバイパス手法が存在しないかテストケースを拡充して確認することが重要です。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputerから1件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [Nippon Columbia malware incident exposes 8.6 million karaoke fan records](https://www.bleepingcomputer.com/news/security/nippon-columbia-malware-incident-exposes-86-million-karaoke-fan-records/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
