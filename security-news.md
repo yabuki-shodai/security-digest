@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-13 12:07:04 JST
+更新日時: 2026-10-14 10:19:58 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近24時間ではBleepingComputer、Dark Reading、SecurityWeekから10件を収集しました。重要度HIGHは2件です。
+直近24時間ではBleepingComputer、Dark Reading、Krebs on Security、SecurityWeek、The Recordから10件を収集しました。重要度HIGHは2件です。
 
-## [Maximum-Severity SSRF Flaw in SonicWall SMA Devices Under Attack](https://www.darkreading.com/vulnerabilities-threats/max-severity-ssrf-flaw-sonicwall-sma-devices-under-attack)
-
-- 重要度: **HIGH**
-- メディア: Dark Reading
-- 公開日時: 2026-10-13 06:42 JST
-- 要約: Attackers are currently targeting a critical vulnerability in SMA 1000 appliances, putting SonicWall customers in a familiar yet unenviable position.
-
-## [Prominent Ransomware Negotiator Faces Extortion Charges](https://www.darkreading.com/insider-threats/prominent-ransomware-negotiator-extortion-charges)
+## [Zero-Days Lurk in Microsoft's Overgrown October Patch Tuesday](https://www.darkreading.com/vulnerabilities-threats/zero-days-microsoft-october-patch-tuesday)
 
 - 重要度: **HIGH**
 - メディア: Dark Reading
-- 公開日時: 2026-10-13 05:00 JST
-- 要約: Edward Dubrovsky, a longtime cybersecurity executive, was arrested and charged in Pennsylvania last week under conspiracy to extort money.
+- 公開日時: 2026-10-14 07:29 JST
+- 要約: The scary surprises for the largest security update ever include security bypasses and unauthenticated RCEs.
 
-## [Norway fines Microsoft ad firm $9.6 million over Grindr data sharing](https://www.bleepingcomputer.com/news/security/norway-fines-microsoft-ad-firm-96-million-over-grindr-data-sharing/)
+## [Ghostscript flaw lets hackers hijack servers via PDF uploads](https://www.bleepingcomputer.com/news/security/ghostscript-flaw-lets-hackers-hijack-servers-via-pdf-uploads/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-14 06:33 JST
+- 要約: A critical heap buffer overflow vulnerability (CVE-2026-39919) in the Ghostscript interpreter and rendering engine could allow remote code execution through specially crafted PDF files. [...]
+
+## [Microsoft Patches More Than 1,400 Security Flaws](https://krebsonsecurity.com/2026/10/microsoft-patches-more-than-1400-security-flaws/)
 
 - 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-13 05:13 JST
-- 要約: Norway's Data Protection Authority (Datatilsynet) has fined Microsoft-owned advertising company Xandr NOK 92 million ($9.6M) for unlawfully processing and sharing sensitive data belonging to Grindr users in the country. [...]
+- メディア: Krebs on Security
+- 公開日時: 2026-10-14 08:24 JST
+- 要約: Microsoft today issued updates to fix more than 1,400 security vulnerabilities in its Windows operating systems and other software. Today's epic patch batch dwarfs September's record of nearly 1,000 fixes, which was already about ten times the normal monthly patch load from Redmo...
 
-## [Yandex confirms service outage as users lose access to cloud files](https://www.bleepingcomputer.com/news/security/yandex-confirms-service-outage-as-users-lose-access-to-cloud-files/)
-
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-13 04:23 JST
-- 要約: Russian cloud services provider Yandex announced that drone attacks damaged three of its data centers, forcing it to shut down two facilities and partially disable a third. [...]
-
-## [Anthropic takes risky AI tests offline after models breach govt sites](https://www.bleepingcomputer.com/news/security/anthropic-takes-risky-ai-tests-offline-after-models-breach-govt-sites/)
-
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-13 03:51 JST
-- 要約: Anthropic announced that its internal AI models undergoing "high-risk and cybersecurity evaluations" no longer have internet access following incidents involving U.S. government websites at the federal, state, and local levels. [...]
-
-## [No Identity, No Recovery: Cyber Resilience Starts With IAM](https://www.darkreading.com/cybersecurity-operations/cyber-resilience-starts-with-iam)
+## [North Korea Phishes Ukrainians for War Intel](https://www.darkreading.com/cyberattacks-data-breaches/north-korea-phishes-ukrainians-war-intel)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-13 03:27 JST
-- 要約: The proliferation of enterprise apps and the centrality of cloud identity providers requires an identity security rethink.
+- 公開日時: 2026-10-14 06:24 JST
+- 要約: The Democratic People's Republic of Korea (DPRK) is trying to get insight into its own war effort in Ukraine, through simple reply-baiting phishing attacks.
 
-## [Ledger confirms spy chip implant behind wallet crypto thefts](https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-implant-behind-crypto-thefts/)
-
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-13 01:27 JST
-- 要約: Ledger has confirmed that some of its devices distributed through Southeast Asian reseller CryptoBilis were compromised with a hardware implant that drained users' cryptocurrency wallets. [...]
-
-## [Cyberattack shuts down refrigerators at French supermarkets](https://www.bleepingcomputer.com/news/security/cyberattack-shuts-down-refrigerators-at-french-supermarkets/)
+## [Anthropic warns self-replicating AI could spread to your smart devices](https://www.bleepingcomputer.com/news/security/anthropic-warns-self-replicating-ai-could-spread-to-your-smart-devices/)
 
 - 重要度: **MEDIUM**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-13 00:23 JST
-- 要約: Attackers remotely defrosted refrigerators at multiple French supermarket chains overnight in a cyberattack that reportedly targeted Danfoss refrigeration controllers. [...]
+- 公開日時: 2026-10-14 06:16 JST
+- 要約: Anthropic is warning that small AI models could soon be able to self-replicate across consumer IoT devices, from Android TV boxes to smart ovens, creating distributed botnets capable of running AI workloads without relying on data centers. [...]
 
-## [IonQ to Acquire Zero Trust Firm Elisity for Up to $1.3 Billion](https://www.securityweek.com/ionq-to-acquire-zero-trust-firm-elisity-for-up-to-1-3-billion/)
+## [Two arrested as DOJ takes down laptop farms responsible for $3 million in North Korean revenue](https://therecord.media/north-korea-laptop-farms-worker-scams-doj-raids-texas)
 
 - 重要度: **MEDIUM**
+- メディア: The Record
+- 公開日時: 2026-10-14 05:55 JST
+- 要約: More than 40 residences in Texas were the target of a federal operation in September to clamp down on remote worker scams that feed money back to the North Korean regime.
+
+## [Anthropic Finds Ingredients for Future AI Worms](https://www.darkreading.com/perimeter/anthropic-ingredients-future-ai-worms)
+
+- 重要度: **MEDIUM**
+- メディア: Dark Reading
+- 公開日時: 2026-10-14 05:35 JST
+- 要約: Anthropic's latest study combined IoT and network tests to explore AI self-replication, which researchers said would be "challenging" to shut down.
+
+## [FTC: Company netted at least $60 million charging sextortion victims for help it didn’t provide](https://therecord.media/sextortion-assistance-company-alleged-fraud-ftc-complaint)
+
+- 重要度: **MEDIUM**
+- メディア: The Record
+- 公開日時: 2026-10-14 05:12 JST
+- 要約: An Ohio-based company charged individuals thousands of dollars to fight sextortion scams, but the operation itself was fraudulent, according to a Federal Trade Commission complaint.
+
+## [Employee Arrested After Listening Device Found in OpenAI Conference Room, FBI and the Company Say](https://www.securityweek.com/employee-arrested-after-listening-device-found-in-openai-conference-room-fbi-and-the-company-say/)
+
+- 重要度: **LOW**
 - メディア: SecurityWeek
-- 公開日時: 2026-10-12 23:25 JST
-- 要約: The all-stock deal brings Elisity’s least-privilege access technology into IonQ’s security portfolio. The post IonQ to Acquire Zero Trust Firm Elisity for Up to $1.3 Billion appeared first on SecurityWeek .
+- 公開日時: 2026-10-14 08:07 JST
+- 要約: Saudi national Abdulrahman Alfozan was arrested Friday and terminated by OpenAI. The post Employee Arrested After Listening Device Found in OpenAI Conference Room, FBI and the Company Say appeared first on SecurityWeek .
 
-## [Inside AvisLoader: A Windows Malware Loader Built to Resist Disruption](https://www.bleepingcomputer.com/news/security/inside-avisloader-a-windows-malware-loader-built-to-resist-disruption/)
+## [OpenAI engineer arrested for allegedly planting spy device in office](https://www.bleepingcomputer.com/news/artificial-intelligence/openai-engineer-arrested-for-allegedly-planting-spy-device-in-office/)
 
-- 重要度: **MEDIUM**
+- 重要度: **LOW**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-12 23:00 JST
-- 要約: A new Windows malware loader called AvisLoader uses encrypted peer-to-peer communications to make command-and-control infrastructure harder to disrupt. Varonis researchers explain how the malware uses ClickFix delivery, shortcut-based persistence, and remote command execution cap...
+- 公開日時: 2026-10-14 07:33 JST
+- 要約: A Saudi OpenAI engineer has been arrested for allegedly planting a hidden recording device in an executive conference room at the company's San Francisco offices to secretly record sensitive conversations. [...]
