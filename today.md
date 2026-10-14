@@ -1,27 +1,27 @@
-# CVE Digest Dashboard (2026-10-13)
+# CVE Digest Dashboard (2026-10-14)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
-- High件数: 9
+- Critical件数: 4
+- High件数: 8
 - KEV件数: 0
-- Frontend件数: 16
-- Backend件数: 14
+- Frontend件数: 11
+- Backend件数: 19
 - Gemini総括: fallback
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-13/frontend-summary.md)
-- [Backend Summary](docs/2026-10-13/backend-summary.md)
+- [Frontend Summary](docs/2026-10-14/frontend-summary.md)
+- [Backend Summary](docs/2026-10-14/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-108895](https://github.com/wudipjq/my_vuln/blob/main/Linksys3/vuln_69/69.md) CVE-2026-108895 / CRITICAL / backend
-- [CVE-2026-108896](https://github.com/wudipjq/my_vuln/blob/main/Linksys3/vuln_70/70.md) CVE-2026-108896 / CRITICAL / backend
-- [CVE-2026-108914](https://github.com/fizz-is-on-the-way/Iot_vuls/tree/main/BR-6208AC/BufferOverflow_formWlSiteSurvey) CVE-2026-108914 / CRITICAL / backend
-- [CVE-2026-92681](https://github.com/neo4j/graphql/commit/ef69cc69ff5e97c60d64aa524005f939c5ba3633) CVE-2026-92681 / CRITICAL / frontend
-- [CVE-2026-109372](https://github.com/zitadel/zitadel/security/advisories/GHSA-x4c7-fpcx-w9q6) CVE-2026-109372 / CRITICAL / backend
+- [CVE-2026-102989](https://github.com/TanStack/router/commit/d521abd71c69f1ff010bb3def4d417cb5fa058cb) CVE-2026-102989 / CRITICAL / frontend
+- [CVE-2026-77459](https://github.com/argoproj/argo-cd/commit/1149cdc6e932208c4402183cc3d7b7485239940c) CVE-2026-77459 / CRITICAL / backend
+- [CVE-2026-104192](https://github.com/dragonflydb/dragonfly/commit/6c6b27a5cfd03d67eb9583ab84a0f0709e3bc77e) CVE-2026-104192 / CRITICAL / backend
+- [CVE-2026-100133](https://www.adobe.com/trust/security/products/commerce/apsb26-153.html) CVE-2026-100133 / CRITICAL / frontend
+- [CVE-2026-102988](https://github.com/makeplane/plane/commit/cc3eb974f1142146ddfedf7126cd4dfd376d32d1) CVE-2026-102988 / MEDIUM / backend
 
 ## Geminiによる今日の総括
 
@@ -31,29 +31,12 @@
 
 ## 優先して確認すべき3〜5件
 
-- CVE-2026-108895: CVE-2026-108895
-- CVE-2026-108896: CVE-2026-108896
-- CVE-2026-108914: CVE-2026-108914
-- CVE-2026-92681: CVE-2026-92681
-- CVE-2026-109372: CVE-2026-109372
+- CVE-2026-102989: CVE-2026-102989
+- CVE-2026-77459: CVE-2026-77459
+- CVE-2026-104192: CVE-2026-104192
+- CVE-2026-100133: CVE-2026-100133
+- CVE-2026-102988: CVE-2026-102988
 
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、Dark Reading、SecurityWeekから10件を収集しました。重要度HIGHは2件です。
-
-- **HIGH** [Maximum-Severity SSRF Flaw in SonicWall SMA Devices Under Attack](https://www.darkreading.com/vulnerabilities-threats/max-severity-ssrf-flaw-sonicwall-sma-devices-under-attack) — Dark Reading
-- **HIGH** [Prominent Ransomware Negotiator Faces Extortion Charges](https://www.darkreading.com/insider-threats/prominent-ransomware-negotiator-extortion-charges) — Dark Reading
-- **MEDIUM** [Norway fines Microsoft ad firm $9.6 million over Grindr data sharing](https://www.bleepingcomputer.com/news/security/norway-fines-microsoft-ad-firm-96-million-over-grindr-data-sharing/) — BleepingComputer
-- **MEDIUM** [Yandex confirms service outage as users lose access to cloud files](https://www.bleepingcomputer.com/news/security/yandex-confirms-service-outage-as-users-lose-access-to-cloud-files/) — BleepingComputer
-- **MEDIUM** [Anthropic takes risky AI tests offline after models breach govt sites](https://www.bleepingcomputer.com/news/security/anthropic-takes-risky-ai-tests-offline-after-models-breach-govt-sites/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
