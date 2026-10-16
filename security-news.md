@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-15 09:44:01 JST
+更新日時: 2026-10-16 09:35:52 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは3件です。
+直近24時間では、Nextcloud連携アプリのRCE脆弱性の悪用やArch Linuxリポジトリへの悪質なパッケージ投入など、実効性のある攻撃手法が報告されています。また、ターゲット広告を介したゼロクリック・スパイウェアや34カ国に及ぶ機器乗っ取り、政府請負業者への攻撃による裁判所業務の停止など、影響範囲の広い深刻な被害が発生しています。一方で、OSレベルでのAI防御機能の追加や詐欺対策データベースの公開など、対策側の動きも見られます。
 
-## [Palo Alto Networks warns of PAN-OS RCE flaw exploited in attacks](https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/)
+## [Federal bankruptcy courts dealing with outages after contractor cyberattack](https://therecord.media/federal-bankruptcy-courts-dealing-with-cyberattack-outage)
+
+- 重要度: **HIGH**
+- メディア: The Record
+- 公開日時: 2026-10-16 05:46 JST
+- 要約: 政府請負業者へのサイバー攻撃により、連邦破産裁判所でシステム障害が発生しています。この影響により、破産通知の発行作業がすべて停止する事態となっています。
+
+## [Hackers exploit Collabora RCE flaw to backdoor Nextcloud servers](https://www.bleepingcomputer.com/news/security/hackers-exploit-collabora-rce-flaw-to-backdoor-nextcloud-servers/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-15 07:56 JST
-- 要約: Palo Alto Networks has released security updates for a high-severity PAN-OS RCE zero-day, tracked as CVE-2026-0322, that has been exploited in attacks targeting firewalls. [...]
+- 公開日時: 2026-10-16 05:25 JST
+- 要約: Nextcloud向けのCollabora Onlineアプリにおいて、コマンド実行の脆弱性（CVE-2026-110447）が悪用されていることが判明しました。攻撃者はこの脆弱性を介してサーバーにバックドアを設置しています。
 
-## [Ivanti ICS Zero-Day Attacks Highlight Vendor Patching Hurdles](https://www.darkreading.com/vulnerabilities-threats/ivanti-ics-zero-day-attacks-vendor-patching)
-
-- 重要度: **HIGH**
-- メディア: Dark Reading
-- 公開日時: 2026-10-15 06:20 JST
-- 要約: CVE-2026-104935, a high-severity authentication bypass + RCE vulnerability, was only partially discovered and patched in July, leaving an opening for threat actors to capitalize on.
-
-## [Cisco patches new Secure Email Gateway zero-day exploited in attacks](https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/)
+## [Zero-click spyware infecting devices through online ads, researchers say](https://therecord.media/spyware-citizen-lab-advertising)
 
 - 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-15 02:29 JST
-- 要約: Cisco has patched another actively exploited zero-day flaw in its Secure Email Gateway (SEG) that lets remote unauthenticated attackers execute commands with root privileges. [...]
-
-## [North Macedonian police arrest alleged administrator behind OLVX cybercrime market](https://therecord.media/olvx-cybercrime-marketplace-arrest-north-macedonia)
-
-- 重要度: **MEDIUM**
 - メディア: The Record
-- 公開日時: 2026-10-15 06:10 JST
-- 要約: A raid on a home in a North Macedonian village led to the arrest of the suspected administrator of the OLVX market, according to the Balkan country's Interior Ministry along with the FBI.
+- 公開日時: 2026-10-16 04:00 JST
+- 要約: オンライン広告を通じて端末に感染する強力なゼロクリック・スパイウェアが世界中で確認されました。監視技術の拡散を示す深刻な事例として研究者が警告しています。
 
-## [Yam Store: The Phishing Network Behind a Billion Messages](https://www.darkreading.com/cyberattacks-data-breaches/yam-store-phishing-network-behind-billion-messages)
+## [Hackers hijack D-Link, Ubiquiti devices to resell your stolen bandwidth](https://www.bleepingcomputer.com/news/security/hackers-hijack-d-link-ubiquiti-devices-to-resell-your-stolen-bandwidth/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-16 03:20 JST
+- 要約: D-LinkやUbiquitiの機器を乗っ取り、被害者のインターネット帯域をプロキシネットワークとして転売する攻撃が確認されました。このキャンペーンは34カ国の機器に広範な影響を与えています。
+
+## [Fake Arch Linux packages push malware with root privileges](https://www.bleepingcomputer.com/news/security/fake-arch-linux-packages-push-malware-with-root-privileges/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-16 02:12 JST
+- 要約: Arch User Repository（AUR）に、人気ツール「yay」や「paru」になりすました偽パッケージがアップロードされました。これらのパッケージはroot権限でマルウェアを実行する機能を備えています。
+
+## [Android gets AI defenses against messaging scams, fake calls](https://www.bleepingcomputer.com/news/security/android-gets-ai-defenses-against-messaging-scams-fake-calls/)
 
 - 重要度: **MEDIUM**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-16 04:48 JST
+- 要約: Googleは、詐欺メッセージや着信転送の悪用に対抗するAI機能をAndroid向けに発表しました。対応端末に対して順次ロールアウトが進められています。
+
+## [SecTor 2026 Reveals a Rapidly Shifting Cybersecurity Landscape](https://www.darkreading.com/cybersecurity-operations/sector-2026-reveals-a-rapidly-shifting-cybersecurity-landscape)
+
+- 重要度: **LOW**
 - メディア: Dark Reading
-- 公開日時: 2026-10-15 05:57 JST
-- 要約: A sprawling cybercrime marketplace supplied cloud infrastructure and phishing kits that helped fuel more than 1 billion phishing messages worldwide.
+- 公開日時: 2026-10-16 07:10 JST
+- 要約: トロントで開催された「SecTor 2026」が閉幕し、参加者数が22%増加したことが発表されました。会場では専門家たちが新たなリスクに関する重要な視点を共有しました。
 
-## [Brooklyn DA’s office disrupts crypto scam targeting Russian community](https://therecord.media/brooklyn-da-server-takedowns-crypto-scam-russian-speakers)
+## [F-Secure Launches Victim-First Scam Encyclopedia Covering 50+ Types of Consumer Fraud](https://www.darkreading.com/threat-intelligence/f-secure-launches-victim-first-scam-encyclopedia-covering-50-types-of-consumer-fraud)
 
-- 重要度: **MEDIUM**
-- メディア: The Record
-- 公開日時: 2026-10-15 05:33 JST
-- 要約: Russian-speaking Brooklyn residents began tipping off local authorities to a cryptocurrency fraud scheme three years ago, leading to an operation to take down the associated servers and domains.
-
-## [Anthropic 'SneakPeek' Flaw Is a Silent Zero-Click Threat](https://www.darkreading.com/threat-intelligence/new-anthropic-sneakpeek-silent-zero-click-threat)
-
-- 重要度: **MEDIUM**
+- 重要度: **LOW**
 - メディア: Dark Reading
-- 公開日時: 2026-10-15 05:09 JST
-- 要約: A bug in Claude Code Desktop's preview pane can allow adversaries to quietly steal credentials from developers, including SSH private keys, AWS credentials, and Claude 0Auth tokens.
+- 公開日時: 2026-10-16 06:55 JST
+- 要約: F-Secureは50種類以上の消費者向け詐欺をカバーする被害者視点のデータベース「Scam Encyclopedia」を公開しました。長年の脅威インテリジェンス調査に基づき、最新のサイバー犯罪手法を追跡・解説しています。
 
-## [FBI raids DPRK IT worker laptop farms in Texas, US nationals arrested](https://www.bleepingcomputer.com/news/security/fbi-raids-dprk-it-worker-laptop-farms-in-texas-us-nationals-arrested/)
+## [AI Slop Isn't Just for Social Media; It's Ruining Cyberattacks, Too](https://www.darkreading.com/threat-intelligence/ai-slop-ruining-cyberattacks)
 
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-15 04:41 JST
-- 要約: The U.S. Department of Justice (DoJ) has disrupted the Famous Chollima threat group's operations by arresting two suspects, charging 14 individuals, and seizing nearly 187 laptops used in North Korean remote IT worker schemes. [...]
+- 重要度: **LOW**
+- メディア: Dark Reading
+- 公開日時: 2026-10-16 05:43 JST
+- 要約: 生成AIはサイバー攻撃を高度化させるどころか攻撃の質を低下させており、深刻な脅威アクターはほとんど利用していないという見解が示されました。AI過熱感に対する注意喚起がなされています。
 
-## [Ledger asks sellers across Asia to halt sales after supply-chain attack](https://www.bleepingcomputer.com/news/security/ledger-asks-sellers-across-asia-to-halt-sales-after-supply-chain-attack/)
+## [Context Is King in the Fight Against Modern Cyberattacks](https://www.securityweek.com/context-is-king-in-the-fight-against-modern-cyberattacks/)
 
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-15 02:46 JST
-- 要約: Ledger has asked resellers and distributors of its wallets in Indonesia, Singapore, Thailand, the Philippines, Vietnam, Malaysia, and Hong Kong to suspend device sales and remove products from shelves while it investigates device tampering. [...]
-
-## [Spyware manufacturer had access to data harvested by former Polish government, current PM says](https://therecord.media/spyware-manufacturer-had-access-to-data-harvested-by-previous-polish-government)
-
-- 重要度: **MEDIUM**
-- メディア: The Record
-- 公開日時: 2026-10-15 01:50 JST
-- 要約: Prime Minister Donald Tusk, who ordered the investigation, on Monday called the sprawling spyware operation spearheaded by the country’s previous ruling party “one of the biggest scandals in Polish history since the fall of communism.”
+- 重要度: **LOW**
+- メディア: SecurityWeek
+- 公開日時: 2026-10-16 02:42 JST
+- 要約: 現代のサイバー攻撃を防ぐには、検知シグナル同士を関連付けるコンテキストの把握が重要であると解説されています。文脈に応じた防御により、脅威のエスカレーションを未然に防ぐことが求められます。

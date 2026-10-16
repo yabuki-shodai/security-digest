@@ -60,3 +60,20 @@
 - **APIライブラリ・ミドルウェアのバージョン確認**: `kin-openapi` を利用中のGoプロジェクトは、DoSや認可バイパスが複数報告されているため、速やかに修正版（0.149.0以上）へ更新してください。
 - **URL解釈・キャッシュ処理の整合性チェック**: フロントエンドやエッジサーバー（Next.js/Cloudflareなど）で認証・認可とキャッシュ参照を行っている場合、パスのエンコード・正規化順序に起因するバイパスがないか構成を見直しましょう。
 - **外部リクエスト処理のリソース・検証強化**: HTTPクライアント（`react/http` や `undici`）を使用している場合は、最新版へ更新してバッファ上限の適用とセキュリティ検証機構（SRI等）の正常動作を確保してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間では、Nextcloud連携アプリのRCE脆弱性の悪用やArch Linuxリポジトリへの悪質なパッケージ投入など、実効性のある攻撃手法が報告されています。また、ターゲット広告を介したゼロクリック・スパイウェアや34カ国に及ぶ機器乗っ取り、政府請負業者への攻撃による裁判所業務の停止など、影響範囲の広い深刻な被害が発生しています。一方で、OSレベルでのAI防御機能の追加や詐欺対策データベースの公開など、対策側の動きも見られます。
+
+- **HIGH** [Federal bankruptcy courts dealing with outages after contractor cyberattack](https://therecord.media/federal-bankruptcy-courts-dealing-with-cyberattack-outage) — The Record
+- **HIGH** [Hackers exploit Collabora RCE flaw to backdoor Nextcloud servers](https://www.bleepingcomputer.com/news/security/hackers-exploit-collabora-rce-flaw-to-backdoor-nextcloud-servers/) — BleepingComputer
+- **HIGH** [Zero-click spyware infecting devices through online ads, researchers say](https://therecord.media/spyware-citizen-lab-advertising) — The Record
+- **HIGH** [Hackers hijack D-Link, Ubiquiti devices to resell your stolen bandwidth](https://www.bleepingcomputer.com/news/security/hackers-hijack-d-link-ubiquiti-devices-to-resell-your-stolen-bandwidth/) — BleepingComputer
+- **HIGH** [Fake Arch Linux packages push malware with root privileges](https://www.bleepingcomputer.com/news/security/fake-arch-linux-packages-push-malware-with-root-privileges/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
