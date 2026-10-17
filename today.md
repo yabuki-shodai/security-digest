@@ -54,3 +54,20 @@
   ユーザー入力からGraphQL経由のURL取得（SSRF）や、JDBC接続文字列のダイレクト指定（任意ファイル読み取り）を許容しないよう、入力のホワイトリスト検証や危険なパラメータ（`allowLoadLocalInfile` 等）のサニタイズを実施してください。
 - **データベース・基盤ライブラリの更新**:
   MariaDBを使用している環境では、最新パッチ（10.6.28, 10.11.19, 11.4.13, 11.8.9, 12.3.3, 13.0.2等）への更新を速やかに検討してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+エッジデバイスにおけるゼロデイ脆弱性の悪用や、広告表示のみで感染するゼロクリック攻撃によるスパイウェア配信など、高度な攻撃手法が確認されています。また、Magento等の主要システムにおける重大な脆弱性や、人気AIブランドを偽装した攻撃手法の急増が報告されています。さらに、ランサムウェア交渉人の不正関与疑惑や業界内の大型買収といった動向も注目を集めています。
+
+- **HIGH** [BeyondTrust Remote Support Zero-Day Continues Trend of Exploited Edge Bugs](https://www.darkreading.com/endpoint-security/beyondtrust-remote-support-exploited-edge-bugs) — Dark Reading
+- **HIGH** [Critical BlockStrap flaw lets hackers run code on Magento servers](https://www.bleepingcomputer.com/news/security/critical-blockstrap-flaw-lets-hackers-run-code-on-magento-servers/) — BleepingComputer
+- **HIGH** [Targeted ads installed Candiru spyware in zero-click attacks](https://www.bleepingcomputer.com/news/security/zero-click-attacks-used-targeted-ads-to-deliver-candiru-spyware/) — BleepingComputer
+- **MEDIUM** [Fake Claude, ChatGPT Attacks Surge, Putting Developers at Risk](https://www.darkreading.com/application-security/fake-claude-chatgpt-attacks-developers-risk) — Dark Reading
+- **MEDIUM** [AI Takes Control of Robotic Arm in 16 Minutes Flat](https://www.darkreading.com/ics-ot-security/ai-takes-control-robotic-arm-16-minutes) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
