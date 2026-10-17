@@ -1,79 +1,56 @@
-# CVE Digest Dashboard (2026-10-16)
+# CVE Digest Dashboard (2026-10-17)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 0
-- High件数: 10
+- Critical件数: 6
+- High件数: 12
 - KEV件数: 0
-- Frontend件数: 16
-- Backend件数: 14
+- Frontend件数: 2
+- Backend件数: 28
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-16/frontend-summary.md)
-- [Backend Summary](docs/2026-10-16/backend-summary.md)
+- [Frontend Summary](docs/2026-10-17/frontend-summary.md)
+- [Backend Summary](docs/2026-10-17/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-100409](https://github.com/opennextjs/opennextjs-aws/pull/1199) CVE-2026-100409 / HIGH / frontend
-- [CVE-2026-104827](https://github.com/reactphp/http/commit/2558622d0b76227c60c61eac8a61572cb6638e8c) CVE-2026-104827 / HIGH / frontend
-- [CVE-2026-77470](https://github.com/LycheeOrg/Lychee/commit/24e6e11f1da131ed20b192d7d7b7ca9084451a2f) CVE-2026-77470 / HIGH / backend
-- [CVE-2026-58391](https://github.com/opnsense/core/commit/5e6313f50546474031805039e209830b63b2b0e4) CVE-2026-58391 / MEDIUM / backend
-- [CVE-2026-100350](https://github.com/getkin/kin-openapi/commit/d090e36b2f1c42c898ba2a687a8f6e25f5ca727f) CVE-2026-100350 / MEDIUM / backend
+- [CVE-2026-111641](https://github.com/fastapiadmin/FastapiAdmin/blob/v3.0/backend/app/api/v1/module_system/auth/controller.py#L173-L251) CVE-2026-111641 / CRITICAL / backend
+- [CVE-2026-57169](https://github.com/Finsys/dockhand/commit/efb634701c55f80a8c752df8ae08d88f2c16cce9) CVE-2026-57169 / CRITICAL / backend
+- [CVE-2026-111663](https://github.com/chaskiq/chaskiq/blob/2.0.3/app/controllers/graphql_controller.rb#L3-L33) CVE-2026-111663 / CRITICAL / frontend
+- [CVE-2026-85748](https://github.com/MariaDB/server/commit/91156c3de58762196605150ab3f756fe952592d1) CVE-2026-85748 / CRITICAL / backend
+- [CVE-2026-92262](https://github.com/MariaDB/server/commit/574ba66b2d6c5d71db83d416677876e9b592858e) CVE-2026-92262 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日は、Go言語向けOpenAPI処理ライブラリ（`kin-openapi`）における多数のDoSおよび認可バイパス脆弱性をはじめ、フロントエンド・Webフレームワーク周辺で高深刻度な脆弱性が相次いで報告されました。特に、URLパス解釈の不一致によるアクセス制御の迂回や、決済・レスポンス処理における入力検証不備による影響に注意が必要です。
+本日掲載されたCVEでは、データベース（MariaDB）における複数の深刻なRCE脆弱性や、Webアプリケーション・管理ツール（FastapiAdmin、Dockhand、Chaskiq等）における**認証・認可の不備**（自動ログイン悪用、未認証WebSocket接続、OAuthトークンの検証漏れなど）が目立ちます。また、プロトコル実装ライブラリ（libIEC61850、libp2p-rust等）のメモリ安全性の不備やDoS脆弱性も複数報告されています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-77470 (CVSS 8.3 - HIGH / Lychee)**
-   - **概要**: 決済処理APIにおいて、追加パラメータの結合時にサーバー側の計算済みパラメータ（金額やリターンURL等）が上書き可能なロジック欠陥。
-   - **影響**: 未認証の購入者により決済金額の改ざんや不正なリダイレクトが行われるリスク。
-
-2. **CVE-2026-100409 (CVSS 7.5 - HIGH / OpenNext Cloudflare)**
-   - **概要**: パーセントエンコードされたパスの扱いについて、アクセス制御ミドルウェアとキャッシュキー生成処理で解釈の不一致が発生。
-   - **影響**: 認可ミドルウェアを迂回し、未認証の攻撃者が保護されたルートのキャッシュ情報を取得可能。
-
-3. **CVE-2026-100351 (CVSS 7.4 - HIGH / kin-openapi)**
-   - **概要**: `ValidationHandler` とルーター（`gorilla/mux`）間でエンコードされたパスのデコード処理タイミングが異なり、ルートのルーティング不一致が発生。
-   - **影響**: 保護されたパラメーター付きルートへのリクエスト制限が迂回される可能性。
-
-4. **CVE-2026-104827 (CVSS 7.5 - HIGH / react/http)**
-   - **概要**: クライアントからのレスポンスヘッダー受信用バッファにサイズ上限が設定されていない。
-   - **影響**: 悪意のあるサーバーからの無限ストリーミングによりメモリが枯渇し、アプリケーションがDoS状態に陥る。
-
-5. **CVE-2026-109841 (CVSS 5.9 - MEDIUM / undici)**
-   - **概要**: Node.js用HTTPクライアントにおいて、SRI（サブリソース統合）ハッシュのアルゴリズム名の大文字・小文字チェック不備。
-   - **影響**: 大文字を含む有効なSRIトークンが未認識扱いとなり、結果として改ざん検証（SRIチェック）がスキップされる。
+1. **CVE-2026-111641 (FastapiAdmin | CVSS 9.8 : CRITICAL)**
+   - **概要**: 未保護の自動ログインエンドポイントを悪用し、未認証で管理者トークンを取得して完全な管理権限を奪取できる脆弱性。
+2. **CVE-2026-57169 (Dockhand | CVSS 9.6 : CRITICAL)**
+   - **概要**: コンテナターミナルのWebSocketエンドポイント（`/api/containers/<id>/exec`）で認証が欠落しており、未認証でターゲットコンテナ内で任意コマンドを実行される恐れ。
+3. **MariaDBのRCE脆弱性群 (CVE-2026-85748, CVE-2026-92262, CVE-2026-85746 | CVSS 各 9.9 : CRITICAL)**
+   - **概要**: UAF、テーブル名の`#mysql50#`プレフィックスによるパスバイパス、GIS関数（`ST_AsText`）のバッファオーバーフローなど、低権限ユーザーから任意コード実行やデータ強奪につながる重大な脆弱性。
+4. **CVE-2026-111663 (Chaskiq | CVSS 9.2 : CRITICAL)**
+   - **概要**: GraphQLの `createUrlUpload` ミューテーションを利用したSSRF。未認証の攻撃者にクラウドメタデータなどの内部リソースへアクセスされる危険性。
+5. **CVE-2026-111613 (AllData | CVSS 8.7 : HIGH)**
+   - **概要**: 未認証のJDBCインジェクション。`allowLoadLocalInfile=true` を含む外部パラメータを指定されることで、ホスト上の任意ファイルが読み取られる危険性。
 
 ---
 
 ## 開発者向けコメント
 
-- **APIライブラリ・ミドルウェアのバージョン確認**: `kin-openapi` を利用中のGoプロジェクトは、DoSや認可バイパスが複数報告されているため、速やかに修正版（0.149.0以上）へ更新してください。
-- **URL解釈・キャッシュ処理の整合性チェック**: フロントエンドやエッジサーバー（Next.js/Cloudflareなど）で認証・認可とキャッシュ参照を行っている場合、パスのエンコード・正規化順序に起因するバイパスがないか構成を見直しましょう。
-- **外部リクエスト処理のリソース・検証強化**: HTTPクライアント（`react/http` や `undici`）を使用している場合は、最新版へ更新してバッファ上限の適用とセキュリティ検証機構（SRI等）の正常動作を確保してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間では、Nextcloud連携アプリのRCE脆弱性の悪用やArch Linuxリポジトリへの悪質なパッケージ投入など、実効性のある攻撃手法が報告されています。また、ターゲット広告を介したゼロクリック・スパイウェアや34カ国に及ぶ機器乗っ取り、政府請負業者への攻撃による裁判所業務の停止など、影響範囲の広い深刻な被害が発生しています。一方で、OSレベルでのAI防御機能の追加や詐欺対策データベースの公開など、対策側の動きも見られます。
-
-- **HIGH** [Federal bankruptcy courts dealing with outages after contractor cyberattack](https://therecord.media/federal-bankruptcy-courts-dealing-with-cyberattack-outage) — The Record
-- **HIGH** [Hackers exploit Collabora RCE flaw to backdoor Nextcloud servers](https://www.bleepingcomputer.com/news/security/hackers-exploit-collabora-rce-flaw-to-backdoor-nextcloud-servers/) — BleepingComputer
-- **HIGH** [Zero-click spyware infecting devices through online ads, researchers say](https://therecord.media/spyware-citizen-lab-advertising) — The Record
-- **HIGH** [Hackers hijack D-Link, Ubiquiti devices to resell your stolen bandwidth](https://www.bleepingcomputer.com/news/security/hackers-hijack-d-link-ubiquiti-devices-to-resell-your-stolen-bandwidth/) — BleepingComputer
-- **HIGH** [Fake Arch Linux packages push malware with root privileges](https://www.bleepingcomputer.com/news/security/fake-arch-linux-packages-push-malware-with-root-privileges/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **認証・認可およびトークン検証の徹底**:
+  WebSocketエンドポイントのハンドシェイク時の認証チェック漏れ（CVE-2026-57169）や、OAuth連携時の `aud` (Audience) クレームチェック不足（CVE-2026-111639）、ハードコードされたJWT署名鍵（CVE-2026-111642）など、基本構造の欠陥による致命的な脆弱性が多発しています。認証フローの再点検を行ってください。
+- **外部パラメータと接続指定の安全化**:
+  ユーザー入力からGraphQL経由のURL取得（SSRF）や、JDBC接続文字列のダイレクト指定（任意ファイル読み取り）を許容しないよう、入力のホワイトリスト検証や危険なパラメータ（`allowLoadLocalInfile` 等）のサニタイズを実施してください。
+- **データベース・基盤ライブラリの更新**:
+  MariaDBを使用している環境では、最新パッチ（10.6.28, 10.11.19, 11.4.13, 11.8.9, 12.3.3, 13.0.2等）への更新を速やかに検討してください。
