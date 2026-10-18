@@ -55,3 +55,18 @@
 - **重要なアカウント操作時の再確認・認証を徹底する**: メールアドレスの変更や2FA設定の解除など、アカウントの所有権に関わる操作では、セッション状態だけでなく現在のパスワード入力や認証チャレンジを必ず求めてください。
 - **IdP・WebAuthn連携時の実装を見直す**: SSO連携時のユーザー紐付けには変更可能な属性（`preferred_username`など）ではなく不変の識別子（`sub`等）を使用し、パスキー登録・認証時は適切なチャレンジ検証とセッション認証を必須としてください。
 - **プロキシヘッダー（`X-Forwarded-For`）の取得ロジックに注意する**: クライアント側から送られるヘッダー値をそのまま信用せず、自社で管理するリバースプロキシが追記した正しいIP（最右列など）を参照してレートリミットやログ記録を行ってください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、SecurityWeekから3件を収集しました。重要度HIGHは0件です。
+
+- **MEDIUM** [Hackers breach Microsoft 365 tenants via ConnectWise supply-chain attack](https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/) — BleepingComputer
+- **MEDIUM** [Drupal patches critical RCE flaws, warns exploits may emerge soon](https://www.bleepingcomputer.com/news/security/drupal-patches-critical-rce-flaws-warns-exploits-may-emerge-soon/) — BleepingComputer
+- **MEDIUM** [Israeli Ad Firm Doubled as Candiru’s Zero-Click Spyware Delivery Channel](https://www.securityweek.com/israeli-ad-firm-doubled-as-candirus-zero-click-spyware-delivery-channel/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
