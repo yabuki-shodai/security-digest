@@ -1,73 +1,57 @@
-# CVE Digest Dashboard (2026-10-17)
+# CVE Digest Dashboard (2026-10-18)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
-- High件数: 12
+- Critical件数: 1
+- High件数: 15
 - KEV件数: 0
 - Frontend件数: 2
-- Backend件数: 28
+- Backend件数: 18
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-17/frontend-summary.md)
-- [Backend Summary](docs/2026-10-17/backend-summary.md)
+- [Frontend Summary](docs/2026-10-18/frontend-summary.md)
+- [Backend Summary](docs/2026-10-18/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-111641](https://github.com/fastapiadmin/FastapiAdmin/blob/v3.0/backend/app/api/v1/module_system/auth/controller.py#L173-L251) CVE-2026-111641 / CRITICAL / backend
-- [CVE-2026-57169](https://github.com/Finsys/dockhand/commit/efb634701c55f80a8c752df8ae08d88f2c16cce9) CVE-2026-57169 / CRITICAL / backend
-- [CVE-2026-111663](https://github.com/chaskiq/chaskiq/blob/2.0.3/app/controllers/graphql_controller.rb#L3-L33) CVE-2026-111663 / CRITICAL / frontend
-- [CVE-2026-85748](https://github.com/MariaDB/server/commit/91156c3de58762196605150ab3f756fe952592d1) CVE-2026-85748 / CRITICAL / backend
-- [CVE-2026-92262](https://github.com/MariaDB/server/commit/574ba66b2d6c5d71db83d416677876e9b592858e) CVE-2026-92262 / CRITICAL / backend
+- [CVE-2026-111911](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-g6cq-6rqg-6c9p) CVE-2026-111911 / CRITICAL / security
+- [CVE-2026-109701](https://patchstack.com/database/wordpress/plugin/paytpv-for-woocommerce/vulnerability/wordpress-paycomet-for-woocommerce-plugin-5-45-cross-site-scripting-xss-vulnerability?_s_id=cve) CVE-2026-109701 / HIGH / security
+- [CVE-2026-111886](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-7pjw-6v4g-f837) CVE-2026-111886 / HIGH / security
+- [CVE-2026-111906](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-cmvh-fpmf-8gfx) CVE-2026-111906 / HIGH / security
+- [CVE-2026-111882](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-43g3-pp5p-fg96) CVE-2026-111882 / HIGH / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-本日掲載されたCVEでは、データベース（MariaDB）における複数の深刻なRCE脆弱性や、Webアプリケーション・管理ツール（FastapiAdmin、Dockhand、Chaskiq等）における**認証・認可の不備**（自動ログイン悪用、未認証WebSocket接続、OAuthトークンの検証漏れなど）が目立ちます。また、プロトコル実装ライブラリ（libIEC61850、libp2p-rust等）のメモリ安全性の不備やDoS脆弱性も複数報告されています。
+本日はWebアプリケーション（主に **phpMyFAQ**、**Coder**、**Admidio** 等）に関する認証回避、アクセス制御の不備、アカウント乗っ取りに関する脆弱性が多数公開されました。特に phpMyFAQ においては、WebAuthnの実装不備（CVSS 9.8）をはじめ、SSO連携やメールアドレス変更機能における認証バイパス・アカウント乗っ取りの深刻な脆弱性が集中的に報告されています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-111641 (FastapiAdmin | CVSS 9.8 : CRITICAL)**
-   - **概要**: 未保護の自動ログインエンドポイントを悪用し、未認証で管理者トークンを取得して完全な管理権限を奪取できる脆弱性。
-2. **CVE-2026-57169 (Dockhand | CVSS 9.6 : CRITICAL)**
-   - **概要**: コンテナターミナルのWebSocketエンドポイント（`/api/containers/<id>/exec`）で認証が欠落しており、未認証でターゲットコンテナ内で任意コマンドを実行される恐れ。
-3. **MariaDBのRCE脆弱性群 (CVE-2026-85748, CVE-2026-92262, CVE-2026-85746 | CVSS 各 9.9 : CRITICAL)**
-   - **概要**: UAF、テーブル名の`#mysql50#`プレフィックスによるパスバイパス、GIS関数（`ST_AsText`）のバッファオーバーフローなど、低権限ユーザーから任意コード実行やデータ強奪につながる重大な脆弱性。
-4. **CVE-2026-111663 (Chaskiq | CVSS 9.2 : CRITICAL)**
-   - **概要**: GraphQLの `createUrlUpload` ミューテーションを利用したSSRF。未認証の攻撃者にクラウドメタデータなどの内部リソースへアクセスされる危険性。
-5. **CVE-2026-111613 (AllData | CVSS 8.7 : HIGH)**
-   - **概要**: 未認証のJDBCインジェクション。`allowLoadLocalInfile=true` を含む外部パラメータを指定されることで、ホスト上の任意ファイルが読み取られる危険性。
+1. **CVE-2026-111911（phpMyFAQ | CVSS 9.8: CRITICAL）**
+   - **WebAuthn登録の不備によるアカウント乗っ取り**
+   - 未認証・チャレンジ検証なしでパスキーをアカウントに登録可能。パスワードや2FAを回避して任意のアカウントを乗っ取られる危険性があります。
+2. **CVE-2026-111884（phpMyFAQ | CVSS 8.7: HIGH）**
+   - **メールアドレス変更時の再認証欠如**
+   - 現在のパスワード確認なしでアカウントのメールアドレスを変更可能。セッション奪取後にアドレスを変更され、パスワードリセット経由でアカウントを奪われます。
+3. **CVE-2026-111882（phpMyFAQ | CVSS 8.6: HIGH）**
+   - **SSOログイン時の2FA（TOTP）バイパス**
+   - KeycloakやEntra IDを経由したログイン時、2FA（TOTP）の検証がスキップされ、2FA有効化アカウントへ不正アクセスされる恐れがあります。
+4. **CVE-2026-111893（phpMyFAQ | CVSS 8.5: HIGH）**
+   - **カテゴリ制限の不備による権限昇格**
+   - 制限付き管理者がAPIを経由して自身に割り当てられていないスコープ外のカテゴリ権限をグループに付与し、特権を奪取できます。
+5. **CVE-2026-111934（Coder | CVSS 6.3: MEDIUM）**
+   - **X-Forwarded-Forの誤信頼によるIPスプーフィング**
+   - クライアントが送信した `X-Forwarded-For` をそのまま信頼するため、レートリミットの回避（ブルートフォース攻撃）や監査ログの偽装が可能です。
 
 ---
 
 ## 開発者向けコメント
 
-- **認証・認可およびトークン検証の徹底**:
-  WebSocketエンドポイントのハンドシェイク時の認証チェック漏れ（CVE-2026-57169）や、OAuth連携時の `aud` (Audience) クレームチェック不足（CVE-2026-111639）、ハードコードされたJWT署名鍵（CVE-2026-111642）など、基本構造の欠陥による致命的な脆弱性が多発しています。認証フローの再点検を行ってください。
-- **外部パラメータと接続指定の安全化**:
-  ユーザー入力からGraphQL経由のURL取得（SSRF）や、JDBC接続文字列のダイレクト指定（任意ファイル読み取り）を許容しないよう、入力のホワイトリスト検証や危険なパラメータ（`allowLoadLocalInfile` 等）のサニタイズを実施してください。
-- **データベース・基盤ライブラリの更新**:
-  MariaDBを使用している環境では、最新パッチ（10.6.28, 10.11.19, 11.4.13, 11.8.9, 12.3.3, 13.0.2等）への更新を速やかに検討してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-エッジデバイスにおけるゼロデイ脆弱性の悪用や、広告表示のみで感染するゼロクリック攻撃によるスパイウェア配信など、高度な攻撃手法が確認されています。また、Magento等の主要システムにおける重大な脆弱性や、人気AIブランドを偽装した攻撃手法の急増が報告されています。さらに、ランサムウェア交渉人の不正関与疑惑や業界内の大型買収といった動向も注目を集めています。
-
-- **HIGH** [BeyondTrust Remote Support Zero-Day Continues Trend of Exploited Edge Bugs](https://www.darkreading.com/endpoint-security/beyondtrust-remote-support-exploited-edge-bugs) — Dark Reading
-- **HIGH** [Critical BlockStrap flaw lets hackers run code on Magento servers](https://www.bleepingcomputer.com/news/security/critical-blockstrap-flaw-lets-hackers-run-code-on-magento-servers/) — BleepingComputer
-- **HIGH** [Targeted ads installed Candiru spyware in zero-click attacks](https://www.bleepingcomputer.com/news/security/zero-click-attacks-used-targeted-ads-to-deliver-candiru-spyware/) — BleepingComputer
-- **MEDIUM** [Fake Claude, ChatGPT Attacks Surge, Putting Developers at Risk](https://www.darkreading.com/application-security/fake-claude-chatgpt-attacks-developers-risk) — Dark Reading
-- **MEDIUM** [AI Takes Control of Robotic Arm in 16 Minutes Flat](https://www.darkreading.com/ics-ot-security/ai-takes-control-robotic-arm-16-minutes) — Dark Reading
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **重要なアカウント操作時の再確認・認証を徹底する**: メールアドレスの変更や2FA設定の解除など、アカウントの所有権に関わる操作では、セッション状態だけでなく現在のパスワード入力や認証チャレンジを必ず求めてください。
+- **IdP・WebAuthn連携時の実装を見直す**: SSO連携時のユーザー紐付けには変更可能な属性（`preferred_username`など）ではなく不変の識別子（`sub`等）を使用し、パスキー登録・認証時は適切なチャレンジ検証とセッション認証を必須としてください。
+- **プロキシヘッダー（`X-Forwarded-For`）の取得ロジックに注意する**: クライアント側から送られるヘッダー値をそのまま信用せず、自社で管理するリバースプロキシが追記した正しいIP（最右列など）を参照してレートリミットやログ記録を行ってください。
