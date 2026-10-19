@@ -51,3 +51,17 @@
 掲載された脆弱性はすべてLinuxカーネルレイヤーに閉じたものであり、一般的なWebアプリケーション（Go、JavaScript/npm等）のアプリケーションコードの変更を直接求めるものではありません。
 
 ただし、ホストOSやコンテナ実行環境（Kubernetesノード、仮想化ハイパーバイザ等）で対象の機能（特定のネットワークプロトコル、GPIO、XFS/NTFS3ファイルシステム、Passthroughデバイスなど）を使用している場合は影響を受ける可能性があります。インフラ運用担当者と連携し、使用中のLinuxカーネルパッチの適用計画を確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+特定のWAF製品における脆弱性を悪用し、サーバー上で管理者権限を獲得しようとするアクティブな攻撃が報告されています。一方で業界動向として、米国のサイバーセキュリティ求人総数が減少する中でAIセキュリティエンジニアの需要が急増していることが示されています。
+
+- **HIGH** [Hackers exploit SiteGuard WAF flaw to run commands as admins](https://www.bleepingcomputer.com/news/security/hackers-exploit-siteguard-waf-flaw-to-run-commands-as-system-root/) — BleepingComputer
+- **LOW** [US Cybersecurity Job Postings Fall 26% as AI Security Engineer Demand Soars](https://www.securityweek.com/us-cybersecurity-job-postings-fall-26-as-ai-security-engineer-demand-soars/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
