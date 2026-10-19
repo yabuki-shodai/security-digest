@@ -1,72 +1,53 @@
-# CVE Digest Dashboard (2026-10-18)
+# CVE Digest Dashboard (2026-10-19)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 1
-- High件数: 15
+- Critical件数: 0
+- High件数: 0
 - KEV件数: 0
-- Frontend件数: 2
-- Backend件数: 18
+- Frontend件数: 1
+- Backend件数: 29
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-18/frontend-summary.md)
-- [Backend Summary](docs/2026-10-18/backend-summary.md)
+- [Frontend Summary](docs/2026-10-19/frontend-summary.md)
+- [Backend Summary](docs/2026-10-19/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-111911](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-g6cq-6rqg-6c9p) CVE-2026-111911 / CRITICAL / security
-- [CVE-2026-109701](https://patchstack.com/database/wordpress/plugin/paytpv-for-woocommerce/vulnerability/wordpress-paycomet-for-woocommerce-plugin-5-45-cross-site-scripting-xss-vulnerability?_s_id=cve) CVE-2026-109701 / HIGH / security
-- [CVE-2026-111886](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-7pjw-6v4g-f837) CVE-2026-111886 / HIGH / security
-- [CVE-2026-111906](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-cmvh-fpmf-8gfx) CVE-2026-111906 / HIGH / security
-- [CVE-2026-111882](https://github.com/thorsten/phpMyFAQ/security/advisories/GHSA-43g3-pp5p-fg96) CVE-2026-111882 / HIGH / security
+- [CVE-2026-98546](https://git.kernel.org/stable/c/071f51188a5d8ec10535541255587976d12fc7d8) CVE-2026-98546 / UNKNOWN / frontend
+- [CVE-2026-98433](https://git.kernel.org/stable/c/0a416ee20bcccddf91ca5b63696a23b9d11d73aa) CVE-2026-98433 / UNKNOWN / backend
+- [CVE-2026-98455](https://git.kernel.org/stable/c/005b23d9e324fe5d0acbcfa70c625f2e81189046) CVE-2026-98455 / UNKNOWN / backend
+- [CVE-2026-98473](https://git.kernel.org/stable/c/3c3433657c82f200dae36c29e2b80681c81b85be) CVE-2026-98473 / UNKNOWN / backend
+- [CVE-2026-98594](https://git.kernel.org/stable/c/0844402326d4e48a28688f93ec6442e93bb442fa) CVE-2026-98594 / UNKNOWN / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日はWebアプリケーション（主に **phpMyFAQ**、**Coder**、**Admidio** 等）に関する認証回避、アクセス制御の不備、アカウント乗っ取りに関する脆弱性が多数公開されました。特に phpMyFAQ においては、WebAuthnの実装不備（CVSS 9.8）をはじめ、SSO連携やメールアドレス変更機能における認証バイパス・アカウント乗っ取りの深刻な脆弱性が集中的に報告されています。
+
+本日掲載されたCVE（全30件）は、すべて**Linuxカーネルにおける修正・不具合報告**です。影響範囲はネットワークサブシステム（IPv6、skbuff、MPTCP、SCTP、Bluetooth、netfilterなど）、ファイルシステム（XFS、NTFS3）、ドライバー（SCSI、ATA、GPIO、DRMなど）、および仮想化（KVM）に渡ります。主な脆弱性タイプは、カーネルスタックからの情報漏洩、整数オーバーフロー/アンダーフロー、エラーハンドリング不備に伴うリソースリークやNULLポインタ参照です。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-111911（phpMyFAQ | CVSS 9.8: CRITICAL）**
-   - **WebAuthn登録の不備によるアカウント乗っ取り**
-   - 未認証・チャレンジ検証なしでパスキーをアカウントに登録可能。パスワードや2FAを回避して任意のアカウントを乗っ取られる危険性があります。
-2. **CVE-2026-111884（phpMyFAQ | CVSS 8.7: HIGH）**
-   - **メールアドレス変更時の再認証欠如**
-   - 現在のパスワード確認なしでアカウントのメールアドレスを変更可能。セッション奪取後にアドレスを変更され、パスワードリセット経由でアカウントを奪われます。
-3. **CVE-2026-111882（phpMyFAQ | CVSS 8.6: HIGH）**
-   - **SSOログイン時の2FA（TOTP）バイパス**
-   - KeycloakやEntra IDを経由したログイン時、2FA（TOTP）の検証がスキップされ、2FA有効化アカウントへ不正アクセスされる恐れがあります。
-4. **CVE-2026-111893（phpMyFAQ | CVSS 8.5: HIGH）**
-   - **カテゴリ制限の不備による権限昇格**
-   - 制限付き管理者がAPIを経由して自身に割り当てられていないスコープ外のカテゴリ権限をグループに付与し、特権を奪取できます。
-5. **CVE-2026-111934（Coder | CVSS 6.3: MEDIUM）**
-   - **X-Forwarded-Forの誤信頼によるIPスプーフィング**
-   - クライアントが送信した `X-Forwarded-For` をそのまま信頼するため、レートリミットの回避（ブルートフォース攻撃）や監査ログの偽装が可能です。
+1. **CVE-2026-98584**
+   - **概要**: `em_text_dump()` でスタック上に割り当てた構造体が初期化されずに送信され、`tc filter show` 等の操作を介してカーネルスタック情報が漏洩する（Kernel Infoleak）。
+2. **CVE-2026-98528**
+   - **概要**: `gpio_desc_to_lineinfo()` のエラーパスで構造体がゼロクリアされないままユーザー空間に返却され、カーネルスタック情報が漏洩する。
+3. **CVE-2026-98547**
+   - **概要**: `af_packet` 内の `prb_calc_retire_blk_tmo()` における32ビット整数オーバーフロー。ユーザー入力可能なブロックサイズに起因する。
+4. **CVE-2026-98573**
+   - **概要**: `skb_checksum_setup_ipv6()` でのIPv6拡張ヘッダー解析時におけるプルバウンドアンダーフロー問題。
+5. **CVE-2026-98545**
+   - **概要**: `ata_scsi_set_passthru_sense_fields()` において、悪意あるまたは異常なATAPIデバイスの応答長を検証せず、バッファ境界外の読み書きが発生する。
 
 ---
 
 ## 開発者向けコメント
 
-- **重要なアカウント操作時の再確認・認証を徹底する**: メールアドレスの変更や2FA設定の解除など、アカウントの所有権に関わる操作では、セッション状態だけでなく現在のパスワード入力や認証チャレンジを必ず求めてください。
-- **IdP・WebAuthn連携時の実装を見直す**: SSO連携時のユーザー紐付けには変更可能な属性（`preferred_username`など）ではなく不変の識別子（`sub`等）を使用し、パスキー登録・認証時は適切なチャレンジ検証とセッション認証を必須としてください。
-- **プロキシヘッダー（`X-Forwarded-For`）の取得ロジックに注意する**: クライアント側から送られるヘッダー値をそのまま信用せず、自社で管理するリバースプロキシが追記した正しいIP（最右列など）を参照してレートリミットやログ記録を行ってください。
+掲載された脆弱性はすべてLinuxカーネルレイヤーに閉じたものであり、一般的なWebアプリケーション（Go、JavaScript/npm等）のアプリケーションコードの変更を直接求めるものではありません。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間ではBleepingComputer、SecurityWeekから3件を収集しました。重要度HIGHは0件です。
-
-- **MEDIUM** [Hackers breach Microsoft 365 tenants via ConnectWise supply-chain attack](https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/) — BleepingComputer
-- **MEDIUM** [Drupal patches critical RCE flaws, warns exploits may emerge soon](https://www.bleepingcomputer.com/news/security/drupal-patches-critical-rce-flaws-warns-exploits-may-emerge-soon/) — BleepingComputer
-- **MEDIUM** [Israeli Ad Firm Doubled as Candiru’s Zero-Click Spyware Delivery Channel](https://www.securityweek.com/israeli-ad-firm-doubled-as-candirus-zero-click-spyware-delivery-channel/) — SecurityWeek
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+ただし、ホストOSやコンテナ実行環境（Kubernetesノード、仮想化ハイパーバイザ等）で対象の機能（特定のネットワークプロトコル、GPIO、XFS/NTFS3ファイルシステム、Passthroughデバイスなど）を使用している場合は影響を受ける可能性があります。インフラ運用担当者と連携し、使用中のLinuxカーネルパッチの適用計画を確認してください。
