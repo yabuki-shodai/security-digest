@@ -1,67 +1,56 @@
-# CVE Digest Dashboard (2026-10-19)
+# CVE Digest Dashboard (2026-10-20)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 0
-- High件数: 0
+- Critical件数: 5
+- High件数: 8
 - KEV件数: 0
-- Frontend件数: 1
-- Backend件数: 29
+- Frontend件数: 7
+- Backend件数: 23
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-19/frontend-summary.md)
-- [Backend Summary](docs/2026-10-19/backend-summary.md)
+- [Frontend Summary](docs/2026-10-20/frontend-summary.md)
+- [Backend Summary](docs/2026-10-20/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-98546](https://git.kernel.org/stable/c/071f51188a5d8ec10535541255587976d12fc7d8) CVE-2026-98546 / UNKNOWN / frontend
-- [CVE-2026-98433](https://git.kernel.org/stable/c/0a416ee20bcccddf91ca5b63696a23b9d11d73aa) CVE-2026-98433 / UNKNOWN / backend
-- [CVE-2026-98455](https://git.kernel.org/stable/c/005b23d9e324fe5d0acbcfa70c625f2e81189046) CVE-2026-98455 / UNKNOWN / backend
-- [CVE-2026-98473](https://git.kernel.org/stable/c/3c3433657c82f200dae36c29e2b80681c81b85be) CVE-2026-98473 / UNKNOWN / backend
-- [CVE-2026-98594](https://git.kernel.org/stable/c/0844402326d4e48a28688f93ec6442e93bb442fa) CVE-2026-98594 / UNKNOWN / backend
+- [CVE-2026-109437](https://github.com/CognicellAI/Cognition/releases/tag/v0.13.0) CVE-2026-109437 / CRITICAL / frontend
+- [CVE-2026-111057](https://github.com/mljar/mercury/commit/8c467129037ee9df269d543ac217ffd33b97bf3f) CVE-2026-111057 / CRITICAL / backend
+- [CVE-2026-112393](https://github.com/python-pillow/Pillow/commit/11582e5ffbdceb973d5ee593f3105af5a9852b40) CVE-2026-112393 / CRITICAL / backend
+- [CVE-2026-111058](https://github.com/mljar/mercury/commit/73a40ceb0becf057f495a5738ad7f5a5222a53e1) CVE-2026-111058 / CRITICAL / backend
+- [CVE-2026-112776](https://github.com/craftcms/cms/security/advisories/GHSA-7rr3-4jcm-x526) CVE-2026-112776 / CRITICAL / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日掲載されたCVE（全30件）は、すべて**Linuxカーネルにおける修正・不具合報告**です。影響範囲はネットワークサブシステム（IPv6、skbuff、MPTCP、SCTP、Bluetooth、netfilterなど）、ファイルシステム（XFS、NTFS3）、ドライバー（SCSI、ATA、GPIO、DRMなど）、および仮想化（KVM）に渡ります。主な脆弱性タイプは、カーネルスタックからの情報漏洩、整数オーバーフロー/アンダーフロー、エラーハンドリング不備に伴うリソースリークやNULLポインタ参照です。
+本日掲載されたCVEでは、**Pythonエコシステム（Mercury、Pillow、AIOHTTP、docTR）やWeb API/CMSにおける深刻な脆弱性**が目立ちます。特にCVSS 9.0を超えるCRITICALな脆弱性が複数含まれており、認証バイパスや設定・実装上の不備から未認証でリモートコード実行（RCE）が可能になるケースが報告されています。また、AIOHTTPやPillowなど広範囲で利用されるライブラリで多数のDoSやメモリ関連の不具合が修正されています。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-98584**
-   - **概要**: `em_text_dump()` でスタック上に割り当てた構造体が初期化されずに送信され、`tc filter show` 等の操作を介してカーネルスタック情報が漏洩する（Kernel Infoleak）。
-2. **CVE-2026-98528**
-   - **概要**: `gpio_desc_to_lineinfo()` のエラーパスで構造体がゼロクリアされないままユーザー空間に返却され、カーネルスタック情報が漏洩する。
-3. **CVE-2026-98547**
-   - **概要**: `af_packet` 内の `prb_calc_retire_blk_tmo()` における32ビット整数オーバーフロー。ユーザー入力可能なブロックサイズに起因する。
-4. **CVE-2026-98573**
-   - **概要**: `skb_checksum_setup_ipv6()` でのIPv6拡張ヘッダー解析時におけるプルバウンドアンダーフロー問題。
-5. **CVE-2026-98545**
-   - **概要**: `ata_scsi_set_passthru_sense_fields()` において、悪意あるまたは異常なATAPIデバイスの応答長を検証せず、バッファ境界外の読み書きが発生する。
+1. **CVE-2026-111057 (Mercury / CVSS 10.0 / CRITICAL)**
+   - **概要:** 配列定義内のカンマ欠落によりブロックリストの正規表現が正しく機能せず、未認証の攻撃者がJupyter ServerのターミナルAPIにアクセスしてOSコマンドを実行可能。
+2. **CVE-2026-109437 (Cognition / CVSS 9.8 / CRITICAL)**
+   - **概要:** REST/SSE APIに認証が設定されておらず、デフォルトでローカルシェル実行となっているため、未認証の攻撃者がPOSTリクエスト経由で任意のシェルコマンドを実行（RCE）可能。
+3. **CVE-2026-111058 (Mercury / CVSS 9.8 / CRITICAL)**
+   - **概要:** デフォルトのトークンなしデプロイにおいて`/api/kernels`エンドポイントの保護が不足しており、未認証で任意のPythonコードを実行可能。
+4. **CVE-2026-112776 (Craft CMS / CVSS 9.8 / CRITICAL)**
+   - **概要:** GraphQLトークンのサイトスコープチェック（`requireAllowedSite()`）が強制されない認可バイパスが存在し、別サイトのコンテンツ作成・削除や共通アセットの削除が可能。
+5. **CVE-2026-112393 (Pillow / CVSS 9.2 / CRITICAL)**
+   - **概要:** `_tiffWriteProc`での圧縮TIFFデータ保存処理におけるヒープバッファオーバーフローおよびメモリ漏洩の脆弱性。
 
 ---
 
 ## 開発者向けコメント
 
-掲載された脆弱性はすべてLinuxカーネルレイヤーに閉じたものであり、一般的なWebアプリケーション（Go、JavaScript/npm等）のアプリケーションコードの変更を直接求めるものではありません。
-
-ただし、ホストOSやコンテナ実行環境（Kubernetesノード、仮想化ハイパーバイザ等）で対象の機能（特定のネットワークプロトコル、GPIO、XFS/NTFS3ファイルシステム、Passthroughデバイスなど）を使用している場合は影響を受ける可能性があります。インフラ運用担当者と連携し、使用中のLinuxカーネルパッチの適用計画を確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-特定のWAF製品における脆弱性を悪用し、サーバー上で管理者権限を獲得しようとするアクティブな攻撃が報告されています。一方で業界動向として、米国のサイバーセキュリティ求人総数が減少する中でAIセキュリティエンジニアの需要が急増していることが示されています。
-
-- **HIGH** [Hackers exploit SiteGuard WAF flaw to run commands as admins](https://www.bleepingcomputer.com/news/security/hackers-exploit-siteguard-waf-flaw-to-run-commands-as-system-root/) — BleepingComputer
-- **LOW** [US Cybersecurity Job Postings Fall 26% as AI Security Engineer Demand Soars](https://www.securityweek.com/us-cybersecurity-job-postings-fall-26-as-ai-security-engineer-demand-soars/) — SecurityWeek
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **Pythonおよびデータ/AI系ライブラリの緊急アップデート:**
+  MercuryやPillow、docTR、AIOHTTPなどの広く使われているPythonライブラリでRCEやDoS、ファイルディスクリプタ枯渇などの深刻な脆弱性が公表されています。特にAIOHTTPはバージョン`3.14.4`へ、Pillowは`13.0.0`へ、Mercuryは`3.2.6`へ至急アップグレードしてください。
+* **APIのデフォルト認証と認可ロジックの再確認:**
+  CognitionのようにAPI認証が欠落しているケースや、Craft CMSのようにトークンの範囲（スコープ）チェックが漏れているケースが散見されます。エンドポイントを露出させる際は、認証の必須化および適切なアクセス制御ロジックが働いているかを点検してください。
+* **モデル・チェックポイント読み込みの安全化:**
+  docTR（CVE-2026-112304）の事例のように、`torch.load`で`weights_only=True`を指定しない不安全なデシリアライズは、不正なPickleコードの実行につながります。機械学習モデルやチェックポイントを読み込む処理の実装を見直してください。
