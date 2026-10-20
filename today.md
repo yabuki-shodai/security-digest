@@ -54,3 +54,20 @@
   CognitionのようにAPI認証が欠落しているケースや、Craft CMSのようにトークンの範囲（スコープ）チェックが漏れているケースが散見されます。エンドポイントを露出させる際は、認証の必須化および適切なアクセス制御ロジックが働いているかを点検してください。
 * **モデル・チェックポイント読み込みの安全化:**
   docTR（CVE-2026-112304）の事例のように、`torch.load`で`weights_only=True`を指定しない不安全なデシリアライズは、不正なPickleコードの実行につながります。機械学習モデルやチェックポイントを読み込む処理の実装を見直してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは2件です。
+
+- **HIGH** [Nikkei discloses third data breach in a month, 1.8M records exposed](https://www.bleepingcomputer.com/news/security/nikkei-discloses-third-data-breach-in-a-month-18m-records-exposed/) — BleepingComputer
+- **HIGH** [ConnectWise suspends Cloud Backup service after supply chain attack](https://therecord.media/connectwise-suspends-cloud-backup-service-supply-chain-attack) — The Record
+- **MEDIUM** [WordPress SEO plugin Rank Math compromised to backdoor websites](https://www.bleepingcomputer.com/news/security/wordpress-seo-plugin-rank-math-compromised-to-backdoor-websites/) — BleepingComputer
+- **MEDIUM** [Researchers Infiltrate Microsoft Tech Support Scam Operation](https://www.darkreading.com/threat-intelligence/microsoft-tech-support-scam-operation) — Dark Reading
+- **MEDIUM** ['AdFection' Turns Ad Impressions Into Zero-Click Spyware Delivery](https://www.darkreading.com/data-privacy/adfection-online-ads-spyware-delivery) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
