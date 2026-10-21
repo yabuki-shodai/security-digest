@@ -60,3 +60,20 @@
 CI/CD基盤（Argo CD）における脆弱性は、デプロイ環境全体の奪取につながるため、運用チームは緊急でのパッチ適用が必要です。
 
 また、AI/LLM開発用エコシステム（Google ADK, MCP SDK）やフロントエンド開発・テストツール（Vite, Vitest）における「パス検証不足」や「セッション・バウンダリの欠如」を狙った脆弱性が多数報告されています。依存ライブラリのバージョン管理を徹底するとともに、開発環境用サーバーやAPIが想定外のネットワークへ露出しないよう、ネットワーク設定およびアクセス制御を見直してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+PHPの重大な脆弱性に対する緊急パッチ予告や、開発プラットフォームでの大規模な情報漏えいなど、開発・運用基盤に関わる深刻な事象が報告されています。また、脆弱な秘密鍵に起因するCA証明書のブロック対応や、600以上の被害を出しているSafePayランサムウェアに関する当局の警告も出されています。さらに、内部脅威事件や過去のデータ侵害に対する法的和解など、多岐にわたるセキュリティ事案が判明しました。
+
+- **HIGH** [Mozilla, Google, Apple block compromised eMudhra CA certificates](https://www.bleepingcomputer.com/news/security/mozilla-google-apple-block-compromised-emudhra-ca-certificates/) — BleepingComputer
+- **HIGH** [Tech Giants Block eMudhra Certificates Tied to 8 Compromised Keys](https://www.darkreading.com/cyber-risk/tech-giants-emudhra-certificates-compromised-keys) — Dark Reading
+- **HIGH** [PHP warns admins of two critical flaws, emergency patches coming tomorrow](https://www.bleepingcomputer.com/news/security/php-warns-admins-of-two-critical-flaws-emergency-patches-coming-tomorrow/) — BleepingComputer
+- **HIGH** [FBI says SafePay ransomware gang ‘among most active’ with more than 600 victims since 2024](https://therecord.media/fbi-says-safepay-ransomware-gang-among-most-active-600-victims) — The Record
+- **HIGH** [Zeabur shutting down after second security breach in two months](https://www.bleepingcomputer.com/news/security/zeabur-shutting-down-after-second-security-breach-in-two-months/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
