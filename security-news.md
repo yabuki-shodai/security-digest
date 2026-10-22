@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-21 09:46:53 JST
+更新日時: 2026-10-22 09:49:24 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-PHPの重大な脆弱性に対する緊急パッチ予告や、開発プラットフォームでの大規模な情報漏えいなど、開発・運用基盤に関わる深刻な事象が報告されています。また、脆弱な秘密鍵に起因するCA証明書のブロック対応や、600以上の被害を出しているSafePayランサムウェアに関する当局の警告も出されています。さらに、内部脅威事件や過去のデータ侵害に対する法的和解など、多岐にわたるセキュリティ事案が判明しました。
+PHPやPlex Media Serverの脆弱性を悪用した攻撃（PHP2Shell、Plex2Shell）や国内VPSサービスでの大規模なマルウェア感染など、サーバーインフラを標的とした重大なインシデントが目立っています。また、北朝鮮のLazarusグループによる耐量子暗号の悪用など、高度な攻撃手法の登場も確認されています。一方で、Google Chromeにおける生成AIを活用した詐欺対策やクラウドインフラのセキュリティ標準化など、防御側の取り組みも推進されています。
 
-## [Mozilla, Google, Apple block compromised eMudhra CA certificates](https://www.bleepingcomputer.com/news/security/mozilla-google-apple-block-compromised-emudhra-ca-certificates/)
+## [Japan's Onamae Desktop Cloud hacked, up to 27,000 servers affected](https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-21 09:46 JST
-- 要約: 認証局eMudhraの秘密鍵が容易に復元可能な状態であったため、8つの中間証明書が失効処理されました。これを受けてMozilla、Google、Appleなどは、信頼された偽造証明書の発行を防ぐため対象証明書をブロックしました。
+- 公開日時: 2026-10-22 06:43 JST
+- 要約: 日本のVPSサービス「お名前.com デスクトップクラウド」のインフラが侵害を受け、最大26,739台の顧客サーバーにマルウェアがインストールされました。サービス提供元のインフラレベルで大規模な侵害が発生しています。
 
-## [Tech Giants Block eMudhra Certificates Tied to 8 Compromised Keys](https://www.darkreading.com/cyber-risk/tech-giants-emudhra-certificates-compromised-keys)
+## [Lazarus hackers use post-quantum cryptography for malware delivery](https://www.bleepingcomputer.com/news/security/lazarus-hackers-use-post-quantum-cryptography-for-malware-delivery/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-22 05:31 JST
+- 要約: 北朝鮮のハッカー集団Lazarusが、マルウェア配信の保護に耐量子暗号メカニズムを使用していることが判明しました。新旧のマルウェアを組み合わせた新たな攻撃運用でこの高度な暗号技術が利用されています。
+
+## ['PHP2Shell' Bugs Signal Red Alert for Security Industry](https://www.darkreading.com/application-security/php2shell-bugs-red-alert-security-industry)
 
 - 重要度: **HIGH**
 - メディア: Dark Reading
-- 公開日時: 2026-10-21 06:45 JST
-- 要約: GoogleやMozilla、Appleなどは、インドの認証局eMudhraで侵害された鍵に関連する証明書のブロック措置を迅速に講じました。なお、キーがどのように侵害されたかの経緯は分かっていません。
+- 公開日時: 2026-10-22 04:19 JST
+- 要約: 詳細情報の漏洩と悪用試行の報告を受け、セキュリティチームは「PHP2Shell」と呼ばれる2つの深刻なPHPの脆弱性修正に追われています。既に攻撃の試みが確認されており、業界全体で警戒が高まっています。
 
-## [PHP warns admins of two critical flaws, emergency patches coming tomorrow](https://www.bleepingcomputer.com/news/security/php-warns-admins-of-two-critical-flaws-emergency-patches-coming-tomorrow/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-21 05:56 JST
-- 要約: PHPのセキュリティチームは、事前漏洩した2つの重大な脆弱性に対処するため、管理者へ緊急パッチの準備を促す警告を出しました。修正用の緊急アップデートは明日公開される予定です。
-
-## [FBI says SafePay ransomware gang ‘among most active’ with more than 600 victims since 2024](https://therecord.media/fbi-says-safepay-ransomware-gang-among-most-active-600-victims)
-
-- 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-10-21 05:27 JST
-- 要約: FBIなどの捜査機関は、SafePayランサムウェア組織が2024年以降600以上の組織を攻撃し、極めて活発に活動していると警告しました。パスワード推測や脆弱性悪用、フィッシングを用いて企業や重要インフラを標的にしています。
-
-## [Zeabur shutting down after second security breach in two months](https://www.bleepingcomputer.com/news/security/zeabur-shutting-down-after-second-security-breach-in-two-months/)
+## [CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers](https://www.bleepingcomputer.com/news/security/cisa-hackers-chain-plex-flaws-in-plex2shell-attacks-to-breach-servers/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-21 04:33 JST
-- 要約: 開発プラットフォームのZeaburは、平文保存された内部認証情報の漏洩を突かれた2回目の攻撃を受け、サービスの終了を発表しました。このインシデントにより、320万件以上の環境変数レコードと約32万件のアカウント情報が窃取されました。
+- 公開日時: 2026-10-22 03:34 JST
+- 要約: CISAは、攻撃者がPlex Media Serverの4つの脆弱性を連鎖させてサーバーを侵害する「Plex2Shell」攻撃をアクティブに悪用していると警告しました。影響を受けるシステムに対して迅速な対応が求められています。
 
-## [California warns all public school students of data stolen in contractor breach](https://therecord.media/california-warns-all-public-school-students-of-data-breach)
+## [Google Chrome adds Gemini-powered scam detection, warns users of ClickFix attacks](https://www.bleepingcomputer.com/news/google/google-chrome-adds-gemini-powered-scam-detection-warns-users-of-clickfix-attacks/)
 
 - 重要度: **MEDIUM**
-- メディア: The Record
-- 公開日時: 2026-10-21 04:20 JST
-- 要約: カリフォルニア州教育局は、評価テスト請負業者のETSが数ヶ月に及ぶデータ侵害を受けたとして生徒に注意を呼びかけました。この侵害により公立学校の生徒データが盗まれたとされています。
+- メディア: BleepingComputer
+- 公開日時: 2026-10-22 07:16 JST
+- 要約: Google Chromeは、偽サイトの検出やClickFix攻撃による不審なコマンドのコピー時に警告を行うGemini活用の詐欺対策機能を追加します。これにより、巧妙化するオンライン詐欺からユーザーを保護することを目指します。
 
-## [Ex-OpenAI Engineer Detained After Planting Secret Recorder at HQ](https://www.darkreading.com/insider-threats/ex-openai-engineer-secret-recorder-saudi-ties)
+## [TiDB Breach Exposes Flawed Cloud Security Assumptions](https://www.darkreading.com/cloud-security/tidb-breach-flawed-cloud-security)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-21 04:16 JST
-- 要約: OpenAIの本社会議室に隠し録音機を設置したとして、サウジアラビアとのつながりを持つ元エンジニアが逮捕されました。内部関係者によるセキュリティ脅威の事例として注目されています。
+- 公開日時: 2026-10-22 06:15 JST
+- 要約: TiDBにおけるデータ侵害事例は、クラウドプロバイダーと利用者の双方が認識しないまま機密データが保管されているリスクを浮き彫りにしました。この事案はクラウドセキュリティにおける従来の前提を見直す契機となっています。
 
-## [23andMe successor settles with California for $6 million over cybersecurity failings](https://therecord.media/23andme-california-data-breach-settlement)
-
-- 重要度: **LOW**
-- メディア: The Record
-- 公開日時: 2026-10-21 03:32 JST
-- 要約: 23andMeの後継企業は、2023年のデータ侵害前に顧客データを適切に保護していなかったとする連邦の主張に対し、600万ドルを支払うことで和解しました。
-
-## [OpenAI says GPT-6.1 Sol is dramatically better at migrating legacy code](https://www.bleepingcomputer.com/news/artificial-intelligence/openai-says-gpt-61-sol-is-dramatically-better-at-migrating-legacy-code/)
-
-- 重要度: **LOW**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-21 03:11 JST
-- 要約: OpenAIは、新しいAIモデルが古いプログラミング言語で書かれたコードの記述や移行作業において大幅に性能向上したことを発表しました。
-
-## [Nigerian national given 8-year sentence for tax business hacks](https://therecord.media/nigerian-given-8-year-sentenc-tax-hacks)
+## [Meta on the spot for $25 billion under New Mexico privacy ruling](https://therecord.media/meta-new-mexico-penalty-cambridge-analytica-privacy-case)
 
 - 重要度: **LOW**
 - メディア: The Record
-- 公開日時: 2026-10-21 02:14 JST
-- 要約: 税務代行業者をハッキングし顧客データを用いて巨額の詐欺を行っていたグループのナイジェリア国籍の男に対し、禁錮8年の判決が言い渡されました。
+- 公開日時: 2026-10-22 05:25 JST
+- 要約: ニューメキシコ州のプライバシー判決により、Metaは約10年前のCambridge Analytica問題に関連して最大250億ドルの支払いに直面する可能性があります。長引くデータプライバシースキャンダルが同社の財務に影響を与え続けています。
+
+## [Marvell, Microsoft & Oracle Work to Standardize Data Center Hardware Security](https://www.darkreading.com/cloud-security/marvell-microsoft-oracle-standardize-data-center-hardware-security)
+
+- 重要度: **LOW**
+- メディア: Dark Reading
+- 公開日時: 2026-10-22 05:14 JST
+- 要約: Marvell、Microsoft、Oracleの3社は、クラウドおよびハイパースケールデータセンター向けにNIST FIPS 140-3 Level 3統合HSMの標準化に取り組んでいます。データセンターインフラにおけるハードウェアセキュリティの共通化を目指すものです。
+
+## [Cloud Security Alliance Survey Finds Data Loss Prevention Often Detects Data Loss Only After It Happens](https://www.darkreading.com/cloud-security/cloud-security-alliance-survey-data-loss-prevention-detects-data-loss)
+
+- 重要度: **LOW**
+- メディア: Dark Reading
+- 公開日時: 2026-10-22 05:03 JST
+- 要約: Cloud Security Allianceの調査によると、データ漏洩を経験した組織のうち、データ流出前にDLPで阻止できた割合は16%に過ぎませんでした。多くのDLP製品が事後のデータ損失検出に留まっている現状が示されています。
+
+## [Tech trio launches $10 million initiative to help under-resourced utilities bolster cybersecurity](https://therecord.media/utilities-cybersecurity-initiative-accenture)
+
+- 重要度: **LOW**
+- メディア: The Record
+- 公開日時: 2026-10-22 04:45 JST
+- 要約: 民間主導のイニシアチブにより、リソースが不足している最大500の公共インフラ事業者を対象に1,000万ドル規模のサイバーセキュリティ支援が提供されます。支援を通じて基礎的なセキュリティ強化を図ります。

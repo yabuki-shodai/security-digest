@@ -50,3 +50,20 @@
 - **ルーティング・ミドルウェア迂回への警戒**: Next.js（Sentry統合）やNuxtにおいて、特定のパス指定やURLエンコード表現によってアクセス制御がバイパスされる問題が報告されています。対象ライブラリを修正バージョンへ更新するとともに、重要なルートが正しく保護されているかテストコード等で再確認してください。
 - **認証トークン失効処理の実効性チェック**: Django REST Frameworkを利用してAPI認証トークンの無効化を行っている場合、実際にDB上のレコードが削除・無効化されているか実挙動を確認し、パッチバージョンへの適用を進めてください。
 - **開発サーバー・ツールのセキュリティ確保**: Storybookのようなローカル開発用サーバーも、ネットワーク共有時のトークン漏洩からコード挿入のリスクに晒されます。開発環境で利用するツールのバージョン管理とバインド範囲の適切な制御を行ってください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+PHPやPlex Media Serverの脆弱性を悪用した攻撃（PHP2Shell、Plex2Shell）や国内VPSサービスでの大規模なマルウェア感染など、サーバーインフラを標的とした重大なインシデントが目立っています。また、北朝鮮のLazarusグループによる耐量子暗号の悪用など、高度な攻撃手法の登場も確認されています。一方で、Google Chromeにおける生成AIを活用した詐欺対策やクラウドインフラのセキュリティ標準化など、防御側の取り組みも推進されています。
+
+- **HIGH** [Japan's Onamae Desktop Cloud hacked, up to 27,000 servers affected](https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/) — BleepingComputer
+- **HIGH** [Lazarus hackers use post-quantum cryptography for malware delivery](https://www.bleepingcomputer.com/news/security/lazarus-hackers-use-post-quantum-cryptography-for-malware-delivery/) — BleepingComputer
+- **HIGH** ['PHP2Shell' Bugs Signal Red Alert for Security Industry](https://www.darkreading.com/application-security/php2shell-bugs-red-alert-security-industry) — Dark Reading
+- **HIGH** [CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers](https://www.bleepingcomputer.com/news/security/cisa-hackers-chain-plex-flaws-in-plex2shell-attacks-to-breach-servers/) — BleepingComputer
+- **MEDIUM** [Google Chrome adds Gemini-powered scam detection, warns users of ClickFix attacks](https://www.bleepingcomputer.com/news/google/google-chrome-adds-gemini-powered-scam-detection-warns-users-of-clickfix-attacks/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
