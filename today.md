@@ -1,69 +1,42 @@
-# CVE Digest Dashboard (2026-10-22)
+# CVE Digest Dashboard (2026-10-23)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 6
-- High件数: 10
+- Critical件数: 1
+- High件数: 18
 - KEV件数: 0
-- Frontend件数: 19
-- Backend件数: 11
+- Frontend件数: 8
+- Backend件数: 22
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-22/frontend-summary.md)
-- [Backend Summary](docs/2026-10-22/backend-summary.md)
+- [Frontend Summary](docs/2026-10-23/frontend-summary.md)
+- [Backend Summary](docs/2026-10-23/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-114139](https://github.com/getsentry/sentry-javascript/commit/878b685c85dc12045e47e1932c96f5381d7ac532) CVE-2026-114139 / CRITICAL / frontend
-- [CVE-2026-20043](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-snort3-ybgmhTQe) CVE-2026-20043 / CRITICAL / backend
-- [CVE-2026-76473](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-voice-hardening-twgbH9e3) CVE-2026-76473 / CRITICAL / backend
-- [CVE-2026-113788](https://github.com/uselagoon/lagoon/releases/tag/v2.33.2) CVE-2026-113788 / CRITICAL / backend
-- [CVE-2026-76474](https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-voice-hardening-twgbH9e3) CVE-2026-76474 / CRITICAL / backend
+- [CVE-2026-114607](https://github.com/better-auth/better-auth/commit/ac54bfd67821a7607533af2059858b12bc54e26a) CVE-2026-114607 / CRITICAL / frontend
+- [CVE-2026-94482](https://github.com/vercel/next.js/releases/tag/v15.5.28) CVE-2026-94482 / HIGH / frontend
+- [CVE-2026-114644](https://github.com/mongodb/mongo-csharp-driver/releases/tag/v3.13.0) CVE-2026-114644 / HIGH / backend
+- [CVE-2026-114653](https://github.com/mongodb/mongo-csharp-driver/releases/tag/v3.13.0) CVE-2026-114653 / HIGH / backend
+- [CVE-2026-115450](https://github.com/MarcosCamara01/ecommerce-template/commit/e6b364cd668f2ba875cfa7f6d55c63e771715df7) CVE-2026-115450 / HIGH / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日掲載されたCVEでは、フロントエンドおよびフルスタックフレームワーク（Next.js/Sentry、Nuxt、Astro、Storybook）、バックエンドフレームワーク（Django REST framework）、およびデプロイ・アプライアンス基盤（Lagoon、Ciscoなど）に関する脆弱性が多数報告されています。特にWeb開発領域において、アクセス制御ミドルウェアの迂回やトークン失効の不具合など、認証・認可の根幹に関わる影響度の高い脆弱性が目立ちます。
+本日公開されたCVEでは、TypeScript向け認証ライブラリ「Better Auth」における深刻な認証バイパス（CVSS 9.1）や、Next.jsのApp Routerにおけるリソース枯渇DoSが注目されます。さらに、MongoDB C# Driverにおける大量の脆弱性（LINQインジェクション、接続共有による他者権限実行、暗号化失敗など）や、Pythonエコシステム（dnspython、msgpack、Mistune）における入力パース時のCPU/メモリ枯渇DoSが相次いで報告されています。
 
 ## 優先して確認すべき3〜5件
-
-1. **CVE-2026-114139 (@sentry/nextjs)**
-   - **深刻度**: CRITICAL (CVSS 9.1)
-   - **概要**: Next.js向けSentry SDKのwebpack統合において、`tunnelRoute`利用時にアクセス制御ミドルウェアがスキップされ、未認証リクエストが保護対象ルートに到達できる脆弱性。
-2. **CVE-2026-114137 (Django REST framework)**
-   - **深刻度**: HIGH (CVSS 7.4)
-   - **概要**: `TokenProxy.delete()` が主キーの参照誤りによりトークンレコードの削除に失敗する不具合。資格情報の失効処理が成功したように見えて実際にはトークンが有効なまま残る。
-3. **CVE-2026-114126 (Storybook)**
-   - **深刻度**: HIGH (CVSS 8.7)
-   - **概要**: 開発サーバーがローカルネットワーク上にWebSocket認証トークンを漏洩させる問題。同一LAN内の攻撃者によるファイル書き込みやコード注入につながる恐れがある。
-4. **CVE-2026-113788 (Lagoon)**
-   - **深刻度**: CRITICAL (CVSS 9.4)
-   - **概要**: Kubernetes向けアプリ配信プラットフォーム「Lagoon」のSSHサービスにおける脆弱性。アカウントを持つユーザーが任意コード実行および管理者権限昇格を行える。
-5. **CVE-2026-114131 / CVE-2026-114132 (Nuxt)**
-   - **深刻度**: MEDIUM (CVSS 6.5 / 6.3)
-   - **概要**: URLセグメントのパーセントエンコード処理や大文字・小文字の判定不一致により、設定した`routeRules`やミドルウェアを迂回してSSRデータや保護ページが取得可能になる脆弱性。
+1. **CVE-2026-114607 (Better Auth) - CVSS 9.1 / CRITICAL**
+   - **概要:** Magic LinkとOAuthを併用している特定設定下で、OAuthのstate値をMagic Linkトークンとして受容し、認証をバイパスされる恐れがあります。
+2. **CVE-2026-94482 (Next.js) - CVSS 8.2 / HIGH**
+   - **概要:** App RouterかつServer Actionsを有効化している環境で、細工されたリクエストにより過度なCPU消費が発生し、サービス停止（DoS）に追い込まれます（v15.5.28 / v16.4.1で修正）。
+3. **MongoDB C# Driver 一連の脆弱性 (CVE-2026-114644, 114649, 114648 等) - CVSS 8.2 / HIGH**
+   - **概要:** LINQクエリ内のキー未検証によるデータ不正アクセス、TLS証明書比較不備による他ユーザーとしてのDB操作実行、BSONデシリアライズ時の無制限メモリ増大など複数の重大な問題が存在します。
+4. **CVE-2026-114605 (dnspython) - CVSS 7.5 / HIGH**
+   - **概要:** DNS圧縮ポインタチェーンの処理ループ制限が不足しており、悪意あるDNS応答メッセージによりCPUが高負荷状態に陥りDoSを引き起こします（v2.9.0で修正）。
 
 ## 開発者向けコメント
-- **ルーティング・ミドルウェア迂回への警戒**: Next.js（Sentry統合）やNuxtにおいて、特定のパス指定やURLエンコード表現によってアクセス制御がバイパスされる問題が報告されています。対象ライブラリを修正バージョンへ更新するとともに、重要なルートが正しく保護されているかテストコード等で再確認してください。
-- **認証トークン失効処理の実効性チェック**: Django REST Frameworkを利用してAPI認証トークンの無効化を行っている場合、実際にDB上のレコードが削除・無効化されているか実挙動を確認し、パッチバージョンへの適用を進めてください。
-- **開発サーバー・ツールのセキュリティ確保**: Storybookのようなローカル開発用サーバーも、ネットワーク共有時のトークン漏洩からコード挿入のリスクに晒されます。開発環境で利用するツールのバージョン管理とバインド範囲の適切な制御を行ってください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-PHPやPlex Media Serverの脆弱性を悪用した攻撃（PHP2Shell、Plex2Shell）や国内VPSサービスでの大規模なマルウェア感染など、サーバーインフラを標的とした重大なインシデントが目立っています。また、北朝鮮のLazarusグループによる耐量子暗号の悪用など、高度な攻撃手法の登場も確認されています。一方で、Google Chromeにおける生成AIを活用した詐欺対策やクラウドインフラのセキュリティ標準化など、防御側の取り組みも推進されています。
-
-- **HIGH** [Japan's Onamae Desktop Cloud hacked, up to 27,000 servers affected](https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/) — BleepingComputer
-- **HIGH** [Lazarus hackers use post-quantum cryptography for malware delivery](https://www.bleepingcomputer.com/news/security/lazarus-hackers-use-post-quantum-cryptography-for-malware-delivery/) — BleepingComputer
-- **HIGH** ['PHP2Shell' Bugs Signal Red Alert for Security Industry](https://www.darkreading.com/application-security/php2shell-bugs-red-alert-security-industry) — Dark Reading
-- **HIGH** [CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers](https://www.bleepingcomputer.com/news/security/cisa-hackers-chain-plex-flaws-in-plex2shell-attacks-to-breach-servers/) — BleepingComputer
-- **MEDIUM** [Google Chrome adds Gemini-powered scam detection, warns users of ClickFix attacks](https://www.bleepingcomputer.com/news/google/google-chrome-adds-gemini-powered-scam-detection-warns-users-of-clickfix-attacks/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+認証周り（Better Auth）およびWebフレームワーク（Next.js）の脆弱性は攻撃者から狙われやすいため、対象バージョンを使用している場合は速やかにライブラリの更新を行ってください。また、.NET環境でMongoDBを利用している開発チームは、ドライバーのバージョンアップを優先課題として扱う必要があります。Python環境でもパーサー類（DNS、MessagePack、Markdown）にDoS脆弱性が多発しているため、依存ライブラリ全般のセキュリティパッチ適用状況の点検を推奨します。
