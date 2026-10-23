@@ -40,3 +40,20 @@
 
 ## 開発者向けコメント
 認証周り（Better Auth）およびWebフレームワーク（Next.js）の脆弱性は攻撃者から狙われやすいため、対象バージョンを使用している場合は速やかにライブラリの更新を行ってください。また、.NET環境でMongoDBを利用している開発チームは、ドライバーのバージョンアップを優先課題として扱う必要があります。Python環境でもパーサー類（DNS、MessagePack、Markdown）にDoS脆弱性が多発しているため、依存ライブラリ全般のセキュリティパッチ適用状況の点検を推奨します。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは5件です。
+
+- **HIGH** [Toronto crime tips org freezes operations after details of data breach come to light](https://therecord.media/toronto-crime-tips-org-freezes-ops-after-breach) — The Record
+- **HIGH** [Microsoft Links Storm-0940 to ConnectWise Supply Chain Attack](https://www.darkreading.com/cyberattacks-data-breaches/microsoft-storm-0940-connectwise-supply-chain-attack) — Dark Reading
+- **HIGH** [Capcom confirms data breach affecting 11.7 million accounts](https://www.bleepingcomputer.com/news/security/capcom-confirms-data-breach-affecting-117-million-accounts/) — BleepingComputer
+- **HIGH** [Arista patches new VeloCloud Orchestrator zero-day exploited in attacks](https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/) — BleepingComputer
+- **HIGH** [Microsoft blames ConnectWise attacks on Chinese state hacker using ARTEX AI agents](https://therecord.media/china-cyber-connectwise-ai) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->

@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-22 09:49:24 JST
+更新日時: 2026-10-23 09:49:54 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-PHPやPlex Media Serverの脆弱性を悪用した攻撃（PHP2Shell、Plex2Shell）や国内VPSサービスでの大規模なマルウェア感染など、サーバーインフラを標的とした重大なインシデントが目立っています。また、北朝鮮のLazarusグループによる耐量子暗号の悪用など、高度な攻撃手法の登場も確認されています。一方で、Google Chromeにおける生成AIを活用した詐欺対策やクラウドインフラのセキュリティ標準化など、防御側の取り組みも推進されています。
+直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは5件です。
 
-## [Japan's Onamae Desktop Cloud hacked, up to 27,000 servers affected](https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-22 06:43 JST
-- 要約: 日本のVPSサービス「お名前.com デスクトップクラウド」のインフラが侵害を受け、最大26,739台の顧客サーバーにマルウェアがインストールされました。サービス提供元のインフラレベルで大規模な侵害が発生しています。
-
-## [Lazarus hackers use post-quantum cryptography for malware delivery](https://www.bleepingcomputer.com/news/security/lazarus-hackers-use-post-quantum-cryptography-for-malware-delivery/)
+## [Toronto crime tips org freezes operations after details of data breach come to light](https://therecord.media/toronto-crime-tips-org-freezes-ops-after-breach)
 
 - 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-22 05:31 JST
-- 要約: 北朝鮮のハッカー集団Lazarusが、マルウェア配信の保護に耐量子暗号メカニズムを使用していることが判明しました。新旧のマルウェアを組み合わせた新たな攻撃運用でこの高度な暗号技術が利用されています。
+- メディア: The Record
+- 公開日時: 2026-10-23 05:52 JST
+- 要約: Late Wednesday night the Toronto chapter of Crime Stoppers broke ranks with the national association, revealing a timeline showing what it knew and when along with an announcement that it will pause operations.
 
-## ['PHP2Shell' Bugs Signal Red Alert for Security Industry](https://www.darkreading.com/application-security/php2shell-bugs-red-alert-security-industry)
+## [Microsoft Links Storm-0940 to ConnectWise Supply Chain Attack](https://www.darkreading.com/cyberattacks-data-breaches/microsoft-storm-0940-connectwise-supply-chain-attack)
 
 - 重要度: **HIGH**
 - メディア: Dark Reading
-- 公開日時: 2026-10-22 04:19 JST
-- 要約: 詳細情報の漏洩と悪用試行の報告を受け、セキュリティチームは「PHP2Shell」と呼ばれる2つの深刻なPHPの脆弱性修正に追われています。既に攻撃の試みが確認されており、業界全体で警戒が高まっています。
+- 公開日時: 2026-10-23 05:42 JST
+- 要約: The China-linked actor used an AI-enabled penetration-testing tool to automate and accelerate its attack on more than 2,200 tenants.
 
-## [CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers](https://www.bleepingcomputer.com/news/security/cisa-hackers-chain-plex-flaws-in-plex2shell-attacks-to-breach-servers/)
+## [Capcom confirms data breach affecting 11.7 million accounts](https://www.bleepingcomputer.com/news/security/capcom-confirms-data-breach-affecting-117-million-accounts/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-22 03:34 JST
-- 要約: CISAは、攻撃者がPlex Media Serverの4つの脆弱性を連鎖させてサーバーを侵害する「Plex2Shell」攻撃をアクティブに悪用していると警告しました。影響を受けるシステムに対して迅速な対応が求められています。
+- 公開日時: 2026-10-23 05:22 JST
+- 要約: Japanese gaming giant Capcom has confirmed that hackers breached its membership service, CAPCOM ID, exposing more than 11.7 million customer email addresses and associated information. [...]
 
-## [Google Chrome adds Gemini-powered scam detection, warns users of ClickFix attacks](https://www.bleepingcomputer.com/news/google/google-chrome-adds-gemini-powered-scam-detection-warns-users-of-clickfix-attacks/)
+## [Arista patches new VeloCloud Orchestrator zero-day exploited in attacks](https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-23 02:18 JST
+- 要約: Arista Networks released security updates to patch an actively exploited zero-day vulnerability affecting VeloCloud Orchestrator (VCO) On-Prem deployments. [...]
+
+## [Microsoft blames ConnectWise attacks on Chinese state hacker using ARTEX AI agents](https://therecord.media/china-cyber-connectwise-ai)
+
+- 重要度: **HIGH**
+- メディア: The Record
+- 公開日時: 2026-10-23 01:30 JST
+- 要約: A Chinese government-aligned hacking group used automated tools to carry out the recent supply chain attack on IT management software company ConnectWise and is using the same techniques to try to compromise organizations around the globe, Microsoft said.
+
+## [Railway warns devs to rotate secrets after potential breach](https://www.bleepingcomputer.com/news/security/railway-warns-devs-to-rotate-secrets-after-potential-breach/)
 
 - 重要度: **MEDIUM**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-22 07:16 JST
-- 要約: Google Chromeは、偽サイトの検出やClickFix攻撃による不審なコマンドのコピー時に警告を行うGemini活用の詐欺対策機能を追加します。これにより、巧妙化するオンライン詐欺からユーザーを保護することを目指します。
+- 公開日時: 2026-10-23 06:25 JST
+- 要約: Cloud platform Railway published an urgent warning to users after detecting suspicious activity on its systems that store customer environment variables earlier this week. [...]
 
-## [TiDB Breach Exposes Flawed Cloud Security Assumptions](https://www.darkreading.com/cloud-security/tidb-breach-flawed-cloud-security)
+## [What We Missed: Feds Lasso Texas Laptop Farms](https://www.darkreading.com/insider-threats/texas-laptop-farms-north-korean-it-workers)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-22 06:15 JST
-- 要約: TiDBにおけるデータ侵害事例は、クラウドプロバイダーと利用者の双方が認識しないまま機密データが保管されているリスクを浮き彫りにしました。この事案はクラウドセキュリティにおける従来の前提を見直す契機となっています。
+- 公開日時: 2026-10-23 05:33 JST
+- 要約: In this video, Dark Reading editors discuss some of the news they didn't get a chance to cover, from busting up North Korea's stateside infrastructure in "Operation Lonestar Justice" to Staples' gift card bonanza.
 
-## [Meta on the spot for $25 billion under New Mexico privacy ruling](https://therecord.media/meta-new-mexico-penalty-cambridge-analytica-privacy-case)
+## [Les supermarchés de l'UE paient d'un firmware de réfrigérateur non mis à jour](https://www.darkreading.com/ics-ot-security/eu-grocers-unpatched-fridge-firmware-french)
 
-- 重要度: **LOW**
-- メディア: The Record
-- 公開日時: 2026-10-22 05:25 JST
-- 要約: ニューメキシコ州のプライバシー判決により、Metaは約10年前のCambridge Analytica問題に関連して最大250億ドルの支払いに直面する可能性があります。長引くデータプライバシースキャンダルが同社の財務に影響を与え続けています。
-
-## [Marvell, Microsoft & Oracle Work to Standardize Data Center Hardware Security](https://www.darkreading.com/cloud-security/marvell-microsoft-oracle-standardize-data-center-hardware-security)
-
-- 重要度: **LOW**
+- 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-22 05:14 JST
-- 要約: Marvell、Microsoft、Oracleの3社は、クラウドおよびハイパースケールデータセンター向けにNIST FIPS 140-3 Level 3統合HSMの標準化に取り組んでいます。データセンターインフラにおけるハードウェアセキュリティの共通化を目指すものです。
+- 公開日時: 2026-10-23 04:30 JST
+- 要約: Des centaines de magasins ont subi des pertes se chiffrant en millions d'euros parce qu'ils avaient fait appel à des tiers pour gérer le micrologiciel OT obsolète qui pilotait leurs systèmes de climatisation.
 
-## [Cloud Security Alliance Survey Finds Data Loss Prevention Often Detects Data Loss Only After It Happens](https://www.darkreading.com/cloud-security/cloud-security-alliance-survey-data-loss-prevention-detects-data-loss)
+## [LiteLLM release pipeline hacked to distribute info-stealer malware](https://www.bleepingcomputer.com/news/security/litellm-release-pipeline-hacked-to-distribute-info-stealer-malware/)
 
-- 重要度: **LOW**
-- メディア: Dark Reading
-- 公開日時: 2026-10-22 05:03 JST
-- 要約: Cloud Security Allianceの調査によると、データ漏洩を経験した組織のうち、データ流出前にDLPで阻止できた割合は16%に過ぎませんでした。多くのDLP製品が事後のデータ損失検出に留まっている現状が示されています。
+- 重要度: **MEDIUM**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-23 04:12 JST
+- 要約: Hackers compromised the LiteLLM project's PyPI package and published malicious Docker images with a payload that steals credentials, secrets, and environment variables. [...]
 
-## [Tech trio launches $10 million initiative to help under-resourced utilities bolster cybersecurity](https://therecord.media/utilities-cybersecurity-initiative-accenture)
+## [Indian tech company eMudhra announces withdrawal from certificate business after security incident](https://therecord.media/indian-tech-company-announces-withdrawal-certificate-business-incident)
 
-- 重要度: **LOW**
+- 重要度: **MEDIUM**
 - メディア: The Record
-- 公開日時: 2026-10-22 04:45 JST
-- 要約: 民間主導のイニシアチブにより、リソースが不足している最大500の公共インフラ事業者を対象に1,000万ドル規模のサイバーセキュリティ支援が提供されます。支援を通じて基礎的なセキュリティ強化を図ります。
+- 公開日時: 2026-10-23 03:46 JST
+- 要約: The issue was publicized by cybersecurity researcher Scott Helme, who published a blog saying that instead of a random 384-bit number, one of the company's private keys was just the number four.
