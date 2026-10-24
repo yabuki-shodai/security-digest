@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-23 09:49:54 JST
+更新日時: 2026-10-24 09:57:01 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近24時間ではBleepingComputer、Dark Reading、The Recordから10件を収集しました。重要度HIGHは5件です。
+直近の主要傾向として、パッチ未提供のPHPのRCE脆弱性や患者情報の流出を伴うデータ侵害など重大な脅威が相次いで報告されています。また、攻撃者がAIツールを低コストで悪用し大規模攻撃やヘルプデスク騙りを行う手法の巧妙化が目立ちます。さらに、各種ランサムウェアや国家背景の攻撃といった多様なセキュリティインシデントへの警戒が広がっています。
 
-## [Toronto crime tips org freezes operations after details of data breach come to light](https://therecord.media/toronto-crime-tips-org-freezes-ops-after-breach)
+## [Abandoned Popcorn Time app exposed millions of devices to RCE attacks](https://www.bleepingcomputer.com/news/security/abandoned-popcorn-time-app-exposed-millions-of-device-to-rce-attacks/)
 
 - 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-10-23 05:52 JST
-- 要約: Late Wednesday night the Toronto chapter of Crime Stoppers broke ranks with the national association, revealing a timeline showing what it knew and when along with an announcement that it will pause operations.
+- メディア: BleepingComputer
+- 公開日時: 2026-10-24 05:55 JST
+- 要約: 研究者らが放置されたTime4Popcornアプリの脆弱なアップデータを遠隔で無効化し、数百万台の端末に影響するRCE脆弱性を対処しました。攻撃者が特権で悪意のあるコードを実行できる危険性がありました。
 
-## [Microsoft Links Storm-0940 to ConnectWise Supply Chain Attack](https://www.darkreading.com/cyberattacks-data-breaches/microsoft-storm-0940-connectwise-supply-chain-attack)
+## [Exposed to PHP2Shell? Cyber Experts Weigh in With Advice](https://www.darkreading.com/application-security/exposed-php2shell-cyber-experts-advice)
 
 - 重要度: **HIGH**
 - メディア: Dark Reading
-- 公開日時: 2026-10-23 05:42 JST
-- 要約: The China-linked actor used an AI-enabled penetration-testing tool to automate and accelerate its attack on more than 2,200 tenants.
+- 公開日時: 2026-10-24 04:41 JST
+- 要約: 専門家が重大なPHP脆弱性（PHP2Shell）に対するリスク評価と防御措置について解説しています。単にアップデートを行うだけでは対応が不十分な場合があり、適切なリスク把握が必要とされています。
 
-## [Capcom confirms data breach affecting 11.7 million accounts](https://www.bleepingcomputer.com/news/security/capcom-confirms-data-breach-affecting-117-million-accounts/)
+## [AI Tools Are Generating Massive Attacks for Little Cost](https://www.darkreading.com/cybersecurity-operations/ai-tools-massive-attacks-little-cost)
+
+- 重要度: **HIGH**
+- メディア: Dark Reading
+- 公開日時: 2026-10-24 02:26 JST
+- 要約: オープンウェイトモデルなどのAIツールを利用し、極めて低コストで大規模なサイバー攻撃が実施されていることが報告されています。わずか12ドルの費用でドメインの完全な制御を奪われた事例も挙げられています。
+
+## [Quest Diagnostics confirms data breach exposed patient records](https://www.bleepingcomputer.com/news/security/quest-diagnostics-confirms-data-breach-exposed-patient-records/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-23 05:22 JST
-- 要約: Japanese gaming giant Capcom has confirmed that hackers breached its membership service, CAPCOM ID, exposing more than 11.7 million customer email addresses and associated information. [...]
+- 公開日時: 2026-10-24 01:40 JST
+- 要約: 臨床検査大手Quest Diagnosticsは、システムへの不正アクセスにより患者データが漏洩したことを公表しました。脅威アクターがQuanum LSMシステムに未承認のアクセスを行ったとされています。
 
-## [Arista patches new VeloCloud Orchestrator zero-day exploited in attacks](https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/)
+## [PHP shares mitigation for new RCE vulnerability with no patch](https://www.bleepingcomputer.com/news/security/php-shares-mitigation-for-new-and-unpatched-rce-vulnerability/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-23 02:18 JST
-- 要約: Arista Networks released security updates to patch an actively exploited zero-day vulnerability affecting VeloCloud Orchestrator (VCO) On-Prem deployments. [...]
+- 公開日時: 2026-10-24 00:38 JST
+- 要約: PHPセキュリティチームは、パッチが存在しない新しいリモートコード実行（RCE）脆弱性についての緩和策を公表しました。この欠陥は非デフォルト設定のシステムに影響します。
 
-## [Microsoft blames ConnectWise attacks on Chinese state hacker using ARTEX AI agents](https://therecord.media/china-cyber-connectwise-ai)
+## [In Other News: Tor Exit Relays Hijacked, Banks Spot Rogue AI Agents, Self-Rebuilding macOS Ransomware](https://www.securityweek.com/in-other-news-tor-exit-relays-hijacked-banks-spot-rogue-ai-agents-self-rebuilding-macos-ransomware/)
 
 - 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-10-23 01:30 JST
-- 要約: A Chinese government-aligned hacking group used automated tools to carry out the recent supply chain attack on IT management software company ConnectWise and is using the same techniques to try to compromise organizations around the globe, Microsoft said.
+- メディア: SecurityWeek
+- 公開日時: 2026-10-23 23:23 JST
+- 要約: Tor出口リレーの乗っ取りや自己再構築型macOSランサムウェア、APT28による攻撃など複数のインシデントが報じられました。PingCAPのソースコード盗難や不正なAIエージェントの検知事例も含まれています。
 
-## [Railway warns devs to rotate secrets after potential breach](https://www.bleepingcomputer.com/news/security/railway-warns-devs-to-rotate-secrets-after-potential-breach/)
-
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-23 06:25 JST
-- 要約: Cloud platform Railway published an urgent warning to users after detecting suspicious activity on its systems that store customer environment variables earlier this week. [...]
-
-## [What We Missed: Feds Lasso Texas Laptop Farms](https://www.darkreading.com/insider-threats/texas-laptop-farms-north-korean-it-workers)
+## [Trust Is Not What It Seems — And Fraudsters Are Counting on It](https://www.darkreading.com/cyber-risk/trust-is-not-what-it-seems-and-fraudsters-are-counting-on-it)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-23 05:33 JST
-- 要約: In this video, Dark Reading editors discuss some of the news they didn't get a chance to cover, from busting up North Korea's stateside infrastructure in "Operation Lonestar Justice" to Staples' gift card bonanza.
+- 公開日時: 2026-10-24 05:57 JST
+- 要約: 脅威アクターはマルウェアに頼ることなく、AIを活用してヘルプデスクに電話しアクセス権を要求する手法を用いています。信頼を悪用したソーシャルエンジニアリングの高度化が示されています。
 
-## [Les supermarchés de l'UE paient d'un firmware de réfrigérateur non mis à jour](https://www.darkreading.com/ics-ot-security/eu-grocers-unpatched-fridge-firmware-french)
-
-- 重要度: **MEDIUM**
-- メディア: Dark Reading
-- 公開日時: 2026-10-23 04:30 JST
-- 要約: Des centaines de magasins ont subi des pertes se chiffrant en millions d'euros parce qu'ils avaient fait appel à des tiers pour gérer le micrologiciel OT obsolète qui pilotait leurs systèmes de climatisation.
-
-## [LiteLLM release pipeline hacked to distribute info-stealer malware](https://www.bleepingcomputer.com/news/security/litellm-release-pipeline-hacked-to-distribute-info-stealer-malware/)
-
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-23 04:12 JST
-- 要約: Hackers compromised the LiteLLM project's PyPI package and published malicious Docker images with a payload that steals credentials, secrets, and environment variables. [...]
-
-## [Indian tech company eMudhra announces withdrawal from certificate business after security incident](https://therecord.media/indian-tech-company-announces-withdrawal-certificate-business-incident)
+## [FCC bans two devices with surveillance chips linked to Huawei](https://therecord.media/fcc-bans-devices-huawei-surveillance-chips)
 
 - 重要度: **MEDIUM**
 - メディア: The Record
-- 公開日時: 2026-10-23 03:46 JST
-- 要約: The issue was publicized by cybersecurity researcher Scott Helme, who published a blog saying that instead of a random 384-bit number, one of the company's private keys was just the number four.
+- 公開日時: 2026-10-24 02:28 JST
+- 要約: 米FCCは、Huawei子会社のHiSilicon製監視向けチップを搭載した製品の禁止措置を実施しました。対象には無線ビデオ送信機やドライブレコーダーが含まれています。
+
+## [Microsoft Teams to get AI-powered, context-aware phishing detection](https://www.bleepingcomputer.com/news/microsoft/microsoft-teams-to-get-ai-powered-context-aware-phishing-detection/)
+
+- 重要度: **LOW**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-24 03:54 JST
+- 要約: Microsoftは2026年11月初旬より、TeamsメッセージにAIを活用した文脈認識型のフィッシング検知機能を追加する計画を発表しました。これによりフィッシング攻撃対策の強化が図られます。
+
+## [Microsoft: Windows Server 2016 reaches end of support in January](https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-server-2016-reaches-end-of-support-in-january/)
+
+- 重要度: **LOW**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-24 02:05 JST
+- 要約: Microsoftは、Windows Server 2016が2027年1月にサポート終了を迎え、セキュリティ更新の提供が終了すると発表しました。利用組織には計画的な移行準備が求められます。
