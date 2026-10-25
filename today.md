@@ -40,3 +40,16 @@
 
 ## 開発者向けコメント
 利用中の言語ランタイム（PythonやJava/GraalVM）に重要な修正が含まれているため、修正版の適用環境を確認してください。また、認証・認可トークンの実装において、同一シークレットの使い回しやトークン種別（セッション用、パスワードリセット用など）の検証漏れ（CVE-2026-115933）は深刻なセキュリティリスクに直結するため、実装の再確認が推奨されます。なお、Travisun Opptrix のようにプロジェクト自体が廃止・非公開化されたコンポーネントを利用している場合は、迅速に撤去または代替品へ移行してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+古い脆弱性を悪用してSecure Bootを回避し、セキュリティ製品を妨害する新しいUEFIブートキット「BlackX」が報告されました。このブートキットは2026年初頭の諜報キャンペーンで展開され、実際の悪用が確認されています。高度な攻撃手法を用いたスパイ活動に対する警戒が必要です。
+
+- **HIGH** [BlackX UEFI bootkit exploits Baton Drop flaw to bypass Secure Boot](https://www.bleepingcomputer.com/news/security/blackx-uefi-bootkit-exploits-baton-drop-flaw-to-bypass-secure-boot/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
