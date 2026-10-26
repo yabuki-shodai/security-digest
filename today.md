@@ -1,55 +1,58 @@
-# CVE Digest Dashboard (2026-10-25)
+# CVE Digest Dashboard (2026-10-26)
 
 ## Overview
 
-- Total: 8
-- Critical件数: 3
+- Total: 7
+- Critical件数: 0
 - High件数: 4
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 4
+- Frontend件数: 1
+- Backend件数: 2
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-25/frontend-summary.md)
-- [Backend Summary](docs/2026-10-25/backend-summary.md)
+- [Frontend Summary](docs/2026-10-26/frontend-summary.md)
+- [Backend Summary](docs/2026-10-26/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-114820](https://www.oracle.com/security-alerts/alert-cve-2026-114820.html) CVE-2026-114820 / CRITICAL / security
-- [CVE-2026-115933](https://gadvisory.org/advisories/PSA-2026-YT2HMH) CVE-2026-115933 / CRITICAL / security
-- [CVE-2026-115557](http://www.openwall.com/lists/oss-security/2026/10/20/29) CVE-2026-115557 / CRITICAL / backend
-- [CVE-2026-115969](https://drive.google.com/drive/folders/1-ENuA8hKauFSTrn55IRYPQBeKwMV9xwR?usp=sharing) CVE-2026-115969 / HIGH / security
-- [CVE-2026-115970](https://drive.google.com/drive/folders/1ni6zbp75v4803pGCG_GGZwEkA0CtaLjl?usp=sharing) CVE-2026-115970 / HIGH / security
+- [CVE-2026-116060](https://github.com/hubdk01/cve/issues/11) CVE-2026-116060 / HIGH / security
+- [CVE-2026-116061](https://github.com/hubdk01/cve/issues/12) CVE-2026-116061 / HIGH / security
+- [CVE-2026-116062](https://github.com/hubdk01/cve/issues/13) CVE-2026-116062 / HIGH / security
+- [CVE-2026-116094](https://github.com/yy-t1/security-reports/tree/main/web/EyouCMS1.8.2/remote_file_to_local()%E7%BC%BA%E5%A4%B1%20SSRF%20%E6%A0%A1%E9%AA%8C%E5%AF%BC%E8%87%B4%E5%89%8D%E5%8F%B0%20SSRF) CVE-2026-116094 / HIGH / security
+- [CVE-2026-114214](https://cna.erlef.org/cves/CVE-2026-114214.html) CVE-2026-114214 / MEDIUM / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日掲載された8件のCVEでは、CVSS 9.0以上の非常に高いスコアを持つ脆弱性が複数含まれています。具体的には、リモートからのOSコマンドインジェクション（CVE-2026-115995）、トークン署名処理の欠陥による認証不備（CVE-2026-115933）、PythonやOracle Java SE/GraalVMといった言語ランタイム・標準ライブラリにおける問題（CVE-2026-115557, CVE-2026-114820）などが報告されています。また、開発が終了し非推奨・オフラインとなった製品（Travisun Opptrix）の脆弱性も含まれています。
+
+本日掲載された7件の脆弱性には、認可の不備（Ash / AshPostgres）、コードインジェクション（Alfresco Activiti）、SQLインジェクション（SourceCodester）、およびSSRF（EyouCMS）が含まれています。複数の脆弱性において公開エクスプロイトが存在しているほか、開発元から応答が得られていないケース（Alfresco ActivitiおよびEyouCMS）が報告されています。
+
+---
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-115995 (CVSS 10.0 / HIGH)**
-   Unitree Robotics Unitree Go2 の `gpt_thread.py` におけるリモートからのOSコマンドインジェクションの脆弱性。バージョン 1.1.11.5 へのアップグレードが必要です。
-2. **CVE-2026-115933 (CVSS 9.9 / CRITICAL)**
-   Postiz におけるトークン処理の欠陥。共通シークレットの使用およびトークン用途の識別子不足により、攻撃者が任意のクレームを含む有効な署名トークンを取得し、セッションや組織招待等を偽装できるリスクがあります。
-3. **CVE-2026-115557 (CVSS 9.4 / CRITICAL)**
-   Python の `ssl` モジュールに関する問題。侵害された既知の証明書拒否リスト（denylist）が追加され、SSLContext ポリシー設定に関わらず自動拒否する対応が行われています。
-4. **CVE-2026-114820 (CVSS 9.1 / CRITICAL)**
-   Oracle Java SE および GraalVM の JSSE コンポーネントに存在する脆弱性。ネットワーク経由での未認証攻撃者による容易な利用が懸念されます。
+
+1. **CVE-2026-116094 (CVSS 7.5 / HIGH)**
+   * **概要:** EyouCMS (1.8.3以下) の `remote_file_to_local` 関数におけるSSRF脆弱性。
+   * **ポイント:** エクスプロイトが公開されており、開発元の応答が確認されていません。
+
+2. **CVE-2026-116060 / CVE-2026-116061 / CVE-2026-116062 (CVSS 7.5 / HIGH)**
+   * **概要:** SourceCodester Performance Indicator System 1.0 の各処理（`adddealer.php`、`edit_dealer.php`、`save_profile.php`）における `Contact` 引数を介したSQLインジェクション。
+   * **ポイント:** すべて公開エクスプロイトが存在します。
+
+3. **CVE-2026-116058 (CVSS 6.5 / MEDIUM)**
+   * **概要:** Alfresco Activiti (7.21.0-rc.692以下) の `JuelScriptEngine.eval` におけるリモートコードインジェクション。
+   * **ポイント:** 開発元への問い合わせに対し応答が得られていない状態です。
+
+4. **CVE-2026-114214 / CVE-2026-115627 (CVSS 6.0 / MEDIUM)**
+   * **概要:** `ash` および `ash_postgres` ライブラリにおける不適切な認可の脆弱性。
+   * **ポイント:** リレーション（`through` や `many_to_many`）やラテラルジョインのロード時に、無関係なレコードや他テナントの結合行を経由してデータがロードされる危険性があります。
+
+---
 
 ## 開発者向けコメント
-利用中の言語ランタイム（PythonやJava/GraalVM）に重要な修正が含まれているため、修正版の適用環境を確認してください。また、認証・認可トークンの実装において、同一シークレットの使い回しやトークン種別（セッション用、パスワードリセット用など）の検証漏れ（CVE-2026-115933）は深刻なセキュリティリスクに直結するため、実装の再確認が推奨されます。なお、Travisun Opptrix のようにプロジェクト自体が廃止・非公開化されたコンポーネントを利用している場合は、迅速に撤去または代替品へ移行してください。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-古い脆弱性を悪用してSecure Bootを回避し、セキュリティ製品を妨害する新しいUEFIブートキット「BlackX」が報告されました。このブートキットは2026年初頭の諜報キャンペーンで展開され、実際の悪用が確認されています。高度な攻撃手法を用いたスパイ活動に対する警戒が必要です。
-
-- **HIGH** [BlackX UEFI bootkit exploits Baton Drop flaw to bypass Secure Boot](https://www.bleepingcomputer.com/news/security/blackx-uefi-bootkit-exploits-baton-drop-flaw-to-bypass-secure-boot/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **公開エクスプロイトへの対応:** SourceCodesterやEyouCMSの脆弱性は具体的に攻撃可能な状態（実証コードあり）として公開されているため、利用している場合は該当機能へのアクセス制限などの直接的な回避策を直ちに講じてください。
+* **未修正・未応答コンポーネントの対策:** Alfresco ActivitiやEyouCMSのようにベンダ未応答の脆弱性については、公式パッチの提供を待つ間に該当機能（スクリプト評価やリモートファイル取得など）の実行権限絞り込みやWAF等での監視強化が必要です。
+* **ORM・データロード処理の検証:** Ash/AshPostgresで発生している問題のように、複雑なリレーションロードやマルチテナント境界でのフィルタリング漏れは意図しないデータ露出につながります。データレイヤーにおける認可ロジックが正しく適用されているか見直してください。
