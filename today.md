@@ -56,3 +56,17 @@
 * **公開エクスプロイトへの対応:** SourceCodesterやEyouCMSの脆弱性は具体的に攻撃可能な状態（実証コードあり）として公開されているため、利用している場合は該当機能へのアクセス制限などの直接的な回避策を直ちに講じてください。
 * **未修正・未応答コンポーネントの対策:** Alfresco ActivitiやEyouCMSのようにベンダ未応答の脆弱性については、公式パッチの提供を待つ間に該当機能（スクリプト評価やリモートファイル取得など）の実行権限絞り込みやWAF等での監視強化が必要です。
 * **ORM・データロード処理の検証:** Ash/AshPostgresで発生している問題のように、複雑なリレーションロードやマルチテナント境界でのフィルタリング漏れは意図しないデータ露出につながります。データレイヤーにおける認可ロジックが正しく適用されているか見直してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+AIエージェントの活用および脅威に関するニュースが報告されています。ダウンロードフォルダ内の指示ファイルを利用してAIコーディングエージェントを騙し、不正なパッケージをインストールさせる攻撃手法が確認されました。また、AIエージェントを活用してアラート調査を行うセキュリティ企業が資金調達を実施したことが発表されています。
+
+- **MEDIUM** [AI coding agents hijacked using AGENTS.md file in Downloads folder](https://www.bleepingcomputer.com/news/security/ai-coding-agents-hijacked-using-agentsmd-file-in-downloads-folder/) — BleepingComputer
+- **LOW** [Former Unit 8200 Officers Raise $34 Million for Agentic SecOps Startup Mave](https://www.securityweek.com/former-unit-8200-officers-raise-34-million-for-agentic-secops-startup-mave/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
