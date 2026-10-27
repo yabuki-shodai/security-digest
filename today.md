@@ -45,3 +45,20 @@
 - **オーケストレーション・MCPツールのバージョン確認と権限見直し**: BurritoやGoogle Cloud MCP Toolbox、Cloud Run MCPを利用している場合は、即座に修正バージョンへアップデートし、Webhookのシークレット設定やバケット設定を再点検してください。
 - **コンテナ・OSイメージの最小権限原則の徹底**: boneIOの事例にある通り、不要なsudo権限やdockerグループ権限がサービスアカウントに付与されていないか、ベースイメージやマイグレーション処理を確認してください。
 - **AI/LLM・データ処理ライブラリの更新と安全なデシリアライズ**: vLLM（`pickle.loads`関連）やLeRobot（動的クラス生成）など、AI周辺ライブラリでのコード実行リスクが報告されています。修正版へのアップデートを行うとともに、不審なオブジェクトの復元や動的ロードを防ぐ構成を徹底してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+AIを悪用した大規模なデータ窃取やAIエージェントの隙を突く新たな攻撃など、AIに関連するサイバー脅威が顕著になっています。同時に、開発者リポジトリを狙ったサプライチェーン攻撃や大学での大規模な個人情報漏えいなど、実害を伴う侵害事案が多発しています。これらに伴い、サービス提供元によるパスワード強制リセットやAI企業に対する法的訴訟などの対応が進んでいます。
+
+- **HIGH** [University of Copenhagen data breach exposes data of 525,000 people](https://www.bleepingcomputer.com/news/security/university-of-copenhagen-data-breach-exposes-data-of-525-000-people/) — BleepingComputer
+- **HIGH** [Former pentester used ARTEX AI to steal 8.2 million data records](https://www.bleepingcomputer.com/news/security/former-pentester-used-artex-ai-to-steal-82-million-data-records/) — BleepingComputer
+- **HIGH** [In-the-Wild Attack Abuses AI Agents' Trust in Markdown](https://www.darkreading.com/application-security/in-the-wild-attack-ai-agents-trust-markdown) — Dark Reading
+- **HIGH** [DreamHost forces password resets in ongoing "incident"](https://www.bleepingcomputer.com/news/security/dreamhost-forces-email-ftp-sftp-password-resets-in-ongoing-incident/) — BleepingComputer
+- **HIGH** ['Gheist' Weaponizes GitHub Tokens to Steal Cloud Secrets](https://www.darkreading.com/cyberattacks-data-breaches/gheist-stolen-github-tokens-cloud-secrets) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
