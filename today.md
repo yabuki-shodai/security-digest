@@ -1,64 +1,53 @@
-# CVE Digest Dashboard (2026-10-27)
+# CVE Digest Dashboard (2026-10-28)
 
 ## Overview
 
 - Total: 30
 - Critical件数: 3
-- High件数: 5
+- High件数: 16
 - KEV件数: 0
-- Frontend件数: 5
-- Backend件数: 25
+- Frontend件数: 6
+- Backend件数: 24
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-27/frontend-summary.md)
-- [Backend Summary](docs/2026-10-27/backend-summary.md)
+- [Frontend Summary](docs/2026-10-28/frontend-summary.md)
+- [Backend Summary](docs/2026-10-28/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-102649](https://github.com/padok-team/burrito/commit/1d48432a4a0126429c99f5fa42567bf3711d1ca1) CVE-2026-102649 / CRITICAL / backend
-- [CVE-2026-93328](https://github.com/googleapis/mcp-toolbox/pull/3454) CVE-2026-93328 / CRITICAL / backend
-- [CVE-2026-77055](https://boneio.eu/en/docs/black) CVE-2026-77055 / CRITICAL / backend
-- [CVE-2026-116467](https://github.com/ggml-org/llama.cpp/) CVE-2026-116467 / MEDIUM / frontend
-- [CVE-2026-115930](https://www.mongodb.com/docs/mongodb-shell/changelog/) CVE-2026-115930 / HIGH / frontend
+- [CVE-2026-116692](https://github.com/mlflow/mlflow/commit/a732443e695c3c677680c54320efc394c81654ab) CVE-2026-116692 / CRITICAL / backend
+- [CVE-2026-106076](https://www.veeam.com/kb4957) CVE-2026-106076 / CRITICAL / backend
+- [CVE-2026-112352](https://www.sunhillo.com/product/sureline/) CVE-2026-112352 / CRITICAL / backend
+- [CVE-2026-118132](https://github.com/ChatGPTNextWeb/NextChat) CVE-2026-118132 / UNKNOWN / frontend
+- [CVE-2026-116676](https://github.com/runatlantis/atlantis/commit/8dd22b4d0a9d7c129fdbf6a3398dd1c4cf8c3a59) CVE-2026-116676 / HIGH / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日掲載されたCVEには、CVSSスコアが最大9.9に達するCRITICALな脆弱性が複数含まれています。特にKubernetes/Terraform連携ツール（Burrito）における署名検証のスキップ、データベース用MCPツールにおけるファイル漏洩・上書き、イメージの初期権限過剰によるroot昇格といったインフラ・運用関連の深刻な脆弱性が目立ちます。また、vLLMなどのAI/LLM推論エンジンやモデルロード処理における任意コード実行リスクも確認されています。
+本日掲載されたCVEは、AI/ML基盤（MLflow、MCP SDK）、認証/CI/CDツール（Authlib、Atlantis）、フロントエンド/エディタライブラリ（CKEditor 5、TinyMCE）、Webサーバ・ミドルウェアなど多岐にわたります。特にMLflowや認証バイパス、CI/CD環境での任意コード実行（RCE）につながる高深刻度な脆弱性や、リダイレクト時のクレデンシャル漏洩、依存ライブラリ経由のプロトタイプ汚染など、開発者が直接扱うライブラリ群の不具合が目立ちます。
+
+---
 
 ## 優先して確認すべき3〜5件
 
-- **CVE-2026-102649 (CVSS 9.9 / CRITICAL): Burrito (Terraform K8s operator)**
-  - `webhookSecret` が未設定または空の場合、未署名のGitHub/GitLabイベントを受け入れて認証検証をスキップしてしまいます。バージョン0.13.0未満が影響を受けます。
-- **CVE-2026-93328 (CVSS 9.3 / CRITICAL): Google Cloud MCP Toolbox for Databases**
-  - パストラバーサルと認可欠如により、未認証のリモート攻撃者がホストファイルを外部ストレージに流出させたり、任意ローカルファイルを上書きできます。
-- **CVE-2026-77055 (CVSS 9.3 / CRITICAL): boneIO (black_debian_images)**
-  - `boneio` サービスアカウントにパスワードなしのsudo権限やdockerグループ所属などの過剰な権限が付与されており、ローカル攻撃者がroot権限へ昇格可能です（1.6.0で修正）。
-- **CVE-2026-115912 (CVSS 7.5 / HIGH): vLLM**
-  - 共有メモリ上のマルチモーダルデータ処理で値が信頼され、`pickle.loads()` に渡されることで任意のPythonコードが実行可能になります（0.32.0未満が影響）。
+1. **CVE-2026-116692（CVSS 9.8 / CRITICAL）: MLflow の逆シリアル化による RCE**
+   - **概要:** サードパーティスコアラー処理時のモジュール指定検証の不備により、攻撃者が配置した悪意のあるモジュールを読み込ませることで、任意コード実行（RCE）が可能です。
+2. **CVE-2026-112352（CVSS 9.1 / CRITICAL）: Sunhillo SureLine の認証バイパスおよび RCE**
+   - **概要:** セッションクッキーが平文ユーザー名のみで検証される脆弱性。ユーザー名を偽装したクッキーを送信することで認証を回避し、root権限でのコマンド実行が可能です。
+3. **CVE-2026-106076（CVSS 9.0 / CRITICAL）: Veeam Backup for M365 の SQL インジェクション**
+   - **概要:** 構成データベースに対するSQLインジェクションにより、クロステナントでのデータ読み書きや、PostgreSQLサービスアカウント権限での任意コード実行が可能です。
+4. **CVE-2026-116676（CVSS 8.8 / HIGH）: Atlantis のワークスペース名注入による RCE**
+   - **概要:** プルリクエスト由来のワークスペース名に対する検証不足により、シェル特殊文字を含めることで `atlantis plan` 実行時に任意コマンドが実行される危険性があります。
+5. **CVE-2026-116672（CVSS 8.8 / HIGH）: Authlib の OAuth クライアント検証迂回**
+   - **概要:** クライアント構成エンドポイントにおいて、リクエスト送信者の資格情報が対象の `client_id` に属しているかの検証が漏れており、他クライアントへのなりすましが可能です。
+
+---
 
 ## 開発者向けコメント
 
-- **オーケストレーション・MCPツールのバージョン確認と権限見直し**: BurritoやGoogle Cloud MCP Toolbox、Cloud Run MCPを利用している場合は、即座に修正バージョンへアップデートし、Webhookのシークレット設定やバケット設定を再点検してください。
-- **コンテナ・OSイメージの最小権限原則の徹底**: boneIOの事例にある通り、不要なsudo権限やdockerグループ権限がサービスアカウントに付与されていないか、ベースイメージやマイグレーション処理を確認してください。
-- **AI/LLM・データ処理ライブラリの更新と安全なデシリアライズ**: vLLM（`pickle.loads`関連）やLeRobot（動的クラス生成）など、AI周辺ライブラリでのコード実行リスクが報告されています。修正版へのアップデートを行うとともに、不審なオブジェクトの復元や動的ロードを防ぐ構成を徹底してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-AIを悪用した大規模なデータ窃取やAIエージェントの隙を突く新たな攻撃など、AIに関連するサイバー脅威が顕著になっています。同時に、開発者リポジトリを狙ったサプライチェーン攻撃や大学での大規模な個人情報漏えいなど、実害を伴う侵害事案が多発しています。これらに伴い、サービス提供元によるパスワード強制リセットやAI企業に対する法的訴訟などの対応が進んでいます。
-
-- **HIGH** [University of Copenhagen data breach exposes data of 525,000 people](https://www.bleepingcomputer.com/news/security/university-of-copenhagen-data-breach-exposes-data-of-525-000-people/) — BleepingComputer
-- **HIGH** [Former pentester used ARTEX AI to steal 8.2 million data records](https://www.bleepingcomputer.com/news/security/former-pentester-used-artex-ai-to-steal-82-million-data-records/) — BleepingComputer
-- **HIGH** [In-the-Wild Attack Abuses AI Agents' Trust in Markdown](https://www.darkreading.com/application-security/in-the-wild-attack-ai-agents-trust-markdown) — Dark Reading
-- **HIGH** [DreamHost forces password resets in ongoing "incident"](https://www.bleepingcomputer.com/news/security/dreamhost-forces-email-ftp-sftp-password-resets-in-ongoing-incident/) — BleepingComputer
-- **HIGH** ['Gheist' Weaponizes GitHub Tokens to Steal Cloud Secrets](https://www.darkreading.com/cyberattacks-data-breaches/gheist-stolen-github-tokens-cloud-secrets) — Dark Reading
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **AI/LLMエコシステムの検証漏れに注意:** MLflowでのRCE（CVE-2026-116692）だけでなく、Model Context Protocol (MCP) SDK等において Audience（`aud`）検証の不足（CVE-2026-116684）、リダイレクト時のヘッダー・本文漏洩（CVE-2026-116685）、`$ref` 解釈によるSSRF/ローカルファイル読み取り（CVE-2026-116686）が相次いでいます。AI連携コンポーネントを導入する際は設定値とトークン検証範囲を再確認してください。
+- **依存ライブラリと型チェックの穴:** `CKEditor 5` で使われている `es-toolkit` のプロトタイプ汚染（CVE-2026-116688）や、`follow-redirects`（CVE-2026-116689）で別レルムの配列判定に `instanceof Array` を使用していたための資格情報漏洩など、外部ライブラリの選定・更新およびJavaScriptの型判定処理には注意が必要です。
+- **入力長・リクエストサイズの制限徹底:** `dd-trace`（CVE-2026-116693）のクエリ文字列正規表現によるReDoSや、`Knative pkg`（CVE-2026-54462）のボディサイズ制限漏れによるメモリ圧迫など、入力制限を設けない処理が容易にDoSを引き起こします。リクエストのサイズ制限やタイムアウト設定を必ず導入してください。
