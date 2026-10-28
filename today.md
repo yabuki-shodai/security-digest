@@ -51,3 +51,20 @@
 - **AI/LLMエコシステムの検証漏れに注意:** MLflowでのRCE（CVE-2026-116692）だけでなく、Model Context Protocol (MCP) SDK等において Audience（`aud`）検証の不足（CVE-2026-116684）、リダイレクト時のヘッダー・本文漏洩（CVE-2026-116685）、`$ref` 解釈によるSSRF/ローカルファイル読み取り（CVE-2026-116686）が相次いでいます。AI連携コンポーネントを導入する際は設定値とトークン検証範囲を再確認してください。
 - **依存ライブラリと型チェックの穴:** `CKEditor 5` で使われている `es-toolkit` のプロトタイプ汚染（CVE-2026-116688）や、`follow-redirects`（CVE-2026-116689）で別レルムの配列判定に `instanceof Array` を使用していたための資格情報漏洩など、外部ライブラリの選定・更新およびJavaScriptの型判定処理には注意が必要です。
 - **入力長・リクエストサイズの制限徹底:** `dd-trace`（CVE-2026-116693）のクエリ文字列正規表現によるReDoSや、`Knative pkg`（CVE-2026-54462）のボディサイズ制限漏れによるメモリ圧迫など、入力制限を設けない処理が容易にDoSを引き起こします。リクエストのサイズ制限やタイムアウト設定を必ず導入してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近では、国内クラウドサービスでのランサムウェア脅威による利用停止要請や、医療機関でのシステム障害など、実害を伴うインシデントが目立っています。また、決済スクリプト改ざんやTeamsを悪用した攻撃など、様々な経路を介した被害の拡大が確認されています。マイクロソフトによる認証局キー侵害への緊急パッチ適用など、迅速なインフラ保護の対応が必要とされる状況です。
+
+- **HIGH** [Japan's GMO urges customers to shut down PCs amid ransomware threat](https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/) — BleepingComputer
+- **HIGH** [UNM Health ransomware attack disrupts patient care, surgeries](https://www.bleepingcomputer.com/news/security/unm-health-ransomware-attack-disrupts-patient-care-surgeries/) — BleepingComputer
+- **HIGH** [Hackers hijack Convertr analytics script to steal payment card data](https://www.bleepingcomputer.com/news/security/hackers-hijack-convertr-analytics-script-to-steal-payment-card-data/) — BleepingComputer
+- **HIGH** [External Teams Chats Anchor 15-Minute Malware Delivery](https://www.darkreading.com/cloud-security/email-bombing-external-teams-chats-repeatable-access-path) — Dark Reading
+- **HIGH** [Microsoft releases Windows OOB updates to distrust eMudhra certificates](https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-windows-oob-updates-to-distrust-emudhra-certificates/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
