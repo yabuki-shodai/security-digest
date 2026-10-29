@@ -56,3 +56,20 @@
   グラフ設定や言語ファイル、動的コンポーネント設定に外部からの未検証な入力が含まれている場合、DOM XSSやプロトタイプ汚染の標的になります。ライブラリのパッチ適用に加え、サードパーティ設定値のサニタイズを徹底してください。
 * **データアクセス層の検証:**
   ORMやMongoDB等の連携用ライブラリにおいて、型変換・チェック処理が不十分な場合、認可ロジックがサイレントに失敗するケースがあります。アクセス制御のテストケースにおいて「型が異なるパラメータを渡した場合の挙動」も確認することをおすすめします。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+国家支援攻撃グループによるゼロデイ攻撃手法の悪用や、政府・企業を標的とした大規模データ侵害の報告が相次いでいます。同時に、ランサムウェアを支援するホスティングサービスの押収や開発者を狙うサプライチェーン攻撃など、法執行機関の対応とサイバー脅威の双方が進展しています。さらに、顧客情報の漏えい事案やプラットフォームのデータ公開方針変更など、多様なセキュリティ課題が顕在化しています。
+
+- **HIGH** [Sony ISP subsidiary data breach exposes 2.5 million customer records](https://www.bleepingcomputer.com/news/security/sony-isp-subsidiary-data-breach-exposes-25-million-customer-records/) — BleepingComputer
+- **HIGH** [Volt Typhoon hides zero-day attacks using 'Silent Train' framework](https://www.bleepingcomputer.com/news/security/volt-typhoon-hides-zero-day-attacks-using-silent-train-framework/) — BleepingComputer
+- **MEDIUM** [Police seize Virtualine bulletproof service tied to ransowmare, cybercrime](https://www.bleepingcomputer.com/news/security/police-seize-virtualine-bulletproof-service-tied-to-ransowmare-cybercrime/) — BleepingComputer
+- **MEDIUM** [Japan Airlines warns of data breach as country grapples with multiple cyber incidents](https://therecord.media/japan-airlines-warns-of-breach-country-grapples-with-incidents) — The Record
+- **MEDIUM** [GhostAction Hacking Wave Fizzles, But Attackers Lurk on in GitHub](https://www.darkreading.com/application-security/ghostaction-hacking-wave-fizzles-attackers-github) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->

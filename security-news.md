@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-28 10:32:48 JST
+更新日時: 2026-10-29 10:54:20 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近では、国内クラウドサービスでのランサムウェア脅威による利用停止要請や、医療機関でのシステム障害など、実害を伴うインシデントが目立っています。また、決済スクリプト改ざんやTeamsを悪用した攻撃など、様々な経路を介した被害の拡大が確認されています。マイクロソフトによる認証局キー侵害への緊急パッチ適用など、迅速なインフラ保護の対応が必要とされる状況です。
+国家支援攻撃グループによるゼロデイ攻撃手法の悪用や、政府・企業を標的とした大規模データ侵害の報告が相次いでいます。同時に、ランサムウェアを支援するホスティングサービスの押収や開発者を狙うサプライチェーン攻撃など、法執行機関の対応とサイバー脅威の双方が進展しています。さらに、顧客情報の漏えい事案やプラットフォームのデータ公開方針変更など、多様なセキュリティ課題が顕在化しています。
 
-## [Japan's GMO urges customers to shut down PCs amid ransomware threat](https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-28 08:35 JST
-- 要約: GMOグループは「お名前.com デスクトップクラウド」への侵入とランサムウェア攻撃予告を受け、顧客に対しシステムの切断とPCのシャットダウンを要請しました。
-
-## [UNM Health ransomware attack disrupts patient care, surgeries](https://www.bleepingcomputer.com/news/security/unm-health-ransomware-attack-disrupts-patient-care-surgeries/)
+## [Sony ISP subsidiary data breach exposes 2.5 million customer records](https://www.bleepingcomputer.com/news/security/sony-isp-subsidiary-data-breach-exposes-25-million-customer-records/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-28 07:07 JST
-- 要約: ニューメキシコ大学ヘルス・サイエンス・センターがサイバー攻撃を受け、システム停止により患者のケアや手術などの業務に影響が生じました。
+- 公開日時: 2026-10-29 01:45 JST
+- 要約: ソニーネットワークコミュニケーションズはデータ侵害を確認し、現・元顧客の個人情報を含む約250万件の記録が影響を受けたことを発表しました。
 
-## [Hackers hijack Convertr analytics script to steal payment card data](https://www.bleepingcomputer.com/news/security/hackers-hijack-convertr-analytics-script-to-steal-payment-card-data/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-28 05:57 JST
-- 要約: ECプラットフォームConvertrが使用する共有解析スクリプトが改ざんされ、決済時に利用者のクレジットカード情報が盗み出される被害が発生しました。
-
-## [External Teams Chats Anchor 15-Minute Malware Delivery](https://www.darkreading.com/cloud-security/email-bombing-external-teams-chats-repeatable-access-path)
-
-- 重要度: **HIGH**
-- メディア: Dark Reading
-- 公開日時: 2026-10-28 05:42 JST
-- 要約: Black Bastaランサムウェアとの関連が疑われる脅威主体が、外部のMicrosoft Teamsチャットを悪用した広範なマルウェア配信キャンペーンを展開しています。
-
-## [Microsoft releases Windows OOB updates to distrust eMudhra certificates](https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-windows-oob-updates-to-distrust-emudhra-certificates/)
+## [Volt Typhoon hides zero-day attacks using 'Silent Train' framework](https://www.bleepingcomputer.com/news/security/volt-typhoon-hides-zero-day-attacks-using-silent-train-framework/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-28 03:20 JST
-- 要約: マイクロソフトは、侵害されたeMudhra認証局の鍵に関連する証明書の信頼を取り消すため、Windows向けの緊急（OOB）更新プログラムをリリースしました。
+- 公開日時: 2026-10-29 01:00 JST
+- 要約: 中国の国家支援ハッキンググループ「Volt Typhoon」が、価値の高いシステムを狙うゼロデイ攻撃などに「Silent Train」と呼ばれるフレームワークを使用していることが判明しました。
 
-## [SBOMs Alone Can't Reveal the Scope of a Supply Chain Attack](https://www.darkreading.com/cyber-risk/sboms-alone-scope-supply-chain-attack)
+## [Police seize Virtualine bulletproof service tied to ransowmare, cybercrime](https://www.bleepingcomputer.com/news/security/police-seize-virtualine-bulletproof-service-tied-to-ransowmare-cybercrime/)
+
+- 重要度: **MEDIUM**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-29 05:47 JST
+- 要約: 米法執行機関は、ランサムウェアやサイバー犯罪の違法行為を助長していた防弾ホスティングサービス「Virtualine」の主要ドメインを押収しました。
+
+## [Japan Airlines warns of data breach as country grapples with multiple cyber incidents](https://therecord.media/japan-airlines-warns-of-breach-country-grapples-with-incidents)
+
+- 重要度: **MEDIUM**
+- メディア: The Record
+- 公開日時: 2026-10-29 05:33 JST
+- 要約: 日本航空はデータ侵害について警告を発し、約2,000人の顧客のパスポート番号やマイレージ番号などがハッカーに盗まれたことを明らかにしました。
+
+## [GhostAction Hacking Wave Fizzles, But Attackers Lurk on in GitHub](https://www.darkreading.com/application-security/ghostaction-hacking-wave-fizzles-attackers-github)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-28 04:58 JST
-- 要約: サプライチェーン攻撃の影響範囲を正確に特定するには、SBOMの利用だけでなく本番コードやサービスに対するリアルタイムの可視性が必要であると指摘されています。
+- 公開日時: 2026-10-29 04:39 JST
+- 要約: サプライチェーン攻撃キャンペーン「GhostAction」の急増は収まりつつありますが、攻撃者は依然としてGitHub上に潜伏しています。攻撃手法が開発者エンドポイントやクラウドアクセスへ移行していることが示唆されています。
 
-## [OpenAI's GPT-6.1 Terra is safer overall, but shows more destructive-action flags in tests](https://www.bleepingcomputer.com/news/artificial-intelligence/openais-gpt-61-terra-is-safer-overall-but-shows-more-destructive-action-flags-in-tests/)
+## [Moldova investigates possible foreign involvement in major government cyberattack](https://therecord.media/moldova-investigates-possible-foreign-involvement-cyberattacks)
+
+- 重要度: **MEDIUM**
+- メディア: The Record
+- 公開日時: 2026-10-29 01:37 JST
+- 要約: モルドバ政府は、市民の個人データと政府インフラを標的とした大規模なサイバー攻撃について、外国が関与している可能性を調査しています。
+
+## [Court strikes down West Virginia law barring disclosure of public officials’ personal data](https://therecord.media/west-virginia-daniels-law-struck-down-appellate-court)
+
+- 重要度: **LOW**
+- メディア: The Record
+- 公開日時: 2026-10-29 05:50 JST
+- 要約: 連邦控訴裁判所のパネルは、警察官などの個人情報を保護することを目的としたウェストバージニア州の法律を違憲と判決しました。
+
+## [Discord to let search engines index public server messages](https://www.bleepingcomputer.com/news/security/discord-to-let-search-engines-index-public-server-messages/)
 
 - 重要度: **LOW**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-28 07:43 JST
-- 要約: OpenAIはGPT-6.1 Terraが全体として旧モデルより安全であることを確認したものの、テストで破壊的行動のフラグが増加するなどの問題が見つかったと公表しました。
+- 公開日時: 2026-10-29 03:44 JST
+- 要約: Discordは「Discoverable Servers」内の公開会話を検索エンジンにインデックス登録させ、アカウントのない外部ユーザーも閲覧可能にする方針です。
 
-## [3 Frameworks to Protect CISOs & Orgs Against AI Liability](https://www.darkreading.com/cyber-risk/3-frameworks-cisos-ai-liability)
-
-- 重要度: **LOW**
-- メディア: Dark Reading
-- 公開日時: 2026-10-28 06:15 JST
-- 要約: セキュリティリーダーがAI導入に伴う法的責任に対処するためのアプローチとして、文書化、透明性、ベンダーとの契約交渉の3つの枠組みが提示されています。
-
-## [Nefilim, Hive ransomware operator given five-year-plus sentence after guilty plea](https://therecord.media/nefilim-hive-ransomware-operator-70-months-prison)
+## [European digital rights nonprofit noyb sues Scale AI for ‘invasive’ worker surveillance](https://therecord.media/noyb-sues-scale-ai-for-worker-surveillance)
 
 - 重要度: **LOW**
 - メディア: The Record
-- 公開日時: 2026-10-28 05:40 JST
-- 要約: NefilimおよびHiveランサムウェアの運営に参加した罪を認めたウクライナ人の被告に対し、5年以上の有罪判決が言い渡されました。
+- 公開日時: 2026-10-29 03:02 JST
+- 要約: 欧州のデジタル権利非営利団体noybは、フリーランスのマウスクリックやキーストロークを過剰に記録する侵害的な監視を行っているとしてScale AIを提訴しました。
 
-## [US indicts Malaysian national after Madagascar scam operation uncovered](https://therecord.media/malaysian-national-indicted-after-scam-centers-raid-madagascar)
+## [US sanctions Russians, North Koreans for laundering IT worker earnings](https://therecord.media/north-korea-russia-sanctions)
 
 - 重要度: **LOW**
 - メディア: The Record
-- 公開日時: 2026-10-28 04:30 JST
-- 要約: マダガスカルでの囮捜査を受けて米司法省が外国籍の容疑者を起訴し、グローバルに拡大する詐欺拠点の容疑が浮き彫りになりました。
+- 公開日時: 2026-10-29 02:45 JST
+- 要約: 米財務省は、北朝鮮のために違法IT労働者の収益を資金洗浄したとして、ロシア人および北朝鮮人に対して制裁を科しました。
