@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-29 10:54:20 JST
+更新日時: 2026-10-30 11:05:14 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-国家支援攻撃グループによるゼロデイ攻撃手法の悪用や、政府・企業を標的とした大規模データ侵害の報告が相次いでいます。同時に、ランサムウェアを支援するホスティングサービスの押収や開発者を狙うサプライチェーン攻撃など、法執行機関の対応とサイバー脅威の双方が進展しています。さらに、顧客情報の漏えい事案やプラットフォームのデータ公開方針変更など、多様なセキュリティ課題が顕在化しています。
+直近では、Binanceでの大規模な潜在的ハッキング調査やJALのサードパーティ経由でのデータ漏洩など、重大なインシデントが相次ぎ報告されています。また、Hugging FaceやGitHub、App Storeといった開発プラットフォームや公式ストアを悪用したマルウェア拡散・資産窃取攻撃が目立っています。さらに、PHP2Shell脆弱性を悪用した政府関連サーバーへの攻撃や、セキュリティツールを迂回するフィッシング手法の登場など、多様な脅威が進行しています。
 
-## [Sony ISP subsidiary data breach exposes 2.5 million customer records](https://www.bleepingcomputer.com/news/security/sony-isp-subsidiary-data-breach-exposes-25-million-customer-records/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-29 01:45 JST
-- 要約: ソニーネットワークコミュニケーションズはデータ侵害を確認し、現・元顧客の個人情報を含む約250万件の記録が影響を受けたことを発表しました。
-
-## [Volt Typhoon hides zero-day attacks using 'Silent Train' framework](https://www.bleepingcomputer.com/news/security/volt-typhoon-hides-zero-day-attacks-using-silent-train-framework/)
+## [Binance probes potential $5.8 billion crypto-theft hack](https://www.bleepingcomputer.com/news/security/binance-probes-potential-58-billion-crypto-theft-hack/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-29 01:00 JST
-- 要約: 中国の国家支援ハッキンググループ「Volt Typhoon」が、価値の高いシステムを狙うゼロデイ攻撃などに「Silent Train」と呼ばれるフレームワークを使用していることが判明しました。
+- 公開日時: 2026-10-30 07:45 JST
+- 要約: 暗号資産取引所のBinanceは、最大58億ドル規模のデジタル資産が流出した可能性のあるセキュリティ侵害について調査を進めています。事実であれば暗号資産のハッキングとして過去最大規模となる可能性があります。
 
-## [Police seize Virtualine bulletproof service tied to ransowmare, cybercrime](https://www.bleepingcomputer.com/news/security/police-seize-virtualine-bulletproof-service-tied-to-ransowmare-cybercrime/)
+## [Hugging Face malware campaign returns to hijack GPUs for crypto mining](https://www.bleepingcomputer.com/news/security/hugging-face-malware-campaign-returns-to-hijack-gpus-for-crypto-mining/)
 
-- 重要度: **MEDIUM**
+- 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-29 05:47 JST
-- 要約: 米法執行機関は、ランサムウェアやサイバー犯罪の違法行為を助長していた防弾ホスティングサービス「Virtualine」の主要ドメインを押収しました。
+- 公開日時: 2026-10-30 07:09 JST
+- 要約: Hugging Face上のモデルを悪用してGPUサーバーを乗っ取りマイニングを行うキャンペーンが再発し、2万8,000回以上ダウンロードされたモデルが確認されました。また、AIコーディングエージェントを騙してRATを感染させる偽のGitHubリポジトリも発見されています。
 
-## [Japan Airlines warns of data breach as country grapples with multiple cyber incidents](https://therecord.media/japan-airlines-warns-of-breach-country-grapples-with-incidents)
+## [Japan Airlines suffers third-party data breach exposing passenger info](https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/)
 
-- 重要度: **MEDIUM**
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-30 07:08 JST
+- 要約: 日本航空（JAL）は、Amadeusの旅客サービスシステムでデータ侵害が発生し、約92,000人分の顧客データが流出したことを発表しました。
+
+## [Polymarket halts trading after crypto-draining script breach, $2.5M traced](https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-30 06:47 JST
+- 要約: 予測市場プラットフォームのPolymarketは、サードパーティサービスの改ざんにより暗号資産窃取用JavaScriptが拡散されたため取引を一時停止しました。攻撃者のウォレットには約250万ドルの被害資産が追跡されています。
+
+## [Limited reports of PHP bug exploitation emerge](https://therecord.media/php2shell-successful-exploitation-reports-emerge)
+
+- 重要度: **HIGH**
 - メディア: The Record
-- 公開日時: 2026-10-29 05:33 JST
-- 要約: 日本航空はデータ侵害について警告を発し、約2,000人の顧客のパスポート番号やマイレージ番号などがハッカーに盗まれたことを明らかにしました。
+- 公開日時: 2026-10-30 05:01 JST
+- 要約: PHP2Shell脆弱性の悪用報告が一部で確認されており、米国の政府関連サーバーを標的とした攻撃キャンペーンなどが特定されています。
 
-## [GhostAction Hacking Wave Fizzles, But Attackers Lurk on in GitHub](https://www.darkreading.com/application-security/ghostaction-hacking-wave-fizzles-attackers-github)
+## [Anthropic-Themed Phishing Emails Bypass Top Security Tools](https://www.darkreading.com/cyberattacks-data-breaches/anthropic-phishing-emails-bypass-security-tools)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-10-29 04:39 JST
-- 要約: サプライチェーン攻撃キャンペーン「GhostAction」の急増は収まりつつありますが、攻撃者は依然としてGitHub上に潜伏しています。攻撃手法が開発者エンドポイントやクラウドアクセスへ移行していることが示唆されています。
+- 公開日時: 2026-10-30 06:21 JST
+- 要約: Anthropicを装ったフィッシングメールが、不審な点が多数存在するにもかかわらず主要な電子メールセキュリティゲートウェイ（SEG）製品をすり抜けて届いていることが判明しました。
 
-## [Moldova investigates possible foreign involvement in major government cyberattack](https://therecord.media/moldova-investigates-possible-foreign-involvement-cyberattacks)
+## [GM settles with 36 states for selling driver data, agrees to $220 million fine and reforms](https://therecord.media/general-motors-lawsuit-privacy)
 
 - 重要度: **MEDIUM**
 - メディア: The Record
-- 公開日時: 2026-10-29 01:37 JST
-- 要約: モルドバ政府は、市民の個人データと政府インフラを標的とした大規模なサイバー攻撃について、外国が関与している可能性を調査しています。
+- 公開日時: 2026-10-30 04:45 JST
+- 要約: ゼネラル・モーターズ（GM）は、ドライバーの走行データを第三者へ不正販売したとする全米36州からの訴訟に対し、2億2,000万ドルの制裁金支払いと業務改善に合意しました。
 
-## [Court strikes down West Virginia law barring disclosure of public officials’ personal data](https://therecord.media/west-virginia-daniels-law-struck-down-appellate-court)
+## [Fake crypto app on Apple App Store linked to $23K wallet theft](https://www.bleepingcomputer.com/news/security/fake-crypto-app-on-apple-app-store-linked-to-23k-wallet-theft/)
 
-- 重要度: **LOW**
-- メディア: The Record
-- 公開日時: 2026-10-29 05:50 JST
-- 要約: 連邦控訴裁判所のパネルは、警察官などの個人情報を保護することを目的としたウェストバージニア州の法律を違憲と判決しました。
+- 重要度: **MEDIUM**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-30 04:23 JST
+- 要約: Apple App Storeに掲載されていた偽の暗号資産アプリ「Padre Terminal」により、27個のSolanaウォレットから約2万3,000ドルが盗難されたことが明らかになりました。
 
-## [Discord to let search engines index public server messages](https://www.bleepingcomputer.com/news/security/discord-to-let-search-engines-index-public-server-messages/)
+## [OpenAI doubles ChatGPT Pro usage limits after backlash over planned 50% cut](https://www.bleepingcomputer.com/news/artificial-intelligence/openai-doubles-chatgpt-pro-usage-limits-after-backlash-over-planned-50-percent-cut/)
 
 - 重要度: **LOW**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-29 03:44 JST
-- 要約: Discordは「Discoverable Servers」内の公開会話を検索エンジンにインデックス登録させ、アカウントのない外部ユーザーも閲覧可能にする方針です。
+- 公開日時: 2026-10-30 08:35 JST
+- 要約: OpenAIはユーザーからの反発を受け、ChatGPT Proおよびビジネスプランでの利用制限のカットを取り止め、制限を維持することを表明しました。あわせてDots機能の利用制限も独立して管理される見込みです。
 
-## [European digital rights nonprofit noyb sues Scale AI for ‘invasive’ worker surveillance](https://therecord.media/noyb-sues-scale-ai-for-worker-surveillance)
-
-- 重要度: **LOW**
-- メディア: The Record
-- 公開日時: 2026-10-29 03:02 JST
-- 要約: 欧州のデジタル権利非営利団体noybは、フリーランスのマウスクリックやキーストロークを過剰に記録する侵害的な監視を行っているとしてScale AIを提訴しました。
-
-## [US sanctions Russians, North Koreans for laundering IT worker earnings](https://therecord.media/north-korea-russia-sanctions)
+## [Rethinking Cybersecurity Awareness in the AI Era](https://www.darkreading.com/cyber-risk/rethinking-cybersecurity-awareness-ai-era)
 
 - 重要度: **LOW**
-- メディア: The Record
-- 公開日時: 2026-10-29 02:45 JST
-- 要約: 米財務省は、北朝鮮のために違法IT労働者の収益を資金洗浄したとして、ロシア人および北朝鮮人に対して制裁を科しました。
+- メディア: Dark Reading
+- 公開日時: 2026-10-30 05:15 JST
+- 要約: AI時代におけるサイバーセキュリティ意識向上トレーニングのトレンドや、新世代の労働者向け教育について議論した動画コンテンツが公開されました。

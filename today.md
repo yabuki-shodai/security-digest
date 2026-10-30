@@ -56,3 +56,20 @@
 * **アップグレードの実施:** ZITADEL、Frappe、Crawl4AI、IBM Langflow OSS、Wasmtime、Parse Serverなどの依存パッケージを使用している場合は、記載の修正済みバージョンへ速やかにアップデートしてください。
 * **入力値の検証と動的評価の回避:** コード内で `eval` や `exec` を使用した動的実行、テンプレートエンジンへの不適切なユーザー入力の直接渡しの排除（SSTI対策）、およびファイルアップロード時のパス検証を徹底してください。
 * **デシリアライズおよび認証ロジックの再確認:** PHPのオブジェクト注入やPickle形式データ読み込み（CVE-2026-119120等）に伴うリスクを把握し、信頼できない入力値の処理ロジックを見直すことが重要です。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近では、Binanceでの大規模な潜在的ハッキング調査やJALのサードパーティ経由でのデータ漏洩など、重大なインシデントが相次ぎ報告されています。また、Hugging FaceやGitHub、App Storeといった開発プラットフォームや公式ストアを悪用したマルウェア拡散・資産窃取攻撃が目立っています。さらに、PHP2Shell脆弱性を悪用した政府関連サーバーへの攻撃や、セキュリティツールを迂回するフィッシング手法の登場など、多様な脅威が進行しています。
+
+- **HIGH** [Binance probes potential $5.8 billion crypto-theft hack](https://www.bleepingcomputer.com/news/security/binance-probes-potential-58-billion-crypto-theft-hack/) — BleepingComputer
+- **HIGH** [Hugging Face malware campaign returns to hijack GPUs for crypto mining](https://www.bleepingcomputer.com/news/security/hugging-face-malware-campaign-returns-to-hijack-gpus-for-crypto-mining/) — BleepingComputer
+- **HIGH** [Japan Airlines suffers third-party data breach exposing passenger info](https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/) — BleepingComputer
+- **HIGH** [Polymarket halts trading after crypto-draining script breach, $2.5M traced](https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/) — BleepingComputer
+- **HIGH** [Limited reports of PHP bug exploitation emerge](https://therecord.media/php2shell-successful-exploitation-reports-emerge) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
