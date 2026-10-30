@@ -1,75 +1,58 @@
-# CVE Digest Dashboard (2026-10-29)
+# CVE Digest Dashboard (2026-10-30)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 2
-- High件数: 20
+- Critical件数: 7
+- High件数: 10
 - KEV件数: 0
-- Frontend件数: 22
-- Backend件数: 8
+- Frontend件数: 3
+- Backend件数: 20
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-29/frontend-summary.md)
-- [Backend Summary](docs/2026-10-29/backend-summary.md)
+- [Frontend Summary](docs/2026-10-30/frontend-summary.md)
+- [Backend Summary](docs/2026-10-30/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-118264](https://github.com/labstack/echo/commit/1855061e572ae9dab727c811d8382f266bfbaaec) CVE-2026-118264 / CRITICAL / backend
-- [CVE-2026-63190](https://github.com/fearlessgeekmedia/FearlessCMS/commit/59fb22cf989b5ba14c387c3212e15b146e02cf9a) CVE-2026-63190 / CRITICAL / frontend
-- [CVE-2026-118262](https://github.com/labstack/echo/commit/1855061e572ae9dab727c811d8382f266bfbaaec) CVE-2026-118262 / HIGH / backend
-- [CVE-2026-118650](https://github.com/labstack/echo/commit/b838391e2eade87ae7e5a09d7bb5087bec271ec1) CVE-2026-118650 / HIGH / backend
-- [CVE-2026-118263](https://github.com/labstack/echo/commit/1855061e572ae9dab727c811d8382f266bfbaaec) CVE-2026-118263 / MEDIUM / backend
+- [CVE-2026-61991](https://patchstack.com/database/wordpress/plugin/ajax-load-more-cache/vulnerability/wordpress-ajaxloadmore-cache-plugin-3-1-1-remote-code-execution-rce-vulnerability?_s_id=cve) CVE-2026-61991 / CRITICAL / security
+- [CVE-2026-119145](https://github.com/frappe/frappe/security/advisories/GHSA-9pp9-wgp9-3p3j) CVE-2026-119145 / CRITICAL / security
+- [CVE-2026-62001](https://patchstack.com/database/wordpress/theme/marcell/vulnerability/wordpress-marcell-theme-1-2-14-php-object-injection-vulnerability?_s_id=cve) CVE-2026-62001 / CRITICAL / security
+- [CVE-2026-107327](https://www.ibm.com/support/pages/node/7293016) CVE-2026-107327 / CRITICAL / security
+- [CVE-2026-107328](https://www.ibm.com/support/pages/node/7293016) CVE-2026-107328 / CRITICAL / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
 
-本日の脆弱性情報では、**Goフレームワーク「Echo」における複数の脆弱性**と、**「Highcharts」を中心とするフロントエンドライブラリでの大量のXSS・プロトタイプ汚染**が目立ちます。
-
-特に、EchoのProxyミドルウェアにおける認証・認可迂回（CRITICAL）や、FearlessCMSにおける認証回避・特権操作（CRITICAL）、MongoDB連携ライブラリでのデータアクセス制御不備など、バックエンド処理やデータ保護に直結する影響度の高い問題が多数報告されています。
+本日掲載された30件のCVEでは、CVSS 9.0以上の最高警戒レベル（CRITICAL）を含む深刻な脆弱性が多数報告されています。特に**IBM Langflow OSS**、**Frappe**、**ZITADEL**、**Crawl4AI**といったプロダクト・ライブラリ群において複数の脆弱性が同時に公開されています。攻撃手法としては、未認証でのリモートコード実行（RCE）、認証バイパス、PHP Object Injection、パス・トラバーサル、SSTI（サーバーサイド・テンプレート・インジェクション）などが目立ちます。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-118264 (Echo Framework - Critical / CVSS 9.1)**
-   - **概要**: ProxyミドルウェアがWebSocketアップグレード拒否時にもトンネルを維持してしまうため、後続のリクエストがEchoのルーターや認証・認可ミドルウェアを迂回してバックエンドへ到達する可能性があります。
-2. **CVE-2026-63190 (FearlessCMS - Critical / CVSS 9.4)**
-   - **概要**: `admin/` 以下のデバッグ/テスト用スクリプトにおける認証・CSRF・パス検証の欠如、および開発用サーバーでのパス正規化不備（`/./admin/`等）により、管理者ログインを迂回して特権操作が実行可能です。
-3. **CVE-2026-118510 (MongoDB Integration Library - High / CVSS 8.8)**
-   - **概要**: リレーションシップクエリ構築時の型不一致により、存在チェックが誤った型で評価され、不審なエラーを出さずに別ユーザーのデータの閲覧・変更・削除を許してしまう恐れがあります。
-4. **CVE-2026-118619 (Ultralytics - High / CVSS 8.8)**
-   - **概要**: Google Driveからのファイルダウンロード処理におけるパストラバーサルの不備により、リモートでの任意コード実行（RCE）につながる可能性があります（要ユーザー操作）。
-5. **CVE-2026-118245 / CVE-2026-118250 等 (Highcharts JS シリーズ - High)**
-   - **概要**: Highchartsおよび関連モジュール（Dashboards, Grid等）において、DOM XSSやプロトタイプ汚染（`__proto__` 経由のオブジェクト汚染）を引き起こす脆弱性が多数報告されています。
+1. **CVE-2026-61991 (CVSS 10.0 / CRITICAL)**
+   * **対象:** AjaxLoadMore Cache（<= 3.1.1）
+   * **概要:** 未認証の第三者によるリモートコード実行（RCE）が可能な脆弱性。最高深刻度として即時対応が必要です。
+2. **CVE-2026-119145 (CVSS 9.9 / CRITICAL)**
+   * **対象:** Frappe（15.121.0未満、および16.xの16.34.0未満）
+   * **概要:** ファイルアップロード処理におけるパス・トラバーサルの欠陥により、意図しないディレクトリへのファイル書き込みを通じたRCEが可能です。
+3. **CVE-2026-107327 / CVE-2026-107328 / CVE-2026-107329 (CVSS 9.9 / CRITICAL)**
+   * **対象:** IBM Langflow OSS（1.0.0 〜 1.12.4）
+   * **概要:** 認可欠如や`eval`/`exec`等のコード評価処理・生成制御の不備により、リモートの認証済み攻撃者による任意のコード実行が可能です。
+4. **CVE-2026-62001 (CVSS 9.8 / CRITICAL)**
+   * **対象:** Marcell（<= 1.2.14）
+   * **概要:** 未認証で悪用可能なPHP Object Injectionの脆弱性が存在します。
+5. **CVE-2026-119128 (CVSS 9.1 / CRITICAL)**
+   * **対象:** ZITADEL（4.0.0以上 4.19.5未満）
+   * **概要:** Login V2 UIにおける認証バイパス。認証手段を持たないユーザーに対して第一資格情報を勝手に設定し、アカウント乗っ取りが行われるリスクがあります。
 
 ---
 
 ## 開発者向けコメント
 
-* **Go (Echo) を使用しているプロジェクト:**
-  今回、Echoフレームワークに関する脆弱性（CVE-2026-118264, CVE-2026-118262, CVE-2026-118650, CVE-2026-118263, CVE-2026-118266, CVE-2026-118260）がまとめて公開されています。バージョン更新（v4.16.1 / v5.4.1 以降など修正版へのアップグレード）を最優先で検討してください。
-* **Highcharts / Vue I18n を使用しているプロジェクト:**
-  グラフ設定や言語ファイル、動的コンポーネント設定に外部からの未検証な入力が含まれている場合、DOM XSSやプロトタイプ汚染の標的になります。ライブラリのパッチ適用に加え、サードパーティ設定値のサニタイズを徹底してください。
-* **データアクセス層の検証:**
-  ORMやMongoDB等の連携用ライブラリにおいて、型変換・チェック処理が不十分な場合、認可ロジックがサイレントに失敗するケースがあります。アクセス制御のテストケースにおいて「型が異なるパラメータを渡した場合の挙動」も確認することをおすすめします。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-国家支援攻撃グループによるゼロデイ攻撃手法の悪用や、政府・企業を標的とした大規模データ侵害の報告が相次いでいます。同時に、ランサムウェアを支援するホスティングサービスの押収や開発者を狙うサプライチェーン攻撃など、法執行機関の対応とサイバー脅威の双方が進展しています。さらに、顧客情報の漏えい事案やプラットフォームのデータ公開方針変更など、多様なセキュリティ課題が顕在化しています。
-
-- **HIGH** [Sony ISP subsidiary data breach exposes 2.5 million customer records](https://www.bleepingcomputer.com/news/security/sony-isp-subsidiary-data-breach-exposes-25-million-customer-records/) — BleepingComputer
-- **HIGH** [Volt Typhoon hides zero-day attacks using 'Silent Train' framework](https://www.bleepingcomputer.com/news/security/volt-typhoon-hides-zero-day-attacks-using-silent-train-framework/) — BleepingComputer
-- **MEDIUM** [Police seize Virtualine bulletproof service tied to ransowmare, cybercrime](https://www.bleepingcomputer.com/news/security/police-seize-virtualine-bulletproof-service-tied-to-ransowmare-cybercrime/) — BleepingComputer
-- **MEDIUM** [Japan Airlines warns of data breach as country grapples with multiple cyber incidents](https://therecord.media/japan-airlines-warns-of-breach-country-grapples-with-incidents) — The Record
-- **MEDIUM** [GhostAction Hacking Wave Fizzles, But Attackers Lurk on in GitHub](https://www.darkreading.com/application-security/ghostaction-hacking-wave-fizzles-attackers-github) — Dark Reading
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **アップグレードの実施:** ZITADEL、Frappe、Crawl4AI、IBM Langflow OSS、Wasmtime、Parse Serverなどの依存パッケージを使用している場合は、記載の修正済みバージョンへ速やかにアップデートしてください。
+* **入力値の検証と動的評価の回避:** コード内で `eval` や `exec` を使用した動的実行、テンプレートエンジンへの不適切なユーザー入力の直接渡しの排除（SSTI対策）、およびファイルアップロード時のパス検証を徹底してください。
+* **デシリアライズおよび認証ロジックの再確認:** PHPのオブジェクト注入やPickle形式データ読み込み（CVE-2026-119120等）に伴うリスクを把握し、信頼できない入力値の処理ロジックを見直すことが重要です。
