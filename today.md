@@ -1,75 +1,45 @@
-# CVE Digest Dashboard (2026-10-30)
+# CVE Digest Dashboard (2026-10-31)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 7
-- High件数: 10
+- Critical件数: 6
+- High件数: 8
 - KEV件数: 0
-- Frontend件数: 3
-- Backend件数: 20
+- Frontend件数: 19
+- Backend件数: 11
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-30/frontend-summary.md)
-- [Backend Summary](docs/2026-10-30/backend-summary.md)
+- [Frontend Summary](docs/2026-10-31/frontend-summary.md)
+- [Backend Summary](docs/2026-10-31/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-61991](https://patchstack.com/database/wordpress/plugin/ajax-load-more-cache/vulnerability/wordpress-ajaxloadmore-cache-plugin-3-1-1-remote-code-execution-rce-vulnerability?_s_id=cve) CVE-2026-61991 / CRITICAL / security
-- [CVE-2026-119145](https://github.com/frappe/frappe/security/advisories/GHSA-9pp9-wgp9-3p3j) CVE-2026-119145 / CRITICAL / security
-- [CVE-2026-62001](https://patchstack.com/database/wordpress/theme/marcell/vulnerability/wordpress-marcell-theme-1-2-14-php-object-injection-vulnerability?_s_id=cve) CVE-2026-62001 / CRITICAL / security
-- [CVE-2026-107327](https://www.ibm.com/support/pages/node/7293016) CVE-2026-107327 / CRITICAL / security
-- [CVE-2026-107328](https://www.ibm.com/support/pages/node/7293016) CVE-2026-107328 / CRITICAL / security
+- [CVE-2026-61730](https://github.com/socfortress/CoPilot/commit/bfa630b65d554670c7462a32ce6fd4e3cbd0254c) CVE-2026-61730 / CRITICAL / backend
+- [CVE-2026-61826](https://github.com/morpheus65535/bazarr/commit/4bd29252feebd0803e84cc3ce1bdd24c3a076ed4) CVE-2026-61826 / CRITICAL / backend
+- [CVE-2026-93327](https://docs.cloud.google.com/support/bulletins) CVE-2026-93327 / CRITICAL / backend
+- [CVE-2026-61728](https://github.com/socfortress/CoPilot/commit/461e8f84794aee8ada588de3bad79430dc9f4f3d) CVE-2026-61728 / CRITICAL / frontend
+- [CVE-2026-61737](https://github.com/huajian123/ng-antd-admin/commit/23e92ff9176074ee534af3ea3700b3652a9726a9) CVE-2026-61737 / CRITICAL / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-
-本日掲載された30件のCVEでは、CVSS 9.0以上の最高警戒レベル（CRITICAL）を含む深刻な脆弱性が多数報告されています。特に**IBM Langflow OSS**、**Frappe**、**ZITADEL**、**Crawl4AI**といったプロダクト・ライブラリ群において複数の脆弱性が同時に公開されています。攻撃手法としては、未認証でのリモートコード実行（RCE）、認証バイパス、PHP Object Injection、パス・トラバーサル、SSTI（サーバーサイド・テンプレート・インジェクション）などが目立ちます。
-
----
+本日掲載された脆弱性では、認証・認可の実装漏れ（ハンドラーでの認証欠落やデフォルト設定・シークレットの残留）や、入力値の不十分なエスケープによるXSS・SQLインジェクションが目立ちます。特にCVSS 9.0以上のCRITICAL件数が多く、未認証での設定変更、クラウド構成情報の漏洩、サンドボックス脱出によるOSコマンド実行など、重大な影響を及ぼす問題が含まれています。
 
 ## 優先して確認すべき3〜5件
-
-1. **CVE-2026-61991 (CVSS 10.0 / CRITICAL)**
-   * **対象:** AjaxLoadMore Cache（<= 3.1.1）
-   * **概要:** 未認証の第三者によるリモートコード実行（RCE）が可能な脆弱性。最高深刻度として即時対応が必要です。
-2. **CVE-2026-119145 (CVSS 9.9 / CRITICAL)**
-   * **対象:** Frappe（15.121.0未満、および16.xの16.34.0未満）
-   * **概要:** ファイルアップロード処理におけるパス・トラバーサルの欠陥により、意図しないディレクトリへのファイル書き込みを通じたRCEが可能です。
-3. **CVE-2026-107327 / CVE-2026-107328 / CVE-2026-107329 (CVSS 9.9 / CRITICAL)**
-   * **対象:** IBM Langflow OSS（1.0.0 〜 1.12.4）
-   * **概要:** 認可欠如や`eval`/`exec`等のコード評価処理・生成制御の不備により、リモートの認証済み攻撃者による任意のコード実行が可能です。
-4. **CVE-2026-62001 (CVSS 9.8 / CRITICAL)**
-   * **対象:** Marcell（<= 1.2.14）
-   * **概要:** 未認証で悪用可能なPHP Object Injectionの脆弱性が存在します。
-5. **CVE-2026-119128 (CVSS 9.1 / CRITICAL)**
-   * **対象:** ZITADEL（4.0.0以上 4.19.5未満）
-   * **概要:** Login V2 UIにおける認証バイパス。認証手段を持たないユーザーに対して第一資格情報を勝手に設定し、アカウント乗っ取りが行われるリスクがあります。
-
----
+1. **CVE-2026-61826（CVSS 10.0 / Bazarr）**
+   ハンドラーへの認証チェック（`@authenticate`）欠落により、未認証の第三者がAPIキーの書き換えや認証解除を自由に行える状態になっています。
+2. **CVE-2026-61737（CVSS 9.8 / ng-antd-admin）**
+   ハードコードされたデフォルトJWTシークレットにより、攻撃者がトークンを偽造して管理者を含む任意ユーザーになりすませます。
+3. **CVE-2026-61730（CVSS 9.3 / SOCFortress CoPilot）**
+   静的ファイル配信経路の認証欠落により、AWS/Azure/GCPのIAM情報やリソース構成を含むレポートが外部から閲覧可能です。
+4. **CVE-2026-119978（CVSS 9.0 / Flowise）**
+   モジュールの読み込み処理を悪用したサンドボックス（vm2）脱出により、認証されたユーザーがOSコマンドを実行可能です。
+5. **CVE-2026-119655 / CVE-2026-119656（CVSS 8.7 / CoreShop）**
+   `ORDER BY` 句に対する入力検証の不備により、未認証で盲目的（Blind）SQLインジェクションを実行され、アカウント等の抽出に繋がります。
 
 ## 開発者向けコメント
-
-* **アップグレードの実施:** ZITADEL、Frappe、Crawl4AI、IBM Langflow OSS、Wasmtime、Parse Serverなどの依存パッケージを使用している場合は、記載の修正済みバージョンへ速やかにアップデートしてください。
-* **入力値の検証と動的評価の回避:** コード内で `eval` や `exec` を使用した動的実行、テンプレートエンジンへの不適切なユーザー入力の直接渡しの排除（SSTI対策）、およびファイルアップロード時のパス検証を徹底してください。
-* **デシリアライズおよび認証ロジックの再確認:** PHPのオブジェクト注入やPickle形式データ読み込み（CVE-2026-119120等）に伴うリスクを把握し、信頼できない入力値の処理ロジックを見直すことが重要です。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近では、Binanceでの大規模な潜在的ハッキング調査やJALのサードパーティ経由でのデータ漏洩など、重大なインシデントが相次ぎ報告されています。また、Hugging FaceやGitHub、App Storeといった開発プラットフォームや公式ストアを悪用したマルウェア拡散・資産窃取攻撃が目立っています。さらに、PHP2Shell脆弱性を悪用した政府関連サーバーへの攻撃や、セキュリティツールを迂回するフィッシング手法の登場など、多様な脅威が進行しています。
-
-- **HIGH** [Binance probes potential $5.8 billion crypto-theft hack](https://www.bleepingcomputer.com/news/security/binance-probes-potential-58-billion-crypto-theft-hack/) — BleepingComputer
-- **HIGH** [Hugging Face malware campaign returns to hijack GPUs for crypto mining](https://www.bleepingcomputer.com/news/security/hugging-face-malware-campaign-returns-to-hijack-gpus-for-crypto-mining/) — BleepingComputer
-- **HIGH** [Japan Airlines suffers third-party data breach exposing passenger info](https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/) — BleepingComputer
-- **HIGH** [Polymarket halts trading after crypto-draining script breach, $2.5M traced](https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/) — BleepingComputer
-- **HIGH** [Limited reports of PHP bug exploitation emerge](https://therecord.media/php2shell-successful-exploitation-reports-emerge) — The Record
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **認証ガードの全系適用とデフォルト値の排除**: APIエンドポイントごとの認証チェック漏れや、デフォルトのJWTシークレット・認証情報（`admin/admin`等）の放置が即座に深刻な侵害につながっています。本番起動時にデフォルト鍵の使用を拒否する仕組みや、CIでの認証漏れ検証を検討してください。
+* **出力エスケープと動的クエリ生成の再点検**: Vueの`v-html`やBladeの未エスケープ出力によるStored XSS、および`ORDER BY`句への直接文字列結合によるSQLiが複数発生しています。フレームワークの安全な出力機構（自動エスケープ）の標準使用と、動的ソート指定時のホワイトリスト検証を徹底してください。
