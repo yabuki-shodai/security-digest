@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-30 11:05:14 JST
+更新日時: 2026-10-31 10:43:53 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近では、Binanceでの大規模な潜在的ハッキング調査やJALのサードパーティ経由でのデータ漏洩など、重大なインシデントが相次ぎ報告されています。また、Hugging FaceやGitHub、App Storeといった開発プラットフォームや公式ストアを悪用したマルウェア拡散・資産窃取攻撃が目立っています。さらに、PHP2Shell脆弱性を悪用した政府関連サーバーへの攻撃や、セキュリティツールを迂回するフィッシング手法の登場など、多様な脅威が進行しています。
+直近24時間では、LinuxカーネルやPalo Altoファイアウォール、多数のサーバーに影響するUEFI脆弱性など、基盤システムを標的とした重大な脅威が相次いで報告されています。また、Cursor向け悪意ある拡張機能や暗号資産ウォレットの物理改ざんなど、開発者や資産を狙うサプライチェーン攻撃も表面化しています。さらに、490万人規模のSSN漏洩やECサイトの決済情報流出など、実害を伴う大規模なデータ侵害被害も明らかになりました。
 
-## [Binance probes potential $5.8 billion crypto-theft hack](https://www.bleepingcomputer.com/news/security/binance-probes-potential-58-billion-crypto-theft-hack/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-30 07:45 JST
-- 要約: 暗号資産取引所のBinanceは、最大58億ドル規模のデジタル資産が流出した可能性のあるセキュリティ侵害について調査を進めています。事実であれば暗号資産のハッキングとして過去最大規模となる可能性があります。
-
-## [Hugging Face malware campaign returns to hijack GPUs for crypto mining](https://www.bleepingcomputer.com/news/security/hugging-face-malware-campaign-returns-to-hijack-gpus-for-crypto-mining/)
+## [Critical Linux kernel flaw allows remote root attacks on MPTCP servers](https://www.bleepingcomputer.com/news/security/critical-linux-kernel-flaw-allows-remote-root-attacks-on-mptcp-servers/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-30 07:09 JST
-- 要約: Hugging Face上のモデルを悪用してGPUサーバーを乗っ取りマイニングを行うキャンペーンが再発し、2万8,000回以上ダウンロードされたモデルが確認されました。また、AIコーディングエージェントを騙してRATを感染させる偽のGitHubリポジトリも発見されています。
+- 公開日時: 2026-10-31 06:09 JST
+- 要約: Linuxカーネルの重大な脆弱性により、MPTCPリスナーを実行するサーバーで未認証のリモート攻撃者がroot権限を取得できるリスクが判明しました。Anthropicの研究者がこの脆弱性に対するエクスプロイトを開発しています。
 
-## [Japan Airlines suffers third-party data breach exposing passenger info](https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-30 07:08 JST
-- 要約: 日本航空（JAL）は、Amadeusの旅客サービスシステムでデータ侵害が発生し、約92,000人分の顧客データが流出したことを発表しました。
-
-## [Polymarket halts trading after crypto-draining script breach, $2.5M traced](https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/)
+## [Devs Hit by Trojanized Claude Code Extension for Cursor](https://www.darkreading.com/cyberattacks-data-breaches/devs-trojanized-claude-code-extension-cursor)
 
 - 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-30 06:47 JST
-- 要約: 予測市場プラットフォームのPolymarketは、サードパーティサービスの改ざんにより暗号資産窃取用JavaScriptが拡散されたため取引を一時停止しました。攻撃者のウォレットには約250万ドルの被害資産が追跡されています。
+- メディア: Dark Reading
+- 公開日時: 2026-10-31 05:05 JST
+- 要約: AI搭載IDEであるCursorにおいて、トロイの木馬化されたClaude Code拡張機能により開発者が被害を受ける事態が発生しました。AI開発環境におけるセキュリティリスクが浮き彫りとなっています。
 
-## [Limited reports of PHP bug exploitation emerge](https://therecord.media/php2shell-successful-exploitation-reports-emerge)
+## [Fashion retailer Resolve says hackers stole payment card information](https://therecord.media/resolve-fashion-retailer-data-breach-payment-cards)
 
 - 重要度: **HIGH**
 - メディア: The Record
-- 公開日時: 2026-10-30 05:01 JST
-- 要約: PHP2Shell脆弱性の悪用報告が一部で確認されており、米国の政府関連サーバーを標的とした攻撃キャンペーンなどが特定されています。
+- 公開日時: 2026-10-31 04:00 JST
+- 要約: ファッション小売業者のResolveは、ハッキング被害により顧客の決済カード情報が流出したことを発表しました。ミレニアル世代およびGen Z向けに展開する同社サービスで被害が確認されています。
 
-## [Anthropic-Themed Phishing Emails Bypass Top Security Tools](https://www.darkreading.com/cyberattacks-data-breaches/anthropic-phishing-emails-bypass-security-tools)
+## [Trezor warns of suspected crypto-theft implant in hardware wallet](https://www.bleepingcomputer.com/news/security/trezor-warns-of-suspected-crypto-theft-implant-in-hardware-wallet/)
 
-- 重要度: **MEDIUM**
-- メディア: Dark Reading
-- 公開日時: 2026-10-30 06:21 JST
-- 要約: Anthropicを装ったフィッシングメールが、不審な点が多数存在するにもかかわらず主要な電子メールセキュリティゲートウェイ（SEG）製品をすり抜けて届いていることが判明しました。
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-10-31 00:58 JST
+- 要約: ハードウェアウォレットメーカーのTrezorは、東南アジアの代理店が販売した「Trezor Safe 5」に暗号資産を盗み出すハードウェアインプラントの疑いがあると警告しました。物理的なサプライチェーンにおける暗号資産の窃盗リスクが懸念されています。
 
-## [GM settles with 36 states for selling driver data, agrees to $220 million fine and reforms](https://therecord.media/general-motors-lawsuit-privacy)
+## [Florida warns that 4.9 million people had Social Security numbers leaked in financial aid site breach](https://therecord.media/florida-warns-5-million-affected-financial-aid-site-breach)
+
+- 重要度: **HIGH**
+- メディア: The Record
+- 公開日時: 2026-10-31 00:54 JST
+- 要約: フロリダ州の学生金融支援ウェブサイトでデータ侵害が発生し、490万人分の社会保障番号が漏洩したことが警告されました。同州教育省は10月にこの被害を把握したとしています。
+
+## [PHP2Shell Attacks Root Palo Alto Firewalls but Fail Against WordPress](https://www.securityweek.com/php2shell-attacks-root-palo-alto-firewalls-but-fail-against-wordpress/)
+
+- 重要度: **HIGH**
+- メディア: SecurityWeek
+- 公開日時: 2026-10-31 00:09 JST
+- 要約: PHPの重大な脆弱性を悪用する「PHP2Shell」攻撃により、Palo Altoファイアウォールでroot権限が奪取される事例が確認されました。2,260万件以上の露出インスタンスが潜在的な影響を受ける可能性があります。
+
+## [In Other News: Anthropic Breach Dispute, UEFI Flaw Hits Most Servers, Cloudflare AI Data Leak](https://www.securityweek.com/in-other-news-anthropic-breach-dispute-uefi-flaw-hits-most-servers-cloudflare-ai-data-leak/)
+
+- 重要度: **HIGH**
+- メディア: SecurityWeek
+- 公開日時: 2026-10-30 23:41 JST
+- 要約: 大半のサーバーに影響するUEFIの脆弱性やCloudflareでのAIデータ漏洩など、複数の重要なセキュリティニュースが報じられました。Anthropicにおける侵害の主張を巡る議論なども含まれています。
+
+## [DOJ raises privacy concerns over potential sale of Character.AI chats](https://therecord.media/doj-raises-privacy-concerns-over-character-ai-sale)
 
 - 重要度: **MEDIUM**
 - メディア: The Record
-- 公開日時: 2026-10-30 04:45 JST
-- 要約: ゼネラル・モーターズ（GM）は、ドライバーの走行データを第三者へ不正販売したとする全米36州からの訴訟に対し、2億2,000万ドルの制裁金支払いと業務改善に合意しました。
+- 公開日時: 2026-10-31 05:45 JST
+- 要約: 米司法省は、Character.AIのチャットデータ売却計画に対してプライバシー上の懸念を表明しました。データの売却条件や規制方法について裁判所に助言するオムブズマンの設置が求められています。
 
-## [Fake crypto app on Apple App Store linked to $23K wallet theft](https://www.bleepingcomputer.com/news/security/fake-crypto-app-on-apple-app-store-linked-to-23k-wallet-theft/)
-
-- 重要度: **MEDIUM**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-30 04:23 JST
-- 要約: Apple App Storeに掲載されていた偽の暗号資産アプリ「Padre Terminal」により、27個のSolanaウォレットから約2万3,000ドルが盗難されたことが明らかになりました。
-
-## [OpenAI doubles ChatGPT Pro usage limits after backlash over planned 50% cut](https://www.bleepingcomputer.com/news/artificial-intelligence/openai-doubles-chatgpt-pro-usage-limits-after-backlash-over-planned-50-percent-cut/)
-
-- 重要度: **LOW**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-30 08:35 JST
-- 要約: OpenAIはユーザーからの反発を受け、ChatGPT Proおよびビジネスプランでの利用制限のカットを取り止め、制限を維持することを表明しました。あわせてDots機能の利用制限も独立して管理される見込みです。
-
-## [Rethinking Cybersecurity Awareness in the AI Era](https://www.darkreading.com/cyber-risk/rethinking-cybersecurity-awareness-ai-era)
+## [Behind the Scenes of How Operation Blackout Went Down](https://www.darkreading.com/cybersecurity-operations/behind-the-scenes-how-operation-blackout-went-down)
 
 - 重要度: **LOW**
 - メディア: Dark Reading
-- 公開日時: 2026-10-30 05:15 JST
-- 要約: AI時代におけるサイバーセキュリティ意識向上トレーニングのトレンドや、新世代の労働者向け教育について議論した動画コンテンツが公開されました。
+- 公開日時: 2026-10-31 04:46 JST
+- 要約: 悪質な詐欺センターの解体を目的とした法執行機関の「Operation Blackout」が成功を収めました。脅威インテリジェンスの専門家がその舞台裏と今後の国際協力の必要性を解説しています。
+
+## [L’Italia è afflitta da vulnerabilità informatiche, senza una causa chiara](https://www.darkreading.com/cybersecurity-analytics/cyber-vulnerabilities-besiege-italy-italian)
+
+- 重要度: **LOW**
+- メディア: Dark Reading
+- 公開日時: 2026-10-31 00:39 JST
+- 要約: イタリアでは他国と異なるサイバー脅威や脆弱性の深刻化が観察されていますが、明確な原因は解明されていません。研究者らによる傾向分析と原因の調査が続けられています。

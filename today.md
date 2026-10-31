@@ -43,3 +43,20 @@
 ## 開発者向けコメント
 * **認証ガードの全系適用とデフォルト値の排除**: APIエンドポイントごとの認証チェック漏れや、デフォルトのJWTシークレット・認証情報（`admin/admin`等）の放置が即座に深刻な侵害につながっています。本番起動時にデフォルト鍵の使用を拒否する仕組みや、CIでの認証漏れ検証を検討してください。
 * **出力エスケープと動的クエリ生成の再点検**: Vueの`v-html`やBladeの未エスケープ出力によるStored XSS、および`ORDER BY`句への直接文字列結合によるSQLiが複数発生しています。フレームワークの安全な出力機構（自動エスケープ）の標準使用と、動的ソート指定時のホワイトリスト検証を徹底してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間では、LinuxカーネルやPalo Altoファイアウォール、多数のサーバーに影響するUEFI脆弱性など、基盤システムを標的とした重大な脅威が相次いで報告されています。また、Cursor向け悪意ある拡張機能や暗号資産ウォレットの物理改ざんなど、開発者や資産を狙うサプライチェーン攻撃も表面化しています。さらに、490万人規模のSSN漏洩やECサイトの決済情報流出など、実害を伴う大規模なデータ侵害被害も明らかになりました。
+
+- **HIGH** [Critical Linux kernel flaw allows remote root attacks on MPTCP servers](https://www.bleepingcomputer.com/news/security/critical-linux-kernel-flaw-allows-remote-root-attacks-on-mptcp-servers/) — BleepingComputer
+- **HIGH** [Devs Hit by Trojanized Claude Code Extension for Cursor](https://www.darkreading.com/cyberattacks-data-breaches/devs-trojanized-claude-code-extension-cursor) — Dark Reading
+- **HIGH** [Fashion retailer Resolve says hackers stole payment card information](https://therecord.media/resolve-fashion-retailer-data-breach-payment-cards) — The Record
+- **HIGH** [Trezor warns of suspected crypto-theft implant in hardware wallet](https://www.bleepingcomputer.com/news/security/trezor-warns-of-suspected-crypto-theft-implant-in-hardware-wallet/) — BleepingComputer
+- **HIGH** [Florida warns that 4.9 million people had Social Security numbers leaked in financial aid site breach](https://therecord.media/florida-warns-5-million-affected-financial-aid-site-breach) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
