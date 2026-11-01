@@ -1,79 +1,51 @@
 # セキュリティーニュース
 
-更新日時: 2026-10-31 10:43:53 JST
+更新日時: 2026-11-01 10:21:15 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近24時間では、LinuxカーネルやPalo Altoファイアウォール、多数のサーバーに影響するUEFI脆弱性など、基盤システムを標的とした重大な脅威が相次いで報告されています。また、Cursor向け悪意ある拡張機能や暗号資産ウォレットの物理改ざんなど、開発者や資産を狙うサプライチェーン攻撃も表面化しています。さらに、490万人規模のSSN漏洩やECサイトの決済情報流出など、実害を伴う大規模なデータ侵害被害も明らかになりました。
+クラウド事業者や分析企業における不正アクセスと、それに伴う顧客情報や認証情報の流出被害が相次いで公表されています。また、SMSを介して未パッチのAndroid端末を遠隔からクラッシュさせる脆弱性のPoCエクスプロイトが公開されました。該当するサービスの利用企業や管理者は、認証情報のローテーションやパッチ適用などの迅速な対応が求められます。
 
-## [Critical Linux kernel flaw allows remote root attacks on MPTCP servers](https://www.bleepingcomputer.com/news/security/critical-linux-kernel-flaw-allows-remote-root-attacks-on-mptcp-servers/)
-
-- 重要度: **HIGH**
-- メディア: BleepingComputer
-- 公開日時: 2026-10-31 06:09 JST
-- 要約: Linuxカーネルの重大な脆弱性により、MPTCPリスナーを実行するサーバーで未認証のリモート攻撃者がroot権限を取得できるリスクが判明しました。Anthropicの研究者がこの脆弱性に対するエクスプロイトを開発しています。
-
-## [Devs Hit by Trojanized Claude Code Extension for Cursor](https://www.darkreading.com/cyberattacks-data-breaches/devs-trojanized-claude-code-extension-cursor)
-
-- 重要度: **HIGH**
-- メディア: Dark Reading
-- 公開日時: 2026-10-31 05:05 JST
-- 要約: AI搭載IDEであるCursorにおいて、トロイの木馬化されたClaude Code拡張機能により開発者が被害を受ける事態が発生しました。AI開発環境におけるセキュリティリスクが浮き彫りとなっています。
-
-## [Fashion retailer Resolve says hackers stole payment card information](https://therecord.media/resolve-fashion-retailer-data-breach-payment-cards)
-
-- 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-10-31 04:00 JST
-- 要約: ファッション小売業者のResolveは、ハッキング被害により顧客の決済カード情報が流出したことを発表しました。ミレニアル世代およびGen Z向けに展開する同社サービスで被害が確認されています。
-
-## [Trezor warns of suspected crypto-theft implant in hardware wallet](https://www.bleepingcomputer.com/news/security/trezor-warns-of-suspected-crypto-theft-implant-in-hardware-wallet/)
+## [Northflank security breach leads to abuse of customers' AI API keys](https://www.bleepingcomputer.com/news/security/northflank-security-breach-leads-to-abuse-of-customers-ai-api-keys/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-10-31 00:58 JST
-- 要約: ハードウェアウォレットメーカーのTrezorは、東南アジアの代理店が販売した「Trezor Safe 5」に暗号資産を盗み出すハードウェアインプラントの疑いがあると警告しました。物理的なサプライチェーンにおける暗号資産の窃盗リスクが懸念されています。
+- 公開日時: 2026-11-01 03:01 JST
+- 要約: クラウドホスティングプラットフォームのNorthflankでセキュリティ侵害が発生し、顧客のAI APIキーが不正利用されました。同社は顧客に対し、プラットフォーム上に保存されているすべての資格情報やシークレットの再発行を呼びかけています。
 
-## [Florida warns that 4.9 million people had Social Security numbers leaked in financial aid site breach](https://therecord.media/florida-warns-5-million-affected-financial-aid-site-breach)
-
-- 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-10-31 00:54 JST
-- 要約: フロリダ州の学生金融支援ウェブサイトでデータ侵害が発生し、490万人分の社会保障番号が漏洩したことが警告されました。同州教育省は10月にこの被害を把握したとしています。
-
-## [PHP2Shell Attacks Root Palo Alto Firewalls but Fail Against WordPress](https://www.securityweek.com/php2shell-attacks-root-palo-alto-firewalls-but-fail-against-wordpress/)
+## [New Android SMS of Death exploit can remotely crash unpatched phones](https://www.bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones/)
 
 - 重要度: **HIGH**
-- メディア: SecurityWeek
-- 公開日時: 2026-10-31 00:09 JST
-- 要約: PHPの重大な脆弱性を悪用する「PHP2Shell」攻撃により、Palo Altoファイアウォールでroot権限が奪取される事例が確認されました。2,260万件以上の露出インスタンスが潜在的な影響を受ける可能性があります。
+- メディア: BleepingComputer
+- 公開日時: 2026-11-01 00:35 JST
+- 要約: 修正済みのAndroidの脆弱性（CVE-2026-58882）に対するPoCエクスプロイトが公開され、特殊なSMSの送信で未パッチ端末を遠隔からクラッシュさせることが可能です。攻撃者はこの問題を悪用して、対象端末の通信サービスを遠隔から妨害することができます。
 
-## [In Other News: Anthropic Breach Dispute, UEFI Flaw Hits Most Servers, Cloudflare AI Data Leak](https://www.securityweek.com/in-other-news-anthropic-breach-dispute-uefi-flaw-hits-most-servers-cloudflare-ai-data-leak/)
+## [Chainalysis discloses data breach from "offensive agentic techniques"](https://www.bleepingcomputer.com/news/security/chainalysis-discloses-data-breach-from-offensive-agentic-techniques/)
 
 - 重要度: **HIGH**
-- メディア: SecurityWeek
-- 公開日時: 2026-10-30 23:41 JST
-- 要約: 大半のサーバーに影響するUEFIの脆弱性やCloudflareでのAIデータ漏洩など、複数の重要なセキュリティニュースが報じられました。Anthropicにおける侵害の主張を巡る議論なども含まれています。
+- メディア: BleepingComputer
+- 公開日時: 2026-10-31 21:50 JST
+- 要約: ブロックチェーン分析企業のChainalysisは、攻撃手法を用いた不正アクセスによりデータ侵害が発生したことを開示しました。これにより顧客の氏名、メールアドレス、ユーザーID、組織内の役割などが流出しました。
 
-## [DOJ raises privacy concerns over potential sale of Character.AI chats](https://therecord.media/doj-raises-privacy-concerns-over-character-ai-sale)
-
-- 重要度: **MEDIUM**
-- メディア: The Record
-- 公開日時: 2026-10-31 05:45 JST
-- 要約: 米司法省は、Character.AIのチャットデータ売却計画に対してプライバシー上の懸念を表明しました。データの売却条件や規制方法について裁判所に助言するオムブズマンの設置が求められています。
-
-## [Behind the Scenes of How Operation Blackout Went Down](https://www.darkreading.com/cybersecurity-operations/behind-the-scenes-how-operation-blackout-went-down)
+## [Reddit to lock content behind logins to fight scrapers](https://www.bleepingcomputer.com/news/security/reddit-to-lock-content-behind-logins-to-fight-scrapers/)
 
 - 重要度: **LOW**
-- メディア: Dark Reading
-- 公開日時: 2026-10-31 04:46 JST
-- 要約: 悪質な詐欺センターの解体を目的とした法執行機関の「Operation Blackout」が成功を収めました。脅威インテリジェンスの専門家がその舞台裏と今後の国際協力の必要性を解説しています。
+- メディア: BleepingComputer
+- 公開日時: 2026-10-31 23:05 JST
+- 要約: Redditはスクレイパー対策として未ログインユーザーのアクセスを制限し、段階的にログイン必須のサービスへ移行することを発表しました。
 
-## [L’Italia è afflitta da vulnerabilità informatiche, senza una causa chiara](https://www.darkreading.com/cybersecurity-analytics/cyber-vulnerabilities-besiege-italy-italian)
+## [From Beginner to Bug Hunter: Learning Cybersecurity in the AI Era.](https://www.bleepingcomputer.com/news/security/from-beginner-to-bug-hunter-learning-cybersecurity-in-the-ai-era/)
 
 - 重要度: **LOW**
-- メディア: Dark Reading
-- 公開日時: 2026-10-31 00:39 JST
-- 要約: イタリアでは他国と異なるサイバー脅威や脆弱性の深刻化が観察されていますが、明確な原因は解明されていません。研究者らによる傾向分析と原因の調査が続けられています。
+- メディア: BleepingComputer
+- 公開日時: 2026-10-31 22:10 JST
+- 要約: AI生成の脆弱性レポート増加がバグバウンティプログラムに影響を与える中、TryHackMeが初心者向けにAIの適切な活用法やスキルの学習方法を解説しています。
+
+## [Syrian Hacker Gets Prison Time in US After Over a Decade on the Run](https://www.securityweek.com/syrian-hacker-gets-prison-time-in-us-after-over-a-decade-on-the-run/)
+
+- 重要度: **LOW**
+- メディア: SecurityWeek
+- 公開日時: 2026-10-31 20:00 JST
+- 要約: 10年以上にわたり逃亡していたシリア人ハッカーのAhmad Umar Aghaに対し、米国の裁判所がメディアや政府機関への攻撃の罪で禁錮42ヶ月の判決を言い渡しました。

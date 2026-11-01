@@ -43,3 +43,20 @@
 - **動的評価の回避**: `eval()` や動的スクリプト実行（Groovy等）に信頼できない入力を渡さない設計を徹底してください。
 - **認証・鍵管理**: トークン署名鍵のハードコードを避け、認証ヘッダーの解析処理において入力値をそのまま演算子として解釈しないよう検証を強化してください。
 - **依存関係のライフサイクル管理**: サポートが終了・停止しているバージョン（Apache MINA 3.0など）は修正パッチが提供されないため、維持されているバージョンラインへ速やかに移行してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+クラウド事業者や分析企業における不正アクセスと、それに伴う顧客情報や認証情報の流出被害が相次いで公表されています。また、SMSを介して未パッチのAndroid端末を遠隔からクラッシュさせる脆弱性のPoCエクスプロイトが公開されました。該当するサービスの利用企業や管理者は、認証情報のローテーションやパッチ適用などの迅速な対応が求められます。
+
+- **HIGH** [Northflank security breach leads to abuse of customers' AI API keys](https://www.bleepingcomputer.com/news/security/northflank-security-breach-leads-to-abuse-of-customers-ai-api-keys/) — BleepingComputer
+- **HIGH** [New Android SMS of Death exploit can remotely crash unpatched phones](https://www.bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones/) — BleepingComputer
+- **HIGH** [Chainalysis discloses data breach from "offensive agentic techniques"](https://www.bleepingcomputer.com/news/security/chainalysis-discloses-data-breach-from-offensive-agentic-techniques/) — BleepingComputer
+- **LOW** [Reddit to lock content behind logins to fight scrapers](https://www.bleepingcomputer.com/news/security/reddit-to-lock-content-behind-logins-to-fight-scrapers/) — BleepingComputer
+- **LOW** [From Beginner to Bug Hunter: Learning Cybersecurity in the AI Era.](https://www.bleepingcomputer.com/news/security/from-beginner-to-bug-hunter-learning-cybersecurity-in-the-ai-era/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
