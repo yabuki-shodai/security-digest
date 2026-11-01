@@ -1,62 +1,45 @@
-# CVE Digest Dashboard (2026-10-31)
+# CVE Digest Dashboard (2026-11-01)
 
 ## Overview
 
-- Total: 30
-- Critical件数: 6
+- Total: 11
+- Critical件数: 3
 - High件数: 8
 - KEV件数: 0
-- Frontend件数: 19
-- Backend件数: 11
+- Frontend件数: 0
+- Backend件数: 3
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-10-31/frontend-summary.md)
-- [Backend Summary](docs/2026-10-31/backend-summary.md)
+- [Frontend Summary](docs/2026-11-01/frontend-summary.md)
+- [Backend Summary](docs/2026-11-01/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-61730](https://github.com/socfortress/CoPilot/commit/bfa630b65d554670c7462a32ce6fd4e3cbd0254c) CVE-2026-61730 / CRITICAL / backend
-- [CVE-2026-61826](https://github.com/morpheus65535/bazarr/commit/4bd29252feebd0803e84cc3ce1bdd24c3a076ed4) CVE-2026-61826 / CRITICAL / backend
-- [CVE-2026-93327](https://docs.cloud.google.com/support/bulletins) CVE-2026-93327 / CRITICAL / backend
-- [CVE-2026-61728](https://github.com/socfortress/CoPilot/commit/461e8f84794aee8ada588de3bad79430dc9f4f3d) CVE-2026-61728 / CRITICAL / frontend
-- [CVE-2026-61737](https://github.com/huajian123/ng-antd-admin/commit/23e92ff9176074ee534af3ea3700b3652a9726a9) CVE-2026-61737 / CRITICAL / frontend
+- [CVE-2026-118636](https://lists.apache.org/thread.html/h76nwcrkvsffhsk2kq6cjzc6srtnty7x) CVE-2026-118636 / CRITICAL / security
+- [CVE-2026-120201](https://github.com/dromara/Jpom) CVE-2026-120201 / CRITICAL / security
+- [CVE-2026-120209](https://gitee.com/belief-team/report) CVE-2026-120209 / CRITICAL / security
+- [CVE-2026-120205](https://github.com/thelia/thelia/blob/3.0.0/core/lib/Thelia/Condition/Implementation/ForSomeCustomers.php#L119) CVE-2026-120205 / HIGH / security
+- [CVE-2026-102212](https://portal.opengear.com/customerservice/s/article/CVE-2026-102212-Opengear-Console-Server-Buffer-Overflow-to-RCE) CVE-2026-102212 / HIGH / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日掲載された脆弱性では、認証・認可の実装漏れ（ハンドラーでの認証欠落やデフォルト設定・シークレットの残留）や、入力値の不十分なエスケープによるXSS・SQLインジェクションが目立ちます。特にCVSS 9.0以上のCRITICAL件数が多く、未認証での設定変更、クラウド構成情報の漏洩、サンドボックス脱出によるOSコマンド実行など、重大な影響を及ぼす問題が含まれています。
+本日のCVE一覧では、未認証でリモートコード実行（RCE）につながるCVSS 9.8（CRITICAL）の深刻な脆弱性が複数報告されています。認証ヘッダーへのクエリ注入による認証回避（Jpom）、ハードコードされた秘密鍵を利用したトークン偽造（AJ-Report）、不適切なJavaデシリアライズ（Apache MINA）などが含まれます。全体として、入力検証の不足、安全でないコード評価（eval）、非サポートバージョンの運用が主なリスク要因となっています。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-61826（CVSS 10.0 / Bazarr）**
-   ハンドラーへの認証チェック（`@authenticate`）欠落により、未認証の第三者がAPIキーの書き換えや認証解除を自由に行える状態になっています。
-2. **CVE-2026-61737（CVSS 9.8 / ng-antd-admin）**
-   ハードコードされたデフォルトJWTシークレットにより、攻撃者がトークンを偽造して管理者を含む任意ユーザーになりすませます。
-3. **CVE-2026-61730（CVSS 9.3 / SOCFortress CoPilot）**
-   静的ファイル配信経路の認証欠落により、AWS/Azure/GCPのIAM情報やリソース構成を含むレポートが外部から閲覧可能です。
-4. **CVE-2026-119978（CVSS 9.0 / Flowise）**
-   モジュールの読み込み処理を悪用したサンドボックス（vm2）脱出により、認証されたユーザーがOSコマンドを実行可能です。
-5. **CVE-2026-119655 / CVE-2026-119656（CVSS 8.7 / CoreShop）**
-   `ORDER BY` 句に対する入力検証の不備により、未認証で盲目的（Blind）SQLインジェクションを実行され、アカウント等の抽出に繋がります。
+1. **CVE-2026-120201 (Jpom | CVSS 9.8 / CRITICAL)**
+   `JPOM-USER-TOKEN` ヘッダーへの条件注入により認証を回避し、未認証の攻撃者が管理者権限を取得して任意コマンドを実行可能です。
+2. **CVE-2026-120209 (AJ-Report | CVSS 9.8 / CRITICAL)**
+   ハードコードされたJWT秘密鍵によってトークンが偽造可能であり、GroovyClassLoaderを経由した未認証RCEにつながります。
+3. **CVE-2026-118636 (Apache MINA | CVSS 9.8 / CRITICAL)**
+   3.0系の `JavaNativeMessageDecoder` における不適切なデシリアライズによりRCEが発生します。3.0系は非サポートのため、2.2.X系への移行が必要です。
+4. **CVE-2026-120203 (ShowDoc | CVSS 8.8 / HIGH)**
+   Mock機能で `eval()` を用いたテンプレート評価を行っているため、コードインジェクションが発生し、Docker環境下でroot権限のコマンド実行を許す恐れがあります。
 
 ## 開発者向けコメント
-* **認証ガードの全系適用とデフォルト値の排除**: APIエンドポイントごとの認証チェック漏れや、デフォルトのJWTシークレット・認証情報（`admin/admin`等）の放置が即座に深刻な侵害につながっています。本番起動時にデフォルト鍵の使用を拒否する仕組みや、CIでの認証漏れ検証を検討してください。
-* **出力エスケープと動的クエリ生成の再点検**: Vueの`v-html`やBladeの未エスケープ出力によるStored XSS、および`ORDER BY`句への直接文字列結合によるSQLiが複数発生しています。フレームワークの安全な出力機構（自動エスケープ）の標準使用と、動的ソート指定時のホワイトリスト検証を徹底してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間では、LinuxカーネルやPalo Altoファイアウォール、多数のサーバーに影響するUEFI脆弱性など、基盤システムを標的とした重大な脅威が相次いで報告されています。また、Cursor向け悪意ある拡張機能や暗号資産ウォレットの物理改ざんなど、開発者や資産を狙うサプライチェーン攻撃も表面化しています。さらに、490万人規模のSSN漏洩やECサイトの決済情報流出など、実害を伴う大規模なデータ侵害被害も明らかになりました。
-
-- **HIGH** [Critical Linux kernel flaw allows remote root attacks on MPTCP servers](https://www.bleepingcomputer.com/news/security/critical-linux-kernel-flaw-allows-remote-root-attacks-on-mptcp-servers/) — BleepingComputer
-- **HIGH** [Devs Hit by Trojanized Claude Code Extension for Cursor](https://www.darkreading.com/cyberattacks-data-breaches/devs-trojanized-claude-code-extension-cursor) — Dark Reading
-- **HIGH** [Fashion retailer Resolve says hackers stole payment card information](https://therecord.media/resolve-fashion-retailer-data-breach-payment-cards) — The Record
-- **HIGH** [Trezor warns of suspected crypto-theft implant in hardware wallet](https://www.bleepingcomputer.com/news/security/trezor-warns-of-suspected-crypto-theft-implant-in-hardware-wallet/) — BleepingComputer
-- **HIGH** [Florida warns that 4.9 million people had Social Security numbers leaked in financial aid site breach](https://therecord.media/florida-warns-5-million-affected-financial-aid-site-breach) — The Record
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+今回のケースでは、開発における基本的なセキュリティ設計の不足が重大な脆弱性を引き起こしています。特に以下の点に注意してください：
+- **動的評価の回避**: `eval()` や動的スクリプト実行（Groovy等）に信頼できない入力を渡さない設計を徹底してください。
+- **認証・鍵管理**: トークン署名鍵のハードコードを避け、認証ヘッダーの解析処理において入力値をそのまま演算子として解釈しないよう検証を強化してください。
+- **依存関係のライフサイクル管理**: サポートが終了・停止しているバージョン（Apache MINA 3.0など）は修正パッチが提供されないため、維持されているバージョンラインへ速やかに移行してください。
