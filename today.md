@@ -45,3 +45,19 @@
 - **実行環境のサンドボックス権限確認**: Prefab UIの事例のように、WebAssemblyやサブプロセスでコードを実行させる場合は、起動引数（Denoの`--allow-*`フラグなど）の最小権限化と、グローバルオブジェクトへの不要なAPI露出を防ぐ実装を徹底してください。
 - **文字列エスケープの仕様見直し**: 単一・二重引用符のみを置換するような独自エスケープ処理は、バックスラッシュの挿入によって無効化される危険があります。コンテキストに応じた適切なエンコーディング処理を使用しているかコードベースを確認してください。
 - **セッション更新の実装**: ログイン認証成功時には必ずセッションIDを再発行し、セッション固定化攻撃を防御する構造になっているか確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+Binanceに対する史上最大規模の暗号資産窃盗被害に北朝鮮の国家主導ハッカーが関与していることがFBIにより特定されました。また、Alpine Linuxの開発インフラを標的としたGitLab脆弱性の悪用試行など、重要インフラを狙った攻撃が報告されています。一方で、リスク分析スタートアップの資金調達やAIツールの機能更新といった技術開発の動きも見られます。
+
+- **HIGH** [FBI links $6.3 billion Binance crypto heist to North Korean hackers](https://www.bleepingcomputer.com/news/security/fbi-links-63-billion-binance-crypto-heist-to-north-korean-hackers/) — BleepingComputer
+- **HIGH** [Alpine Linux rebuilds GitLab after attempted RCE attack](https://www.bleepingcomputer.com/news/security/alpine-linux-rebuilds-gitlab-after-attempted-rce-attack/) — BleepingComputer
+- **LOW** [OpenAI says it's doubling Pro usage limits and bringing Work features to Chat](https://www.bleepingcomputer.com/news/artificial-intelligence/openai-says-its-doubling-pro-usage-limits-and-bringing-work-features-to-chat/) — BleepingComputer
+- **LOW** [Northstar Security Exits Stealth With $7M to Expose Toxic Risk Combinations](https://www.securityweek.com/northstar-security-exits-stealth-with-7m-to-expose-toxic-risk-combinations/) — SecurityWeek
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
