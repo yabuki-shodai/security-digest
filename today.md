@@ -1,62 +1,47 @@
-# CVE Digest Dashboard (2026-11-01)
+# CVE Digest Dashboard (2026-11-02)
 
 ## Overview
 
-- Total: 11
-- Critical件数: 3
-- High件数: 8
+- Total: 30
+- Critical件数: 13
+- High件数: 7
 - KEV件数: 0
-- Frontend件数: 0
-- Backend件数: 3
+- Frontend件数: 9
+- Backend件数: 9
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-11-01/frontend-summary.md)
-- [Backend Summary](docs/2026-11-01/backend-summary.md)
+- [Frontend Summary](docs/2026-11-02/frontend-summary.md)
+- [Backend Summary](docs/2026-11-02/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-118636](https://lists.apache.org/thread.html/h76nwcrkvsffhsk2kq6cjzc6srtnty7x) CVE-2026-118636 / CRITICAL / security
-- [CVE-2026-120201](https://github.com/dromara/Jpom) CVE-2026-120201 / CRITICAL / security
-- [CVE-2026-120209](https://gitee.com/belief-team/report) CVE-2026-120209 / CRITICAL / security
-- [CVE-2026-120205](https://github.com/thelia/thelia/blob/3.0.0/core/lib/Thelia/Condition/Implementation/ForSomeCustomers.php#L119) CVE-2026-120205 / HIGH / security
-- [CVE-2026-102212](https://portal.opengear.com/customerservice/s/article/CVE-2026-102212-Opengear-Console-Server-Buffer-Overflow-to-RCE) CVE-2026-102212 / HIGH / security
+- [CVE-2026-120230](https://github.com/pipiyyb/cve/blob/main/WAVLINK_WN701AE_del_vlan_group.md) CVE-2026-120230 / CRITICAL / security
+- [CVE-2026-120231](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_openvpn_cli_command_injection.md) CVE-2026-120231 / CRITICAL / security
+- [CVE-2026-120238](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_ovpn_file_command_injection.md) CVE-2026-120238 / CRITICAL / security
+- [CVE-2026-120239](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_wireguard_cli_command_injection.md) CVE-2026-120239 / CRITICAL / security
+- [CVE-2026-120240](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_wireguard_cli_group_command_injection.md) CVE-2026-120240 / CRITICAL / security
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日のCVE一覧では、未認証でリモートコード実行（RCE）につながるCVSS 9.8（CRITICAL）の深刻な脆弱性が複数報告されています。認証ヘッダーへのクエリ注入による認証回避（Jpom）、ハードコードされた秘密鍵を利用したトークン偽造（AJ-Report）、不適切なJavaデシリアライズ（Apache MINA）などが含まれます。全体として、入力検証の不足、安全でないコード評価（eval）、非サポートバージョンの運用が主なリスク要因となっています。
+
+本日掲載された脆弱性には、生成AI向けUIライブラリ「Prefab UI」における最高深刻度（CVSS 10.0）のサンドボックス回避、Webフレームワーク「Apache Wicket」における多数のエスケープ漏れやセッション管理不備（XSS、セッション固定化など）、「ag-ui-protocol」におけるDoSや情報漏洩、各種ルーター機器（WAVLINK、Linksys）でのリモートOSコマンドインジェクションおよびバッファオーバーフローが含まれます。
 
 ## 優先して確認すべき3〜5件
-1. **CVE-2026-120201 (Jpom | CVSS 9.8 / CRITICAL)**
-   `JPOM-USER-TOKEN` ヘッダーへの条件注入により認証を回避し、未認証の攻撃者が管理者権限を取得して任意コマンドを実行可能です。
-2. **CVE-2026-120209 (AJ-Report | CVSS 9.8 / CRITICAL)**
-   ハードコードされたJWT秘密鍵によってトークンが偽造可能であり、GroovyClassLoaderを経由した未認証RCEにつながります。
-3. **CVE-2026-118636 (Apache MINA | CVSS 9.8 / CRITICAL)**
-   3.0系の `JavaNativeMessageDecoder` における不適切なデシリアライズによりRCEが発生します。3.0系は非サポートのため、2.2.X系への移行が必要です。
-4. **CVE-2026-120203 (ShowDoc | CVSS 8.8 / HIGH)**
-   Mock機能で `eval()` を用いたテンプレート評価を行っているため、コードインジェクションが発生し、Docker環境下でroot権限のコマンド実行を許す恐れがあります。
+
+1. **CVE-2026-120338**（Prefab UI | CVSS 10.0: CRITICAL）
+   - **内容**: Pyodide/Deno上でPythonを実行するサンドボックスにて、Denoが制限なし権限（`--allow-read`等）で起動され、Deno APIが露出しているため、制限を回避してファイルアクセス等の任意操作が可能です。
+2. **CVE-2026-83559**（Apache Wicket | CVSS 7.4: HIGH）
+   - **内容**: `JavaScriptUtils#escapeQuotes()` がバックスラッシュ自体のエスケープを行わないため、JavaScript文字列リテラルへの埋め込み時にエスケープが破綻する不備が存在します。
+3. **CVE-2026-82840**（Apache Wicket | CVSS 7.2: HIGH）
+   - **内容**: `AuthenticatedWebSession.signIn()` による認証時にコンテナセッションIDの更新が行われず、セッション固定化攻撃を受けるリスクがあります。
+4. **CVE-2026-120276** ほか（WAVLINK / Linksys 機器 | CVSS 10.0: CRITICAL）
+   - **内容**: Web管理インターフェースやCLIハンドラーの引数（`group_name`など）の不備により、リモートからOSコマンドインジェクションやバッファオーバーフローが実行可能な状態になっています。
 
 ## 開発者向けコメント
-今回のケースでは、開発における基本的なセキュリティ設計の不足が重大な脆弱性を引き起こしています。特に以下の点に注意してください：
-- **動的評価の回避**: `eval()` や動的スクリプト実行（Groovy等）に信頼できない入力を渡さない設計を徹底してください。
-- **認証・鍵管理**: トークン署名鍵のハードコードを避け、認証ヘッダーの解析処理において入力値をそのまま演算子として解釈しないよう検証を強化してください。
-- **依存関係のライフサイクル管理**: サポートが終了・停止しているバージョン（Apache MINA 3.0など）は修正パッチが提供されないため、維持されているバージョンラインへ速やかに移行してください。
 
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-クラウド事業者や分析企業における不正アクセスと、それに伴う顧客情報や認証情報の流出被害が相次いで公表されています。また、SMSを介して未パッチのAndroid端末を遠隔からクラッシュさせる脆弱性のPoCエクスプロイトが公開されました。該当するサービスの利用企業や管理者は、認証情報のローテーションやパッチ適用などの迅速な対応が求められます。
-
-- **HIGH** [Northflank security breach leads to abuse of customers' AI API keys](https://www.bleepingcomputer.com/news/security/northflank-security-breach-leads-to-abuse-of-customers-ai-api-keys/) — BleepingComputer
-- **HIGH** [New Android SMS of Death exploit can remotely crash unpatched phones](https://www.bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones/) — BleepingComputer
-- **HIGH** [Chainalysis discloses data breach from "offensive agentic techniques"](https://www.bleepingcomputer.com/news/security/chainalysis-discloses-data-breach-from-offensive-agentic-techniques/) — BleepingComputer
-- **LOW** [Reddit to lock content behind logins to fight scrapers](https://www.bleepingcomputer.com/news/security/reddit-to-lock-content-behind-logins-to-fight-scrapers/) — BleepingComputer
-- **LOW** [From Beginner to Bug Hunter: Learning Cybersecurity in the AI Era.](https://www.bleepingcomputer.com/news/security/from-beginner-to-bug-hunter-learning-cybersecurity-in-the-ai-era/) — BleepingComputer
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+- **実行環境のサンドボックス権限確認**: Prefab UIの事例のように、WebAssemblyやサブプロセスでコードを実行させる場合は、起動引数（Denoの`--allow-*`フラグなど）の最小権限化と、グローバルオブジェクトへの不要なAPI露出を防ぐ実装を徹底してください。
+- **文字列エスケープの仕様見直し**: 単一・二重引用符のみを置換するような独自エスケープ処理は、バックスラッシュの挿入によって無効化される危険があります。コンテキストに応じた適切なエンコーディング処理を使用しているかコードベースを確認してください。
+- **セッション更新の実装**: ログイン認証成功時には必ずセッションIDを再発行し、セッション固定化攻撃を防御する構造になっているか確認してください。
