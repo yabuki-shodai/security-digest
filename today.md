@@ -1,63 +1,61 @@
-# CVE Digest Dashboard (2026-11-02)
+# CVE Digest Dashboard (2026-11-03)
 
 ## Overview
 
 - Total: 30
-- Critical件数: 13
-- High件数: 7
+- Critical件数: 5
+- High件数: 16
 - KEV件数: 0
 - Frontend件数: 9
-- Backend件数: 9
+- Backend件数: 21
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-11-02/frontend-summary.md)
-- [Backend Summary](docs/2026-11-02/backend-summary.md)
+- [Frontend Summary](docs/2026-11-03/frontend-summary.md)
+- [Backend Summary](docs/2026-11-03/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-120230](https://github.com/pipiyyb/cve/blob/main/WAVLINK_WN701AE_del_vlan_group.md) CVE-2026-120230 / CRITICAL / security
-- [CVE-2026-120231](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_openvpn_cli_command_injection.md) CVE-2026-120231 / CRITICAL / security
-- [CVE-2026-120238](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_ovpn_file_command_injection.md) CVE-2026-120238 / CRITICAL / security
-- [CVE-2026-120239](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_wireguard_cli_command_injection.md) CVE-2026-120239 / CRITICAL / security
-- [CVE-2026-120240](https://github.com/senxitoyshuyi-ui/HACKALL/blob/main/WAVLINK%20WN553X1-B%20Router/WAVLINK_WN553X1-B_wireguard_cli_group_command_injection.md) CVE-2026-120240 / CRITICAL / security
+- [CVE-2026-105769](https://github.com/chainguard-forks/kaniko/pull/495) CVE-2026-105769 / CRITICAL / backend
+- [CVE-2026-120447](https://github.com/bufanyun/hotgo/blob/269b2f9e435cf8ff6b18d53bc053a905f4e02d11/server/internal/logic/sys/sms_log.go) CVE-2026-120447 / CRITICAL / backend
+- [CVE-2026-120459](https://github.com/mpdavis/python-jose/blob/3.5.0/jose/backends/cryptography_backend.py) CVE-2026-120459 / CRITICAL / backend
+- [CVE-2026-119085](https://aws.amazon.com/security/security-bulletins/2026-162-aws/) CVE-2026-119085 / CRITICAL / backend
+- [CVE-2026-102435](https://plugins.svn.wordpress.org/ultimate-addons-for-contact-form-7/tags/3.5.52/addons/pdf-generator/pdf-generator.php) CVE-2026-102435 / CRITICAL / backend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
+本日のダイジェストでは、認証バイパス（JWT検証の不備）、CI/CDビルドツールにおけるトークン漏洩、テンプレートインジェクションによるクラウド権限奪取など、**ライブラリや開発・運用ツールに潜むCRITICALレベルの脆弱性**が目立ちます。特にWebアプリケーションの認証基盤やコンテナビルドパイプラインの安全確認が急務です。
 
-本日掲載された脆弱性には、生成AI向けUIライブラリ「Prefab UI」における最高深刻度（CVSS 10.0）のサンドボックス回避、Webフレームワーク「Apache Wicket」における多数のエスケープ漏れやセッション管理不備（XSS、セッション固定化など）、「ag-ui-protocol」におけるDoSや情報漏洩、各種ルーター機器（WAVLINK、Linksys）でのリモートOSコマンドインジェクションおよびバッファオーバーフローが含まれます。
+---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-120338**（Prefab UI | CVSS 10.0: CRITICAL）
-   - **内容**: Pyodide/Deno上でPythonを実行するサンドボックスにて、Denoが制限なし権限（`--allow-read`等）で起動され、Deno APIが露出しているため、制限を回避してファイルアクセス等の任意操作が可能です。
-2. **CVE-2026-83559**（Apache Wicket | CVSS 7.4: HIGH）
-   - **内容**: `JavaScriptUtils#escapeQuotes()` がバックスラッシュ自体のエスケープを行わないため、JavaScript文字列リテラルへの埋め込み時にエスケープが破綻する不備が存在します。
-3. **CVE-2026-82840**（Apache Wicket | CVSS 7.2: HIGH）
-   - **内容**: `AuthenticatedWebSession.signIn()` による認証時にコンテナセッションIDの更新が行われず、セッション固定化攻撃を受けるリスクがあります。
-4. **CVE-2026-120276** ほか（WAVLINK / Linksys 機器 | CVSS 10.0: CRITICAL）
-   - **内容**: Web管理インターフェースやCLIハンドラーの引数（`group_name`など）の不備により、リモートからOSコマンドインジェクションやバッファオーバーフローが実行可能な状態になっています。
+1. **CVE-2026-120459 (python-jose)**
+   * **CVSS / 深刻度**: 9.1 / CRITICAL
+   * **カテゴリ**: backend
+   * **概要**: HMACシークレットが空（長さ0）の場合にJWT検証を通過させてしまう脆弱性。攻撃者が任意のクレームを持つトークンを偽造し、認証をバイパスできます。
+
+2. **CVE-2026-105769 (kaniko)**
+   * **CVSS / 深刻度**: 9.3 / CRITICAL
+   * **カテゴリ**: backend
+   * **概要**: レジストリ判定の正規表現の不備により、攻撃者が所有する特定ドメイン（例: `*.azurecr.io` を含むホスト）へAzure ADアクセストークンが送信され、認証情報が漏洩します。
+
+3. **CVE-2026-119085 (Amazon Virtual Engineering Workbench)**
+   * **CVSS / 深刻度**: 9.4 / CRITICAL
+   * **カテゴリ**: backend
+   * **概要**: テンプレートエンジンに対する不適切な中和処理により、任意コード実行が可能。Publishing LambdaのIAMロール権限を悪用され、全テナントのデータやリソースへアクセスされる恐れがあります。
+
+4. **CVE-2026-120447 (HotGo)**
+   * **CVSS / 深刻度**: 9.2 / CRITICAL
+   * **カテゴリ**: backend
+   * **概要**: SMSログイン送信エンドポイントでユーザー側が検証コードを指定できる実装不備。電話番号を知っている攻撃者が任意コードを設定して管理者アカウント等を奪取可能です。
+
+---
 
 ## 開発者向けコメント
 
-- **実行環境のサンドボックス権限確認**: Prefab UIの事例のように、WebAssemblyやサブプロセスでコードを実行させる場合は、起動引数（Denoの`--allow-*`フラグなど）の最小権限化と、グローバルオブジェクトへの不要なAPI露出を防ぐ実装を徹底してください。
-- **文字列エスケープの仕様見直し**: 単一・二重引用符のみを置換するような独自エスケープ処理は、バックスラッシュの挿入によって無効化される危険があります。コンテキストに応じた適切なエンコーディング処理を使用しているかコードベースを確認してください。
-- **セッション更新の実装**: ログイン認証成功時には必ずセッションIDを再発行し、セッション固定化攻撃を防御する構造になっているか確認してください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-Binanceに対する史上最大規模の暗号資産窃盗被害に北朝鮮の国家主導ハッカーが関与していることがFBIにより特定されました。また、Alpine Linuxの開発インフラを標的としたGitLab脆弱性の悪用試行など、重要インフラを狙った攻撃が報告されています。一方で、リスク分析スタートアップの資金調達やAIツールの機能更新といった技術開発の動きも見られます。
-
-- **HIGH** [FBI links $6.3 billion Binance crypto heist to North Korean hackers](https://www.bleepingcomputer.com/news/security/fbi-links-63-billion-binance-crypto-heist-to-north-korean-hackers/) — BleepingComputer
-- **HIGH** [Alpine Linux rebuilds GitLab after attempted RCE attack](https://www.bleepingcomputer.com/news/security/alpine-linux-rebuilds-gitlab-after-attempted-rce-attack/) — BleepingComputer
-- **LOW** [OpenAI says it's doubling Pro usage limits and bringing Work features to Chat](https://www.bleepingcomputer.com/news/artificial-intelligence/openai-says-its-doubling-pro-usage-limits-and-bringing-work-features-to-chat/) — BleepingComputer
-- **LOW** [Northstar Security Exits Stealth With $7M to Expose Toxic Risk Combinations](https://www.securityweek.com/northstar-security-exits-stealth-with-7m-to-expose-toxic-risk-combinations/) — SecurityWeek
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **認証ライブラリ・ロジックの緊急確認**: `python-jose` を利用して認証を実装している場合は、空の鍵に対するバリデーション処理を確認するか、修正バージョンへ速やかにアップデートしてください。
+* **CI/CD環境のクレデンシャル保護**: `kaniko` を含むコンテナビルドツールで外部レジストリへイメージをプッシュする際、アクセストークンが必要以上に広い範囲に送信されないようバージョン更新およびアクセス権限の最小化を行ってください。
+* **入力値バリデーションと認可チェックの徹底**: 今回はファイル削除APIでのパストラバーサル（GoFound）や、権限チェック不足（Munshi）による不必要なデータ削除の脆弱性も報告されています。破壊的処理を行うAPIエンドポイントでは、入力値の正規化と厳密な所有権チェックを徹底してください。
