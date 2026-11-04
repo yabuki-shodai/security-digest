@@ -1,79 +1,79 @@
 # セキュリティーニュース
 
-更新日時: 2026-11-03 12:37:34 JST
+更新日時: 2026-11-04 11:34:29 JST
 
 SecurityWeek、Krebs on Security、BleepingComputer、The Record、Dark ReadingのRSSから、直近24時間に公開されたセキュリティ関連記事を収集しています。
 
 ## 今日の総括
 
-直近では、Googleらによる130万台以上のAndroid TVを標的とした大規模ボットネットの解体や、AIを活用した200以上の組織への自動化攻撃が報告されています。また、暗号資産取引所からの多額の資金流出や政府機関・大学を狙った攻撃など、多様な領域で実際の被害が発生しています。英国NCSCも放置された脆弱性を突く攻撃の急増を警告しており、脅威の広範化と高度化が懸念されます。
+直近24時間では、セキュリティ製品の自動更新インフラ侵害や暗号資産取引所からの巨額流出など、重大なサイバー攻撃が報告されています。また、欧州全域におけるスーパーの冷蔵制御システム侵害や、クラウド上の大規模言語モデルを悪用した不正利用など、物理インフラや新技術を標的とした被害が目立ちます。さらに、政府機関や開発者向けプラットフォームを対象としたデータ漏洩事件も確認されています。
 
-## [Tech Firms Dismantle Botnet That Turned 1.3M TV Boxes Into Proxies](https://krebsonsecurity.com/2026/11/tech-firms-dismantle-botnet-that-turned-1-3m-tv-boxes-into-proxies/)
-
-- 重要度: **HIGH**
-- メディア: Krebs on Security
-- 公開日時: 2026-11-03 11:24 JST
-- 要約: Googleと業界パートナーは、130万台以上のAndroid TV端末で構成されるボットネットを解体しました。この対応により、他のIoT機器を含む1,000万台以上の侵害システムへのアクセスが遮断される見込みです。
-
-## [Largest crypto exchange in Brazil confirms cyberattack as millions flow out of platform](https://therecord.media/mercado-bitcoin-brazil-cryptocurrency-heist)
+## [Philippine Migrant Worker Data Likely Leaked in 69GB Government Breach](https://www.darkreading.com/cyberattacks-data-breaches/philippine-migrant-worker-data-69gb-government-breach)
 
 - 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-11-03 06:42 JST
-- 要約: ブラジル最大の暗号資産取引所Mercado Bitcoinがサイバー攻撃を受け、4,600万ドル以上が流出したことが確認されました。
+- メディア: Dark Reading
+- 公開日時: 2026-11-04 11:00 JST
+- 要約: フィリピン海外雇用庁のSQL Serverバックアップ（69GB）が流出し、海外労働者の個人データが漏洩した可能性があります。
 
-## [Chinese hackers use ARTEX AI in automated attacks against 200 orgs](https://www.bleepingcomputer.com/news/security/chinese-hackers-use-artex-ai-in-automated-attacks-against-200-orgs/)
+## [Hackers hijack cPGuard autoupdate to deploy backdoor, steal data](https://www.bleepingcomputer.com/news/security/hackers-hijack-cpguard-autoupdate-to-deploy-backdoor-steal-data/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-11-03 06:40 JST
-- 要約: 中国のハッカーがオープンソースのAI侵入テストツール「ARTEX」を使用し、14カ国200以上の組織に対して自動化攻撃を実施しました。
+- 公開日時: 2026-11-04 07:18 JST
+- 要約: Webセキュリティスイート「cPGuard」の自動更新インフラが侵害され、攻撃者によってバックドアとデータ窃取スクリプトが配信されました。
 
-## [Michigan State cyber incident claimed by ransomware gang behind recent hospital attack](https://therecord.media/michigan-state-university-byod-gang-cyber-incident)
-
-- 重要度: **HIGH**
-- メディア: The Record
-- 公開日時: 2026-11-03 04:54 JST
-- 要約: ミシガン州立大学で発生したインシデントに対し、病院攻撃への関与で知られるランサムウェアグループ「BYOD」が犯行声明を出しました。
-
-## [Google disrupts million-device XCPE Android malware botnet, bans TV box maker](https://www.bleepingcomputer.com/news/security/google-disrupts-million-device-xcpe-android-malware-botnet-bans-tv-box-maker/)
+## [Binance says fake job interview led to $6.3 billion crypto heist](https://www.bleepingcomputer.com/news/security/binance-says-fake-job-interview-led-to-63-billion-crypto-heist/)
 
 - 重要度: **HIGH**
 - メディア: BleepingComputer
-- 公開日時: 2026-11-03 03:16 JST
-- 要約: Googleらは130万台以上のAndroid TVで構成される「XCPE」マルウェアボットネットを解体しました。端末製造元が収益目的で意図的にマルウェアを仕込んでいたとされています。
+- 公開日時: 2026-11-04 05:05 JST
+- 要約: 暗号資産取引所Binanceは、北朝鮮ハッカーが偽の求人面接を通じてマルウェアを感染させ、約63.4億ドルの暗号資産を盗み出したと発表しました。
 
-## [Russia's statistics agency confirms cyberattack claimed by Belarusian and Ukrainian hackers](https://therecord.media/hackers-ukraine-belarus-russia)
+## [Google: LLMjacking attacks rack up $1 million in cloud AI charges](https://www.bleepingcomputer.com/news/security/google-llmjacking-attacks-rack-up-1-million-in-cloud-ai-charges/)
+
+- 重要度: **HIGH**
+- メディア: BleepingComputer
+- 公開日時: 2026-11-04 03:51 JST
+- 要約: クラウド上の大規模言語モデルを乗っ取る「LLMjacking」により、一部の組織で1日10万ドルを超える不正利用料金が発生しているとGoogleが報告しました。
+
+## [British businesses caught in Europe-wide supermarket fridge attacks](https://therecord.media/british-businesses-caught-in-europe-wide-supermarket-fridge-attacks)
 
 - 重要度: **HIGH**
 - メディア: The Record
-- 公開日時: 2026-11-03 01:30 JST
-- 要約: ベラルーシとウクライナのハッカー同盟がロシア連邦統計局を攻撃して機密政府データを窃取したと主張し、ロシア側もサイバー攻撃の発生を確認しました。
+- 公開日時: 2026-11-04 02:43 JST
+- 要約: 欧州全域でスーパーマーケットの冷蔵制御システムがハッキングされ、製品の解凍や損傷被害が発生し英国企業も影響を受けました。
 
-## [UK faces ‘unprecedented rise’ in cyberattacks in coming months, warns cyber chief](https://therecord.media/uk-ncsc-predicts-rise-cyberattacks-coming-months)
-
-- 重要度: **MEDIUM**
-- メディア: The Record
-- 公開日時: 2026-11-03 09:01 JST
-- 要約: 英国NCSCの長官は年次報告書において、長年放置されてきた脆弱性が大規模に悪用され、今後数ヶ月でサイバー攻撃が急増すると警告しました。
-
-## [One Compromised Laptop, Billions Lost: The Binance Attack-Path Warning](https://www.darkreading.com/cyberattacks-data-breaches/binance-hack-test-attack-paths)
+## [Fresh European Fridge Attacks Put Cold-Chain Security in Focus](https://www.darkreading.com/ics-ot-security/fresh-european-fridge-attacks-cold-chain-security)
 
 - 重要度: **MEDIUM**
 - メディア: Dark Reading
-- 公開日時: 2026-11-03 07:27 JST
-- 要約: Binanceの攻撃パスに関する分析では、侵害された1台のノートPCから巨額の損失につながった事例が示されました。システム分離の不備や不十分な管理が組織全体に壊滅的なリスクをもたらすと指摘されています。
+- 公開日時: 2026-11-04 07:16 JST
+- 要約: 欧州での食品保管庫に対するハッキングにより、インターネット接続された温度管理インフラのセキュリティリスクが浮き彫りとなっています。
 
-## [Fintech platform Sageworks taken offline after suspected cyberattack](https://www.bleepingcomputer.com/news/security/fintech-platform-sageworks-taken-offline-after-suspected-cyberattack/)
+## [WorkOS says attacker used ARTEX AI to breach internal sales app](https://www.bleepingcomputer.com/news/security/workos-says-attacker-used-artex-ai-to-breach-internal-sales-app/)
 
 - 重要度: **MEDIUM**
 - メディア: BleepingComputer
-- 公開日時: 2026-11-03 04:00 JST
-- 要約: Fintech企業Abrigoは、不正なアクティビティによる障害の後、リスク管理アプリ「Sageworks」を復旧させましたが、一部機能は停止したままです。
+- 公開日時: 2026-11-04 06:28 JST
+- 要約: 開発者プラットフォームのWorkOSがデータ侵害を受け、社内販売アプリ経由で顧客の連絡先や通信要約が窃取されました。
 
-## [Polymarket pledges to give $3.9 million back to victims after site compromise](https://therecord.media/polymarket-returning-funds-to-customers-after-site-compromise)
+## [Google dismantles massive botnet hidden in Android TV boxes](https://therecord.media/google-dismantles-botnet-hidden-android-tv-boxes)
 
 - 重要度: **MEDIUM**
 - メディア: The Record
-- 公開日時: 2026-11-03 02:05 JST
-- 要約: 予測市場Polymarketは、10月29日のサイト侵害被害者に対し、損失額とダウンタイム分を含む計390万ドルを補償すると発表しました。
+- 公開日時: 2026-11-04 04:48 JST
+- 要約: Googleは、Android TVセットトップボックスを中心に構成された大規模ボットネット「X.CPE」を解体したと発表しました。
+
+## [Several German lawmakers and foreign policy staff received Apple warnings on spyware](https://therecord.media/german-officials-among-apple-spyware-warning-recipients)
+
+- 重要度: **MEDIUM**
+- メディア: The Record
+- 公開日時: 2026-11-04 03:44 JST
+- 要約: ドイツの政治家や外交スタッフ複数の人物がスパイウェアの標的になっているとして、Appleから警告を受けました。
+
+## [Germany Busts 'Crime-as-a-Service' Investment Fraud Outfit](https://www.darkreading.com/cybersecurity-operations/germany-crime-service-investment-fraud)
+
+- 重要度: **LOW**
+- メディア: Dark Reading
+- 公開日時: 2026-11-04 06:57 JST
+- 要約: ドイツ警察主導の国際捜査により、投資詐欺グループへ偽の取引プラットフォームを提供する「Crime-as-a-Service」組織が摘発されました。

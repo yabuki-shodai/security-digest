@@ -54,3 +54,20 @@
 * **コード生成・パーサー処理のエスケープ徹底**: Eloの脆弱性に見られるように、独自の式言語やDSLを別言語（JS/Ruby/Python等）へコード生成する際は、メタプロパティ参照の制限や文字列補完構文のエスケープ漏れが直ちにRCEに直結します。入出力の型検証と安全な構文木評価の徹底が必要です。
 * **ファイルアップロード・解凍処理（Zip Slip）の再確認**: アーカイブ解凍処理では、展開先パスが許可されたディレクトリ内に収まっているかを必ずチェックしてください。
 * **フレームワークおよび運用ツールの迅速な更新**: DjangoやMongoDB Tools、Docker周辺ツール、サードパーティ製Webライブラリなどの依存コンポーネントについて、修正パッチが適用されたバージョンへ早期にマイグレーションしてください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間では、セキュリティ製品の自動更新インフラ侵害や暗号資産取引所からの巨額流出など、重大なサイバー攻撃が報告されています。また、欧州全域におけるスーパーの冷蔵制御システム侵害や、クラウド上の大規模言語モデルを悪用した不正利用など、物理インフラや新技術を標的とした被害が目立ちます。さらに、政府機関や開発者向けプラットフォームを対象としたデータ漏洩事件も確認されています。
+
+- **HIGH** [Philippine Migrant Worker Data Likely Leaked in 69GB Government Breach](https://www.darkreading.com/cyberattacks-data-breaches/philippine-migrant-worker-data-69gb-government-breach) — Dark Reading
+- **HIGH** [Hackers hijack cPGuard autoupdate to deploy backdoor, steal data](https://www.bleepingcomputer.com/news/security/hackers-hijack-cpguard-autoupdate-to-deploy-backdoor-steal-data/) — BleepingComputer
+- **HIGH** [Binance says fake job interview led to $6.3 billion crypto heist](https://www.bleepingcomputer.com/news/security/binance-says-fake-job-interview-led-to-63-billion-crypto-heist/) — BleepingComputer
+- **HIGH** [Google: LLMjacking attacks rack up $1 million in cloud AI charges](https://www.bleepingcomputer.com/news/security/google-llmjacking-attacks-rack-up-1-million-in-cloud-ai-charges/) — BleepingComputer
+- **HIGH** [British businesses caught in Europe-wide supermarket fridge attacks](https://therecord.media/british-businesses-caught-in-europe-wide-supermarket-fridge-attacks) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
