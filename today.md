@@ -1,73 +1,61 @@
-# CVE Digest Dashboard (2026-11-04)
+# CVE Digest Dashboard (2026-11-05)
 
 ## Overview
 
 - Total: 30
 - Critical件数: 3
-- High件数: 10
+- High件数: 9
 - KEV件数: 0
-- Frontend件数: 6
-- Backend件数: 24
+- Frontend件数: 16
+- Backend件数: 14
 - Gemini総括: Gemini
 
 ## Links
 
-- [Frontend Summary](docs/2026-11-04/frontend-summary.md)
-- [Backend Summary](docs/2026-11-04/backend-summary.md)
+- [Frontend Summary](docs/2026-11-05/frontend-summary.md)
+- [Backend Summary](docs/2026-11-05/backend-summary.md)
 
 ## Today TOP5
 
-- [CVE-2026-38600](https://github.com/Den-Sec/security-research/blob/master/advisories/gohttpserver/VDR-001-zipslip.md) CVE-2026-38600 / CRITICAL / backend
-- [CVE-2026-44266](https://github.com/enspirit/elo/commit/51b869963fbe445c18328714a7ccfbd76b21ba38) CVE-2026-44266 / CRITICAL / frontend
-- [CVE-2026-44267](https://github.com/enspirit/elo/commit/2136da1f64eec8ebf99890d3100be9394534b842) CVE-2026-44267 / CRITICAL / frontend
-- [CVE-2026-111211](https://docs.djangoproject.com/en/dev/releases/security/) CVE-2026-111211 / MEDIUM / backend
-- [CVE-2026-108147](https://docs.djangoproject.com/en/dev/releases/security/) CVE-2026-108147 / MEDIUM / backend
+- [CVE-2026-115770](https://github.com/pocket-id/pocket-id/commit/43aaccd5bfacb76283b11ce039fb3f0716196fcb) CVE-2026-115770 / CRITICAL / backend
+- [CVE-2026-97693](https://github.com/xerrors/Yuxi/commit/b5b5713e6e639dd4ed2ebce41579a3c458347663) CVE-2026-97693 / CRITICAL / backend
+- [CVE-2026-107846](https://github.com/bitcoinjs/bitcoinjs-lib/commit/009f165edfbf925cad8964b2dce478d18dd19449) CVE-2026-107846 / CRITICAL / frontend
+- [CVE-2026-122224](https://github.com/catborise/webvirtcloud/commit/1227674d8f5a5230e5c654267773aca4ebc5c717) CVE-2026-122224 / HIGH / backend
+- [CVE-2026-63655](https://github.com/tsparticles/tsparticles/commit/25fb70e7f527a91568adaef576570289083f243b) CVE-2026-63655 / HIGH / frontend
 
 ## Geminiによる今日の総括
 
 ## 今日のまとめ
-本日は、ノーコード向け式言語「Elo」や軽量ファイルサーバ「gohttpserver」における**CVSS 9.8（CRITICAL）のリモートコード実行（RCE）脆弱性**をはじめ、Djangoフレームワークにおける複数の脆弱性（SSRF、DoS、ファイル読み取りなど）が掲載されています。また、MongoDB Database ToolsやDocker Sandboxなど、インフラ・開発周辺ツールでの認証バイパスやパス検証の不備も目立ちます。
+本日公開されたCVEは、Webアプリケーションから開発環境ツール、認証・プロキシインフラ、暗号化ライブラリまで多岐にわたります。特に高スコアの脆弱性として、**コンテナ実行環境の分離不備による他テナント攻撃（Yuxi）**、**メール検証トークンの不備による認証バイパス（Pocket ID）**、**暗号検証ロジックの不備（bitcoinjs-lib）**、**プロキシ接続プール再利用によるなりすまし（Traefik）**などが報告されています。また、開発者が日常的に使用する `nvm` に複数の脆弱性が発見された点にも注意が必要です。
 
 ---
 
 ## 優先して確認すべき3〜5件
 
-1. **CVE-2026-44267 (CVSS 9.8 / CRITICAL - Elo)**
-   JavaScriptトランスパイル時のメタプロパティ検証不備により、`.constructor.constructor` を経由して任意のJavaScriptコードを実行される恐れがあります（ver 1.0.1未満が対象）。
+1. **CVE-2026-97693 (Yuxi | CVSS 9.9 CRITICAL)**
+   - **内容**: Dockerサンドボックスの不十分な隔離により、悪意あるユーザーが他テナントのサンドボックスAPIやファイル、シークレットにアクセスし、コマンド実行が可能な状態になる。
+   - **対策**: バージョン 0.7.1 以降へアップデートし、サンドボックス間のアクセス制限を強化する。
 
-2. **CVE-2026-44266 (CVSS 9.8 / CRITICAL - Elo)**
-   Rubyバックエンドのエミッターにおいて文字列内の `#` エスケープ漏れがあり、Rubyの式展開を利用した任意コード実行が可能です（ver 1.0.1未満が対象）。
+2. **CVE-2026-115770 (Pocket ID | CVSS 9.6 CRITICAL)**
+   - **内容**: メールアドレス変更時に既存の検証トークンが無効化されないため、攻撃者が自身で取得したトークンを使って変更後の任意アドレスを検証済みに偽装できる。
+   - **対策**: バージョン 2.12.0 以降へ更新し、アドレス変更時にトークンを無効化する。
 
-3. **CVE-2026-38600 (CVSS 9.8 / CRITICAL - gohttpserver)**
-   `/upload` エンドポイントにおける Zip Slip 脆弱性により、不正なZipアーカイブをアップロードされることで任意ファイルが書き換えられます（v1.3.0以下が対象）。
+3. **CVE-2026-107846 (bitcoinjs-lib | CVSS 9.3 CRITICAL)**
+   - **内容**: `fastMerkleRoot` で奇数ノードのパディング時に隣接重複ハッシュを検出できず、不正なMerkle rootを正当と判定してしまう。
+   - **対策**: 修正済みバージョン（5.2.1 / 6.1.8 / 7.0.2 以降）へ修正依存関係を更新する。
 
-4. **CVE-2026-119675 (CVSS 8.6 / HIGH - MongoDB Database Tools)**
-   `mongorestore` のコレクション名検証不備により、リストア処理を通じて管理者（root）を含む未承認のデータベースアカウントが作成されるリスクがあります。
+4. **CVE-2026-121966 (Traefik | CVSS 8.7 HIGH)**
+   - **内容**: ForwardAuth のサブリクエストが全クライアント共通の接続プールを使用するため、未認証の攻撃者が他ユーザーの認証済み接続（NTLM/Negotiate）を再利用してバックエンドにアクセス可能。
+   - **対策**: Traefik 2.11.60 または 3.7.16 以降へアップグレードする。
 
-5. **Django 関連の一連の脆弱性 (CVE-2026-108147, CVE-2026-114582 等)**
-   Django 5.2/6.0/6.1系において、ファイルアップロード時のメモリ過剰消費（DoS）や、GIS/GDAL機能経由のSSRF・ローカルファイル読み取り問題が報告されています。修正バージョンへの更新が必要です。
+5. **CVE-2026-121747 (nvm | CVSS 6.7 MEDIUM)**
+   - **内容**: `.nvmrc` がシンボリックリンクであるか検証しないため、悪意あるリポジトリを `nvm use` 等で読み込むと任意ファイルの内容がエラーメッセージ経由で出力・漏洩する。
+   - **対策**: nvm 0.40.8 より新しい修正版への更新、または信頼できないリポジトリでの `.nvmrc` 存在確認。
 
 ---
 
 ## 開発者向けコメント
 
-* **コード生成・パーサー処理のエスケープ徹底**: Eloの脆弱性に見られるように、独自の式言語やDSLを別言語（JS/Ruby/Python等）へコード生成する際は、メタプロパティ参照の制限や文字列補完構文のエスケープ漏れが直ちにRCEに直結します。入出力の型検証と安全な構文木評価の徹底が必要です。
-* **ファイルアップロード・解凍処理（Zip Slip）の再確認**: アーカイブ解凍処理では、展開先パスが許可されたディレクトリ内に収まっているかを必ずチェックしてください。
-* **フレームワークおよび運用ツールの迅速な更新**: DjangoやMongoDB Tools、Docker周辺ツール、サードパーティ製Webライブラリなどの依存コンポーネントについて、修正パッチが適用されたバージョンへ早期にマイグレーションしてください。
-
-<!-- SECURITY_NEWS_START -->
-## セキュリティーニュース
-
-### 今日の総括
-
-直近24時間では、セキュリティ製品の自動更新インフラ侵害や暗号資産取引所からの巨額流出など、重大なサイバー攻撃が報告されています。また、欧州全域におけるスーパーの冷蔵制御システム侵害や、クラウド上の大規模言語モデルを悪用した不正利用など、物理インフラや新技術を標的とした被害が目立ちます。さらに、政府機関や開発者向けプラットフォームを対象としたデータ漏洩事件も確認されています。
-
-- **HIGH** [Philippine Migrant Worker Data Likely Leaked in 69GB Government Breach](https://www.darkreading.com/cyberattacks-data-breaches/philippine-migrant-worker-data-69gb-government-breach) — Dark Reading
-- **HIGH** [Hackers hijack cPGuard autoupdate to deploy backdoor, steal data](https://www.bleepingcomputer.com/news/security/hackers-hijack-cpguard-autoupdate-to-deploy-backdoor-steal-data/) — BleepingComputer
-- **HIGH** [Binance says fake job interview led to $6.3 billion crypto heist](https://www.bleepingcomputer.com/news/security/binance-says-fake-job-interview-led-to-63-billion-crypto-heist/) — BleepingComputer
-- **HIGH** [Google: LLMjacking attacks rack up $1 million in cloud AI charges](https://www.bleepingcomputer.com/news/security/google-llmjacking-attacks-rack-up-1-million-in-cloud-ai-charges/) — BleepingComputer
-- **HIGH** [British businesses caught in Europe-wide supermarket fridge attacks](https://therecord.media/british-businesses-caught-in-europe-wide-supermarket-fridge-attacks) — The Record
-
-- [セキュリティーニュースをすべて見る](security-news.md)
-
-<!-- SECURITY_NEWS_END -->
+* **認証・状態管理ロジックの再検証**: 接続プールのセッション再利用（Traefik）や、メール変更時のトークン有効期限管理（Pocket ID）、クライアント側JSによるブルートフォース制限（ProSoft）など、サーバーサイドでの適切な状態分離と検証を徹底してください。
+* **リポジトリ経由のローカル開発環境攻撃に注意**: `nvm` の脆弱性に代表されるように、悪意ある設定ファイル（`.nvmrc` など）を含むリポジトリをチェックアウトしてコマンドを実行するだけで情報漏洩や意図しない挙動が引き起こされるリスクがあります。開発ツールの最新化を推奨します。
+* **デスクトップ・コンテナ基盤の境界防御**: Tauriアプリケーション（Readest）やDockerサンドボックス（Yuxi）のように、フロントエンドや隔離環境からバックエンド・ホスト側へのファイルパス指定・APIアクセスに対しては、適切なスコープ制限と入力検証を必ず設けてください。
