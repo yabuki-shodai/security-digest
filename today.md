@@ -59,3 +59,20 @@
 * **認証・状態管理ロジックの再検証**: 接続プールのセッション再利用（Traefik）や、メール変更時のトークン有効期限管理（Pocket ID）、クライアント側JSによるブルートフォース制限（ProSoft）など、サーバーサイドでの適切な状態分離と検証を徹底してください。
 * **リポジトリ経由のローカル開発環境攻撃に注意**: `nvm` の脆弱性に代表されるように、悪意ある設定ファイル（`.nvmrc` など）を含むリポジトリをチェックアウトしてコマンドを実行するだけで情報漏洩や意図しない挙動が引き起こされるリスクがあります。開発ツールの最新化を推奨します。
 * **デスクトップ・コンテナ基盤の境界防御**: Tauriアプリケーション（Readest）やDockerサンドボックス（Yuxi）のように、フロントエンドや隔離環境からバックエンド・ホスト側へのファイルパス指定・APIアクセスに対しては、適切なスコープ制限と入力検証を必ず設けてください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+直近24時間では、航空会社や金融機関、医療関連施設、ゲームランチャーなどを標的としたサプライチェーン攻撃や第三者プロバイダ経由の被害が目立っています。また、ネットワーク機器のゼロデイ脆弱性の悪用やRailsの深刻な脆弱性、130万台規模のボットネット解体など、基盤やインフラに関わる重大な事象も報告されています。認証情報の窃盗や巨額の不正送金など実害を伴うインシデントが多く確認されており、厳重な警戒が必要です。
+
+- **HIGH** [Critical Rails Bug Threatens to Derail Vulnerable Servers](https://www.darkreading.com/application-security/critical-rails-bug-derail-vulnerable-servers) — Dark Reading
+- **HIGH** [More Asian airlines announce data breaches after attack on Spanish IT provider Amadeus](https://therecord.media/asian-airlines-announce-data-breach-it-provider-incident) — The Record
+- **HIGH** [Zyxel fixes zero-day exploited to hack nearly 1,000 network switches](https://www.bleepingcomputer.com/news/security/zyxel-fixes-zero-day-exploited-to-hack-nearly-1-000-network-switches/) — BleepingComputer
+- **HIGH** [DreamHost confirms data breach exposed FTP logins and webmail sessions](https://www.bleepingcomputer.com/news/security/dreamhost-confirms-data-breach-exposed-ftp-logins-and-webmail-sessions/) — BleepingComputer
+- **HIGH** [French bank confirms cyber heist, hackers suspected to have stolen an estimated $133 million](https://therecord.media/french-bank-confirms-cyber-heist) — The Record
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
