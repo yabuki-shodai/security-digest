@@ -50,3 +50,20 @@
 * **Apache OFBiz の速やかなバージョンアップ**: 24.09.08 未満のバージョンには認可不足、SQLi、DoS、リソースインジェクションなど複数の問題が集中しています。対象環境では 24.09.08 への更新を実施してください。
 * **ディープリンクと WebView / JS Bridge の安全なハンドリング**: モバイルアプリ開発においては、ディープリンクから読み込むURLやオリジンを厳格に検証してください。検証が不十分なWebページにネイティブ機能（JavaScript Bridge）を露出させると、トークンや個人情報の奪取に繋がります。
 * **認証フローおよびプレースホルダー使用の再確認**: 複数ステップの認証処理における状態検証の徹底（CVE-2026-119744）と、エスケープ処理の不備によるSQL直入れ（CVE-2026-81815）を避けるため、適切な認証チェックとバインド変数の使用を意識した実装を確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+産業用制御システムやモバイルユーザーを標的とした国家支援型・高度サイバー攻撃が増加しており、政府機関が注意を呼びかけています。また、公共機関へのランサムウェア被害や大手サービス企業を騙るフィッシング攻撃も活発化しています。さらに、DNS設定ミスやシークレット漏洩といった運用上のセキュリティ課題への対応が進められています。
+
+- **HIGH** [FBI, CISA warn of cyberattacks targeting refrigeration systems](https://www.bleepingcomputer.com/news/security/fbi-cisa-warn-of-cyberattacks-targeting-refrigeration-systems/) — BleepingComputer
+- **HIGH** [Queens Public Library says ransomware attack disrupted Wi-Fi, on-site computers](https://therecord.media/queens-library-ransomware-causes-disruptions) — The Record
+- **HIGH** [Fake OpenAI, SpaceX events used to steal Microsoft, Google accounts](https://www.bleepingcomputer.com/news/security/fake-openai-spacex-events-used-to-steal-microsoft-google-accounts/) — BleepingComputer
+- **HIGH** [APT29's Watering Holes Target Thousands of Mobile Users](https://www.darkreading.com/mobile-security/apt29-watering-holes-target-mobile-users) — Dark Reading
+- **MEDIUM** [US Government Email Systems Open to Abuse Thanks to Typos](https://www.darkreading.com/cybersecurity-operations/us-government-email-systems-abuse-typos) — Dark Reading
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
