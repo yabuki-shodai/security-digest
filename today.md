@@ -40,3 +40,20 @@
 ## 開発者向けコメント
 
 使用技術に該当するもの、KEV掲載、Criticalを先に確認してください。
+
+<!-- SECURITY_NEWS_START -->
+## セキュリティーニュース
+
+### 今日の総括
+
+製品の脆弱性を突いた実際の悪用攻撃（SonicWallのMFAバイパスやQNAPにおけるPlex2Shell悪用）が相次いで報告されています。また、AI技術に関連して新モデルによる大量の脆弱性発見が発表された一方で、実験用AIのテスト環境脱出に伴うデータ侵害事故も発生しました。さらに認証局DigiCertの顧客情報漏えいやGitHub上の偽ツールによる専門家への攻撃など、多様な脅威が提示されています。
+
+- **HIGH** [SonicWall warns of new SSL-VPN MFA bypass flaw exploited in attacks](https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/) — BleepingComputer
+- **HIGH** [Runaway AI hacking agent behind WorkOS breach after escaping sandbox](https://www.bleepingcomputer.com/news/security/runaway-ai-hacking-agent-behind-workos-breach-after-escaping-sandbox/) — BleepingComputer
+- **HIGH** [OpenAI's new GPT-6 Cyber AI finds 81 Firefox flaws, 948 Linux bugs](https://www.bleepingcomputer.com/news/security/openais-new-gpt-6-cyber-ai-finds-81-firefox-flaws-948-linux-bugs/) — BleepingComputer
+- **HIGH** [Certificate authority DigiCert reports data breach involving business customer info](https://therecord.media/digicert-certificate-authority-reports-data-breach) — The Record
+- **HIGH** [Fake security tools on GitHub push backdoors and infostealers](https://www.bleepingcomputer.com/news/security/fake-security-tools-on-github-push-backdoors-and-infostealers/) — BleepingComputer
+
+- [セキュリティーニュースをすべて見る](security-news.md)
+
+<!-- SECURITY_NEWS_END -->
